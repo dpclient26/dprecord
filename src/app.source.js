@@ -1,5 +1,5 @@
 // ==========================================
-// 1. Google Sheets Integration Setup
+// 1. DB Integration Setup
 // ==========================================
 const scriptURL = '/api/d1';
 
@@ -87,7 +87,7 @@ async function loadFromCacheOrFetch() {
 
     // STEP 1: If we have cache, show it INSTANTLY
     if (cached && cached.length >= 0) {
-        allRecords = [...cached].reverse();
+        allRecords = [...cached];
         updateStats();
         applyFiltersAndRender();
         // Quietly refresh in background
@@ -107,7 +107,7 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
         saveToCache(data);
 
         // Update UI with fresh data
-        allRecords = [...data].reverse();
+        allRecords = [...data];
         updateStats();
         applyFiltersAndRender();
     } catch (error) {
@@ -442,9 +442,8 @@ function populateForm(form, record) {
     const fieldsToFill = [
         'Requested Department', 'Request Date', 'Letter / Email Reference',
         'Action Taken By', 'Problem Statement / Objective', 'Datasets Used',
-        'Date for Data Dump', 'Received Count', 'Completed Date',
-        'Result Shared Mode', 'Analysis Outcome', 'File Path (if any)',
-        'Action Taken', 'Status', 'Savings'
+        'Date for Data Dump', 'Received Count', 'Result Shared Mode', 'Analysis Outcome',
+        'Status', 'Savings'
     ];
 
     fieldsToFill.forEach(field => {
