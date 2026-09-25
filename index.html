@@ -53,15 +53,18 @@
             <p class="text-muted small" id="formSubtitle">Fill out the fields below</p>
         </div>
 
-                <div class="card border-0 shadow-sm rounded-3 p-4 position-relative">
+        <div class="card border-0 shadow-sm rounded-3 p-4 position-relative">
             <!-- LOADING OVERLAY -->
-            <div id="formLoadingOverlay" class="position-absolute top-0 start-0 w-100 h-100 justify-content-center align-items-center rounded-3" 
-                 style="display: none; background: rgba(255, 255, 255, 0.92); z-index: 10; backdrop-filter: blur(2px); pointer-events: none;">
+            <div id="formLoadingOverlay"
+                class="position-absolute top-0 start-0 w-100 h-100 justify-content-center align-items-center rounded-3"
+                style="display: none; background: rgba(255, 255, 255, 0.92); z-index: 10; backdrop-filter: blur(2px); pointer-events: none;">
                 <div class="text-center">
-                    <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
+                    <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                    </div>
                     <p class="fw-semibold text-dark mb-1">Loading record details...</p>
                     <p class="text-muted small mb-0">Fetching data from the registry</p>
-                    <button type="button" id="cancelLoadBtn" class="btn btn-sm btn-outline-secondary mt-3 d-none" style="pointer-events: auto;">
+                    <button type="button" id="cancelLoadBtn" class="btn btn-sm btn-outline-secondary mt-3 d-none"
+                        style="pointer-events: auto;">
                         <i class="bi bi-x-circle me-1"></i> Taking too long? Cancel
                     </button>
                 </div>
@@ -77,23 +80,27 @@
                             name="Reference Number/Ticket Number" placeholder="Auto-generated on save" readonly>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Requested Department <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold small">Requested Department <span
+                                class="text-danger">*</span></label>
                         <input type="text" class="form-control bg-light" name="Requested Department"
                             placeholder="e.g. Civil Supplies and Consumer Protection" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Request Date <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold small">Request Date <span
+                                class="text-danger">*</span></label>
                         <input type="date" class="form-control bg-light" name="Request Date" required>
                     </div>
 
                     <!-- Row 2 -->
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Letter / Email Reference <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold small">Letter / Email Reference <span
+                                class="text-danger">*</span></label>
                         <input type="text" class="form-control bg-light" name="Letter / Email Reference"
                             placeholder="e.g. LTR/2024/092" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Action Taken By <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold small">Action Taken By <span
+                                class="text-danger">*</span></label>
                         <select class="form-select bg-light" name="Action Taken By" required>
                             <option value="" disabled selected>--Select--</option>
                             <option value="Akash Karmegam">Akash Karmegam</option>
@@ -107,38 +114,44 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Problem Statement / Objective <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold small">Problem Statement / Objective <span
+                                class="text-danger">*</span></label>
                         <textarea class="form-control bg-light" name="Problem Statement / Objective"
                             placeholder="Enter problem statement or objective" rows="4" required></textarea>
                     </div>
 
                     <!-- Row 3 -->
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Datasets Used<span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold small">Datasets Used<span
+                                class="text-danger">*</span></label>
                         <input type="text" class="form-control bg-light" name="Datasets Used"
                             placeholder="e.g. IFHRMS, PDS, CRS, etc., if not put N/A" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Date for Data Dump<span class="text-danger">*</span></label>
-                        <input type="date" class="form-control bg-light" name="Date for Data Dump" required>
-                    </div> 
+                        <label class="form-label fw-semibold small">Date for Data Dump<span
+                                class="text-danger">*</span></label>
+                        <input type="date" class="form-control bg-light" name="Date for Data Dump">
+                    </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Analysis Outcome<span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold small">Analysis Outcome<span
+                                class="text-danger">*</span></label>
                         <textarea class="form-control bg-light" name="Analysis Outcome"
                             placeholder="e.g. Cleaned & Validated, if not put N/A" rows="4" required></textarea>
                     </div>
 
                     <!-- Row 4 -->
                     <div class="col-md-3">
-                        <label class="form-label fw-semibold small">Result Shared Mode<span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold small">Result Shared Mode<span
+                                class="text-danger">*</span></label>
                         <input type="text" class="form-control bg-light" name="Result Shared Mode"
                             placeholder="e.g. Email, Shared Drive, Portal, if not put N/A" required>
                     </div>
-                     <div class="col-md-3">
-                        <label class="form-label fw-semibold small">Received Count<span class="text-danger">*</span></label>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold small">Received Count<span
+                                class="text-danger">*</span></label>
                         <input type="text" class="form-control bg-light" name="Received Count"
                             placeholder="e.g. 25,000, if not put N/A" required>
-                    </div> 
+                    </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold small">Savings<span class="text-danger">*</span></label>
                         <input type="text" class="form-control bg-light" name="Savings"
@@ -160,7 +173,8 @@
                         <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold" id="submitBtn">
                             <i class="bi bi-send me-2"></i> Submit Request
                         </button>
-                        <button type="button" class="btn btn-light bg-light text-muted px-4 py-2 fw-semibold" id="clearBtn">
+                        <button type="button" class="btn btn-light bg-light text-muted px-4 py-2 fw-semibold"
+                            id="clearBtn">
                             <i class="bi bi-arrow-counterclockwise me-2"></i> Clear Fields
                         </button>
                     </div>
