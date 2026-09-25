@@ -19,7 +19,7 @@ export async function onRequest(context) {
         // ================================
         if (request.method === 'GET' && action === 'get') {
             const { results } = await env.DB.prepare(
-                "SELECT * FROM requests ORDER BY timestamp DESC"
+                "SELECT * FROM requests ORDER BY id DESC"
             ).all();
 
             // Map D1 snake_case columns → old key names the frontend expects
