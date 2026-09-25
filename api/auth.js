@@ -27,11 +27,9 @@
 // }  
 
 
-// api/auth.js (Cloudflare Pages Function) - Single User Login
 export async function onRequest(context) {
   const { request, env } = context;
 
-  // Only allow POST
   if (request.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
       status: 405,
@@ -40,10 +38,7 @@ export async function onRequest(context) {
   }
 
   try {
-    // Parse JSON body
     const { username, password } = await request.json();
-
-    // Get credentials from Cloudflare Environment Variables (set as Secret)
     const validUsername = env.ADMIN_USER;
     const validPassword = env.ADMIN_PASS;
 
@@ -57,7 +52,6 @@ export async function onRequest(context) {
       });
     }
 
-    // Check credentials match
     if (username === validUsername && password === validPassword) {
       return new Response(JSON.stringify({
         success: true,
@@ -77,7 +71,6 @@ export async function onRequest(context) {
       });
     }
   } catch (error) {
-    console.error("Auth Error:", error);
     return new Response(JSON.stringify({ error: 'Internal Server Error: ' + error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
