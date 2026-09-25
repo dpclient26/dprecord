@@ -1,7 +1,7 @@
 // ==========================================
 // 1. DB Integration Setup
 // ==========================================
-const scriptURL = '/api/d1';
+const scriptURL = '/api/cfdb';
 
 // Global State
 let allRecords = [];
