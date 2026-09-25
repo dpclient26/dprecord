@@ -65,15 +65,50 @@ function clearCache() {
 // ==========================================
 // SMART FETCH WITH RETRY
 // ==========================================
+// async function fetchWithRetry(url, options = {}, retries = 3, delay = 500) {
+//     for (let attempt = 1; attempt <= retries; attempt++) {
+//         try {
+//             const response = await fetch(url, options);
+//             if (!response.ok) throw new Error(`HTTP ${response.status}`);
+//             return await response.json();
+//         } catch (error) {
+//             if (attempt === retries) throw error;
+//             await new Promise(r => setTimeout(r, delay * attempt)); // Exponential backoff
+//         }
+//     }
+// } 
+
+// ==========================================
+// SMART FETCH WITH RETRY (with auth header)
+// ==========================================
 async function fetchWithRetry(url, options = {}, retries = 3, delay = 500) {
+    // Get the logged-in user from session
+    const loggedInUser = sessionStorage.getItem('ops_portal_user') || '';
+
+    // Merge auth header into existing headers
+    const headers = {
+        ...(options.headers || {}),
+        'X-Logged-In-User': loggedInUser
+    };
+
+    const mergedOptions = { ...options, headers };
+
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
-            const response = await fetch(url, options);
+            const response = await fetch(url, mergedOptions);
+
+            // If backend says we're unauthorized, redirect to login immediately
+            if (response.status === 401) {
+                sessionStorage.removeItem('ops_portal_user');
+                window.location.href = '/login?timeout=true';
+                return;
+            }
+
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return await response.json();
         } catch (error) {
             if (attempt === retries) throw error;
-            await new Promise(r => setTimeout(r, delay * attempt)); // Exponential backoff
+            await new Promise(r => setTimeout(r, delay * attempt));
         }
     }
 }
@@ -409,7 +444,16 @@ function setupFormLogic(form) {
         urlEncodedData.append('action', actionType);
         urlEncodedData.append('Logged In User', sessionStorage.getItem('ops_portal_user') || 'Unknown');
 
-        fetch(scriptURL, { method: 'POST', body: urlEncodedData })
+        // fetch(scriptURL, { method: 'POST', body: urlEncodedData }) 
+        const loggedInUser = sessionStorage.getItem('ops_portal_user') || '';
+
+        fetch(scriptURL, {
+            method: 'POST',
+            headers: {
+                'X-Logged-In-User': loggedInUser
+            },
+            body: urlEncodedData
+        })
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'success') {
