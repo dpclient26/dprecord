@@ -87,7 +87,7 @@ async function loadFromCacheOrFetch() {
 
     // STEP 1: If we have cache, show it INSTANTLY
     if (cached && cached.length >= 0) {
-        allRecords = [...cached].reverse();
+        allRecords = [...cached];
         updateStats();
         applyFiltersAndRender();
         // Quietly refresh in background
@@ -107,7 +107,7 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
         saveToCache(data);
 
         // Update UI with fresh data
-        allRecords = [...data].reverse();
+        allRecords = [...data];
         updateStats();
         applyFiltersAndRender();
     } catch (error) {
