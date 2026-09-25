@@ -27,7 +27,10 @@ export async function onRequest(context) {
         // POST: Add or Update
         // ================================
         if (request.method === 'POST') {
-            const data = await request.json();
+            // ✅ FIX: Read form-encoded body (not JSON)
+            const bodyText = await request.text();
+            const data = new URLSearchParams(bodyText);
+            const get = (key) => data.get(key) || '';
 
             // ----- ADD NEW RECORD -----
             if (action === 'add') {
@@ -55,25 +58,26 @@ export async function onRequest(context) {
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
                 ).bind(
                     newRefId,
-                    data['Requested Department'] || '',
-                    data['Request Date'] || '',
-                    data['Letter / Email Reference'] || '',
-                    data['Action Taken By'] || '',
-                    data['Problem Statement / Objective'] || '',
-                    data['Datasets Used'] || '',
-                    data['Date for Data Dump'] || '',
-                    data['Received Count'] || '',
-                    data['Result Shared Mode'] || '',
-                    data['Analysis Outcome'] || '',
-                    data['Status'] || 'Pending',
-                    data['Savings'] || '',
+                    get('Requested Department'),
+                    get('Request Date'),
+                    get('Letter / Email Reference'),
+                    get('Action Taken By'),
+                    get('Problem Statement / Objective'),
+                    get('Datasets Used'),
+                    get('Date for Data Dump'),
+                    get('Received Count'),
+                    get('Result Shared Mode'),
+                    get('Analysis Outcome'),
+                    get('Status') || 'Pending',
+                    get('Savings')
                 ).run();
 
                 return Response.json({ result: 'success', action: 'added', id: newRefId });
             }
+
             // ----- UPDATE EXISTING RECORD -----
             if (action === 'update') {
-                const originalId = data['originalId'];
+                const originalId = get('originalId');
                 if (!originalId) {
                     return Response.json({ error: 'Missing originalId for update.' }, { status: 400 });
                 }
@@ -85,18 +89,18 @@ export async function onRequest(context) {
             shared_mode = ?, analysis = ?, status = ?, savings = ?
           WHERE ref_id = ?`
                 ).bind(
-                    data['Requested Department'] || '',
-                    data['Request Date'] || '',
-                    data['Letter / Email Reference'] || '',
-                    data['Action Taken By'] || '',
-                    data['Problem Statement / Objective'] || '',
-                    data['Datasets Used'] || '',
-                    data['Date for Data Dump'] || '',
-                    data['Received Count'] || '',
-                    data['Result Shared Mode'] || '',
-                    data['Analysis Outcome'] || '',
-                    data['Status'] || 'Pending',
-                    data['Savings'] || '',
+                    get('Requested Department'),
+                    get('Request Date'),
+                    get('Letter / Email Reference'),
+                    get('Action Taken By'),
+                    get('Problem Statement / Objective'),
+                    get('Datasets Used'),
+                    get('Date for Data Dump'),
+                    get('Received Count'),
+                    get('Result Shared Mode'),
+                    get('Analysis Outcome'),
+                    get('Status') || 'Pending',
+                    get('Savings'),
                     originalId
                 ).run();
 
