@@ -2,7 +2,8 @@
 export async function onRequest(context) {
     const { request, env } = context;
     const url = new URL(request.url);
-    const action = url.searchParams.get('action');
+    // const action = url.searchParams.get('action'); 
+    let action = url.searchParams.get('action');
 
     // Sanity check: is the D1 binding present?
     if (!env.DB) {
@@ -26,11 +27,22 @@ export async function onRequest(context) {
         // ================================
         // POST: Add or Update
         // ================================
+        // if (request.method === 'POST') {
+        //     // ✅ FIX: Read form-encoded body (not JSON)
+        //     const bodyText = await request.text();
+        //     const data = new URLSearchParams(bodyText);
+        //     const get = (key) => data.get(key) || ''; 
+
         if (request.method === 'POST') {
-            // ✅ FIX: Read form-encoded body (not JSON)
+            // Read form-encoded body (not JSON)
             const bodyText = await request.text();
             const data = new URLSearchParams(bodyText);
             const get = (key) => data.get(key) || '';
+
+            // ✅ FIX: If action wasn't in the query string, get it from the body
+            if (!action) {
+                action = data.get('action');
+            }
 
             // ----- ADD NEW RECORD -----
             if (action === 'add') {
