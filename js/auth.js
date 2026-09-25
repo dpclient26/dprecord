@@ -1,0 +1,1 @@
+const token=sessionStorage.getItem("ops_portal_token");function logout(){sessionStorage.removeItem("ops_portal_token"),window.location.href="/login"}token||(window.location.href="/login");
