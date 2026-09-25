@@ -31,22 +31,28 @@ export async function onRequest(context) {
 
             // ----- ADD NEW RECORD -----
             if (action === 'add') {
-                // Generate ref_id: current year + 4-digit number starting from 0049
                 const year = new Date().getFullYear().toString();
                 const STARTING_NUMBER = 48;
-                const countResult = await env.DB.prepare(
-                    "SELECT COUNT(*) as c FROM requests WHERE ref_id LIKE ?"
+
+                // Find the highest numeric suffix for this year
+                const maxResult = await env.DB.prepare(
+                    "SELECT ref_id FROM requests WHERE ref_id LIKE ? ORDER BY ref_id DESC LIMIT 1"
                 ).bind(year + '%').first();
 
-                const nextNum = (countResult.c + STARTING_NUMBER + 1).toString().padStart(4, '0');
-                const newRefId = year + nextNum;
+                let nextCount = STARTING_NUMBER + 1;
+                if (maxResult && maxResult.ref_id) {
+                    const lastNum = parseInt(maxResult.ref_id.substring(4), 10);
+                    if (!isNaN(lastNum)) nextCount = lastNum + 1;
+                }
+
+                const newRefId = year + String(nextCount).padStart(4, '0');
 
                 await env.DB.prepare(
                     `INSERT INTO requests 
           (ref_id, requested_dept, request_date, letter_ref, action_by, problem,
            datasets, data_dump_date, received_count, shared_mode,
-           analysis, action_taken, status, savings)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+           analysis, status, savings)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
                 ).bind(
                     newRefId,
                     data['Requested Department'] || '',
@@ -59,14 +65,12 @@ export async function onRequest(context) {
                     data['Received Count'] || '',
                     data['Result Shared Mode'] || '',
                     data['Analysis Outcome'] || '',
-                    data['Action Taken'] || '',
                     data['Status'] || 'Pending',
                     data['Savings'] || '',
                 ).run();
 
                 return Response.json({ result: 'success', action: 'added', id: newRefId });
             }
-
             // ----- UPDATE EXISTING RECORD -----
             if (action === 'update') {
                 const originalId = data['originalId'];
@@ -78,7 +82,7 @@ export async function onRequest(context) {
                     `UPDATE requests SET
             requested_dept = ?, request_date = ?, letter_ref = ?, action_by = ?,
             problem = ?, datasets = ?, data_dump_date = ?, received_count = ?,
-            shared_mode = ?, analysis = ?, action_taken = ?, status = ?, savings = ?
+            shared_mode = ?, analysis = ?, status = ?, savings = ?
           WHERE ref_id = ?`
                 ).bind(
                     data['Requested Department'] || '',
@@ -91,7 +95,6 @@ export async function onRequest(context) {
                     data['Received Count'] || '',
                     data['Result Shared Mode'] || '',
                     data['Analysis Outcome'] || '',
-                    data['Action Taken'] || '',
                     data['Status'] || 'Pending',
                     data['Savings'] || '',
                     originalId
