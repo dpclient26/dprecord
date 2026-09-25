@@ -1,13 +1,57 @@
+// Token verification helper — validates HMAC-signed tokens from auth.js
+async function verifyToken(authHeader, env) {
+    if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
+    const token = authHeader.substring(7);
+    try {
+        const parts = token.split('.');
+        if (parts.length !== 2) return null;
+        const [payloadB64, sigB64] = parts;
+
+        const key = await crypto.subtle.importKey(
+            'raw',
+            new TextEncoder().encode(env.AUTH_SECRET),
+            { name: 'HMAC', hash: 'SHA-256' },
+            false,
+            ['verify']
+        );
+
+        const sigBuffer = Uint8Array.from(atob(sigB64), c => c.charCodeAt(0));
+        const valid = await crypto.subtle.verify(
+            'HMAC', key, sigBuffer, new TextEncoder().encode(payloadB64)
+        );
+
+        if (!valid) return null;
+
+        const payload = JSON.parse(atob(payloadB64));
+
+        // Token expires after 24 hours
+        if (Date.now() - payload.iat > 24 * 60 * 60 * 1000) return null;
+
+        return payload;
+    } catch {
+        return null;
+    }
+}
+
 export async function onRequest(context) {
     const { request, env } = context;
     const url = new URL(request.url);
     let action = url.searchParams.get('action');
 
-    // 🔒 AUTH CHECK
-    const loggedInUser = request.headers.get('X-Logged-In-User') || '';
-    const validUser = env.ADMIN_USER || '';
+    // 🔒 CSRF CHECK — validate Origin header for state-changing requests
+    if (request.method === 'POST') {
+        const origin = request.headers.get('Origin');
+        const requestUrl = new URL(request.url);
+        if (origin && new URL(origin).host !== requestUrl.host) {
+            return Response.json({ error: 'Forbidden.' }, { status: 403 });
+        }
+    }
 
-    if (!loggedInUser || loggedInUser !== validUser) {
+    // 🔒 AUTH CHECK — verify HMAC-signed token
+    const authHeader = request.headers.get('Authorization');
+    const tokenPayload = await verifyToken(authHeader, env);
+
+    if (!tokenPayload || tokenPayload.user !== env.ADMIN_USER) {
         return Response.json({ error: 'Unauthorized. Please log in.' }, { status: 401 });
     }
 
@@ -41,6 +85,41 @@ export async function onRequest(context) {
         }
 
         // ================================
+        // GET: Fetch single record by ID
+        // ================================
+        if (request.method === 'GET' && action === 'get_one') {
+            const id = url.searchParams.get('id');
+            if (!id) {
+                return Response.json({ error: 'Missing id parameter.' }, { status: 400 });
+            }
+
+            const r = await env.DB.prepare(
+                "SELECT * FROM requests WHERE ref_id = ?"
+            ).bind(id).first();
+
+            if (!r) {
+                return Response.json({ error: 'Record not found.' }, { status: 404 });
+            }
+
+            return Response.json({
+                'Reference Number/Ticket Number': r.ref_id,
+                'Requested Department': r.requested_dept,
+                'Request Date': r.request_date,
+                'Letter / Email Reference': r.letter_ref,
+                'Action Taken By': r.action_by,
+                'Problem Statement / Objective': r.problem,
+                'Datasets Used': r.datasets,
+                'Date for Data Dump': r.data_dump_date,
+                'Received Count': r.received_count,
+                'Result Shared Mode': r.shared_mode,
+                'Analysis Outcome': r.analysis,
+                'Status': r.status,
+                'Savings': r.savings,
+                'Timestamp': r.timestamp
+            });
+        }
+
+        // ================================
         // POST: Add or Update
         // ================================
         if (request.method === 'POST') {
@@ -50,6 +129,27 @@ export async function onRequest(context) {
 
             if (!action) {
                 action = data.get('action');
+            }
+
+            // Server-side validation
+            const VALID_STATUSES = ['Pending', 'In Progress', 'Completed'];
+            const MAX_FIELD_LENGTH = 2000;
+
+            const status = get('Status') || 'Pending';
+            if (!VALID_STATUSES.includes(status)) {
+                return Response.json({ error: 'Invalid status value.' }, { status: 400 });
+            }
+
+            // Validate field lengths
+            const fieldsToCheck = [
+                'Requested Department', 'Letter / Email Reference', 'Action Taken By',
+                'Problem Statement / Objective', 'Datasets Used', 'Received Count',
+                'Result Shared Mode', 'Analysis Outcome', 'Savings'
+            ];
+            for (const field of fieldsToCheck) {
+                if (get(field).length > MAX_FIELD_LENGTH) {
+                    return Response.json({ error: `Field "${field}" exceeds maximum length.` }, { status: 400 });
+                }
             }
 
             // ----- ADD NEW RECORD -----
@@ -87,7 +187,7 @@ export async function onRequest(context) {
                     get('Received Count'),
                     get('Result Shared Mode'),
                     get('Analysis Outcome'),
-                    get('Status') || 'Pending',
+                    status,
                     get('Savings')
                 ).run();
 
@@ -118,7 +218,7 @@ export async function onRequest(context) {
                     get('Received Count'),
                     get('Result Shared Mode'),
                     get('Analysis Outcome'),
-                    get('Status') || 'Pending',
+                    status,
                     get('Savings'),
                     originalId
                 ).run();
@@ -131,6 +231,6 @@ export async function onRequest(context) {
 
     } catch (error) {
         console.error("D1 proxy error:", error);
-        return Response.json({ error: 'Server error: ' + error.message }, { status: 500 });
+        return Response.json({ error: 'An unexpected error occurred.' }, { status: 500 });
     }
 }
