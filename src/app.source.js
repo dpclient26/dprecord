@@ -1,7 +1,7 @@
 // ==========================================
 // 1. Google Sheets Integration Setup
 // ==========================================
-const scriptURL = '/api/proxy';
+const scriptURL = '/api/d1';
 
 // Global State
 let allRecords = [];
@@ -102,10 +102,10 @@ async function loadFromCacheOrFetch() {
 async function fetchAndRenderRecords(isBackgroundRefresh = false) {
     try {
         const data = await fetchWithRetry(scriptURL + "?action=get", {}, 3, 500);
-        
+
         // Save fresh data to cache
         saveToCache(data);
-        
+
         // Update UI with fresh data
         allRecords = [...data].reverse();
         updateStats();
@@ -114,7 +114,7 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
         console.error('Error fetching data:', error);
         // Only show error if we have nothing to display
         if (!isBackgroundRefresh || allRecords.length === 0) {
-            document.getElementById('tableBody').innerHTML = 
+            document.getElementById('tableBody').innerHTML =
                 `<tr><td colspan="9" class="text-center py-4 text-danger">
                     <i class="bi bi-exclamation-triangle me-2"></i>Unable to load records. Please check your connection and try again.
                     <br><button class="btn btn-sm btn-outline-primary mt-2" onclick="loadFromCacheOrFetch()">
@@ -188,14 +188,14 @@ function renderTable() {
         const initials = actionBy.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
         const problem = row['Problem Statement / Objective'] || 'N/A';
         const shortProblem = problem.length > 30 ? problem.substring(0, 30) + '...' : problem;
-        
+
         const rawId = row['Reference Number/Ticket Number'] || '';
         const displayId = rawId ? rawId : 'N/A';
 
         // ✨ NEW: Format the Received Count with commas (e.g., 25000 -> 25,000)
         const receivedCount = row['Received Count'] || '-';
-        const formattedCount = (receivedCount !== '-' && !isNaN(receivedCount)) 
-            ? Number(receivedCount).toLocaleString() 
+        const formattedCount = (receivedCount !== '-' && !isNaN(receivedCount))
+            ? Number(receivedCount).toLocaleString()
             : receivedCount;
 
         const status = row['Status'] || 'Pending';
@@ -208,8 +208,8 @@ function renderTable() {
             statusBadge = `<span class="badge bg-danger-subtle text-danger border border-danger px-2 py-1">Pending</span>`;
         }
 
-        const editAction = rawId 
-            ? `<a href="/index?edit=${encodeURIComponent(rawId)}" class="text-primary fw-semibold text-decoration-none action-btn">View/Edit</a>` 
+        const editAction = rawId
+            ? `<a href="/index?edit=${encodeURIComponent(rawId)}" class="text-primary fw-semibold text-decoration-none action-btn">View/Edit</a>`
             : `<a href="#" class="text-muted fw-semibold text-decoration-none" onclick="alert('Cannot edit: Missing Reference Number.'); return false;">Edit</a>`;
 
         const tr = document.createElement('tr');
@@ -270,10 +270,10 @@ function setupSearch() {
 function renderPagination() {
     const paginationText = document.getElementById('paginationText');
     const paginationControls = document.getElementById('paginationControls');
-    
+
     const totalFiltered = filteredRecords.length;
     const totalPages = Math.ceil(totalFiltered / recordsPerPage) || 1;
-    
+
     const startIndex = (currentPage - 1) * recordsPerPage;
     const endIndex = Math.min(startIndex + recordsPerPage, totalFiltered);
 
@@ -323,7 +323,7 @@ function setupFormLogic(form) {
         document.getElementById('formTitle').innerText = 'Edit Data Request';
         document.getElementById('formSubtitle').innerText = 'Update the fields below to modify the request in the registry.';
         submitBtn.innerHTML = '<i class="bi bi-save me-2"></i> Update Request';
-        
+
         refNumberInput.value = editId;
 
         const hiddenInput = document.createElement('input');
@@ -410,24 +410,24 @@ function setupFormLogic(form) {
         urlEncodedData.append('Logged In User', sessionStorage.getItem('ops_portal_user') || 'Unknown');
 
         fetch(scriptURL, { method: 'POST', body: urlEncodedData })
-        .then(response => response.json())
-        .then(result => {
-            if (result.result === 'success') {
-                clearCache(); // Invalidate cache so fresh data loads on index
-                const msg = actionType === 'add' 
-                    ? `Request submitted successfully! Generated ID: ${result.id}` 
-                    : `Request updated successfully!`;
-                alert(msg);
-                window.location.href = '/index'; 
-            } else {
-                alert('Error: ' + result.error);
-            }
-        })
-        .catch(error => alert('Network error. check your connection.'))
-        .finally(() => {
-            submitBtn.innerHTML = originalBtnText;
-            submitBtn.disabled = false;
-        });
+            .then(response => response.json())
+            .then(result => {
+                if (result.result === 'success') {
+                    clearCache(); // Invalidate cache so fresh data loads on index
+                    const msg = actionType === 'add'
+                        ? `Request submitted successfully! Generated ID: ${result.id}`
+                        : `Request updated successfully!`;
+                    alert(msg);
+                    window.location.href = '/index';
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            })
+            .catch(error => alert('Network error. check your connection.'))
+            .finally(() => {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            });
     });
 
     document.getElementById('clearBtn')?.addEventListener('click', () => {
@@ -439,7 +439,7 @@ function setupFormLogic(form) {
 }
 
 function populateForm(form, record) {
-        const fieldsToFill = [
+    const fieldsToFill = [
         'Requested Department', 'Request Date', 'Letter / Email Reference',
         'Action Taken By', 'Problem Statement / Objective', 'Datasets Used',
         'Date for Data Dump', 'Received Count', 'Completed Date',
@@ -463,7 +463,7 @@ function populateForm(form, record) {
 // Uses LOCAL time to correctly handle IST (UTC+5:30) and other timezones
 function formatDateForInput(dateStr) {
     if (!dateStr) return '';
-    
+
     const str = String(dateStr).trim();
 
     // 1. Already a plain date like "2026-09-10" -> return as-is
@@ -476,7 +476,7 @@ function formatDateForInput(dateStr) {
     //    (This is the fix for the "one day earlier" bug)
     const d = new Date(str);
     if (isNaN(d.getTime())) return '';
-    
+
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
@@ -508,7 +508,7 @@ function formatValueForCSV(key, value) {
         }
         return `${day}-${month}-${year}`;
     }
-    
+
     if (/^\d{4}-\d{2}-\d{2}$/.test(strValue)) {
         const parts = strValue.split('-');
         return `${parts[2]}-${parts[1]}-${parts[0]}`;
@@ -527,7 +527,7 @@ function setupDownloadButton() {
         }
 
         const allHeaders = Object.keys(allRecords[0]);
-        const headers = allHeaders.filter(h => h !== 'Timestamp'); 
+        const headers = allHeaders.filter(h => h !== 'Timestamp');
 
         const csvRows = [];
         csvRows.push(headers.map(header => `"${header}"`).join(','));
@@ -544,21 +544,21 @@ function setupDownloadButton() {
 
         const csvString = '\uFEFF' + csvRows.join('\n');
         const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-        
+
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        
+
         const date = new Date();
         const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-        
+
         link.setAttribute('href', url);
         link.setAttribute('download', `Data_Purity_Records_${dateString}.csv`);
         link.style.visibility = 'hidden';
-        
+
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
+
         URL.revokeObjectURL(url);
     });
 }
