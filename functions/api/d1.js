@@ -21,7 +21,26 @@ export async function onRequest(context) {
             const { results } = await env.DB.prepare(
                 "SELECT * FROM requests ORDER BY timestamp DESC"
             ).all();
-            return Response.json(results);
+
+            // Map D1 snake_case columns → old key names the frontend expects
+            const mapped = results.map(r => ({
+                'Reference Number/Ticket Number': r.ref_id,
+                'Requested Department': r.requested_dept,
+                'Request Date': r.request_date,
+                'Letter / Email Reference': r.letter_ref,
+                'Action Taken By': r.action_by,
+                'Problem Statement / Objective': r.problem,
+                'Datasets Used': r.datasets,
+                'Date for Data Dump': r.data_dump_date,
+                'Received Count': r.received_count,
+                'Result Shared Mode': r.shared_mode,
+                'Analysis Outcome': r.analysis,
+                'Status': r.status,
+                'Savings': r.savings,
+                'Timestamp': r.timestamp
+            }));
+
+            return Response.json(mapped);
         }
 
         // ================================
