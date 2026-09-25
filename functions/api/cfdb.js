@@ -1,16 +1,14 @@
-// functions/api/d1.js
 export async function onRequest(context) {
     const { request, env } = context;
     const url = new URL(request.url);
-    // const action = url.searchParams.get('action'); 
     let action = url.searchParams.get('action');
 
-    // Sanity check: is the D1 binding present?
-    if (!env.DB) {
-        return Response.json(
-            { error: 'DB binding missing. Check Cloudflare Settings → Functions → D1 bindings.' },
-            { status: 500 }
-        );
+    // 🔒 AUTH CHECK
+    const loggedInUser = request.headers.get('X-Logged-In-User') || '';
+    const validUser = env.ADMIN_USER || '';
+
+    if (!loggedInUser || loggedInUser !== validUser) {
+        return Response.json({ error: 'Unauthorized. Please log in.' }, { status: 401 });
     }
 
     try {
@@ -22,7 +20,6 @@ export async function onRequest(context) {
                 "SELECT * FROM requests ORDER BY id DESC"
             ).all();
 
-            // Map D1 snake_case columns → old key names the frontend expects
             const mapped = results.map(r => ({
                 'Reference Number/Ticket Number': r.ref_id,
                 'Requested Department': r.requested_dept,
@@ -46,19 +43,11 @@ export async function onRequest(context) {
         // ================================
         // POST: Add or Update
         // ================================
-        // if (request.method === 'POST') {
-        //     // ✅ FIX: Read form-encoded body (not JSON)
-        //     const bodyText = await request.text();
-        //     const data = new URLSearchParams(bodyText);
-        //     const get = (key) => data.get(key) || ''; 
-
         if (request.method === 'POST') {
-            // Read form-encoded body (not JSON)
             const bodyText = await request.text();
             const data = new URLSearchParams(bodyText);
             const get = (key) => data.get(key) || '';
 
-            // ✅ FIX: If action wasn't in the query string, get it from the body
             if (!action) {
                 action = data.get('action');
             }
@@ -68,7 +57,6 @@ export async function onRequest(context) {
                 const year = new Date().getFullYear().toString();
                 const STARTING_NUMBER = 48;
 
-                // Find the highest numeric suffix for this year
                 const maxResult = await env.DB.prepare(
                     "SELECT ref_id FROM requests WHERE ref_id LIKE ? ORDER BY ref_id DESC LIMIT 1"
                 ).bind(year + '%').first();
@@ -83,10 +71,10 @@ export async function onRequest(context) {
 
                 await env.DB.prepare(
                     `INSERT INTO requests 
-          (ref_id, requested_dept, request_date, letter_ref, action_by, problem,
-           datasets, data_dump_date, received_count, shared_mode,
-           analysis, status, savings)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+                    (ref_id, requested_dept, request_date, letter_ref, action_by, problem,
+                     datasets, data_dump_date, received_count, shared_mode,
+                     analysis, status, savings)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
                 ).bind(
                     newRefId,
                     get('Requested Department'),
@@ -115,10 +103,10 @@ export async function onRequest(context) {
 
                 await env.DB.prepare(
                     `UPDATE requests SET
-            requested_dept = ?, request_date = ?, letter_ref = ?, action_by = ?,
-            problem = ?, datasets = ?, data_dump_date = ?, received_count = ?,
-            shared_mode = ?, analysis = ?, status = ?, savings = ?
-          WHERE ref_id = ?`
+                    requested_dept = ?, request_date = ?, letter_ref = ?, action_by = ?,
+                    problem = ?, datasets = ?, data_dump_date = ?, received_count = ?,
+                    shared_mode = ?, analysis = ?, status = ?, savings = ?
+                    WHERE ref_id = ?`
                 ).bind(
                     get('Requested Department'),
                     get('Request Date'),
