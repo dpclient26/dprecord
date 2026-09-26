@@ -7,40 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        body {
-            background-color: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 1.5rem 1rem;
-            margin: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        .login-card {
-            width: 100%;
-            max-width: 400px;
-            padding: 2.25rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            background: white;
-        }
-        @media (max-width: 576px) {
-            .login-card {
-                padding: 1.75rem 1.25rem;
-            }
-            .form-control {
-                font-size: 1rem;
-            }
-        }
+        body { background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .login-card { width: 100%; max-width: 400px; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); background: white; }
     </style>
 </head>
 <body>
 
     <div class="login-card">
         <div class="text-center mb-4">
-            <div class="rounded p-1 d-inline-flex justify-content-center align-items-center mb-2" style="width: 48px; height: 48px;">
-                 <img src="images/Picture1.png" alt="Logo" style="width: 48px; height: 48px; object-fit: contain;">
+            <div class="text-white rounded p-2 d-inline-flex justify-content-center align-items-center mb-2" style="width: 50px; height: 50px;">
+                <!-- <i class="bi bi-layout-text-window-reverse fs-3"></i> --> 
+                 <img src="images/Picture1.png" alt="Logo" style="width: 50px; height: 50px;">
             </div>
             <h4 class="fw-bold">Data Purity Register</h4>
             <p class="text-muted small">Sign in to access the registry</p>
@@ -51,16 +28,16 @@
         <form id="loginForm">
             <div class="mb-3">
                 <label class="form-label fw-semibold small">Username</label>
-                <input type="text" class="form-control bg-light" id="username" required autocomplete="username">
+                <input type="text" class="form-control bg-light" id="username" required>
             </div>
             <div class="mb-3">
                 <label class="form-label fw-semibold small">Password</label>
-                <input type="password" class="form-control bg-light" id="password" required autocomplete="current-password">
+                <input type="password" class="form-control bg-light" id="password" required>
             </div>
             
             <!-- Math CAPTCHA -->
             <div class="mb-4">
-                <label class="form-label fw-semibold small">Security Check: <span id="captchaQuestion" class="text-primary fw-bold"></span></label>
+                <label class="form-label fw-semibold small">Security Check: <span id="captchaQuestion" class="text-primary"></span></label>
                 <input type="number" class="form-control bg-light" id="captchaAnswer" placeholder="Enter the answer" required>
             </div>
 
@@ -70,17 +47,7 @@
         </form>
     </div>
 
-    <script>
-        // Check for session timeout or existing active session
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('timeout') === 'true') {
-            const errorAlert = document.getElementById('errorAlert');
-            errorAlert.innerText = "Your session has expired. Please sign in again.";
-            errorAlert.classList.remove('d-none');
-        } else if (sessionStorage.getItem('ops_portal_token')) {
-            window.location.href = '/index';
-        }
-
+    <script> 
         // 1. Generate Math CAPTCHA
         let correctAnswer = 0;
         function generateCaptcha() {
@@ -89,15 +56,15 @@
             correctAnswer = num1 + num2;
             document.getElementById('captchaQuestion').innerText = `What is ${num1} + ${num2}?`;
         }
-        generateCaptcha();
+        generateCaptcha(); // Run on page load
 
         // 2. Handle Login Form Submission
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const username = document.getElementById('username').value.trim();
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const captchaInput = parseInt(document.getElementById('captchaAnswer').value, 10);
+            const captchaInput = parseInt(document.getElementById('captchaAnswer').value);
             const errorAlert = document.getElementById('errorAlert');
             const loginBtn = document.getElementById('loginBtn');
 
@@ -105,7 +72,7 @@
             if (captchaInput !== correctAnswer) {
                 errorAlert.innerText = "Incorrect CAPTCHA answer. Please try again.";
                 errorAlert.classList.remove('d-none');
-                generateCaptcha();
+                generateCaptcha(); // Generate new captcha
                 document.getElementById('captchaAnswer').value = '';
                 return;
             }
@@ -116,6 +83,7 @@
             errorAlert.classList.add('d-none');
 
             try {
+                // Send credentials to Vercel Serverless Function
                 const response = await fetch('/api/auth', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -125,11 +93,12 @@
                 const data = await response.json();
 
                 if (data.success) {
+                    // Store token and username in SessionStorage to keep user logged in
                     sessionStorage.setItem('ops_portal_token', data.token);
                     sessionStorage.setItem('ops_portal_user', data.username);
                     window.location.href = '/index';
                 } else {
-                    throw new Error(data.error || 'Login failed. Please check your credentials.');
+                    throw new Error(data.error || 'Login failed');
                 }
             } catch (error) {
                 errorAlert.innerText = error.message;

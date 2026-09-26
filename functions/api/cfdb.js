@@ -2,8 +2,6 @@
 async function verifyToken(authHeader, env) {
     if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
     const token = authHeader.substring(7);
-    if (!env.AUTH_SECRET) return null;
-
     try {
         const parts = token.split('.');
         if (parts.length !== 2) return null;
@@ -17,25 +15,17 @@ async function verifyToken(authHeader, env) {
             ['verify']
         );
 
-        const sigBinary = atob(sigB64);
-        const sigBuffer = new Uint8Array(sigBinary.length);
-        for (let i = 0; i < sigBinary.length; i++) {
-            sigBuffer[i] = sigBinary.charCodeAt(i);
-        }
-
+        const sigBuffer = Uint8Array.from(atob(sigB64), c => c.charCodeAt(0));
         const valid = await crypto.subtle.verify(
             'HMAC', key, sigBuffer, new TextEncoder().encode(payloadB64)
         );
 
         if (!valid) return null;
 
-        const payloadStr = decodeURIComponent(escape(atob(payloadB64)));
-        const payload = JSON.parse(payloadStr);
+        const payload = JSON.parse(atob(payloadB64));
 
-        // Token expires after 24 hours (with clock skew tolerance)
-        if (!payload.iat || typeof payload.iat !== 'number') return null;
-        const now = Date.now();
-        if (now - payload.iat > 24 * 60 * 60 * 1000 || payload.iat > now + 60000) return null;
+        // Token expires after 24 hours
+        if (Date.now() - payload.iat > 24 * 60 * 60 * 1000) return null;
 
         return payload;
     } catch {
@@ -61,7 +51,7 @@ export async function onRequest(context) {
     const authHeader = request.headers.get('Authorization');
     const tokenPayload = await verifyToken(authHeader, env);
 
-    if (!tokenPayload || !env.ADMIN_USER || tokenPayload.user !== env.ADMIN_USER) {
+    if (!tokenPayload || tokenPayload.user !== env.ADMIN_USER) {
         return Response.json({ error: 'Unauthorized. Please log in.' }, { status: 401 });
     }
 
@@ -135,7 +125,7 @@ export async function onRequest(context) {
         if (request.method === 'POST') {
             const bodyText = await request.text();
             const data = new URLSearchParams(bodyText);
-            const get = (key) => (data.get(key) || '').trim();
+            const get = (key) => data.get(key) || '';
 
             if (!action) {
                 action = data.get('action');
@@ -168,7 +158,7 @@ export async function onRequest(context) {
                 const STARTING_NUMBER = 48;
 
                 const maxResult = await env.DB.prepare(
-                    "SELECT ref_id FROM requests WHERE ref_id LIKE ? ORDER BY LENGTH(ref_id) DESC, ref_id DESC LIMIT 1"
+                    "SELECT ref_id FROM requests WHERE ref_id LIKE ? ORDER BY ref_id DESC LIMIT 1"
                 ).bind(year + '%').first();
 
                 let nextCount = STARTING_NUMBER + 1;
@@ -211,7 +201,7 @@ export async function onRequest(context) {
                     return Response.json({ error: 'Missing originalId for update.' }, { status: 400 });
                 }
 
-                const updateResult = await env.DB.prepare(
+                await env.DB.prepare(
                     `UPDATE requests SET
                     requested_dept = ?, request_date = ?, letter_ref = ?, action_by = ?,
                     problem = ?, datasets = ?, data_dump_date = ?, received_count = ?,
@@ -233,10 +223,6 @@ export async function onRequest(context) {
                     originalId
                 ).run();
 
-                if (updateResult.meta && updateResult.meta.changes === 0) {
-                    return Response.json({ error: 'Record not found.' }, { status: 404 });
-                }
-
                 return Response.json({ result: 'success', action: 'updated' });
             }
         }
@@ -244,7 +230,7 @@ export async function onRequest(context) {
         return Response.json({ error: 'Invalid action or method.' }, { status: 400 });
 
     } catch (error) {
-        console.error("D1 database error:", error);
+        console.error("D1 proxy error:", error);
         return Response.json({ error: 'An unexpected error occurred.' }, { status: 500 });
     }
 }

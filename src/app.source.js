@@ -1,7 +1,7 @@
 // ==========================================
 // 1. DB Integration Setup
 // ==========================================
-const scriptURL = '/api/cfdb';
+const scriptURL = '/api/d1';
 
 // Global State
 let allRecords = [];
@@ -63,37 +63,17 @@ function clearCache() {
 }
 
 // ==========================================
-// SMART FETCH WITH RETRY (with Bearer token)
+// SMART FETCH WITH RETRY
 // ==========================================
 async function fetchWithRetry(url, options = {}, retries = 3, delay = 500) {
-    // Get the auth token from session
-    const token = sessionStorage.getItem('ops_portal_token') || '';
-
-    // Merge auth header into existing headers
-    const headers = {
-        ...(options.headers || {}),
-        'Authorization': 'Bearer ' + token
-    };
-
-    const mergedOptions = { ...options, headers };
-
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
-            const response = await fetch(url, mergedOptions);
-
-            // If backend says we're unauthorized, redirect to login immediately
-            if (response.status === 401) {
-                sessionStorage.removeItem('ops_portal_token');
-                sessionStorage.removeItem('ops_portal_user');
-                window.location.href = '/login?timeout=true';
-                return;
-            }
-
+            const response = await fetch(url, options);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return await response.json();
         } catch (error) {
             if (attempt === retries) throw error;
-            await new Promise(r => setTimeout(r, delay * attempt));
+            await new Promise(r => setTimeout(r, delay * attempt)); // Exponential backoff
         }
     }
 }
@@ -126,11 +106,6 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
         // Save fresh data to cache
         saveToCache(data);
 
-        // Skip re-render if data hasn't changed (avoids duplicate rendering)
-        if (isBackgroundRefresh && JSON.stringify(data) === JSON.stringify(allRecords)) {
-            return;
-        }
-
         // Update UI with fresh data
         allRecords = [...data];
         updateStats();
@@ -151,13 +126,15 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
 }
 
 function updateStats() {
-    const counts = { Completed: 0, 'In Progress': 0, Pending: 0 };
-    allRecords.forEach(r => { if (r['Status'] in counts) counts[r['Status']]++; });
+    const total = allRecords.length;
+    const completed = allRecords.filter(r => r['Status'] === 'Completed').length;
+    const inProgress = allRecords.filter(r => r['Status'] === 'In Progress').length;
+    const pending = allRecords.filter(r => r['Status'] === 'Pending').length;
 
-    document.getElementById('totalCount').innerText = allRecords.length;
-    document.getElementById('completedCount').innerText = counts.Completed;
-    document.getElementById('inProgressCount').innerText = counts['In Progress'];
-    document.getElementById('pendingCount').innerText = counts.Pending;
+    document.getElementById('totalCount').innerText = total;
+    document.getElementById('completedCount').innerText = completed;
+    document.getElementById('inProgressCount').innerText = inProgress;
+    document.getElementById('pendingCount').innerText = pending;
 }
 
 // ==========================================
@@ -186,18 +163,12 @@ function applyFiltersAndRender() {
     renderPagination();
 }
 
-// XSS Protection: Escape user-controlled data before inserting into HTML
-function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-}
-
 function renderTable() {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
 
     if (filteredRecords.length === 0) {
+        // Changed colspan from 9 to 10
         tableBody.innerHTML = `<tr><td colspan="10" class="text-center py-4 text-muted">No records found matching your criteria.</td></tr>`;
         return;
     }
@@ -213,22 +184,19 @@ function renderTable() {
             reqDate = dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
         }
 
-        const actionBy = escapeHtml(row['Action Taken By'] || 'Unknown');
-        const initials = escapeHtml((row['Action Taken By'] || 'Unknown').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
-        const problem = escapeHtml(row['Problem Statement / Objective'] || 'N/A');
-        const rawProblem = row['Problem Statement / Objective'] || 'N/A';
-        const shortProblem = escapeHtml(rawProblem.length > 30 ? rawProblem.substring(0, 30) + '...' : rawProblem);
+        const actionBy = row['Action Taken By'] || 'Unknown';
+        const initials = actionBy.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        const problem = row['Problem Statement / Objective'] || 'N/A';
+        const shortProblem = problem.length > 30 ? problem.substring(0, 30) + '...' : problem;
 
         const rawId = row['Reference Number/Ticket Number'] || '';
-        const displayId = escapeHtml(rawId ? rawId : 'N/A');
+        const displayId = rawId ? rawId : 'N/A';
 
-        // Format the Received Count with commas (e.g., 25000 -> 25,000)
+        // ✨ NEW: Format the Received Count with commas (e.g., 25000 -> 25,000)
         const receivedCount = row['Received Count'] || '-';
-        const formattedCount = escapeHtml(
-            (receivedCount !== '-' && !isNaN(receivedCount))
-                ? Number(receivedCount).toLocaleString()
-                : String(receivedCount)
-        );
+        const formattedCount = (receivedCount !== '-' && !isNaN(receivedCount))
+            ? Number(receivedCount).toLocaleString()
+            : receivedCount;
 
         const status = row['Status'] || 'Pending';
         let statusBadge = '';
@@ -244,23 +212,20 @@ function renderTable() {
             ? `<a href="/index?edit=${encodeURIComponent(rawId)}" class="text-primary fw-semibold text-decoration-none action-btn">View/Edit</a>`
             : `<a href="#" class="text-muted fw-semibold text-decoration-none" onclick="alert('Cannot edit: Missing Reference Number.'); return false;">Edit</a>`;
 
-        const department = escapeHtml(row['Requested Department'] || 'N/A');
-        const letterRef = escapeHtml(row['Letter / Email Reference'] || '-');
-        const sharedMode = escapeHtml(row['Result Shared Mode'] || '-');
-
         const tr = document.createElement('tr');
         tr.className = 'animate-row';
         tr.style.animationDelay = `${Math.min(index * 0.05, 0.4)}s`;
 
         tr.innerHTML = `
             <td class="px-4 ${rawId ? 'text-primary' : 'text-muted'} fw-semibold">${displayId}</td>
-            <td class="fw-semibold">${department}</td>
+            <td class="fw-semibold">${row['Requested Department'] || 'N/A'}</td>
             <td>${reqDate}</td>
-            <td class="text-muted">${letterRef}</td>
+            <td class="text-muted">${row['Letter / Email Reference'] || '-'}</td>
             <td><span class="badge bg-light text-dark border me-2">${initials}</span> ${actionBy}</td>
             <td class="text-truncate" style="max-width: 200px;" title="${problem}">${shortProblem}</td>
+            <!-- ✨ NEW COLUMN -->
             <td class="text-muted">${formattedCount}</td> 
-            <td class="text-muted">${sharedMode}</td>
+            <td class="text-muted">${row['Result Shared Mode'] || '-'}</td>
             <td>${statusBadge}</td>
             <td class="text-end px-4">${editAction}</td>
         `;
@@ -295,14 +260,10 @@ function setupSearch() {
     const searchInput = document.getElementById('searchInput');
     if (!searchInput) return;
 
-    let searchTimeout;
     searchInput.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            searchQuery = e.target.value;
-            currentPage = 1;
-            applyFiltersAndRender();
-        }, 300);
+        searchQuery = e.target.value;
+        currentPage = 1;
+        applyFiltersAndRender();
     });
 }
 
@@ -327,28 +288,9 @@ function renderPagination() {
     let html = '';
     html += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}"><a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a></li>`;
 
-    // Ellipsis-based pagination for many pages
-    const getPageNumbers = (current, total) => {
-        if (total <= 7) return Array.from({length: total}, (_, i) => i + 1);
-        const pages = [1];
-        let start = Math.max(2, current - 1);
-        let end = Math.min(total - 1, current + 1);
-        if (current <= 3) { start = 2; end = 4; }
-        if (current >= total - 2) { start = total - 3; end = total - 1; }
-        if (start > 2) pages.push('...');
-        for (let i = start; i <= end; i++) pages.push(i);
-        if (end < total - 1) pages.push('...');
-        pages.push(total);
-        return pages;
-    };
-
-    getPageNumbers(currentPage, totalPages).forEach(p => {
-        if (p === '...') {
-            html += `<li class="page-item disabled"><span class="page-link">&hellip;</span></li>`;
-        } else {
-            html += `<li class="page-item ${currentPage === p ? 'active' : ''}"><a class="page-link" href="#" data-page="${p}">${p}</a></li>`;
-        }
-    });
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<li class="page-item ${currentPage === i ? 'active' : ''}"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+    }
 
     html += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}"><a class="page-link" href="#" data-page="${currentPage + 1}">Next</a></li>`;
 
@@ -426,10 +368,13 @@ function setupFormLogic(form) {
             }
         }
 
-        // STRATEGY 2: Fetch single record from server (efficient — no full table download)
-        fetchWithRetry(scriptURL + "?action=get_one&id=" + encodeURIComponent(editId), {}, 3, 500)
-            .then(record => {
-                if (record && !record.error) {
+        // STRATEGY 2: Also fetch fresh data (in case cache is stale)
+        fetchWithRetry(scriptURL + "?action=get", {}, 3, 500)
+            .then(data => {
+                const record = data.find(r => String(r['Reference Number/Ticket Number']) === String(editId));
+                if (record) {
+                    // Save to cache for next time
+                    saveToCache(data);
                     // Only finish if not already finished (cache may have hit first)
                     if (!overlay.classList.contains('d-none')) {
                         finishLoading(record);
@@ -464,13 +409,7 @@ function setupFormLogic(form) {
         urlEncodedData.append('action', actionType);
         urlEncodedData.append('Logged In User', sessionStorage.getItem('ops_portal_user') || 'Unknown');
 
-        fetch(scriptURL, {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + (sessionStorage.getItem('ops_portal_token') || '')
-            },
-            body: urlEncodedData
-        })
+        fetch(scriptURL, { method: 'POST', body: urlEncodedData })
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'success') {

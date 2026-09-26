@@ -1,6 +1,4 @@
-/* ==========================================
-   Global Styles
-   ========================================== */
+/* Global Styles */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #f8f9fa;
@@ -54,22 +52,23 @@ h2, h3 {
 }
 
 .fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.6s ease-out forwards;
 }
 
 .animate-row {
-    animation: fadeIn 0.35s ease-out forwards;
+    animation: fadeIn 0.4s ease-out forwards;
     opacity: 0;
 }
 
 /* Button Hover Effects */
 .btn {
-    transition: all 0.25s ease;
+    transition: all 0.3s ease;
 }
 .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-}
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+} 
+
 
 /* Ensure submit button is always clickable and on top */
 #submitBtn, #clearBtn {
@@ -79,215 +78,6 @@ h2, h3 {
 }
 
 /* Ensure the loading overlay never blocks clicks when hidden */
-#formLoadingOverlay[style*="display: none"],
-#formLoadingOverlay.d-none {
-    pointer-events: none !important;
-    display: none !important;
-}
-
-/* ==========================================
-   MOBILE & RESPONSIVE MEDIA QUERIES
-   ========================================== */
-
-/* Tablet & Mobile Navigation (<= 991.98px) */
-@media (max-width: 991.98px) {
-    .navbar .container-fluid {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-
-    .navbar-collapse {
-        margin-top: 0.75rem;
-        padding: 0.75rem 0.5rem;
-        border-top: 1px solid #f1f3f5;
-    }
-
-    .navbar-nav {
-        margin-bottom: 0.5rem;
-        gap: 0.5rem !important;
-    }
-
-    .navbar-nav .nav-link {
-        padding: 0.5rem 0.75rem !important;
-        border-radius: 6px;
-    }
-}
-
-/* Mobile Screens (<= 768px) */
-@media (max-width: 768px) {
-    /* Container spacing */
-    .container, .container-fluid {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-
-    .container.py-5 {
-        padding-top: 1.5rem !important;
-        padding-bottom: 1.5rem !important;
-    }
-
-    .container-fluid.py-4 {
-        padding-top: 1.25rem !important;
-        padding-bottom: 1.25rem !important;
-    }
-
-    /* Headings */
-    h2, h2.fw-bold {
-        font-size: 1.5rem !important;
-    }
-
-    /* Top stats header layout */
-    .d-flex.justify-content-between.align-items-end.mb-4 {
-        flex-direction: column;
-        align-items: flex-start !important;
-        gap: 1rem;
-    }
-
-    /* Dynamic Stats Badges: 2x2 Clean Grid on Mobile */
-    .d-flex.gap-2.flex-wrap {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr);
-        width: 100%;
-        gap: 0.5rem !important;
-    }
-
-    .d-flex.gap-2.flex-wrap .badge {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.6rem 0.85rem !important;
-        font-size: 0.75rem;
-    }
-
-    /* Search & Filter Toolbar */
-    .input-group.w-50 {
-        width: 100% !important;
-    }
-
-    .bg-white.p-3.rounded-3.shadow-sm.mb-4 {
-        flex-direction: column;
-        align-items: stretch !important;
-        gap: 0.75rem !important;
-    }
-
-    .bg-white.p-3.rounded-3.shadow-sm.mb-4 > .d-flex {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.5rem !important;
-    }
-
-    #filterGroup {
-        display: flex;
-        width: 100%;
-    }
-
-    #filterGroup .btn {
-        flex: 1;
-        padding: 0.4rem 0.2rem;
-        font-size: 0.75rem;
-        text-align: center;
-    }
-
-    #downloadBtn,
-    a.btn-dark[href="/index"] {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-    }
-
-    /* Table Mobile Optimizations */
-    .table-responsive {
-        border-radius: 0.5rem;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .table {
-        min-width: 880px;
-    }
-
-    .table th, .table td {
-        white-space: nowrap;
-        padding: 0.75rem 0.6rem;
-    }
-
-    .action-btn {
-        display: inline-block;
-        padding: 0.35rem 0.65rem;
-        border-radius: 6px;
-        background-color: rgba(13, 110, 253, 0.08);
-        min-height: 36px;
-        line-height: 1.4;
-    }
-
-    /* Form Page Cards & Inputs */
-    .card.p-4 {
-        padding: 1.25rem !important;
-    }
-
-    .form-control, .form-select {
-        font-size: 1rem; /* Prevents auto-zoom on iOS Safari */
-    }
-
-    /* Form Footer Action Buttons */
-    .border-top.mt-5.pt-3 {
-        margin-top: 1.5rem !important;
-        padding-top: 1rem !important;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: stretch !important;
-    }
-
-    .border-top.mt-5.pt-3 .d-flex.gap-2 {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.5rem !important;
-    }
-
-    .border-top.mt-5.pt-3 button {
-        width: 100%;
-        padding: 0.65rem !important;
-    }
-
-    .border-top.mt-5.pt-3 a {
-        text-align: center;
-        padding: 0.5rem;
-    }
-
-    /* Pagination Mobile */
-    .d-flex.justify-content-between.align-items-center.p-3.border-top {
-        flex-direction: column;
-        gap: 0.75rem;
-        text-align: center;
-    }
-
-    .pagination {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    /* Footer Mobile */
-    footer.px-4 {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
-    }
-}
-
-/* Extra Small Phones (<= 400px) */
-@media (max-width: 400px) {
-    .d-flex.gap-2.flex-wrap {
-        grid-template-columns: 1fr;
-    }
-
-    .navbar-brand {
-        font-size: 0.95rem;
-    }
-
-    .card.p-4 {
-        padding: 1rem !important;
-    }
+#formLoadingOverlay[style*="display: none"] {
+    pointer-events: none;
 }
