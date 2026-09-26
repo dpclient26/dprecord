@@ -10,10 +10,22 @@ export async function onRequest(context) {
     const validUsername = env.ADMIN_USER;
     const validPassword = env.ADMIN_PASS;
 
-    if (username === validUsername && password === validPassword) {
+    if (!validUsername || !validPassword || !env.AUTH_SECRET) {
+      return Response.json({ error: 'Server configuration error.' }, { status: 500 });
+    }
+
+    // Constant-time string comparison to prevent timing attacks
+    const isUserValid = timingSafeEqualStr(username, validUsername);
+    const isPassValid = timingSafeEqualStr(password, validPassword);
+
+    if (isUserValid && isPassValid) {
       // Generate HMAC-signed token (cryptographically secure, non-reversible)
-      const payload = JSON.stringify({ user: username, iat: Date.now() });
-      const payloadB64 = btoa(payload);
+      const payload = JSON.stringify({
+        user: username,
+        iat: Date.now(),
+        exp: Date.now() + 24 * 60 * 60 * 1000
+      });
+      const payloadB64 = btoa(unescape(encodeURIComponent(payload)));
 
       const key = await crypto.subtle.importKey(
         'raw',
@@ -27,7 +39,11 @@ export async function onRequest(context) {
         'HMAC', key, new TextEncoder().encode(payloadB64)
       );
       const sigArray = new Uint8Array(sigBuffer);
-      const sigB64 = btoa(String.fromCharCode(...sigArray));
+      let binary = '';
+      for (let i = 0; i < sigArray.length; i++) {
+        binary += String.fromCharCode(sigArray[i]);
+      }
+      const sigB64 = btoa(binary);
       const token = payloadB64 + '.' + sigB64;
 
       return Response.json({
@@ -36,9 +52,24 @@ export async function onRequest(context) {
         token: token
       });
     } else {
+      // Small artificial delay to mitigate automated brute-force attacks
+      await new Promise(r => setTimeout(r, 200));
       return Response.json({ success: false, error: 'Invalid credentials' }, { status: 401 });
     }
   } catch (error) {
     return Response.json({ error: 'Internal Server Error' }, { status: 500 });
   }
+}
+
+function timingSafeEqualStr(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  const encoder = new TextEncoder();
+  const aBuf = encoder.encode(a);
+  const bBuf = encoder.encode(b);
+  if (aBuf.byteLength !== bBuf.byteLength) return false;
+  let diff = 0;
+  for (let i = 0; i < aBuf.byteLength; i++) {
+    diff |= aBuf[i] ^ bBuf[i];
+  }
+  return diff === 0;
 }
