@@ -15,20 +15,29 @@
     <nav class="navbar navbar-expand-lg bg-white border-bottom py-3 fade-in">
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="/index">
-                <div class= "text-white rounded p-1 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;">
-                    <img src="images/Picture1.png" alt="Logo" style="width: 50px; height: 50px;">
+                <div class="rounded p-1 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;">
+                    <img src="images/Picture1.png" alt="Logo" style="width: 32px; height: 32px; object-fit: contain;">
                 </div>
-                   &nbsp
-                   DeG - Data Purity
+                &nbsp;
+                DeG - Data Purity
             </a>
-            <div class="collapse navbar-collapse justify-content-center">
+
+            <!-- Mobile Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
                 <ul class="navbar-nav gap-3">
                     <li class="nav-item"><a class="nav-link" href="/index">New Request Form</a></li>
                     <li class="nav-item"><a class="nav-link active fw-semibold bg-light rounded px-3" href="/form">Records</a></li>
                 </ul>
             </div> 
-            <!-- Inside the Navbar, replace the user icon div with this: -->
-            <div class="d-flex align-items-center gap-3">
+
+            <!-- User Info and Logout -->
+            <div class="d-flex align-items-center gap-2 gap-md-3">
+                <span id="currentUserDisplay" class="small fw-semibold text-secondary d-none d-md-inline"></span>
                 <button onclick="logout()" class="btn btn-sm btn-outline-danger fw-semibold">
                     <i class="bi bi-box-arrow-right me-1"></i> Logout
                 </button>
@@ -39,8 +48,8 @@
         </div>
     </nav>
 
-    
-    <div class="container-fluid px-4 py-4 fade-in">
+    <!-- Main Content -->
+    <div class="container-fluid px-3 px-md-4 py-3 py-md-4 fade-in">
         
         <div class="d-flex justify-content-between align-items-end mb-4">
             <div>
@@ -49,7 +58,7 @@
                 <p class="text-muted small mb-0">Overview of submitted requests and their status.</p>
             </div>
             
-                        <!-- Dynamic Stats -->
+            <!-- Dynamic Stats Badges -->
             <div class="d-flex gap-2 flex-wrap">
                 <span class="badge bg-white text-dark border px-3 py-2 rounded-pill shadow-sm">TOTAL <span class="text-dark fw-bold ms-1" id="totalCount">0</span></span>
                 <span class="badge bg-white text-success border px-3 py-2 rounded-pill shadow-sm">COMPLETED <span class="fw-bold ms-1" id="completedCount">0</span></span>
@@ -58,23 +67,19 @@
             </div>
         </div>
 
-    
+        <!-- Search & Filters Toolbar -->
         <div class="bg-white p-3 rounded-3 shadow-sm mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
             <div class="input-group w-50">
                 <span class="input-group-text bg-light border-0"><i class="bi bi-search text-muted"></i></span>
                 <input type="text" id="searchInput" class="form-control bg-light border-0" placeholder="Search by department, reference, or ticket number...">
             </div>
-            <div class="d-flex gap-2">
-                
-                <div class="btn-gro
-                    
-                    up bg-light rounded p-1" role="group" id="filterGroup">
+            <div class="d-flex gap-2 flex-wrap">
+                <div class="btn-group bg-light rounded p-1" role="group" id="filterGroup">
                     <button type="button" class="btn btn-sm btn-white active fw-semibold px-3" data-filter="all">All</button>
                     <button type="button" class="btn btn-sm btn-light text-muted px-3" data-filter="Pending">Pending</button>
                     <button type="button" class="btn btn-sm btn-light text-muted px-3" data-filter="In Progress">In Progress</button>
                     <button type="button" class="btn btn-sm btn-light text-muted px-3" data-filter="Completed">Completed</button>
                 </div>
-                
                 
                 <button type="button" id="downloadBtn" class="btn btn-outline-dark px-3 fw-semibold">
                     <i class="bi bi-download me-1"></i> Download Sheet
@@ -84,7 +89,7 @@
             </div>
         </div>
 
-        
+        <!-- Records Table -->
         <div class="bg-white rounded-3 shadow-sm overflow-hidden">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
@@ -103,17 +108,15 @@
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        
                     </tbody>
                 </table>
             </div>
             
-            
+            <!-- Pagination -->
             <div class="d-flex justify-content-between align-items-center p-3 border-top">
                 <span class="text-muted small" id="paginationText">Showing 0 to 0 of 0 requests</span>
                 <nav>
                     <ul class="pagination pagination-sm mb-0" id="paginationControls">
-                       
                     </ul>
                 </nav>
             </div>

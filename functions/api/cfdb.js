@@ -6,6 +6,7 @@ async function verifyToken(authHeader, env) {
         const parts = token.split('.');
         if (parts.length !== 2) return null;
         const [payloadB64, sigB64] = parts;
+        if (!env.AUTH_SECRET) return null;
 
         const key = await crypto.subtle.importKey(
             'raw',
@@ -158,7 +159,7 @@ export async function onRequest(context) {
                 const STARTING_NUMBER = 48;
 
                 const maxResult = await env.DB.prepare(
-                    "SELECT ref_id FROM requests WHERE ref_id LIKE ? ORDER BY ref_id DESC LIMIT 1"
+                    "SELECT ref_id FROM requests WHERE ref_id LIKE ? ORDER BY LENGTH(ref_id) DESC, ref_id DESC LIMIT 1"
                 ).bind(year + '%').first();
 
                 let nextCount = STARTING_NUMBER + 1;
