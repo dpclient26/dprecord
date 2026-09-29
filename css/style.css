@@ -10,7 +10,8 @@ body {
 }
 
 /* Typography */
-h2, h3 {
+h2,
+h3 {
     color: #212529;
 }
 
@@ -30,18 +31,21 @@ h2, h3 {
 .action-btn {
     transition: all 0.2s ease-in-out;
 }
+
 .action-btn:hover {
     transform: translateY(-1px);
     text-decoration: underline !important;
 }
 
 /* Form Styling */
-.form-control, .form-select {
+.form-control,
+.form-select {
     border: 1px solid transparent;
     transition: all 0.3s ease;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     background-color: #fff !important;
     border-color: #0d6efd;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
@@ -49,8 +53,15 @@ h2, h3 {
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .fade-in {
@@ -66,13 +77,15 @@ h2, h3 {
 .btn {
     transition: all 0.25s ease;
 }
+
 .btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
 }
 
 /* Ensure submit button is always clickable and on top */
-#submitBtn, #clearBtn {
+#submitBtn,
+#clearBtn {
     position: relative;
     z-index: 100;
     cursor: pointer;
@@ -115,8 +128,10 @@ h2, h3 {
 
 /* Mobile Screens (<= 768px) */
 @media (max-width: 768px) {
+
     /* Container spacing */
-    .container, .container-fluid {
+    .container,
+    .container-fluid {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
@@ -132,7 +147,8 @@ h2, h3 {
     }
 
     /* Headings */
-    h2, h2.fw-bold {
+    h2,
+    h2.fw-bold {
         font-size: 1.5rem !important;
     }
 
@@ -170,7 +186,7 @@ h2, h3 {
         gap: 0.75rem !important;
     }
 
-    .bg-white.p-3.rounded-3.shadow-sm.mb-4 > .d-flex {
+    .bg-white.p-3.rounded-3.shadow-sm.mb-4>.d-flex {
         flex-direction: column;
         width: 100%;
         gap: 0.5rem !important;
@@ -207,7 +223,8 @@ h2, h3 {
         min-width: 880px;
     }
 
-    .table th, .table td {
+    .table th,
+    .table td {
         white-space: nowrap;
         padding: 0.75rem 0.6rem;
     }
@@ -226,8 +243,10 @@ h2, h3 {
         padding: 1.25rem !important;
     }
 
-    .form-control, .form-select {
-        font-size: 1rem; /* Prevents auto-zoom on iOS Safari */
+    .form-control,
+    .form-select {
+        font-size: 1rem;
+        /* Prevents auto-zoom on iOS Safari */
     }
 
     /* Form Footer Action Buttons */

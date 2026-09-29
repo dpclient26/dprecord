@@ -156,51 +156,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="js/app.js"></script>
-    <!-- Dark Mode Toggle -->
-    <script>
-        (function () {
-            const KEY = 'ops_portal_theme';
-            const html = document.documentElement;
-
-            // Apply saved theme immediately on load
-            const saved = localStorage.getItem(KEY);
-            const initial = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            if (initial === 'dark') html.setAttribute('data-bs-theme', 'dark');
-
-            // Wire up toggle once DOM is ready
-            document.addEventListener('DOMContentLoaded', function () {
-                const btn = document.getElementById('themeToggle');
-                const icon = document.getElementById('themeIcon');
-                if (!btn) {
-                    console.warn('themeToggle button not found');
-                    return;
-                }
-
-                // Set the initial icon
-                if (icon) {
-                    icon.className = html.getAttribute('data-bs-theme') === 'dark'
-                        ? 'bi bi-sun-fill'
-                        : 'bi bi-moon-fill';
-                }
-
-                btn.addEventListener('click', function () {
-                    const isDark = html.getAttribute('data-bs-theme') === 'dark';
-                    const next = isDark ? 'light' : 'dark';
-                    localStorage.setItem(KEY, next);
-
-                    if (next === 'dark') {
-                        html.setAttribute('data-bs-theme', 'dark');
-                    } else {
-                        html.setAttribute('data-bs-theme', 'light');
-                    }
-
-                    if (icon) {
-                        icon.className = next === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
-                    }
-                });
-            });
-        })();
-    </script>
 </body>
 
 </html>
