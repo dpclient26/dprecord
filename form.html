@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-body-tertiary">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-white border-bottom py-3 fade-in">
+    <nav class="navbar navbar-expand-lg bg-body border-bottom py-3 fade-in">
         <div class="container-fluid px-4">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="/index">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-body" href="/index">
                 <div class="rounded p-1 d-flex justify-content-center align-items-center"
                     style="width: 32px; height: 32px;">
                     <img src="images/Picture1.png" alt="Logo" style="width: 50px; height: 50px; object-fit: contain;">
@@ -35,7 +35,7 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
                 <ul class="navbar-nav gap-3">
                     <li class="nav-item"><a class="nav-link" href="/index">New Request Form</a></li>
-                    <li class="nav-item"><a class="nav-link active fw-semibold bg-light rounded px-3"
+                    <li class="nav-item"><a class="nav-link active fw-semibold bg-body-secondary rounded px-3"
                             href="/form">Records</a></li>
                 </ul>
             </div>
@@ -43,10 +43,10 @@
             <!-- User Info and Logout -->
             <div class="d-flex align-items-center gap-2 gap-md-3">
                 <span id="currentUserDisplay" class="small fw-semibold text-secondary d-none d-md-inline"></span>
-                <!-- <button id="themeToggle" class="btn btn-sm btn-outline-secondary" title="Toggle dark mode">
+                <button id="themeToggle" class="btn btn-sm btn-outline-secondary" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">
                     <i class="bi bi-moon-fill" id="themeIcon"></i>
-                </button> -->
-                <button onclick="logout()" class="btn btn-sm btn-outline-danger fw-semibold">
+                </button>
+                <button id="logoutBtn" class="btn btn-sm btn-outline-danger fw-semibold logout-btn" type="button">
                     <i class="bi bi-box-arrow-right me-1"></i> Logout
                 </button>
                 <div class="bg-dark text-white rounded-circle d-flex justify-content-center align-items-center"
@@ -60,7 +60,7 @@
     <!-- Main Content -->
     <div class="container-fluid px-3 px-md-4 py-3 py-md-4 fade-in">
 
-        <div class="d-flex justify-content-between align-items-end mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
             <div>
                 <p class="text-uppercase text-secondary fw-semibold mb-1 small"><i
                         class="bi bi-circle-fill text-primary me-1" style="font-size: 8px;"></i> Data Purity Repository
@@ -69,29 +69,38 @@
                 <p class="text-muted small mb-0">Overview of submitted requests and their status.</p>
             </div>
 
-            <!-- Dynamic Stats Badges -->
-            <div class="d-flex gap-2 flex-wrap">
-                <span class="badge bg-white text-dark border px-3 py-2 rounded-pill shadow-sm">TOTAL <span
-                        class="text-dark fw-bold ms-1" id="totalCount">0</span></span>
-                <span class="badge bg-white text-success border px-3 py-2 rounded-pill shadow-sm">COMPLETED <span
-                        class="fw-bold ms-1" id="completedCount">0</span></span>
-                <span class="badge bg-white text-primary border px-3 py-2 rounded-pill shadow-sm">IN PROGRESS <span
-                        class="fw-bold ms-1" id="inProgressCount">0</span></span>
-                <span class="badge bg-white text-danger border px-3 py-2 rounded-pill shadow-sm">PENDING <span
-                        class="fw-bold ms-1" id="pendingCount">0</span></span>
+            <!-- Stats Panel: Dynamic Pie Chart + Interactive Badges -->
+            <div class="stats-panel">
+                <div class="pie-chart-wrapper" title="Status Distribution">
+                    <canvas id="statusPieChart" width="130" height="130" role="img" aria-label="Status Distribution Pie Chart"></canvas>
+                </div>
+                <div class="stats-badges">
+                    <span class="stat-badge badge bg-body text-body border px-3 py-2 rounded-pill shadow-sm" role="button" data-filter="all" title="Click to view all records">
+                        TOTAL <span class="fw-bold ms-1" id="totalCount">0</span>
+                    </span>
+                    <span class="stat-badge badge bg-body text-success border border-success-subtle px-3 py-2 rounded-pill shadow-sm" role="button" data-filter="Completed" title="Click to filter by Completed">
+                        <i class="bi bi-check-circle-fill me-1"></i>COMPLETED <span class="fw-bold ms-1" id="completedCount">0</span>
+                    </span>
+                    <span class="stat-badge badge bg-body text-primary border border-primary-subtle px-3 py-2 rounded-pill shadow-sm" role="button" data-filter="In Progress" title="Click to filter by In Progress">
+                        <i class="bi bi-arrow-repeat me-1"></i>IN PROGRESS <span class="fw-bold ms-1" id="inProgressCount">0</span>
+                    </span>
+                    <span class="stat-badge badge bg-body text-danger border border-danger-subtle px-3 py-2 rounded-pill shadow-sm" role="button" data-filter="Pending" title="Click to filter by Pending">
+                        <i class="bi bi-clock-fill me-1"></i>PENDING <span class="fw-bold ms-1" id="pendingCount">0</span>
+                    </span>
+                </div>
             </div>
         </div>
 
         <!-- Search & Filters Toolbar -->
         <div
-            class="bg-white p-3 rounded-3 shadow-sm mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+            class="bg-body p-3 rounded-3 shadow-sm mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3 toolbar-wrapper">
             <div class="input-group w-50">
-                <span class="input-group-text bg-light border-0"><i class="bi bi-search text-muted"></i></span>
-                <input type="text" id="searchInput" class="form-control bg-light border-0"
+                <span class="input-group-text bg-body-secondary border-0"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" id="searchInput" class="form-control bg-body-secondary border-0"
                     placeholder="Search by department, reference, or ticket number...">
             </div>
             <div class="d-flex gap-2 flex-wrap">
-                <div class="btn-group bg-light rounded p-1" role="group" id="filterGroup">
+                <div class="btn-group bg-body-secondary rounded p-1" role="group" id="filterGroup">
                     <button type="button" class="btn btn-sm btn-white active fw-semibold px-3"
                         data-filter="all">All</button>
                     <button type="button" class="btn btn-sm btn-light text-muted px-3"
@@ -112,7 +121,7 @@
         </div>
 
         <!-- Records Table -->
-        <div class="bg-white rounded-3 shadow-sm overflow-hidden">
+        <div class="bg-body rounded-3 shadow-sm overflow-hidden">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
@@ -146,11 +155,14 @@
     </div>
 
     <!-- Footer -->
-    <footer class="d-flex justify-content-between align-items-center px-4 py-3 mt-auto bg-white border-top">
+    <footer class="d-flex justify-content-between align-items-center px-4 py-3 mt-auto bg-body border-top">
         <span class="text-muted small">© 2026 DeG-Data Purity.</span>
         <span class="text-success small fw-semibold"><i class="bi bi-circle-fill me-1" style="font-size: 8px;"></i>
             Created By NS</span>
     </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
