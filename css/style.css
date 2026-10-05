@@ -1,9 +1,48 @@
 /* ==========================================
+   Theme Variables
+   ========================================== */
+:root,
+[data-bs-theme="light"] {
+    --dp-bg-card: #ffffff;
+    --dp-bg-surface: #f8f9fa;
+    --dp-text-heading: #212529;
+    --dp-text-secondary: #6c757d;
+    --dp-text-muted: #adb5bd;
+    --dp-border-color: #dee2e6;
+    --dp-border-light: #f1f3f5;
+    --dp-overlay-bg: rgba(255, 255, 255, 0.92);
+}
+
+[data-bs-theme="dark"] {
+    --dp-bg-card: var(--bs-body-bg, #212529);
+    --dp-bg-surface: var(--bs-tertiary-bg, #2b3035);
+    --dp-text-heading: #e6edf3;
+    --dp-text-secondary: #8b949e;
+    --dp-text-muted: #6e7681;
+    --dp-border-color: #30363d;
+    --dp-border-light: #21262d;
+    --dp-overlay-bg: rgba(22, 27, 34, 0.92);
+}
+
+/* ==========================================
+   Theme Transition
+   ========================================== */
+body,
+.navbar,
+.card,
+footer,
+.bg-body,
+.bg-body-secondary,
+.bg-body-tertiary,
+.login-card {
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* ==========================================
    Global Styles
    ========================================== */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -12,14 +51,16 @@ body {
 /* Typography */
 h2,
 h3 {
-    color: #212529;
+    color: var(--dp-text-heading);
 }
 
-/* Table Styling */
+/* ==========================================
+   Table Styling
+   ========================================== */
 .table th {
     font-size: 0.75rem;
     letter-spacing: 0.5px;
-    border-bottom: 2px solid #f1f3f5;
+    border-bottom: 2px solid var(--dp-border-light);
 }
 
 .table td {
@@ -27,7 +68,9 @@ h3 {
     vertical-align: middle;
 }
 
-/* Custom Action Buttons */
+/* ==========================================
+   Custom Action Buttons
+   ========================================== */
 .action-btn {
     transition: all 0.2s ease-in-out;
 }
@@ -37,7 +80,9 @@ h3 {
     text-decoration: underline !important;
 }
 
-/* Form Styling */
+/* ==========================================
+   Form Styling
+   ========================================== */
 .form-control,
 .form-select {
     border: 1px solid transparent;
@@ -46,12 +91,14 @@ h3 {
 
 .form-control:focus,
 .form-select:focus {
-    background-color: #fff !important;
+    background-color: var(--bs-body-bg, #fff) !important;
     border-color: #0d6efd;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
 }
 
-/* Animations */
+/* ==========================================
+   Animations
+   ========================================== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -64,6 +111,30 @@ h3 {
     }
 }
 
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
 .fade-in {
     animation: fadeIn 0.5s ease-out forwards;
 }
@@ -73,7 +144,9 @@ h3 {
     opacity: 0;
 }
 
-/* Button Hover Effects */
+/* ==========================================
+   Button Hover Effects
+   ========================================== */
 .btn {
     transition: all 0.25s ease;
 }
@@ -99,6 +172,177 @@ h3 {
 }
 
 /* ==========================================
+   Form Loading Overlay
+   ========================================== */
+.form-overlay {
+    display: none;
+    background: var(--dp-overlay-bg);
+    z-index: 10;
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+}
+
+/* ==========================================
+   Theme Toggle Button
+   ========================================== */
+#themeToggle {
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    color: var(--bs-body-color);
+    cursor: pointer;
+}
+
+#themeToggle:hover {
+    background-color: var(--bs-tertiary-bg);
+    transform: none;
+    box-shadow: none;
+}
+
+/* ==========================================
+   Dark Mode Overrides
+   ========================================== */
+[data-bs-theme="dark"] .shadow-sm {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-bs-theme="dark"] .stat-badge {
+    background-color: var(--bs-tertiary-bg, #2b3035) !important;
+    border-color: var(--dp-border-color) !important;
+}
+
+[data-bs-theme="dark"] .stat-badge.text-dark {
+    color: var(--bs-body-color) !important;
+}
+
+[data-bs-theme="dark"] .badge.bg-light {
+    background-color: var(--bs-tertiary-bg) !important;
+    color: var(--bs-body-color) !important;
+}
+
+/* ==========================================
+   Toast Notifications
+   ========================================== */
+.toast-container {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+
+.toast-notification {
+    pointer-events: auto;
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease forwards;
+    max-width: 420px;
+    backdrop-filter: blur(8px);
+}
+
+.toast-success {
+    background: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.toast-error {
+    background: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.toast-info {
+    background: #cfe2ff;
+    color: #084298;
+    border: 1px solid #b6d4fe;
+}
+
+[data-bs-theme="dark"] .toast-success {
+    background: rgba(25, 135, 84, 0.2);
+    color: #75b798;
+    border-color: rgba(25, 135, 84, 0.35);
+}
+
+[data-bs-theme="dark"] .toast-error {
+    background: rgba(220, 53, 69, 0.2);
+    color: #ea868f;
+    border-color: rgba(220, 53, 69, 0.35);
+}
+
+[data-bs-theme="dark"] .toast-info {
+    background: rgba(13, 110, 253, 0.2);
+    color: #6ea8fe;
+    border-color: rgba(13, 110, 253, 0.35);
+}
+
+/* ==========================================
+   Pie Chart
+   ========================================== */
+.pie-chart-wrapper {
+    width: 150px;
+    min-width: 150px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pie-chart-wrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ==========================================
+   Stats Panel (Badges + Chart)
+   ========================================== */
+.stats-panel {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.stats-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ==========================================
+   Login Page
+   ========================================== */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem 1rem;
+    margin: 0;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2.25rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    background: var(--bs-body-bg, white);
+}
+
+[data-bs-theme="dark"] .login-card {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================
    MOBILE & RESPONSIVE MEDIA QUERIES
    ========================================== */
 
@@ -112,7 +356,7 @@ h3 {
     .navbar-collapse {
         margin-top: 0.75rem;
         padding: 0.75rem 0.5rem;
-        border-top: 1px solid #f1f3f5;
+        border-top: 1px solid var(--dp-border-light);
     }
 
     .navbar-nav {
@@ -159,15 +403,28 @@ h3 {
         gap: 1rem;
     }
 
+    /* Stats Panel Mobile */
+    .stats-panel {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    .pie-chart-wrapper {
+        width: 120px !important;
+        min-width: 120px !important;
+    }
+
     /* Dynamic Stats Badges: 2x2 Clean Grid on Mobile */
-    .d-flex.gap-2.flex-wrap {
+    .stats-badges {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
         gap: 0.5rem !important;
     }
 
-    .d-flex.gap-2.flex-wrap .badge {
+    .stats-badges .badge,
+    .stats-badges .stat-badge {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -180,13 +437,13 @@ h3 {
         width: 100% !important;
     }
 
-    .bg-white.p-3.rounded-3.shadow-sm.mb-4 {
+    .toolbar-wrapper {
         flex-direction: column;
         align-items: stretch !important;
         gap: 0.75rem !important;
     }
 
-    .bg-white.p-3.rounded-3.shadow-sm.mb-4>.d-flex {
+    .toolbar-wrapper>.d-flex {
         flex-direction: column;
         width: 100%;
         gap: 0.5rem !important;
@@ -294,12 +551,31 @@ h3 {
         gap: 0.5rem;
         text-align: center;
     }
+
+    /* Login card */
+    .login-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .login-card .form-control {
+        font-size: 1rem;
+    }
+
+    /* Toast mobile */
+    .toast-container {
+        left: 1rem;
+        right: 1rem;
+    }
+
+    .toast-notification {
+        max-width: 100%;
+    }
 }
 
 /* Extra Small Phones (<= 400px) */
 @media (max-width: 400px) {
-    .d-flex.gap-2.flex-wrap {
-        grid-template-columns: 1fr;
+    .stats-badges {
+        grid-template-columns: 1fr !important;
     }
 
     .navbar-brand {
