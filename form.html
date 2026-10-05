@@ -43,7 +43,8 @@
             <!-- User Info and Logout -->
             <div class="d-flex align-items-center gap-2 gap-md-3">
                 <span id="currentUserDisplay" class="small fw-semibold text-secondary d-none d-md-inline"></span>
-                <button id="themeToggle" class="btn btn-sm btn-outline-secondary" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">
+                <button id="themeToggle" class="btn btn-sm btn-outline-secondary" type="button" title="Toggle dark mode"
+                    aria-label="Toggle dark mode">
                     <i class="bi bi-moon-fill" id="themeIcon"></i>
                 </button>
                 <button id="logoutBtn" class="btn btn-sm btn-outline-danger fw-semibold logout-btn" type="button">
@@ -72,20 +73,31 @@
             <!-- Stats Panel: Dynamic Pie Chart + Interactive Badges -->
             <div class="stats-panel">
                 <div class="pie-chart-wrapper" title="Status Distribution">
-                    <canvas id="statusPieChart" width="130" height="130" role="img" aria-label="Status Distribution Pie Chart"></canvas>
+                    <canvas id="statusPieChart" width="130" height="130" role="img"
+                        aria-label="Status Distribution Pie Chart"></canvas>
                 </div>
                 <div class="stats-badges">
-                    <span class="stat-badge badge bg-body text-body border px-3 py-2 rounded-pill shadow-sm" role="button" data-filter="all" title="Click to view all records">
+                    <span class="stat-badge badge bg-body text-body border px-3 py-2 rounded-pill shadow-sm"
+                        role="button" data-filter="all" title="Click to view all records">
                         TOTAL <span class="fw-bold ms-1" id="totalCount">0</span>
                     </span>
-                    <span class="stat-badge badge bg-body text-success border border-success-subtle px-3 py-2 rounded-pill shadow-sm" role="button" data-filter="Completed" title="Click to filter by Completed">
-                        <i class="bi bi-check-circle-fill me-1"></i>COMPLETED <span class="fw-bold ms-1" id="completedCount">0</span>
+                    <span
+                        class="stat-badge badge bg-body text-success border border-success-subtle px-3 py-2 rounded-pill shadow-sm"
+                        role="button" data-filter="Completed" title="Click to filter by Completed">
+                        <i class="bi bi-check-circle-fill me-1"></i>COMPLETED <span class="fw-bold ms-1"
+                            id="completedCount">0</span>
                     </span>
-                    <span class="stat-badge badge bg-body text-primary border border-primary-subtle px-3 py-2 rounded-pill shadow-sm" role="button" data-filter="In Progress" title="Click to filter by In Progress">
-                        <i class="bi bi-arrow-repeat me-1"></i>IN PROGRESS <span class="fw-bold ms-1" id="inProgressCount">0</span>
+                    <span
+                        class="stat-badge badge bg-body text-primary border border-primary-subtle px-3 py-2 rounded-pill shadow-sm"
+                        role="button" data-filter="In Progress" title="Click to filter by In Progress">
+                        <i class="bi bi-arrow-repeat me-1"></i>IN PROGRESS <span class="fw-bold ms-1"
+                            id="inProgressCount">0</span>
                     </span>
-                    <span class="stat-badge badge bg-body text-danger border border-danger-subtle px-3 py-2 rounded-pill shadow-sm" role="button" data-filter="Pending" title="Click to filter by Pending">
-                        <i class="bi bi-clock-fill me-1"></i>PENDING <span class="fw-bold ms-1" id="pendingCount">0</span>
+                    <span
+                        class="stat-badge badge bg-body text-danger border border-danger-subtle px-3 py-2 rounded-pill shadow-sm"
+                        role="button" data-filter="Pending" title="Click to filter by Pending">
+                        <i class="bi bi-clock-fill me-1"></i>PENDING <span class="fw-bold ms-1"
+                            id="pendingCount">0</span>
                     </span>
                 </div>
             </div>
@@ -103,19 +115,17 @@
                 <div class="btn-group rounded p-1 filter-group" role="group" id="filterGroup">
                     <button type="button" class="btn btn-sm btn-filter active fw-semibold px-3"
                         data-filter="all">All</button>
-                    <button type="button" class="btn btn-sm btn-filter px-3"
-                        data-filter="Pending">Pending</button>
+                    <button type="button" class="btn btn-sm btn-filter px-3" data-filter="Pending">Pending</button>
                     <button type="button" class="btn btn-sm btn-filter px-3" data-filter="In Progress">In
                         Progress</button>
-                    <button type="button" class="btn btn-sm btn-filter px-3"
-                        data-filter="Completed">Completed</button>
+                    <button type="button" class="btn btn-sm btn-filter px-3" data-filter="Completed">Completed</button>
                 </div>
 
-                <button type="button" id="downloadBtn" class="btn btn-outline-secondary px-3 fw-semibold">
+                <button type="button" id="downloadBtn" class="btn btn-outline-success px-3 fw-semibold">
                     <i class="bi bi-download me-1"></i> Download Sheet
                 </button>
 
-                <a href="/index" class="btn btn-dark px-3 fw-semibold"><i class="bi bi-plus-lg me-1"></i> Add New
+                <a href="/index" class="btn btn-primary px-3 fw-semibold"><i class="bi bi-plus-lg me-1"></i> Add New
                     Request</a>
             </div>
         </div>
