@@ -81,19 +81,37 @@ h3 {
 }
 
 /* ==========================================
-   Form Styling
+   Form Styling (Base / Light Mode)
    ========================================== */
+.form-label {
+    color: var(--dp-text-heading, #212529);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
+}
+
 .form-control,
 .form-select {
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    border: 1px solid var(--dp-border-color, #dee2e6);
+    background-color: var(--bs-body-bg, #ffffff);
+    color: var(--bs-body-color, #212529);
+    padding: 0.6rem 0.85rem;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
 }
 
 .form-control:focus,
 .form-select:focus {
-    background-color: var(--bs-body-bg, #fff) !important;
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+    background-color: var(--bs-body-bg, #ffffff) !important;
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15) !important;
+}
+
+.form-control[readonly] {
+    background-color: var(--dp-bg-surface, #f8f9fa);
+    opacity: 0.85;
 }
 
 /* ==========================================

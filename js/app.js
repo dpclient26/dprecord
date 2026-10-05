@@ -510,11 +510,9 @@ function setupFilters() {
         const btn = e.target.closest('button');
         if (btn) {
             filterGroup.querySelectorAll('button').forEach(b => {
-                b.classList.remove('btn-white', 'active', 'fw-semibold');
-                b.classList.add('btn-light', 'text-muted');
+                b.classList.remove('active', 'fw-semibold');
             });
-            btn.classList.remove('btn-light', 'text-muted');
-            btn.classList.add('btn-white', 'active', 'fw-semibold');
+            btn.classList.add('active', 'fw-semibold');
 
             currentFilter = btn.getAttribute('data-filter') || 'all';
             currentPage = 1;

@@ -100,18 +100,18 @@
                     placeholder="Search by department, reference, or ticket number...">
             </div>
             <div class="d-flex gap-2 flex-wrap">
-                <div class="btn-group bg-body-secondary rounded p-1" role="group" id="filterGroup">
-                    <button type="button" class="btn btn-sm btn-white active fw-semibold px-3"
+                <div class="btn-group rounded p-1 filter-group" role="group" id="filterGroup">
+                    <button type="button" class="btn btn-sm btn-filter active fw-semibold px-3"
                         data-filter="all">All</button>
-                    <button type="button" class="btn btn-sm btn-light text-muted px-3"
+                    <button type="button" class="btn btn-sm btn-filter px-3"
                         data-filter="Pending">Pending</button>
-                    <button type="button" class="btn btn-sm btn-light text-muted px-3" data-filter="In Progress">In
+                    <button type="button" class="btn btn-sm btn-filter px-3" data-filter="In Progress">In
                         Progress</button>
-                    <button type="button" class="btn btn-sm btn-light text-muted px-3"
+                    <button type="button" class="btn btn-sm btn-filter px-3"
                         data-filter="Completed">Completed</button>
                 </div>
 
-                <button type="button" id="downloadBtn" class="btn btn-outline-dark px-3 fw-semibold">
+                <button type="button" id="downloadBtn" class="btn btn-outline-secondary px-3 fw-semibold">
                     <i class="bi bi-download me-1"></i> Download Sheet
                 </button>
 
@@ -124,7 +124,7 @@
         <div class="bg-body rounded-3 shadow-sm overflow-hidden">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
-                    <thead class="table-light">
+                    <thead class="table-header-custom">
                         <tr>
                             <th class="text-uppercase text-secondary small fw-semibold py-3 px-4">Reference Number</th>
                             <th class="text-uppercase text-secondary small fw-semibold py-3">Requested Dept</th>
