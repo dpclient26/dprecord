@@ -375,6 +375,18 @@ h3 {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
 }
 
+
+/* Custom styles for number input to prevent spinner */
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.no-spinner {
+    -moz-appearance: textfield;
+}
+
 /* ==========================================
    MOBILE & RESPONSIVE MEDIA QUERIES
    ========================================== */
