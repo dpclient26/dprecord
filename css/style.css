@@ -259,7 +259,7 @@ h3 {
 }
 
 /* Dark Mode: Filter buttons */
-[data-bs-theme="dark"] .btn-filter {
+/* [data-bs-theme="dark"] .btn-filter {
     color: #8b949e;
     background-color: transparent;
     border-color: transparent;
@@ -274,7 +274,7 @@ h3 {
     color: #58a6ff;
     background-color: rgba(56, 139, 253, 0.15);
     border-color: rgba(56, 139, 253, 0.3);
-}
+} */
 
 /* Dark Mode: Pagination */
 [data-bs-theme="dark"] .page-link {
