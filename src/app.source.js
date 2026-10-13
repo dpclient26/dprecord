@@ -83,7 +83,9 @@ function applyTheme(theme) {
 
     // Redraw pie chart if present on page to adapt colors/contrast
     if (document.getElementById('statusPieChart')) {
-        drawStatusPieChart();
+        const isFiltered = currentFilter !== 'all' || searchQuery;
+        const sourceData = isFiltered ? filteredRecords : allRecords;
+        drawStatusPieChart(sourceData);
     }
 }
 
@@ -217,8 +219,19 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
         saveToCache(data);
 
         // Avoid re-rendering if background refresh data hasn't changed
-        if (isBackgroundRefresh && JSON.stringify(data) === JSON.stringify(allRecords)) {
-            return;
+        // Lightweight comparison: check length and sample a few records instead of full JSON.stringify
+        if (isBackgroundRefresh && data.length === allRecords.length) {
+            let same = true;
+            const sampleIndices = [0, Math.floor(data.length / 2), data.length - 1];
+            for (const idx of sampleIndices) {
+                if (idx >= 0 && idx < data.length) {
+                    if (JSON.stringify(data[idx]) !== JSON.stringify(allRecords[idx])) {
+                        same = false;
+                        break;
+                    }
+                }
+            }
+            if (same) return;
         }
 
         allRecords = [...data];
@@ -245,9 +258,11 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
 // ==========================================
 // Dynamic Stats & Canvas Pie Chart
 // ==========================================
-function updateStats() {
+// When useFiltered is true, stats and pie chart reflect filteredRecords (search/filter active)
+function updateStats(useFiltered = false) {
+    const sourceData = useFiltered ? filteredRecords : allRecords;
     const counts = { Completed: 0, 'In Progress': 0, Pending: 0 };
-    allRecords.forEach(r => {
+    sourceData.forEach(r => {
         if (r['Status'] in counts) counts[r['Status']]++;
     });
 
@@ -256,20 +271,23 @@ function updateStats() {
     const progEl = document.getElementById('inProgressCount');
     const pendEl = document.getElementById('pendingCount');
 
-    if (totalEl) totalEl.innerText = allRecords.length;
+    if (totalEl) totalEl.innerText = sourceData.length;
     if (compEl) compEl.innerText = counts.Completed;
     if (progEl) progEl.innerText = counts['In Progress'];
     if (pendEl) pendEl.innerText = counts.Pending;
 
-    drawStatusPieChart();
+    drawStatusPieChart(sourceData);
 }
 
-function drawStatusPieChart() {
+function drawStatusPieChart(sourceData) {
     const canvas = document.getElementById('statusPieChart');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    // Use provided data or fall back to allRecords
+    const data = sourceData || allRecords;
 
     const dpr = window.devicePixelRatio || 1;
     const displaySize = 130;
@@ -286,11 +304,11 @@ function drawStatusPieChart() {
     ctx.clearRect(0, 0, displaySize, displaySize);
 
     const counts = { Completed: 0, 'In Progress': 0, Pending: 0 };
-    allRecords.forEach(r => {
+    data.forEach(r => {
         if (r['Status'] in counts) counts[r['Status']]++;
     });
 
-    const total = allRecords.length;
+    const total = data.length;
     const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
 
     const centerX = displaySize / 2;
@@ -381,16 +399,23 @@ function applyFiltersAndRender() {
         currentPage = 1;
     }
 
+    // Update stats and pie chart based on whether search/filter is active
+    const isFiltered = currentFilter !== 'all' || searchQuery;
+    updateStats(!!isFiltered);
+
     renderTable();
     renderPagination();
 }
 
-// XSS Sanitizer: Encodes HTML entities
+// XSS Sanitizer: Pure string-based HTML entity encoding (no DOM allocation)
 function escapeHtml(str) {
     if (str === null || str === undefined) return '';
-    const div = document.createElement('div');
-    div.appendChild(document.createTextNode(String(str)));
-    return div.innerHTML.replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
 
 function renderTable() {
@@ -829,17 +854,21 @@ function formatValueForCSV(key, value) {
         const d = new Date(strValue);
         if (isNaN(d.getTime())) return strValue;
 
-        const day = String(d.getDate()).padStart(2, '0');
-        const month = String(d.getMonth() + 1).padStart(2, '0');
-        const year = d.getFullYear();
+        // Use IST (Asia/Kolkata) for all date-time formatting in CSV
+        const istOptions = { timeZone: 'Asia/Kolkata' };
+        const day = String(d.toLocaleString('en-US', { ...istOptions, day: '2-digit' })).padStart(2, '0');
+        const month = String(d.toLocaleString('en-US', { ...istOptions, month: '2-digit' })).padStart(2, '0');
+        const year = d.toLocaleString('en-US', { ...istOptions, year: 'numeric' });
 
         if (key === 'Timestamp') {
-            let hours = d.getHours();
-            const minutes = String(d.getMinutes()).padStart(2, '0');
-            const seconds = String(d.getSeconds()).padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            return `${day}-${month}-${year} ${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+            // Format timestamp in IST 12-hour format
+            const istFormatted = d.toLocaleString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: true
+            });
+            return istFormatted;
         }
         return `${day}-${month}-${year}`;
     }

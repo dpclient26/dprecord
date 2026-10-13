@@ -34,6 +34,25 @@ async function verifyToken(authHeader, env) {
     }
 }
 
+// Helper: Convert a UTC ISO timestamp to IST (UTC+5:30) formatted string
+function toIST(isoString) {
+    if (!isoString) return '';
+    try {
+        const d = new Date(isoString);
+        if (isNaN(d.getTime())) return isoString;
+        return d.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    } catch {
+        return isoString;
+    }
+}
+
+// Helper: Get current IST timestamp as ISO string
+function nowIST() {
+    const now = new Date();
+    // Format as ISO-like string in IST
+    return now.toLocaleString('en-CA', { timeZone: 'Asia/Kolkata', hour12: false }).replace(', ', 'T') + '+05:30';
+}
+
 export async function onRequest(context) {
     const { request, env } = context;
     const url = new URL(request.url);
@@ -43,8 +62,15 @@ export async function onRequest(context) {
     if (request.method === 'POST') {
         const origin = request.headers.get('Origin');
         const requestUrl = new URL(request.url);
-        if (origin && new URL(origin).host !== requestUrl.host) {
+        // Reject if Origin is missing or doesn't match the host
+        if (!origin || new URL(origin).host !== requestUrl.host) {
             return Response.json({ error: 'Forbidden.' }, { status: 403 });
+        }
+
+        // Validate Content-Type for POST requests
+        const contentType = request.headers.get('Content-Type') || '';
+        if (!contentType.includes('application/x-www-form-urlencoded')) {
+            return Response.json({ error: 'Invalid content type.' }, { status: 415 });
         }
     }
 
@@ -79,7 +105,7 @@ export async function onRequest(context) {
                 'Analysis Outcome': r.analysis,
                 'Status': r.status,
                 'Savings': r.savings,
-                'Timestamp': r.timestamp
+                'Timestamp': toIST(r.timestamp)
             }));
 
             return Response.json(mapped);
@@ -116,7 +142,7 @@ export async function onRequest(context) {
                 'Analysis Outcome': r.analysis,
                 'Status': r.status,
                 'Savings': r.savings,
-                'Timestamp': r.timestamp
+                'Timestamp': toIST(r.timestamp)
             });
         }
 
@@ -174,8 +200,8 @@ export async function onRequest(context) {
                     `INSERT INTO requests 
                     (ref_id, requested_dept, request_date, letter_ref, action_by, problem,
                      datasets, data_dump_date, received_count, shared_mode,
-                     analysis, status, savings)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+                     analysis, status, savings, timestamp)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
                 ).bind(
                     newRefId,
                     get('Requested Department'),
@@ -189,7 +215,8 @@ export async function onRequest(context) {
                     get('Result Shared Mode'),
                     get('Analysis Outcome'),
                     status,
-                    get('Savings')
+                    get('Savings'),
+                    nowIST()
                 ).run();
 
                 return Response.json({ result: 'success', action: 'added', id: newRefId });
