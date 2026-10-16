@@ -14,15 +14,18 @@ let currentFilter = 'all';
 let selectedPerson = 'all';
 let searchQuery = '';
 
-const DEFAULT_OFFICERS = [
+const DEFAULT_MEMBERS = [
     'Akash Karmegam',
     'Ganesh Velu',
     'Kalaivanan',
-    'Martina Maria Pushpam',
     'Mohan',
-    'Nivas Saravana',
     'Praveenraj',
     'Swathi'
+];
+
+const EXCLUDED_MEMBERS = [
+    'Martina Maria Pushpam',
+    'Nivas Saravana'
 ];
 
 // Cache Configuration
@@ -309,30 +312,31 @@ function updateStats(useFiltered = false) {
 // ==========================================
 // Team Workload: "Action Taken By" Analytics
 // ==========================================
-function getOfficersList() {
-    const set = new Set(DEFAULT_OFFICERS);
+function getMembersList() {
+    const excluded = new Set(EXCLUDED_MEMBERS.map(m => m.toLowerCase()));
+    const set = new Set(DEFAULT_MEMBERS);
     allRecords.forEach(r => {
         const name = (r['Action Taken By'] || '').trim();
-        if (name && name !== 'Unknown' && name !== '-' && name !== 'N/A') {
+        if (name && name !== 'Unknown' && name !== '-' && name !== 'N/A' && !excluded.has(name.toLowerCase())) {
             set.add(name);
         }
     });
-    return Array.from(set).sort((a, b) => a.localeCompare(b));
+    return Array.from(set).filter(name => !excluded.has(name.toLowerCase())).sort((a, b) => a.localeCompare(b));
 }
 
 function renderPersonBadges() {
     const container = document.getElementById('personBadgesContainer');
     if (!container) return;
 
-    const officers = getOfficersList();
+    const members = getMembersList();
     const teamMemberCountBadge = document.getElementById('teamMemberCountBadge');
     if (teamMemberCountBadge) {
-        teamMemberCountBadge.innerText = `${officers.length} Officers`;
+        teamMemberCountBadge.innerText = `${members.length} Members`;
     }
 
-    // Tally total requests per officer across entire database (allRecords)
+    // Tally total requests per member across entire database (allRecords)
     const counts = {};
-    officers.forEach(name => {
+    members.forEach(name => {
         counts[name] = 0;
     });
 
@@ -347,38 +351,38 @@ function renderPersonBadges() {
 
     const fragment = document.createDocumentFragment();
 
-    // 1. "All Officers" Chip
+    // 1. "All Members" Chip
     const allChip = document.createElement('div');
     allChip.className = `person-chip ${selectedPerson === 'all' ? 'active' : ''}`;
     allChip.setAttribute('data-person', 'all');
     allChip.setAttribute('role', 'button');
     allChip.setAttribute('tabindex', '0');
-    allChip.setAttribute('title', 'Click to view all requests across all officers');
+    allChip.setAttribute('title', 'Click to view all requests across all members');
     allChip.innerHTML = `
         <div class="person-chip-avatar">
             <i class="bi bi-people-fill"></i>
         </div>
-        <span class="person-chip-name">All Officers</span>
+        <span class="person-chip-name">All Members</span>
         <span class="person-chip-count badge bg-body-secondary text-body border" id="allPersonsCount">${allRecords.length}</span>
     `;
     fragment.appendChild(allChip);
 
-    // 2. Individual Officer Chips
-    officers.forEach(officer => {
-        const count = counts[officer] || 0;
-        const initials = escapeHtml(officer.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
-        const isSelected = selectedPerson.toLowerCase() === officer.toLowerCase();
+    // 2. Individual Member Chips
+    members.forEach(member => {
+        const count = counts[member] || 0;
+        const initials = escapeHtml(member.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
+        const isSelected = selectedPerson.toLowerCase() === member.toLowerCase();
 
         const chip = document.createElement('div');
         chip.className = `person-chip ${isSelected ? 'active' : ''}`;
-        chip.setAttribute('data-person', officer);
+        chip.setAttribute('data-person', member);
         chip.setAttribute('role', 'button');
         chip.setAttribute('tabindex', '0');
-        chip.setAttribute('title', `Click to view requests by ${escapeHtml(officer)} (${count} total requests)`);
+        chip.setAttribute('title', `Click to view requests by ${escapeHtml(member)} (${count} total requests)`);
 
         chip.innerHTML = `
             <div class="person-chip-avatar">${initials}</div>
-            <span class="person-chip-name" title="${escapeHtml(officer)}">${escapeHtml(officer)}</span>
+            <span class="person-chip-name" title="${escapeHtml(member)}">${escapeHtml(member)}</span>
             <span class="person-chip-count badge bg-body-secondary text-body border">${count}</span>
         `;
         fragment.appendChild(chip);
