@@ -18,9 +18,9 @@ const DEFAULT_OFFICERS = [
     'Akash Karmegam',
     'Ganesh Velu',
     'Kalaivanan',
-    'Martina Maria Pushpam',
+    // 'Martina Maria Pushpam',
     'Mohan',
-    'Nivas Saravana',
+    // 'Nivas Saravana',
     'Praveenraj',
     'Swathi'
 ];
@@ -327,7 +327,7 @@ function renderPersonBadges() {
     const officers = getOfficersList();
     const teamMemberCountBadge = document.getElementById('teamMemberCountBadge');
     if (teamMemberCountBadge) {
-        teamMemberCountBadge.innerText = `${officers.length} Officers`;
+        teamMemberCountBadge.innerText = `${officers.length} Members`;
     }
 
     // Tally total requests per officer across entire database (allRecords)
@@ -353,12 +353,12 @@ function renderPersonBadges() {
     allChip.setAttribute('data-person', 'all');
     allChip.setAttribute('role', 'button');
     allChip.setAttribute('tabindex', '0');
-    allChip.setAttribute('title', 'Click to view all requests across all officers');
+    allChip.setAttribute('title', 'Click to view all requests across all members');
     allChip.innerHTML = `
         <div class="person-chip-avatar">
             <i class="bi bi-people-fill"></i>
         </div>
-        <span class="person-chip-name">All Officers</span>
+        <span class="person-chip-name">All Members</span>
         <span class="person-chip-count badge bg-body-secondary text-body border" id="allPersonsCount">${allRecords.length}</span>
     `;
     fragment.appendChild(allChip);
