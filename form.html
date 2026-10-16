@@ -61,46 +61,96 @@
     <!-- Main Content -->
     <div class="container-fluid px-3 px-md-4 py-3 py-md-4 fade-in">
 
-        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
             <div>
                 <p class="text-uppercase text-secondary fw-semibold mb-1 small"><i
                         class="bi bi-circle-fill text-primary me-1" style="font-size: 8px;"></i> Data Purity Repository
                 </p>
                 <h2 class="fw-bold mb-0">All Data Requests</h2>
-                <p class="text-muted small mb-0">Overview of submitted requests and their status.</p>
+                <p class="text-muted small mb-0">Overview of submitted requests, team workload, and real-time status.</p>
             </div>
+            <div class="d-flex gap-2 align-items-center">
+                <button type="button" id="refreshDataBtn" class="btn btn-sm btn-outline-secondary px-3 fw-semibold" title="Refresh data from database">
+                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+                </button>
+            </div>
+        </div>
 
-            <!-- Stats Panel: Dynamic Pie Chart + Interactive Badges -->
-            <div class="stats-panel">
-                <div class="pie-chart-wrapper" title="Status Distribution">
-                    <canvas id="statusPieChart" width="130" height="130" role="img"
-                        aria-label="Status Distribution Pie Chart"></canvas>
+        <!-- Analytics & Team Workload Panel -->
+        <div class="card border-0 shadow-sm rounded-3 p-3 p-md-4 mb-4 bg-body analytics-dashboard-card">
+            <div class="row g-4 align-items-center">
+                <!-- Status Analysis (Pie Chart & Interactive Badges) -->
+                <div class="col-xl-5 col-lg-5 col-12 status-analysis-col">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="small fw-bold text-uppercase text-secondary">
+                            <i class="bi bi-pie-chart-fill me-1 text-primary"></i> Status Distribution
+                        </span>
+                        <span class="badge bg-body-secondary text-secondary small" id="statusScopeBadge">All Requests</span>
+                    </div>
+                    <div class="stats-panel">
+                        <div class="pie-chart-wrapper flex-shrink-0" title="Status Distribution">
+                            <canvas id="statusPieChart" width="130" height="130" role="img"
+                                aria-label="Status Distribution Pie Chart"></canvas>
+                        </div>
+                        <div class="stats-badges flex-grow-1">
+                            <span class="stat-badge badge bg-body text-body border px-3 py-2 rounded-pill shadow-sm"
+                                role="button" data-filter="all" title="Click to view all records">
+                                TOTAL <span class="fw-bold ms-1" id="totalCount">0</span>
+                            </span>
+                            <span
+                                class="stat-badge badge bg-body text-success border border-success-subtle px-3 py-2 rounded-pill shadow-sm"
+                                role="button" data-filter="Completed" title="Click to filter by Completed">
+                                <i class="bi bi-check-circle-fill me-1"></i>COMPLETED <span class="fw-bold ms-1"
+                                    id="completedCount">0</span>
+                            </span>
+                            <span
+                                class="stat-badge badge bg-body text-primary border border-primary-subtle px-3 py-2 rounded-pill shadow-sm"
+                                role="button" data-filter="In Progress" title="Click to filter by In Progress">
+                                <i class="bi bi-arrow-repeat me-1"></i>IN PROGRESS <span class="fw-bold ms-1"
+                                    id="inProgressCount">0</span>
+                            </span>
+                            <span
+                                class="stat-badge badge bg-body text-danger border border-danger-subtle px-3 py-2 rounded-pill shadow-sm"
+                                role="button" data-filter="Pending" title="Click to filter by Pending">
+                                <i class="bi bi-clock-fill me-1"></i>PENDING <span class="fw-bold ms-1"
+                                    id="pendingCount">0</span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stats-badges">
-                    <span class="stat-badge badge bg-body text-body border px-3 py-2 rounded-pill shadow-sm"
-                        role="button" data-filter="all" title="Click to view all records">
-                        TOTAL <span class="fw-bold ms-1" id="totalCount">0</span>
-                    </span>
-                    <span
-                        class="stat-badge badge bg-body text-success border border-success-subtle px-3 py-2 rounded-pill shadow-sm"
-                        role="button" data-filter="Completed" title="Click to filter by Completed">
-                        <i class="bi bi-check-circle-fill me-1"></i>COMPLETED <span class="fw-bold ms-1"
-                            id="completedCount">0</span>
-                    </span>
-                    <span
-                        class="stat-badge badge bg-body text-primary border border-primary-subtle px-3 py-2 rounded-pill shadow-sm"
-                        role="button" data-filter="In Progress" title="Click to filter by In Progress">
-                        <i class="bi bi-arrow-repeat me-1"></i>IN PROGRESS <span class="fw-bold ms-1"
-                            id="inProgressCount">0</span>
-                    </span>
-                    <span
-                        class="stat-badge badge bg-body text-danger border border-danger-subtle px-3 py-2 rounded-pill shadow-sm"
-                        role="button" data-filter="Pending" title="Click to filter by Pending">
-                        <i class="bi bi-clock-fill me-1"></i>PENDING <span class="fw-bold ms-1"
-                            id="pendingCount">0</span>
-                    </span>
+
+                <!-- Team Workload (Action Taken By Counts & Filters) -->
+                <div class="col-xl-7 col-lg-7 col-12 team-workload-col border-start-lg">
+                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="small fw-bold text-uppercase text-secondary">
+                                <i class="bi bi-people-fill me-1 text-primary"></i> Action Taken By (Team Workload)
+                            </span>
+                            <span class="badge bg-body-tertiary text-muted border small" id="teamMemberCountBadge">Team Members</span>
+                        </div>
+                        <button type="button" id="clearPersonFilterBtn" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill d-none" style="font-size: 0.75rem;">
+                            <i class="bi bi-x me-1"></i>Show All Officers
+                        </button>
+                    </div>
+
+                    <!-- Person Chips Container (interactive grid of cards) -->
+                    <div class="person-chips-grid" id="personBadgesContainer">
+                        <!-- Rendered by JS -->
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Active Filter Indicator Banner -->
+        <div id="activePersonFilterBanner" class="alert alert-primary py-2 px-3 mb-3 rounded-3 d-flex justify-content-between align-items-center d-none" role="alert">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <i class="bi bi-person-check-fill text-primary fs-5"></i>
+                <span class="small">Showing requests handled by: <strong id="activePersonFilterName" class="text-primary"></strong></span>
+                <span class="badge bg-primary text-white rounded-pill ms-2" id="activePersonFilterCount">0 requests</span>
+            </div>
+            <button type="button" id="dismissPersonFilterBtn" class="btn btn-sm btn-outline-primary py-0 px-2 fw-semibold" title="Clear officer filter">
+                <i class="bi bi-x-circle me-1"></i>View All Officers
+            </button>
         </div>
 
         <!-- Search & Filters Toolbar -->

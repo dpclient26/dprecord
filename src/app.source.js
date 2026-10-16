@@ -11,7 +11,19 @@ let filteredRecords = [];
 let currentPage = 1;
 const recordsPerPage = 10;
 let currentFilter = 'all';
+let selectedPerson = 'all';
 let searchQuery = '';
+
+const DEFAULT_OFFICERS = [
+    'Akash Karmegam',
+    'Ganesh Velu',
+    'Kalaivanan',
+    'Martina Maria Pushpam',
+    'Mohan',
+    'Nivas Saravana',
+    'Praveenraj',
+    'Swathi'
+];
 
 // Cache Configuration
 const CACHE_KEY = 'ops_portal_records_cache';
@@ -83,7 +95,7 @@ function applyTheme(theme) {
 
     // Redraw pie chart if present on page to adapt colors/contrast
     if (document.getElementById('statusPieChart')) {
-        const isFiltered = currentFilter !== 'all' || searchQuery;
+        const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
         const sourceData = isFiltered ? filteredRecords : allRecords;
         drawStatusPieChart(sourceData);
     }
@@ -111,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSearch();
         setupDownloadButton();
         setupTableDelegation();
+        setupPersonFilterListeners();
     }
 
     const form = document.getElementById('requestForm');
@@ -199,6 +212,7 @@ async function loadFromCacheOrFetch() {
 
     if (cached && Array.isArray(cached) && cached.length >= 0) {
         allRecords = [...cached];
+        renderPersonBadges();
         updateStats();
         applyFiltersAndRender();
         // Background silent refresh
@@ -235,6 +249,7 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
         }
 
         allRecords = [...data];
+        renderPersonBadges();
         updateStats();
         applyFiltersAndRender();
     } catch (error) {
@@ -260,7 +275,8 @@ async function fetchAndRenderRecords(isBackgroundRefresh = false) {
 // ==========================================
 // When useFiltered is true, stats and pie chart reflect filteredRecords (search/filter active)
 function updateStats(useFiltered = false) {
-    const sourceData = useFiltered ? filteredRecords : allRecords;
+    const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
+    const sourceData = (useFiltered || isFiltered) ? filteredRecords : allRecords;
     const counts = { Completed: 0, 'In Progress': 0, Pending: 0 };
     sourceData.forEach(r => {
         if (r['Status'] in counts) counts[r['Status']]++;
@@ -276,7 +292,182 @@ function updateStats(useFiltered = false) {
     if (progEl) progEl.innerText = counts['In Progress'];
     if (pendEl) pendEl.innerText = counts.Pending;
 
+    const scopeBadge = document.getElementById('statusScopeBadge');
+    if (scopeBadge) {
+        if (selectedPerson !== 'all') {
+            scopeBadge.innerText = `${selectedPerson}'s Requests`;
+        } else if (currentFilter !== 'all' || searchQuery) {
+            scopeBadge.innerText = 'Filtered';
+        } else {
+            scopeBadge.innerText = 'All Requests';
+        }
+    }
+
     drawStatusPieChart(sourceData);
+}
+
+// ==========================================
+// Team Workload: "Action Taken By" Analytics
+// ==========================================
+function getOfficersList() {
+    const set = new Set(DEFAULT_OFFICERS);
+    allRecords.forEach(r => {
+        const name = (r['Action Taken By'] || '').trim();
+        if (name && name !== 'Unknown' && name !== '-' && name !== 'N/A') {
+            set.add(name);
+        }
+    });
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
+}
+
+function renderPersonBadges() {
+    const container = document.getElementById('personBadgesContainer');
+    if (!container) return;
+
+    const officers = getOfficersList();
+    const teamMemberCountBadge = document.getElementById('teamMemberCountBadge');
+    if (teamMemberCountBadge) {
+        teamMemberCountBadge.innerText = `${officers.length} Officers`;
+    }
+
+    // Tally total requests per officer across entire database (allRecords)
+    const counts = {};
+    officers.forEach(name => {
+        counts[name] = 0;
+    });
+
+    allRecords.forEach(r => {
+        const name = (r['Action Taken By'] || '').trim();
+        if (name in counts) {
+            counts[name]++;
+        } else if (name && name !== 'Unknown' && name !== '-' && name !== 'N/A') {
+            counts[name] = (counts[name] || 0) + 1;
+        }
+    });
+
+    const fragment = document.createDocumentFragment();
+
+    // 1. "All Officers" Chip
+    const allChip = document.createElement('div');
+    allChip.className = `person-chip ${selectedPerson === 'all' ? 'active' : ''}`;
+    allChip.setAttribute('data-person', 'all');
+    allChip.setAttribute('role', 'button');
+    allChip.setAttribute('tabindex', '0');
+    allChip.setAttribute('title', 'Click to view all requests across all officers');
+    allChip.innerHTML = `
+        <div class="person-chip-avatar">
+            <i class="bi bi-people-fill"></i>
+        </div>
+        <span class="person-chip-name">All Officers</span>
+        <span class="person-chip-count badge bg-body-secondary text-body border" id="allPersonsCount">${allRecords.length}</span>
+    `;
+    fragment.appendChild(allChip);
+
+    // 2. Individual Officer Chips
+    officers.forEach(officer => {
+        const count = counts[officer] || 0;
+        const initials = escapeHtml(officer.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
+        const isSelected = selectedPerson.toLowerCase() === officer.toLowerCase();
+
+        const chip = document.createElement('div');
+        chip.className = `person-chip ${isSelected ? 'active' : ''}`;
+        chip.setAttribute('data-person', officer);
+        chip.setAttribute('role', 'button');
+        chip.setAttribute('tabindex', '0');
+        chip.setAttribute('title', `Click to view requests by ${escapeHtml(officer)} (${count} total requests)`);
+
+        chip.innerHTML = `
+            <div class="person-chip-avatar">${initials}</div>
+            <span class="person-chip-name" title="${escapeHtml(officer)}">${escapeHtml(officer)}</span>
+            <span class="person-chip-count badge bg-body-secondary text-body border">${count}</span>
+        `;
+        fragment.appendChild(chip);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(fragment);
+
+    updatePersonChipsActiveState();
+}
+
+function updatePersonChipsActiveState() {
+    const container = document.getElementById('personBadgesContainer');
+    if (container) {
+        container.querySelectorAll('.person-chip').forEach(chip => {
+            const person = chip.getAttribute('data-person');
+            if (person === 'all') {
+                chip.classList.toggle('active', selectedPerson === 'all');
+            } else {
+                chip.classList.toggle('active', selectedPerson.toLowerCase() === person.toLowerCase());
+            }
+        });
+    }
+
+    // Toggle active filter indicators & banner
+    const clearBtn = document.getElementById('clearPersonFilterBtn');
+    const banner = document.getElementById('activePersonFilterBanner');
+    const bannerName = document.getElementById('activePersonFilterName');
+    const bannerCount = document.getElementById('activePersonFilterCount');
+
+    if (selectedPerson !== 'all') {
+        if (clearBtn) clearBtn.classList.remove('d-none');
+        if (banner) banner.classList.remove('d-none');
+        if (bannerName) bannerName.innerText = selectedPerson;
+        if (bannerCount) bannerCount.innerText = `${filteredRecords.length} requests`;
+    } else {
+        if (clearBtn) clearBtn.classList.add('d-none');
+        if (banner) banner.classList.add('d-none');
+    }
+}
+
+function selectPersonFilter(personName) {
+    if (!personName || personName === 'all' || selectedPerson.toLowerCase() === personName.toLowerCase()) {
+        selectedPerson = 'all';
+    } else {
+        selectedPerson = personName;
+    }
+    currentPage = 1;
+    applyFiltersAndRender();
+}
+
+function setupPersonFilterListeners() {
+    const container = document.getElementById('personBadgesContainer');
+    if (container) {
+        container.addEventListener('click', (e) => {
+            const chip = e.target.closest('.person-chip');
+            if (chip) {
+                const person = chip.getAttribute('data-person');
+                selectPersonFilter(person);
+            }
+        });
+    }
+
+    const clearBtn = document.getElementById('clearPersonFilterBtn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            selectPersonFilter('all');
+        });
+    }
+
+    const dismissBtn = document.getElementById('dismissPersonFilterBtn');
+    if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+            selectPersonFilter('all');
+        });
+    }
+
+    const refreshBtn = document.getElementById('refreshDataBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            clearCache();
+            const icon = refreshBtn.querySelector('i');
+            if (icon) icon.classList.add('spin-animation');
+            fetchAndRenderRecords(false).finally(() => {
+                if (icon) icon.classList.remove('spin-animation');
+                showToast('Records refreshed from database!', 'success');
+            });
+        });
+    }
 }
 
 function drawStatusPieChart(sourceData) {
@@ -380,28 +571,42 @@ function drawStatusPieChart(sourceData) {
 // Filtering, Searching, & Rendering
 // ==========================================
 function applyFiltersAndRender() {
-    if (currentFilter === 'all') {
-        filteredRecords = [...allRecords];
-    } else {
-        filteredRecords = allRecords.filter(r => r['Status'] === currentFilter);
+    let result = [...allRecords];
+
+    // 1. Status Filter
+    if (currentFilter !== 'all') {
+        result = result.filter(r => r['Status'] === currentFilter);
     }
 
+    // 2. Person Filter (Action Taken By)
+    if (selectedPerson !== 'all') {
+        const target = selectedPerson.trim().toLowerCase();
+        result = result.filter(r => {
+            const actionBy = (r['Action Taken By'] || '').trim().toLowerCase();
+            return actionBy === target;
+        });
+    }
+
+    // 3. Search Query Filter
     if (searchQuery) {
         const query = searchQuery.toLowerCase();
-        filteredRecords = filteredRecords.filter(r => {
+        result = result.filter(r => {
             const rowString = Object.values(r).join(' ').toLowerCase();
             return rowString.includes(query);
         });
     }
+
+    filteredRecords = result;
 
     const maxPage = Math.ceil(filteredRecords.length / recordsPerPage) || 1;
     if (currentPage > maxPage) {
         currentPage = 1;
     }
 
-    // Update stats and pie chart based on whether search/filter is active
-    const isFiltered = currentFilter !== 'all' || searchQuery;
+    // Update stats, pie chart, person chips state
+    const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
     updateStats(!!isFiltered);
+    updatePersonChipsActiveState();
 
     renderTable();
     renderPagination();
@@ -489,7 +694,10 @@ function renderTable() {
             <td class="fw-semibold">${department}</td>
             <td>${reqDate}</td>
             <td class="text-muted">${letterRef}</td>
-            <td><span class="badge bg-body-secondary text-body border me-2">${initials}</span> ${actionBy}</td>
+            <td class="action-by-cell" data-person="${rawActionBy}" title="Click to filter by ${actionBy}">
+                <span class="badge bg-body-secondary text-body border me-2">${initials}</span>
+                <span class="action-by-name fw-medium">${actionBy}</span>
+            </td>
             <td class="text-truncate" style="max-width: 200px;" title="${problem}">${shortProblem}</td>
             <td class="text-muted">${formattedCount}</td>
             <td class="text-muted">${sharedMode}</td>
@@ -519,6 +727,16 @@ function setupTableDelegation() {
         if (missingIdBtn) {
             e.preventDefault();
             showToast('Cannot edit: Missing Reference Number.', 'warning');
+            return;
+        }
+
+        const actionByCell = e.target.closest('.action-by-cell');
+        if (actionByCell) {
+            e.preventDefault();
+            const person = actionByCell.getAttribute('data-person');
+            if (person && person !== 'Unknown' && person !== 'N/A') {
+                selectPersonFilter(person);
+            }
             return;
         }
     });

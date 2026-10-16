@@ -162,6 +162,20 @@ h3 {
     opacity: 0;
 }
 
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin-animation {
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+}
+
 /* ==========================================
    Button Hover Effects
    ========================================== */
@@ -341,6 +355,55 @@ h3 {
     background-color: rgba(248, 113, 113, 0.15) !important;
 }
 
+/* Dark Mode: Person Chips & Team Workload */
+[data-bs-theme="dark"] .border-start-lg {
+    border-left-color: #30363d !important;
+}
+
+[data-bs-theme="dark"] .person-chip {
+    background-color: #21262d;
+    border-color: #30363d;
+}
+
+[data-bs-theme="dark"] .person-chip:hover {
+    background-color: #262c36;
+    border-color: #58a6ff;
+    box-shadow: 0 4px 12px rgba(88, 166, 255, 0.15);
+}
+
+[data-bs-theme="dark"] .person-chip.active {
+    background-color: rgba(56, 139, 253, 0.18);
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 1.5px #58a6ff, 0 4px 12px rgba(88, 166, 255, 0.25);
+}
+
+[data-bs-theme="dark"] .person-chip.active .person-chip-name {
+    color: #58a6ff;
+}
+
+[data-bs-theme="dark"] .person-chip-avatar {
+    background-color: #30363d;
+    color: #c9d1d9;
+    border-color: #484f58;
+}
+
+[data-bs-theme="dark"] .person-chip.active .person-chip-avatar {
+    background-color: #388bfd;
+    color: #ffffff;
+    border-color: #388bfd;
+}
+
+[data-bs-theme="dark"] .person-chip.active .person-chip-count {
+    background-color: #388bfd !important;
+    color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] #activePersonFilterBanner {
+    background-color: rgba(56, 139, 253, 0.12) !important;
+    border-color: #388bfd !important;
+    color: #e6edf3 !important;
+}
+
 /* Dark Mode: Scrollbar */
 [data-bs-theme="dark"] ::-webkit-scrollbar {
     width: 8px;
@@ -480,6 +543,132 @@ h3 {
 }
 
 /* ==========================================
+   Analytics Dashboard Card & Team Workload
+   ========================================== */
+.analytics-dashboard-card {
+    transition: all 0.25s ease;
+}
+
+@media (min-width: 992px) {
+    .border-start-lg {
+        border-left: 1px solid var(--dp-border-color, #dee2e6) !important;
+        padding-left: 1.75rem !important;
+    }
+}
+
+.person-chips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 0.65rem;
+    max-height: 165px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.person-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.45rem 0.65rem;
+    border-radius: 10px;
+    background-color: var(--dp-bg-surface, #f8f9fa);
+    border: 1px solid var(--dp-border-color, #dee2e6);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    position: relative;
+}
+
+.person-chip:hover {
+    transform: translateY(-2px);
+    border-color: #0d6efd;
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.12);
+}
+
+.person-chip:active {
+    transform: translateY(0);
+}
+
+.person-chip.active {
+    background-color: rgba(13, 110, 253, 0.08);
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 1.5px #0d6efd, 0 4px 12px rgba(13, 110, 253, 0.16);
+}
+
+.person-chip-avatar {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 50%;
+    background-color: var(--bs-body-secondary, #e9ecef);
+    color: var(--bs-body-color, #212529);
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--dp-border-color, #dee2e6);
+    transition: all 0.2s ease;
+}
+
+.person-chip.active .person-chip-avatar {
+    background-color: #0d6efd;
+    color: #ffffff;
+    border-color: #0d6efd;
+}
+
+.person-chip-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--dp-text-heading);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+}
+
+.person-chip.active .person-chip-name {
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.person-chip-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.person-chip.active .person-chip-count {
+    background-color: #0d6efd !important;
+    color: #ffffff !important;
+    border-color: #0d6efd !important;
+}
+
+/* Action Taken By Table Cell */
+.action-by-cell {
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.action-by-cell:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.action-by-cell:hover .action-by-name {
+    color: #0d6efd !important;
+    text-decoration: underline;
+}
+
+/* Active Filter Banner */
+#activePersonFilterBanner {
+    animation: fadeIn 0.3s ease-out forwards;
+    border-left: 4px solid #0d6efd;
+}
+
+/* ==========================================
    Login Page
    ========================================== */
 .login-wrapper {
@@ -604,6 +793,11 @@ h3 {
         align-items: center;
         padding: 0.6rem 0.85rem !important;
         font-size: 0.75rem;
+    }
+
+    .person-chips-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 220px;
     }
 
     /* Search & Filter Toolbar */
@@ -749,6 +943,10 @@ h3 {
 /* Extra Small Phones (<= 400px) */
 @media (max-width: 400px) {
     .stats-badges {
+        grid-template-columns: 1fr !important;
+    }
+
+    .person-chips-grid {
         grid-template-columns: 1fr !important;
     }
 
