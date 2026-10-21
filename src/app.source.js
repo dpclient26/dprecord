@@ -324,12 +324,20 @@ function getMembersList() {
     return Array.from(set).filter(name => !excluded.has(name.toLowerCase())).sort((a, b) => a.localeCompare(b));
 }
 
-function getThemeIndex(name) {
+function getThemeIndex(name, index) {
+    if (typeof index === 'number' && index >= 0) {
+        return index % 12;
+    }
+    const members = getMembersList();
+    const idx = members.findIndex(m => m.toLowerCase() === (name || '').toLowerCase());
+    if (idx >= 0) {
+        return idx % 12;
+    }
     let hash = 0;
-    for (let i = 0; i < name.length; i++) {
+    for (let i = 0; i < (name || '').length; i++) {
         hash = name.charCodeAt(i) + ((hash << 5) - hash);
     }
-    return Math.abs(hash) % 8;
+    return Math.abs(hash) % 12;
 }
 
 function renderPersonBadges() {
@@ -388,12 +396,12 @@ function renderPersonBadges() {
     `;
     fragment.appendChild(allChip);
 
-    // 2. Individual Executive Member Cards
-    members.forEach(member => {
+    // 2. Individual Executive Member Cards (each person gets a distinct dynamic color theme)
+    members.forEach((member, index) => {
         const count = counts[member] || 0;
         const initials = escapeHtml(member.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
         const isSelected = selectedPerson.toLowerCase() === member.toLowerCase();
-        const themeIndex = getThemeIndex(member);
+        const themeIndex = getThemeIndex(member, index);
 
         const card = document.createElement('div');
         card.className = `team-member-card avatar-theme-${themeIndex} ${isSelected ? 'active' : ''}`;
@@ -407,7 +415,7 @@ function renderPersonBadges() {
                 <div class="team-avatar">${initials}</div>
                 <div class="team-info">
                     <span class="team-name" title="${escapeHtml(member)}">${escapeHtml(member)}</span>
-                    // <span class="team-role">Contributor</span>
+                    <span class="team-role">Team Member</span>
                 </div>
                 <div class="team-stat-badge">
                     <span class="team-count">${count}</span>
@@ -743,7 +751,7 @@ function renderTable() {
             <td>${reqDate}</td>
             <td class="text-muted">${letterRef}</td>
             <td class="action-by-cell" data-person="${rawActionBy}" title="Click to filter by ${actionBy}">
-                <span class="badge bg-body-secondary text-body border me-2">${initials}</span>
+                <span class="team-avatar-mini avatar-theme-${getThemeIndex(rawActionBy)} me-2">${initials}</span>
                 <span class="action-by-name fw-medium">${actionBy}</span>
             </td>
             <td class="text-truncate" style="max-width: 200px;" title="${problem}">${shortProblem}</td>
