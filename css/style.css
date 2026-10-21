@@ -592,31 +592,162 @@ h4 {
 }
 
 /* 12 Distinct Dynamic Avatar Themes */
-.avatar-theme-0 { --chip-avatar-bg: #e0f2fe; --chip-avatar-color: #0284c7; --chip-avatar-border: #bae6fd; } /* Sky Blue */
-.avatar-theme-1 { --chip-avatar-bg: #dcfce7; --chip-avatar-color: #16a34a; --chip-avatar-border: #bbf7d0; } /* Emerald Green */
-.avatar-theme-2 { --chip-avatar-bg: #f3e8ff; --chip-avatar-color: #9333ea; --chip-avatar-border: #e9d5ff; } /* Purple */
-.avatar-theme-3 { --chip-avatar-bg: #ffedd5; --chip-avatar-color: #ea580c; --chip-avatar-border: #fed7aa; } /* Tangerine Orange */
-.avatar-theme-4 { --chip-avatar-bg: #ffe4e6; --chip-avatar-color: #e11d48; --chip-avatar-border: #fecdd3; } /* Rose */
-.avatar-theme-5 { --chip-avatar-bg: #cffafe; --chip-avatar-color: #0891b2; --chip-avatar-border: #a5f3fc; } /* Cyan */
-.avatar-theme-6 { --chip-avatar-bg: #fef3c7; --chip-avatar-color: #d97706; --chip-avatar-border: #fde68a; } /* Amber Gold */
-.avatar-theme-7 { --chip-avatar-bg: #e0e7ff; --chip-avatar-color: #4f46e5; --chip-avatar-border: #c7d2fe; } /* Electric Indigo */
-.avatar-theme-8 { --chip-avatar-bg: #fae8ff; --chip-avatar-color: #c026d3; --chip-avatar-border: #f5d0fe; } /* Fuchsia Pink */
-.avatar-theme-9 { --chip-avatar-bg: #ccfbf1; --chip-avatar-color: #0d9488; --chip-avatar-border: #99f6e4; } /* Mint Teal */
-.avatar-theme-10 { --chip-avatar-bg: #fee2e2; --chip-avatar-color: #dc2626; --chip-avatar-border: #fecaca; } /* Ruby Red */
-.avatar-theme-11 { --chip-avatar-bg: #ecfccb; --chip-avatar-color: #65a30d; --chip-avatar-border: #d9f99d; } /* Lime Green */
+.avatar-theme-0 {
+    --chip-avatar-bg: #e0f2fe;
+    --chip-avatar-color: #0284c7;
+    --chip-avatar-border: #bae6fd;
+}
 
-[data-bs-theme="dark"] .avatar-theme-0 { --chip-avatar-bg: rgba(56, 189, 248, 0.16); --chip-avatar-color: #38bdf8; --chip-avatar-border: rgba(56, 189, 248, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-1 { --chip-avatar-bg: rgba(74, 222, 128, 0.16); --chip-avatar-color: #4ade80; --chip-avatar-border: rgba(74, 222, 128, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-2 { --chip-avatar-bg: rgba(192, 132, 252, 0.16); --chip-avatar-color: #c084fc; --chip-avatar-border: rgba(192, 132, 252, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-3 { --chip-avatar-bg: rgba(251, 146, 60, 0.16); --chip-avatar-color: #fb923c; --chip-avatar-border: rgba(251, 146, 60, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-4 { --chip-avatar-bg: rgba(251, 113, 133, 0.16); --chip-avatar-color: #fb7185; --chip-avatar-border: rgba(251, 113, 133, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-5 { --chip-avatar-bg: rgba(34, 211, 238, 0.16); --chip-avatar-color: #22d3ee; --chip-avatar-border: rgba(34, 211, 238, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-6 { --chip-avatar-bg: rgba(251, 191, 36, 0.16); --chip-avatar-color: #fbbf24; --chip-avatar-border: rgba(251, 191, 36, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-7 { --chip-avatar-bg: rgba(129, 140, 248, 0.16); --chip-avatar-color: #818cf8; --chip-avatar-border: rgba(129, 140, 248, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-8 { --chip-avatar-bg: rgba(232, 121, 249, 0.16); --chip-avatar-color: #e879f9; --chip-avatar-border: rgba(232, 121, 249, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-9 { --chip-avatar-bg: rgba(45, 212, 191, 0.16); --chip-avatar-color: #2dd4bf; --chip-avatar-border: rgba(45, 212, 191, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-10 { --chip-avatar-bg: rgba(248, 113, 113, 0.16); --chip-avatar-color: #f87171; --chip-avatar-border: rgba(248, 113, 113, 0.35); }
-[data-bs-theme="dark"] .avatar-theme-11 { --chip-avatar-bg: rgba(163, 230, 53, 0.16); --chip-avatar-color: #a3e635; --chip-avatar-border: rgba(163, 230, 53, 0.35); }
+/* Sky Blue */
+.avatar-theme-1 {
+    --chip-avatar-bg: #dcfce7;
+    --chip-avatar-color: #16a34a;
+    --chip-avatar-border: #bbf7d0;
+}
+
+/* Emerald Green */
+.avatar-theme-2 {
+    --chip-avatar-bg: #f3e8ff;
+    --chip-avatar-color: #9333ea;
+    --chip-avatar-border: #e9d5ff;
+}
+
+/* Purple */
+.avatar-theme-3 {
+    --chip-avatar-bg: #ffedd5;
+    --chip-avatar-color: #ea580c;
+    --chip-avatar-border: #fed7aa;
+}
+
+/* Tangerine Orange */
+.avatar-theme-4 {
+    --chip-avatar-bg: #fee2e2;
+    --chip-avatar-color: #dc2626;
+    --chip-avatar-border: #fecaca;
+}
+
+/* Ruby Red */
+.avatar-theme-5 {
+    --chip-avatar-bg: #ffe4e6;
+    --chip-avatar-color: #e11d48;
+    --chip-avatar-border: #fecdd3;
+}
+
+/* Rose */
+.avatar-theme-6 {
+    --chip-avatar-bg: #fef3c7;
+    --chip-avatar-color: #d97706;
+    --chip-avatar-border: #fde68a;
+}
+
+/* Amber Gold */
+.avatar-theme-7 {
+    --chip-avatar-bg: #e0e7ff;
+    --chip-avatar-color: #4f46e5;
+    --chip-avatar-border: #c7d2fe;
+}
+
+/* Electric Indigo */
+.avatar-theme-8 {
+    --chip-avatar-bg: #fae8ff;
+    --chip-avatar-color: #c026d3;
+    --chip-avatar-border: #f5d0fe;
+}
+
+/* Fuchsia Pink */
+.avatar-theme-9 {
+    --chip-avatar-bg: #ccfbf1;
+    --chip-avatar-color: #0d9488;
+    --chip-avatar-border: #99f6e4;
+}
+
+/* Mint Teal */
+.avatar-theme-10 {
+    --chip-avatar-bg: #cffafe;
+    --chip-avatar-color: #0891b2;
+    --chip-avatar-border: #a5f3fc;
+}
+
+/* Cyan */
+.avatar-theme-11 {
+    --chip-avatar-bg: #ecfccb;
+    --chip-avatar-color: #65a30d;
+    --chip-avatar-border: #d9f99d;
+}
+
+/* Lime Green */
+
+[data-bs-theme="dark"] .avatar-theme-0 {
+    --chip-avatar-bg: rgba(56, 189, 248, 0.16);
+    --chip-avatar-color: #38bdf8;
+    --chip-avatar-border: rgba(56, 189, 248, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-1 {
+    --chip-avatar-bg: rgba(74, 222, 128, 0.16);
+    --chip-avatar-color: #4ade80;
+    --chip-avatar-border: rgba(74, 222, 128, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-2 {
+    --chip-avatar-bg: rgba(192, 132, 252, 0.16);
+    --chip-avatar-color: #c084fc;
+    --chip-avatar-border: rgba(192, 132, 252, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-3 {
+    --chip-avatar-bg: rgba(251, 146, 60, 0.16);
+    --chip-avatar-color: #fb923c;
+    --chip-avatar-border: rgba(251, 146, 60, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-4 {
+    --chip-avatar-bg: rgba(251, 113, 133, 0.16);
+    --chip-avatar-color: #fb7185;
+    --chip-avatar-border: rgba(251, 113, 133, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-5 {
+    --chip-avatar-bg: rgba(34, 211, 238, 0.16);
+    --chip-avatar-color: #22d3ee;
+    --chip-avatar-border: rgba(34, 211, 238, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-6 {
+    --chip-avatar-bg: rgba(251, 191, 36, 0.16);
+    --chip-avatar-color: #fbbf24;
+    --chip-avatar-border: rgba(251, 191, 36, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-7 {
+    --chip-avatar-bg: rgba(129, 140, 248, 0.16);
+    --chip-avatar-color: #818cf8;
+    --chip-avatar-border: rgba(129, 140, 248, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-8 {
+    --chip-avatar-bg: rgba(232, 121, 249, 0.16);
+    --chip-avatar-color: #e879f9;
+    --chip-avatar-border: rgba(232, 121, 249, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-9 {
+    --chip-avatar-bg: rgba(45, 212, 191, 0.16);
+    --chip-avatar-color: #2dd4bf;
+    --chip-avatar-border: rgba(45, 212, 191, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-10 {
+    --chip-avatar-bg: rgba(248, 113, 113, 0.16);
+    --chip-avatar-color: #f87171;
+    --chip-avatar-border: rgba(248, 113, 113, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-11 {
+    --chip-avatar-bg: rgba(163, 230, 53, 0.16);
+    --chip-avatar-color: #a3e635;
+    --chip-avatar-border: rgba(163, 230, 53, 0.35);
+}
 
 /* Base Executive Member Card */
 .team-member-card,
