@@ -375,20 +375,11 @@ function renderPersonBadges() {
             </div>
             <div class="team-info">
                 <span class="team-name">All Team Members</span>
-                <span class="team-role">Complete Workload</span>
+                <span class="team-role">${members.length} Active Members</span>
             </div>
             <div class="team-stat-badge">
                 <span class="team-count" id="allPersonsCount">${allRecords.length}</span>
                 <span class="team-count-unit">Total</span>
-            </div>
-        </div>
-        <div class="team-card-progress">
-            <div class="team-progress-track">
-                <div class="team-progress-bar team-progress-bar-all" style="width: 100%;"></div>
-            </div>
-            <div class="team-progress-label">
-                <span>Active Contributors</span>
-                <span class="team-pct">${members.length} Members</span>
             </div>
         </div>
         <div class="team-card-active-indicator">
@@ -400,7 +391,6 @@ function renderPersonBadges() {
     // 2. Individual Executive Member Cards
     members.forEach(member => {
         const count = counts[member] || 0;
-        const pct = allRecords.length > 0 ? ((count / allRecords.length) * 100).toFixed(1) : '0.0';
         const initials = escapeHtml(member.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
         const isSelected = selectedPerson.toLowerCase() === member.toLowerCase();
         const themeIndex = getThemeIndex(member);
@@ -410,7 +400,7 @@ function renderPersonBadges() {
         card.setAttribute('data-person', member);
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
-        card.setAttribute('title', `Click to filter by ${escapeHtml(member)} (${count} requests, ${pct}% workload)`);
+        card.setAttribute('title', `Click to filter by ${escapeHtml(member)} (${count} total requests)`);
 
         card.innerHTML = `
             <div class="team-card-top">
@@ -422,15 +412,6 @@ function renderPersonBadges() {
                 <div class="team-stat-badge">
                     <span class="team-count">${count}</span>
                     <span class="team-count-unit">reqs</span>
-                </div>
-            </div>
-            <div class="team-card-progress">
-                <div class="team-progress-track">
-                    <div class="team-progress-bar" style="width: ${Math.min(parseFloat(pct), 100)}%;"></div>
-                </div>
-                <div class="team-progress-label">
-                    <span>Workload Share</span>
-                    <span class="team-pct">${pct}%</span>
                 </div>
             </div>
             <div class="team-card-active-indicator">

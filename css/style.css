@@ -652,7 +652,7 @@ h4 {
     display: flex;
     align-items: center;
     gap: 0.65rem;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0;
 }
 
 .team-avatar,
@@ -733,45 +733,6 @@ h4 {
     letter-spacing: 0.3px;
 }
 
-/* Card Progress Section */
-.team-card-progress {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-}
-
-.team-progress-track {
-    height: 5px;
-    width: 100%;
-    background-color: var(--dp-border-light, #e9ecef);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.team-progress-bar {
-    height: 100%;
-    border-radius: 4px;
-    background-color: var(--chip-bar-bg, #0d6efd);
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.team-progress-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.7rem;
-    color: var(--dp-text-secondary);
-}
-
-.team-pct {
-    font-weight: 700;
-    color: var(--dp-text-heading);
-}
-
-.team-member-card.active .team-pct {
-    color: #0d6efd;
-}
-
 /* Active Filter Indicator */
 .team-card-active-indicator {
     display: none;
@@ -817,10 +778,6 @@ h4 {
     font-size: 1rem;
 }
 
-.team-progress-bar-all {
-    background: linear-gradient(90deg, #0d6efd 0%, #20c997 100%) !important;
-}
-
 /* Dark Mode Overrides for Member Cards */
 [data-bs-theme="dark"] .team-member-card,
 [data-bs-theme="dark"] .person-chip {
@@ -844,10 +801,8 @@ h4 {
 
 [data-bs-theme="dark"] .team-member-card.active .team-name,
 [data-bs-theme="dark"] .team-member-card.active .team-count,
-[data-bs-theme="dark"] .team-member-card.active .team-pct,
 [data-bs-theme="dark"] .person-chip.active .team-name,
-[data-bs-theme="dark"] .person-chip.active .team-count,
-[data-bs-theme="dark"] .person-chip.active .team-pct {
+[data-bs-theme="dark"] .person-chip.active .team-count {
     color: #58a6ff;
 }
 
@@ -855,10 +810,6 @@ h4 {
 [data-bs-theme="dark"] .person-chip.active .team-card-active-indicator {
     color: #58a6ff;
     border-top-color: rgba(88, 166, 255, 0.25);
-}
-
-[data-bs-theme="dark"] .team-progress-track {
-    background-color: #21262d;
 }
 
 [data-bs-theme="dark"] .team-card-all,
