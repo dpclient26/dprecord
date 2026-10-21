@@ -50,7 +50,8 @@ body {
 
 /* Typography */
 h2,
-h3 {
+h3,
+h4 {
     color: var(--dp-text-heading);
 }
 
@@ -85,7 +86,6 @@ h3 {
    ========================================== */
 .form-label {
     color: var(--dp-text-heading, #212529);
-    font-weight: 600;
     margin-bottom: 0.4rem;
     font-size: 0.85rem;
     letter-spacing: 0.2px;
@@ -166,6 +166,7 @@ h3 {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -206,12 +207,16 @@ h3 {
 /* ==========================================
    Form Loading Overlay
    ========================================== */
-.form-overlay {
-    display: none;
-    background: var(--dp-overlay-bg);
+.form-overlay,
+#formLoadingOverlay {
+    background: var(--dp-overlay-bg, rgba(255, 255, 255, 0.92));
     z-index: 10;
     backdrop-filter: blur(2px);
     pointer-events: none;
+}
+
+.form-overlay {
+    display: none;
 }
 
 /* ==========================================
@@ -267,9 +272,14 @@ h3 {
     background-color: rgba(56, 139, 253, 0.06);
 }
 
-/* Dark Mode: Table borders */
+/* Dark Mode: Table body text + borders */
 [data-bs-theme="dark"] .table td {
+    color: #c9d1d9;
     border-bottom-color: #21262d;
+}
+
+[data-bs-theme="dark"] .table td.text-muted {
+    color: #8b949e !important;
 }
 
 /* Dark Mode: Filter buttons */
@@ -549,6 +559,16 @@ h3 {
     transition: all 0.25s ease;
 }
 
+.analytics-dashboard-card .row {
+    align-items: stretch;
+}
+
+.status-analysis-col,
+.team-workload-col {
+    display: flex;
+    flex-direction: column;
+}
+
 @media (min-width: 992px) {
     .border-start-lg {
         border-left: 1px solid var(--dp-border-color, #dee2e6) !important;
@@ -559,10 +579,72 @@ h3 {
 .person-chips-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-    gap: 0.65rem;
-    max-height: 165px;
+    gap: 0.6rem;
+    max-height: 200px;
     overflow-y: auto;
     padding-right: 4px;
+    flex-grow: 1;
+}
+
+/* "All Members" chip – full-width header style */
+.person-chip-all {
+    grid-column: 1 / -1;
+    background-color: var(--dp-bg-surface, #f0f2f5);
+    border-style: dashed;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.5rem 0.85rem;
+}
+
+.person-chip-all .person-chip-avatar {
+    background-color: transparent;
+    border: none;
+    font-size: 0.85rem;
+    color: var(--dp-text-secondary, #6c757d);
+    width: auto;
+    min-width: auto;
+    height: auto;
+}
+
+.person-chip-all .person-chip-name {
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: var(--dp-text-secondary, #6c757d);
+}
+
+.person-chip-all.active {
+    border-style: solid;
+    background-color: rgba(13, 110, 253, 0.06);
+}
+
+.person-chip-all.active .person-chip-name {
+    color: #0d6efd;
+}
+
+.person-chip-all.active .person-chip-avatar {
+    color: #0d6efd;
+}
+
+[data-bs-theme="dark"] .person-chip-all {
+    background-color: #161b22;
+}
+
+[data-bs-theme="dark"] .person-chip-all .person-chip-avatar {
+    color: #8b949e;
+}
+
+[data-bs-theme="dark"] .person-chip-all.active {
+    background-color: rgba(56, 139, 253, 0.1);
+}
+
+[data-bs-theme="dark"] .person-chip-all.active .person-chip-name {
+    color: #58a6ff;
+}
+
+[data-bs-theme="dark"] .person-chip-all.active .person-chip-avatar {
+    color: #58a6ff;
 }
 
 .person-chip {
@@ -797,7 +879,11 @@ h3 {
 
     .person-chips-grid {
         grid-template-columns: repeat(2, 1fr);
-        max-height: 220px;
+        max-height: 240px;
+    }
+
+    .person-chip-all {
+        grid-column: 1 / -1;
     }
 
     /* Search & Filter Toolbar */

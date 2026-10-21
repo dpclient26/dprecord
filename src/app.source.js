@@ -353,7 +353,7 @@ function renderPersonBadges() {
 
     // 1. "All Members" Chip
     const allChip = document.createElement('div');
-    allChip.className = `person-chip ${selectedPerson === 'all' ? 'active' : ''}`;
+    allChip.className = `person-chip person-chip-all ${selectedPerson === 'all' ? 'active' : ''}`;
     allChip.setAttribute('data-person', 'all');
     allChip.setAttribute('role', 'button');
     allChip.setAttribute('tabindex', '0');
