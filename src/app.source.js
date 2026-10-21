@@ -324,6 +324,14 @@ function getMembersList() {
     return Array.from(set).filter(name => !excluded.has(name.toLowerCase())).sort((a, b) => a.localeCompare(b));
 }
 
+function getThemeIndex(name) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash) % 8;
+}
+
 function renderPersonBadges() {
     const container = document.getElementById('personBadgesContainer');
     if (!container) return;
@@ -349,43 +357,87 @@ function renderPersonBadges() {
         }
     });
 
+    const totalDatabaseRecords = allRecords.length || 1;
     const fragment = document.createDocumentFragment();
 
-    // 1. "All Members" Chip
+    // 1. "All Members" Executive Master Card
     const allChip = document.createElement('div');
-    allChip.className = `person-chip person-chip-all ${selectedPerson === 'all' ? 'active' : ''}`;
+    const isAllActive = selectedPerson === 'all';
+    allChip.className = `team-member-card team-card-all ${isAllActive ? 'active' : ''}`;
     allChip.setAttribute('data-person', 'all');
     allChip.setAttribute('role', 'button');
     allChip.setAttribute('tabindex', '0');
-    allChip.setAttribute('title', 'Click to view all requests across all members');
+    allChip.setAttribute('title', `Click to view all requests across all members (${allRecords.length} total requests)`);
     allChip.innerHTML = `
-        <div class="person-chip-avatar">
-            <i class="bi bi-people-fill"></i>
+        <div class="team-card-top">
+            <div class="team-avatar team-avatar-all">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="team-info">
+                <span class="team-name">All Team Members</span>
+                <span class="team-role">Complete Workload</span>
+            </div>
+            <div class="team-stat-badge">
+                <span class="team-count" id="allPersonsCount">${allRecords.length}</span>
+                <span class="team-count-unit">Total</span>
+            </div>
         </div>
-        <span class="person-chip-name">All Members</span>
-        <span class="person-chip-count badge bg-body-secondary text-body border" id="allPersonsCount">${allRecords.length}</span>
+        <div class="team-card-progress">
+            <div class="team-progress-track">
+                <div class="team-progress-bar team-progress-bar-all" style="width: 100%;"></div>
+            </div>
+            <div class="team-progress-label">
+                <span>Active Contributors</span>
+                <span class="team-pct">${members.length} Members</span>
+            </div>
+        </div>
+        <div class="team-card-active-indicator">
+            <i class="bi bi-check-circle-fill"></i> Showing All Records
+        </div>
     `;
     fragment.appendChild(allChip);
 
-    // 2. Individual Member Chips
+    // 2. Individual Executive Member Cards
     members.forEach(member => {
         const count = counts[member] || 0;
+        const pct = allRecords.length > 0 ? ((count / allRecords.length) * 100).toFixed(1) : '0.0';
         const initials = escapeHtml(member.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
         const isSelected = selectedPerson.toLowerCase() === member.toLowerCase();
+        const themeIndex = getThemeIndex(member);
 
-        const chip = document.createElement('div');
-        chip.className = `person-chip ${isSelected ? 'active' : ''}`;
-        chip.setAttribute('data-person', member);
-        chip.setAttribute('role', 'button');
-        chip.setAttribute('tabindex', '0');
-        chip.setAttribute('title', `Click to view requests by ${escapeHtml(member)} (${count} total requests)`);
+        const card = document.createElement('div');
+        card.className = `team-member-card avatar-theme-${themeIndex} ${isSelected ? 'active' : ''}`;
+        card.setAttribute('data-person', member);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('title', `Click to filter by ${escapeHtml(member)} (${count} requests, ${pct}% workload)`);
 
-        chip.innerHTML = `
-            <div class="person-chip-avatar">${initials}</div>
-            <span class="person-chip-name" title="${escapeHtml(member)}">${escapeHtml(member)}</span>
-            <span class="person-chip-count badge bg-body-secondary text-body border">${count}</span>
+        card.innerHTML = `
+            <div class="team-card-top">
+                <div class="team-avatar">${initials}</div>
+                <div class="team-info">
+                    <span class="team-name" title="${escapeHtml(member)}">${escapeHtml(member)}</span>
+                    <span class="team-role">Contributor</span>
+                </div>
+                <div class="team-stat-badge">
+                    <span class="team-count">${count}</span>
+                    <span class="team-count-unit">reqs</span>
+                </div>
+            </div>
+            <div class="team-card-progress">
+                <div class="team-progress-track">
+                    <div class="team-progress-bar" style="width: ${Math.min(parseFloat(pct), 100)}%;"></div>
+                </div>
+                <div class="team-progress-label">
+                    <span>Workload Share</span>
+                    <span class="team-pct">${pct}%</span>
+                </div>
+            </div>
+            <div class="team-card-active-indicator">
+                <i class="bi bi-check-circle-fill"></i> Filter Active
+            </div>
         `;
-        fragment.appendChild(chip);
+        fragment.appendChild(card);
     });
 
     container.innerHTML = '';
@@ -397,7 +449,7 @@ function renderPersonBadges() {
 function updatePersonChipsActiveState() {
     const container = document.getElementById('personBadgesContainer');
     if (container) {
-        container.querySelectorAll('.person-chip').forEach(chip => {
+        container.querySelectorAll('.team-member-card, .person-chip').forEach(chip => {
             const person = chip.getAttribute('data-person');
             if (person === 'all') {
                 chip.classList.toggle('active', selectedPerson === 'all');
@@ -438,10 +490,21 @@ function setupPersonFilterListeners() {
     const container = document.getElementById('personBadgesContainer');
     if (container) {
         container.addEventListener('click', (e) => {
-            const chip = e.target.closest('.person-chip');
+            const chip = e.target.closest('.team-member-card, .person-chip');
             if (chip) {
                 const person = chip.getAttribute('data-person');
                 selectPersonFilter(person);
+            }
+        });
+
+        container.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const chip = e.target.closest('.team-member-card, .person-chip');
+                if (chip) {
+                    e.preventDefault();
+                    const person = chip.getAttribute('data-person');
+                    selectPersonFilter(person);
+                }
             }
         });
     }

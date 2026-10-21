@@ -576,157 +576,306 @@ h4 {
     }
 }
 
-.person-chips-grid {
+/* ==========================================
+   Executive Team Summary Grid & Member Cards
+   ========================================== */
+.person-chips-grid,
+.team-summary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-    gap: 0.6rem;
-    max-height: 200px;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.75rem;
+    max-height: 250px;
     overflow-y: auto;
-    padding-right: 4px;
+    padding-right: 6px;
+    padding-bottom: 4px;
     flex-grow: 1;
 }
 
-/* "All Members" chip – full-width header style */
-.person-chip-all {
-    grid-column: 1 / -1;
-    background-color: var(--dp-bg-surface, #f0f2f5);
-    border-style: dashed;
-    justify-content: center;
-    gap: 0.65rem;
-    padding: 0.5rem 0.85rem;
-}
+/* 8 Dynamic Avatar Themes */
+.avatar-theme-0 { --chip-avatar-bg: #e0f2fe; --chip-avatar-color: #0284c7; --chip-bar-bg: #0284c7; }
+.avatar-theme-1 { --chip-avatar-bg: #dcfce7; --chip-avatar-color: #16a34a; --chip-bar-bg: #16a34a; }
+.avatar-theme-2 { --chip-avatar-bg: #f3e8ff; --chip-avatar-color: #9333ea; --chip-bar-bg: #9333ea; }
+.avatar-theme-3 { --chip-avatar-bg: #ffedd5; --chip-avatar-color: #ea580c; --chip-bar-bg: #ea580c; }
+.avatar-theme-4 { --chip-avatar-bg: #fce7f3; --chip-avatar-color: #db2777; --chip-bar-bg: #db2777; }
+.avatar-theme-5 { --chip-avatar-bg: #ccfbf1; --chip-avatar-color: #0d9488; --chip-bar-bg: #0d9488; }
+.avatar-theme-6 { --chip-avatar-bg: #fef3c7; --chip-avatar-color: #d97706; --chip-bar-bg: #d97706; }
+.avatar-theme-7 { --chip-avatar-bg: #e0e7ff; --chip-avatar-color: #4f46e5; --chip-bar-bg: #4f46e5; }
 
-.person-chip-all .person-chip-avatar {
-    background-color: transparent;
-    border: none;
-    font-size: 0.85rem;
-    color: var(--dp-text-secondary, #6c757d);
-    width: auto;
-    min-width: auto;
-    height: auto;
-}
+[data-bs-theme="dark"] .avatar-theme-0 { --chip-avatar-bg: rgba(56, 189, 248, 0.15); --chip-avatar-color: #38bdf8; --chip-bar-bg: #38bdf8; }
+[data-bs-theme="dark"] .avatar-theme-1 { --chip-avatar-bg: rgba(74, 222, 128, 0.15); --chip-avatar-color: #4ade80; --chip-bar-bg: #4ade80; }
+[data-bs-theme="dark"] .avatar-theme-2 { --chip-avatar-bg: rgba(192, 132, 252, 0.15); --chip-avatar-color: #c084fc; --chip-bar-bg: #c084fc; }
+[data-bs-theme="dark"] .avatar-theme-3 { --chip-avatar-bg: rgba(251, 146, 60, 0.15); --chip-avatar-color: #fb923c; --chip-bar-bg: #fb923c; }
+[data-bs-theme="dark"] .avatar-theme-4 { --chip-avatar-bg: rgba(244, 114, 182, 0.15); --chip-avatar-color: #f472b6; --chip-bar-bg: #f472b6; }
+[data-bs-theme="dark"] .avatar-theme-5 { --chip-avatar-bg: rgba(45, 212, 191, 0.15); --chip-avatar-color: #2dd4bf; --chip-bar-bg: #2dd4bf; }
+[data-bs-theme="dark"] .avatar-theme-6 { --chip-avatar-bg: rgba(251, 191, 36, 0.15); --chip-avatar-color: #fbbf24; --chip-bar-bg: #fbbf24; }
+[data-bs-theme="dark"] .avatar-theme-7 { --chip-avatar-bg: rgba(129, 140, 248, 0.15); --chip-avatar-color: #818cf8; --chip-bar-bg: #818cf8; }
 
-.person-chip-all .person-chip-name {
-    font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-    color: var(--dp-text-secondary, #6c757d);
-}
-
-.person-chip-all.active {
-    border-style: solid;
-    background-color: rgba(13, 110, 253, 0.06);
-}
-
-.person-chip-all.active .person-chip-name {
-    color: #0d6efd;
-}
-
-.person-chip-all.active .person-chip-avatar {
-    color: #0d6efd;
-}
-
-[data-bs-theme="dark"] .person-chip-all {
-    background-color: #161b22;
-}
-
-[data-bs-theme="dark"] .person-chip-all .person-chip-avatar {
-    color: #8b949e;
-}
-
-[data-bs-theme="dark"] .person-chip-all.active {
-    background-color: rgba(56, 139, 253, 0.1);
-}
-
-[data-bs-theme="dark"] .person-chip-all.active .person-chip-name {
-    color: #58a6ff;
-}
-
-[data-bs-theme="dark"] .person-chip-all.active .person-chip-avatar {
-    color: #58a6ff;
-}
-
+/* Base Executive Member Card */
+.team-member-card,
 .person-chip {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.45rem 0.65rem;
-    border-radius: 10px;
-    background-color: var(--dp-bg-surface, #f8f9fa);
+    background-color: var(--dp-bg-card, #ffffff);
     border: 1px solid var(--dp-border-color, #dee2e6);
+    border-radius: 12px;
+    padding: 0.75rem 0.9rem;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    user-select: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
+.team-member-card:hover,
 .person-chip:hover {
     transform: translateY(-2px);
     border-color: #0d6efd;
-    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.12);
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.1);
 }
 
+.team-member-card:active,
 .person-chip:active {
     transform: translateY(0);
 }
 
+/* Active State */
+.team-member-card.active,
 .person-chip.active {
-    background-color: rgba(13, 110, 253, 0.08);
+    background-color: rgba(13, 110, 253, 0.04);
     border-color: #0d6efd;
-    box-shadow: 0 0 0 1.5px #0d6efd, 0 4px 12px rgba(13, 110, 253, 0.16);
+    box-shadow: 0 0 0 1.5px #0d6efd, 0 6px 18px rgba(13, 110, 253, 0.14);
 }
 
+/* Card Top Section: Avatar, Name, Count */
+.team-card-top {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.65rem;
+}
+
+.team-avatar,
 .person-chip-avatar {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    border-radius: 50%;
-    background-color: var(--bs-body-secondary, #e9ecef);
-    color: var(--bs-body-color, #212529);
-    font-size: 0.72rem;
-    font-weight: 700;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--dp-border-color, #dee2e6);
+    font-size: 0.82rem;
+    font-weight: 700;
+    background-color: var(--chip-avatar-bg, #e0f2fe);
+    color: var(--chip-avatar-color, #0284c7);
+    border: 1px solid rgba(0, 0, 0, 0.04);
     transition: all 0.2s ease;
 }
 
+.team-member-card.active .team-avatar,
 .person-chip.active .person-chip-avatar {
-    background-color: #0d6efd;
-    color: #ffffff;
-    border-color: #0d6efd;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.25);
 }
 
+.team-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.team-name,
 .person-chip-name {
-    font-size: 0.82rem;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--dp-text-heading);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    flex-grow: 1;
+    line-height: 1.25;
 }
 
+.team-member-card.active .team-name,
 .person-chip.active .person-chip-name {
-    font-weight: 700;
     color: #0d6efd;
 }
 
-.person-chip-count {
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.2rem 0.5rem;
-    border-radius: 20px;
-    transition: all 0.2s ease;
+.team-role {
+    font-size: 0.7rem;
+    color: var(--dp-text-secondary);
+    margin-top: 1px;
 }
 
-.person-chip.active .person-chip-count {
-    background-color: #0d6efd !important;
-    color: #ffffff !important;
-    border-color: #0d6efd !important;
+.team-stat-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.team-count {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dp-text-heading);
+}
+
+.team-member-card.active .team-count {
+    color: #0d6efd;
+}
+
+.team-count-unit {
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--dp-text-secondary);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+}
+
+/* Card Progress Section */
+.team-card-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.team-progress-track {
+    height: 5px;
+    width: 100%;
+    background-color: var(--dp-border-light, #e9ecef);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.team-progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    background-color: var(--chip-bar-bg, #0d6efd);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: var(--dp-text-secondary);
+}
+
+.team-pct {
+    font-weight: 700;
+    color: var(--dp-text-heading);
+}
+
+.team-member-card.active .team-pct {
+    color: #0d6efd;
+}
+
+/* Active Filter Indicator */
+.team-card-active-indicator {
+    display: none;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.45rem;
+    padding-top: 0.35rem;
+    border-top: 1px dashed rgba(13, 110, 253, 0.25);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+.team-member-card.active .team-card-active-indicator,
+.person-chip.active .team-card-active-indicator {
+    display: flex;
+}
+
+/* Master "All Members" Card (Full width header card) */
+.team-card-all,
+.person-chip-all {
+    grid-column: 1 / -1;
+    background-color: var(--dp-bg-surface, #f8f9fa);
+    border-style: dashed;
+    border-color: var(--dp-border-color, #dee2e6);
+}
+
+.team-card-all:hover,
+.person-chip-all:hover {
+    border-color: #0d6efd;
+    background-color: var(--dp-bg-card, #ffffff);
+}
+
+.team-card-all.active,
+.person-chip-all.active {
+    border-style: solid;
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.team-avatar-all {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    color: #0d6efd !important;
+    font-size: 1rem;
+}
+
+.team-progress-bar-all {
+    background: linear-gradient(90deg, #0d6efd 0%, #20c997 100%) !important;
+}
+
+/* Dark Mode Overrides for Member Cards */
+[data-bs-theme="dark"] .team-member-card,
+[data-bs-theme="dark"] .person-chip {
+    background-color: #161b22;
+    border-color: #30363d;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-bs-theme="dark"] .team-member-card:hover,
+[data-bs-theme="dark"] .person-chip:hover {
+    border-color: #58a6ff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+[data-bs-theme="dark"] .team-member-card.active,
+[data-bs-theme="dark"] .person-chip.active {
+    background-color: rgba(56, 139, 253, 0.08);
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 1.5px #58a6ff, 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+[data-bs-theme="dark"] .team-member-card.active .team-name,
+[data-bs-theme="dark"] .team-member-card.active .team-count,
+[data-bs-theme="dark"] .team-member-card.active .team-pct,
+[data-bs-theme="dark"] .person-chip.active .team-name,
+[data-bs-theme="dark"] .person-chip.active .team-count,
+[data-bs-theme="dark"] .person-chip.active .team-pct {
+    color: #58a6ff;
+}
+
+[data-bs-theme="dark"] .team-member-card.active .team-card-active-indicator,
+[data-bs-theme="dark"] .person-chip.active .team-card-active-indicator {
+    color: #58a6ff;
+    border-top-color: rgba(88, 166, 255, 0.25);
+}
+
+[data-bs-theme="dark"] .team-progress-track {
+    background-color: #21262d;
+}
+
+[data-bs-theme="dark"] .team-card-all,
+[data-bs-theme="dark"] .person-chip-all {
+    background-color: #161b22;
+    border-color: #30363d;
+}
+
+[data-bs-theme="dark"] .team-card-all.active,
+[data-bs-theme="dark"] .person-chip-all.active {
+    background-color: rgba(56, 139, 253, 0.1);
+    border-color: #58a6ff;
+}
+
+[data-bs-theme="dark"] .team-avatar-all {
+    background-color: rgba(56, 139, 253, 0.15) !important;
+    color: #58a6ff !important;
 }
 
 /* Action Taken By Table Cell */
