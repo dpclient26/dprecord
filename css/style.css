@@ -626,20 +626,19 @@ h4 {
     --chip-avatar-border: #fecaca;
 }
 
-/* Ruby Red */
-.avatar-theme-5 {
-    --chip-avatar-bg: #ffe4e6;
-    --chip-avatar-color: #e11d48;
-    --chip-avatar-border: #fecdd3;
-}
-
 /* Electric Indigo */
-.avatar-theme-6 {
+.avatar-theme-5 {
     --chip-avatar-bg: #fae8ff;
     --chip-avatar-color: #c026d3;
     --chip-avatar-border: #f5d0fe;
 }
 
+/* Ruby Red */
+.avatar-theme-6 {
+    --chip-avatar-bg: #ffe4e6;
+    --chip-avatar-color: #e11d48;
+    --chip-avatar-border: #fecdd3;
+}
 
 /* Amber Gold */
 .avatar-theme-7 {
@@ -709,15 +708,15 @@ h4 {
 }
 
 [data-bs-theme="dark"] .avatar-theme-5 {
-    --chip-avatar-bg: rgba(248, 113, 113, 0.16);
-    --chip-avatar-color: #f87171;
-    --chip-avatar-border: rgba(248, 113, 113, 0.35);
-}
-
-[data-bs-theme="dark"] .avatar-theme-6 {
     --chip-avatar-bg: rgba(232, 121, 249, 0.16);
     --chip-avatar-color: #e879f9;
     --chip-avatar-border: rgba(232, 121, 249, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-6 {
+    --chip-avatar-bg: rgba(248, 113, 113, 0.16);
+    --chip-avatar-color: #f87171;
+    --chip-avatar-border: rgba(248, 113, 113, 0.35);
 }
 
 [data-bs-theme="dark"] .avatar-theme-7 {
