@@ -708,16 +708,17 @@ h4 {
 }
 
 [data-bs-theme="dark"] .avatar-theme-5 {
+    --chip-avatar-bg: rgba(248, 113, 113, 0.16);
+    --chip-avatar-color: #f87171;
+    --chip-avatar-border: rgba(248, 113, 113, 0.35);
+}
+
+[data-bs-theme="dark"] .avatar-theme-6 {
     --chip-avatar-bg: rgba(34, 211, 238, 0.16);
     --chip-avatar-color: #22d3ee;
     --chip-avatar-border: rgba(34, 211, 238, 0.35);
 }
 
-[data-bs-theme="dark"] .avatar-theme-6 {
-    --chip-avatar-bg: rgba(251, 191, 36, 0.16);
-    --chip-avatar-color: #fbbf24;
-    --chip-avatar-border: rgba(251, 191, 36, 0.35);
-}
 
 [data-bs-theme="dark"] .avatar-theme-7 {
     --chip-avatar-bg: rgba(129, 140, 248, 0.16);
@@ -738,9 +739,9 @@ h4 {
 }
 
 [data-bs-theme="dark"] .avatar-theme-10 {
-    --chip-avatar-bg: rgba(248, 113, 113, 0.16);
-    --chip-avatar-color: #f87171;
-    --chip-avatar-border: rgba(248, 113, 113, 0.35);
+    --chip-avatar-bg: rgba(251, 191, 36, 0.16);
+    --chip-avatar-color: #fbbf24;
+    --chip-avatar-border: rgba(251, 191, 36, 0.35);
 }
 
 [data-bs-theme="dark"] .avatar-theme-11 {
