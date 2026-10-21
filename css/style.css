@@ -633,12 +633,13 @@ h4 {
     --chip-avatar-border: #fecdd3;
 }
 
-/* Rose */
+/* Electric Indigo */
 .avatar-theme-6 {
-    --chip-avatar-bg: #fef3c7;
-    --chip-avatar-color: #d97706;
-    --chip-avatar-border: #fde68a;
+    --chip-avatar-bg: #fae8ff;
+    --chip-avatar-color: #c026d3;
+    --chip-avatar-border: #f5d0fe;
 }
+
 
 /* Amber Gold */
 .avatar-theme-7 {
@@ -647,11 +648,11 @@ h4 {
     --chip-avatar-border: #c7d2fe;
 }
 
-/* Electric Indigo */
+/* Rose */
 .avatar-theme-8 {
-    --chip-avatar-bg: #fae8ff;
-    --chip-avatar-color: #c026d3;
-    --chip-avatar-border: #f5d0fe;
+    --chip-avatar-bg: #fef3c7;
+    --chip-avatar-color: #d97706;
+    --chip-avatar-border: #fde68a;
 }
 
 /* Fuchsia Pink */
@@ -714,11 +715,10 @@ h4 {
 }
 
 [data-bs-theme="dark"] .avatar-theme-6 {
-    --chip-avatar-bg: rgba(34, 211, 238, 0.16);
-    --chip-avatar-color: #22d3ee;
-    --chip-avatar-border: rgba(34, 211, 238, 0.35);
+    --chip-avatar-bg: rgba(232, 121, 249, 0.16);
+    --chip-avatar-color: #e879f9;
+    --chip-avatar-border: rgba(232, 121, 249, 0.35);
 }
-
 
 [data-bs-theme="dark"] .avatar-theme-7 {
     --chip-avatar-bg: rgba(129, 140, 248, 0.16);
@@ -727,9 +727,9 @@ h4 {
 }
 
 [data-bs-theme="dark"] .avatar-theme-8 {
-    --chip-avatar-bg: rgba(232, 121, 249, 0.16);
-    --chip-avatar-color: #e879f9;
-    --chip-avatar-border: rgba(232, 121, 249, 0.35);
+    --chip-avatar-bg: rgba(34, 211, 238, 0.16);
+    --chip-avatar-color: #22d3ee;
+    --chip-avatar-border: rgba(34, 211, 238, 0.35);
 }
 
 [data-bs-theme="dark"] .avatar-theme-9 {
