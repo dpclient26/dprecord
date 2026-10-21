@@ -407,7 +407,7 @@ function renderPersonBadges() {
                 <div class="team-avatar">${initials}</div>
                 <div class="team-info">
                     <span class="team-name" title="${escapeHtml(member)}">${escapeHtml(member)}</span>
-                    <span class="team-role">Contributor</span>
+                    // <span class="team-role">Contributor</span>
                 </div>
                 <div class="team-stat-badge">
                     <span class="team-count">${count}</span>
