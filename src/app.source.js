@@ -408,7 +408,7 @@ function renderPersonBadges() {
         card.setAttribute('data-person', member);
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
-        card.setAttribute('title', `Click to filter by ${escapeHtml(member)} (${count} total requests)`);
+        card.setAttribute('title', isSelected ? `${escapeHtml(member)} (${count} total requests - click to show all)` : `Click to view count & requests for ${escapeHtml(member)}`);
 
         card.innerHTML = `
             <div class="team-card-top">
@@ -417,13 +417,18 @@ function renderPersonBadges() {
                     <span class="team-name" title="${escapeHtml(member)}">${escapeHtml(member)}</span>
                     <span class="team-role">Team Member</span>
                 </div>
-                <div class="team-stat-badge">
+                <div class="team-stat-badge team-stat-individual">
                     <span class="team-count">${count}</span>
-                    <span class="team-count-unit">reqs</span>
+                    <span class="team-count-unit">${count === 1 ? 'req' : 'reqs'}</span>
+                </div>
+                <div class="team-click-prompt">
+                    <span class="badge bg-body-secondary text-secondary border border-secondary-subtle rounded-pill px-2 py-1 small fw-normal">
+                        <i class="bi bi-eye me-1"></i>View
+                    </span>
                 </div>
             </div>
             <div class="team-card-active-indicator">
-                <i class="bi bi-check-circle-fill"></i> Filter Active
+                <i class="bi bi-check-circle-fill"></i> Showing ${count} ${count === 1 ? 'Request' : 'Requests'}
             </div>
         `;
         fragment.appendChild(card);
@@ -443,7 +448,11 @@ function updatePersonChipsActiveState() {
             if (person === 'all') {
                 chip.classList.toggle('active', selectedPerson === 'all');
             } else {
-                chip.classList.toggle('active', selectedPerson.toLowerCase() === person.toLowerCase());
+                const isSelected = selectedPerson.toLowerCase() === person.toLowerCase();
+                chip.classList.toggle('active', isSelected);
+                const countBadge = chip.querySelector('.team-count');
+                const count = countBadge ? countBadge.innerText : '';
+                chip.setAttribute('title', isSelected ? `${person} (${count} requests - click to show all)` : `Click to view count & requests for ${person}`);
             }
         });
     }

@@ -870,6 +870,56 @@ h4 {
     line-height: 1;
 }
 
+/* Individual member cards hide count by default; only show when clicked/active */
+.team-member-card:not(.team-card-all) .team-stat-individual {
+    display: none;
+}
+
+.team-member-card:not(.team-card-all).active .team-stat-individual {
+    display: flex;
+    animation: teamCountReveal 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Click prompt badge on individual member cards */
+.team-member-card:not(.team-card-all) .team-click-prompt {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.team-member-card:not(.team-card-all) .team-click-prompt .badge {
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+}
+
+.team-member-card:not(.team-card-all):hover .team-click-prompt .badge {
+    background-color: #0d6efd !important;
+    color: #ffffff !important;
+    border-color: #0d6efd !important;
+    box-shadow: 0 2px 6px rgba(13, 110, 253, 0.28);
+    transform: scale(1.04);
+}
+
+.team-member-card:not(.team-card-all).active .team-click-prompt {
+    display: none !important;
+}
+
+@keyframes teamCountReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-2px) scale(0.92);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 .team-count {
     font-size: 1rem;
     font-weight: 700;
@@ -983,6 +1033,13 @@ h4 {
 [data-bs-theme="dark"] .team-avatar-all {
     background-color: rgba(56, 139, 253, 0.15) !important;
     color: #58a6ff !important;
+}
+
+[data-bs-theme="dark"] .team-member-card:not(.team-card-all):hover .team-click-prompt .badge {
+    background-color: #58a6ff !important;
+    color: #0d1117 !important;
+    border-color: #58a6ff !important;
+    box-shadow: 0 2px 6px rgba(88, 166, 255, 0.35);
 }
 
 /* Action Taken By Table Cell */
