@@ -1,322 +1,226 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/auth.js"></script>
+<!doctypehtml>
+    <html lang=en>
+    <meta charset=UTF-8>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+    <script src=js/auth.js></script>
     <title>DeG-Data Purity-Request Records</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css rel=stylesheet
+        crossorigin=anonymous integrity=sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN>
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css rel=stylesheet>
+    <link href=css/style.css rel=stylesheet>
 
-<body class="bg-body-tertiary">
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-body border-bottom py-3 fade-in">
-        <div class="container-fluid px-4">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-body" href="/index">
-                <div class="rounded p-1 d-flex justify-content-center align-items-center"
-                    style="width: 32px; height: 32px;">
-                    <img src="images/Picture1.png" alt="Logo" style="width: 50px; height: 50px; object-fit: contain;">
+    <body class=bg-body-tertiary>
+        <nav class="bg-body py-3 border-bottom fade-in navbar navbar-expand-lg">
+            <div class="container-fluid px-4"><a class="align-items-center d-flex gap-2 fw-bold navbar-brand text-body"
+                    href=/index>
+                    <div class="align-items-center d-flex justify-content-center p-1 rounded"
+                        style=width:32px;height:32px><img alt=Logo src=images/Picture1.png
+                            style=width:50px;height:50px;object-fit:contain></div>  DeG - Data Purity
+                </a><button class=navbar-toggler type=button aria-label="Toggle navigation" aria-controls=navbarContent
+                    aria-expanded=false data-bs-target=#navbarContent data-bs-toggle=collapse><span
+                        class=navbar-toggler-icon></span></button>
+                <div class="justify-content-center collapse navbar-collapse" id=navbarContent>
+                    <ul class="gap-3 navbar-nav">
+                        <li class=nav-item><a class="fw-semibold active bg-body-secondary nav-link px-3 rounded"
+                                href=/index>New Request Form</a>
+                        <li class=nav-item><a class=nav-link href=/form>Records</a>
+                    </ul>
                 </div>
-                &nbsp;
-                DeG - Data Purity
-            </a>
-
-            <!-- Mobile Navbar Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
-                <ul class="navbar-nav gap-3">
-                    <li class="nav-item"><a class="nav-link active fw-semibold bg-body-secondary rounded px-3" href="/index">New
-                            Request Form</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/form">Records</a></li>
-                </ul>
-            </div>
-
-            <!-- User Info and Logout -->
-            <div class="d-flex align-items-center gap-2 gap-md-3">
-                <span id="currentUserDisplay" class="small fw-semibold text-secondary d-none d-md-inline"></span>
-                <button id="themeToggle" class="btn btn-sm btn-outline-secondary" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">
-                    <i class="bi bi-moon-fill" id="themeIcon"></i>
-                </button>
-                <button id="logoutBtn" class="btn btn-sm btn-outline-danger fw-semibold logout-btn" type="button">
-                    <i class="bi bi-box-arrow-right me-1"></i> Logout
-                </button>
-                <div class="bg-dark text-white rounded-circle d-flex justify-content-center align-items-center"
-                    style="width: 35px; height: 35px;">
-                    <i class="bi bi-person"></i>
+                <div class="align-items-center d-flex gap-2 gap-md-3"><span
+                        class="fw-semibold small text-secondary d-md-inline d-none" id=currentUserDisplay></span>
+                    <button class="btn btn-outline-secondary btn-sm" type=button id=themeToggle
+                        aria-label="Toggle dark mode" title="Toggle dark mode"><i class="bi bi-moon-fill"
+                            id=themeIcon></i></button> <button
+                        class="fw-semibold btn btn-outline-danger btn-sm logout-btn" type=button id=logoutBtn><i
+                            class="bi me-1 bi-box-arrow-right"></i> Logout</button>
+                    <div class="align-items-center d-flex justify-content-center bg-dark rounded-circle text-white"
+                        style=width:35px;height:35px><i class="bi bi-person"></i></div>
                 </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="container py-4 py-md-5 fade-in">
-        <div class="mb-4">
-            <p class="text-uppercase text-secondary fw-semibold mb-1 small"><i class="bi bi-journal-text me-1"></i> Data
-                Purity</p>
-            <h2 class="fw-bold mb-0" id="formTitle">Data Request Entry</h2>
-            <p class="text-muted small" id="formSubtitle">Fill out the fields below</p>
-        </div>
-
-        <div class="card border-0 shadow-sm rounded-3 p-4 position-relative">
-            <!-- LOADING OVERLAY -->
-            <div id="formLoadingOverlay"
-                class="position-absolute top-0 start-0 w-100 h-100 justify-content-center align-items-center rounded-3 d-none"
-                style="display: none; pointer-events: none;">
-                <div class="text-center">
-                    <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
-                    </div>
-                    <p class="fw-semibold text-body mb-1">Loading record details...</p>
-                    <p class="text-muted small mb-0">Fetching data from the registry</p>
-                    <button type="button" id="cancelLoadBtn" class="btn btn-sm btn-outline-secondary mt-3 d-none"
-                        style="pointer-events: auto;">
-                        <i class="bi bi-x-circle me-1"></i> Taking too long? Cancel
-                    </button>
-                </div>
+        </nav>
+        <div class="fade-in container py-4 py-md-5">
+            <div class=mb-4>
+                <p class="fw-semibold small text-secondary mb-1 text-uppercase"><i class="bi me-1 bi-journal-text"></i>
+                    Data Purity
+                <h2 class="mb-0 fw-bold" id=formTitle>Data Request Entry</h2>
+                <p class="small text-muted" id=formSubtitle>Fill out the fields below
             </div>
-
-            <!-- Request Entry Form -->
-            <form id="requestForm" name="requestForm">
-                <div class="row g-4">
-                    <!-- Row 1 -->
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Reference Number/Ticket Number</label>
-                        <input type="text" class="form-control text-muted" id="refNumberInput"
-                            name="Reference Number/Ticket Number" placeholder="Auto-generated on save" readonly>
-                    </div>
-                    <!-- <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Requested Department <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="Requested Department"
-                            placeholder="e.g. Civil Supplies and Consumer Protection" required>
-                    </div> -->
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Requested Department <span
-                                class="text-danger">*</span></label>
-                        <select class="form-select" name="Requested Department" required>
-                            <option value="" disabled selected>--Select--</option>
-                            <option value="Adi Dravidar Welfare">Adi Dravidar Welfare</option>
-                            <option value="Agricultural Engineering">Agricultural Engineering</option>
-                            <option value="Agriculture Department">Agriculture Department</option>
-                            <option value="Animal Husbandry and Veterinary Services">Animal Husbandry and Veterinary
-                                Services</option>
-                            <option value="Art and Culture">Art and Culture</option>
-                            <option value="Backward Classes Welfare">Backward Classes Welfare</option>
-                            <option value="Children Welfare and Special Services">Children Welfare and Special Services
-                            </option>
-                            <option value="Civil Supplies and Consumer Protection">CCS - Civil Supplies and Consumer
-                                Protection</option>
-                            <option value="Cleanliness Workers Welfare Board">Cleanliness Workers Welfare Board</option>
-                            <option value="Collegiate Education">Collegiate Education</option>
-                            <option value="CRA - Revenue Administration">CRA - Revenue
-                                Administration</option>
-                            <option value="CTA - IFHRMS">CTA - IFHRMS</option>
-                            <option value="Dairy Development Department">Dairy Development Department</option>
-                            <option value="EDII-TN">EDII-TN</option>
-                            <option value="Elementary Education">Elementary Education</option>
-                            <option value="Employment and Training">Employment and Training</option>
-                            <option value="Ex-Servicemen’s Welfare">Ex-Servicemen’s Welfare</option>
-                            <option value="Fisheries and Fishermen Welfare">Fisheries and Fishermen Welfare</option>
-                            <option value="Geology and Mining Department">Geology and Mining Department</option>
-                            <option value="Handlooms Department">Handlooms Department</option>
-                            <option value="Hindu Religious and Charitable Endowments Department">Hindu Religious and
-                                Charitable Endowments Department</option>
-                            <option value="Horticulture and Plantation Crops Department">Horticulture and Plantation
-                                Crops Department</option>
-                            <option value="Human Resources Management Department">Human Resources Management Department
-                            </option>
-                            <option value="Industries and Commerce">Industries and Commerce</option>
-                            <option value="Information and Public Relations Department">Information and Public Relations
-                                Department</option>
-                            <option value="International Institute of Tamil Studies">International Institute of Tamil
-                                Studies</option>
-                            <option value="Land Administration">Land Administration</option>
-                            <option value="Local Fund Audit">Local Fund Audit</option>
-                            <option value="Medical Education and Research">Medical Education and Research</option>
-                            <option value="Minorities Welfare">Minorities Welfare</option>
-                            <option value="Most Backward Classes and Denotified Communities Welfare Department">Most
-                                Backward Classes and Denotified Communities Welfare Department</option>
-                            <option value="NHM - National Health Mission">NHM - National Health Mission</option>
-                            <option value="Private Schools Department">Private Schools Department</option>
-                            <option value="Public Health and Preventive Medicine">Public Health and Preventive Medicine
-                            </option>
-                            <option value="RCS - Registrar of Cooperative Societies">RCS - Registrar of Cooperative
-                                Societies</option>
-                            <option value="Rural Developement and Panchayat Raj">Rural Developement and Panchayat Raj
-                            </option>
-                            <option value="School Education Department">School Education Department</option>
-                            <option value="Seed Certification and Organic Certification">Seed Certification and Organic
-                                Certification</option>
-                            <option value="Social Welfare and Women’s Rights Department">Social Welfare and Women’s
-                                Rights Department</option>
-                            <option value="Sericulture Department">Sericulture Department</option>
-                            <option value="Social Welfare Department">Social Welfare Department</option>
-                            <option value="Sports Development Authority of Tamil Nadu">Sports Development Authority of
-                                Tamil Nadu</option>
-                            <option value="StartupTN">StartupTN</option>
-                            <option value="TAHDCO">TAHDCO</option>
-                            <option value="Tamil Development Department">Tamil Development Department</option>
-                            <option value="Tamil Nadu Civil Supplies Corporation">Tamil Nadu Civil Supplies Corporation
-                            </option>
-                            <option value="Tamil Nadu Corporation for Development of Women">Tamil Nadu Corporation for
-                                Development of Women</option>
-                            <option value="Tamil Nadu Fishermen Welfare Board">Tamil Nadu Fishermen Welfare Board
-                            </option>
-                            <option value="TASMAC - Tamil Nadu State Marketing Corporation">TASMAC - Tamil Nadu State
-                                Marketing
-                                Corporation</option>
-                            <option value="Tamil Nadu Traders Welfare Board">Tamil Nadu Traders Welfare Board</option>
-                            <option value="TNSTC - Tamil Nadu State Transport Corporation">TNSTC - Tamil Nadu State
-                                Transport
-                                Corporation</option>
-                            <option value="Tamil Nadu State Waqf Board">Tamil Nadu State Waqf Board</option>
-                            <option value="Tamil Nadu Unorganised Workers Welfare Board (TNUWWB)">TNUWWB - Tamil Nadu
-                                Unorganised
-                                Workers Welfare Board</option>
-                            <option value="Tamil Nadu Watershed Development Agency">Tamil Nadu Watershed Development
-                                Agency</option>
-                            <option value="Tamil Nadu Welfare Board For Differently Abled">Tamil Nadu Welfare Board For
-                                Differently Abled</option>
-                            <option value="TANGEDCO">TANGEDCO</option>
-                            <option value="Technical Education">Technical Education</option>
-                            <option value="TNHSP">TNHSP</option>
-                            <option value="TNSDC">TNSDC</option>
-                            <option value="TNUHDB">TNUHDB</option>
-                            <option value="Transgender Welfare Board">Transgender Welfare Board</option>
-                            <option value="Tribal Welfare">Tribal Welfare</option>
-                            <option value="Ulemas And Employees Welfare Board">Ulemas And Employees Welfare Board
-                            </option>
-                            <option value="Welfare of Differently Abled Person">Welfare of Differently Abled Person
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Request Date <span
-                                class="text-danger">*</span></label>
-                        <input type="date" class="form-control" name="Request Date" required>
-                    </div>
-
-                    <!-- Row 2 -->
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Letter / Email Reference <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="Letter / Email Reference"
-                            placeholder="e.g. LTR/2024/092" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Action Taken By <span
-                                class="text-danger">*</span></label>
-                        <select class="form-select" name="Action Taken By" required>
-                            <option value="" disabled selected>--Select--</option>
-                            <option value="Akash Karmegam">Akash Karmegam</option>
-                            <option value="Ganesh Velu">Ganesh Velu</option>
-                            <option value="Kalaivanan">Kalaivanan</option>
-                            <option value="Martina Maria Pushpam">Martina Maria Pushpam</option>
-                            <option value="Mohan">Mohan</option>
-                            <option value="Nivas Saravana">Nivas Saravana</option>
-                            <option value="Praveenraj">Praveenraj</option>
-                            <option value="Swathi">Swathi</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Problem Statement / Objective <span
-                                class="text-danger">*</span></label>
-                        <textarea class="form-control" name="Problem Statement / Objective"
-                            placeholder="Enter problem statement or objective" rows="4" required></textarea>
-                    </div>
-
-                    <!-- Row 3 -->
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Datasets Used <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="Datasets Used"
-                            placeholder="e.g. IFHRMS, PDS, CRS, etc., if not put N/A" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Date for Data Dump</label>
-                        <input type="date" class="form-control" name="Date for Data Dump">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold small">Analysis Outcome <span
-                                class="text-danger">*</span></label>
-                        <textarea class="form-control" name="Analysis Outcome"
-                            placeholder="e.g. Cleaned & Validated, if not put N/A" rows="4" required></textarea>
-                    </div>
-
-                    <!-- Row 4 -->
-                    <div class="col-md-3">
-                        <label class="form-label fw-semibold small">Result Shared Mode <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="Result Shared Mode"
-                            placeholder="e.g. Email, Shared Drive, Portal, if not put N/A" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-semibold small">Received Count <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="Received Count"
-                            placeholder="e.g. 25,000, if not put N/A" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-semibold small">Savings <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="Savings"
-                            placeholder="e.g. 10,000, if not put N/A" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-semibold small">Status <span class="text-danger">*</span></label>
-                        <select class="form-select" name="Status" required>
-                            <option value="Pending" selected>Pending</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
-                        </select>
+            <div class="border-0 card p-4 position-relative rounded-3 shadow-sm">
+                <div class="align-items-center justify-content-center d-none h-100 position-absolute rounded-3 start-0 top-0 w-100"
+                    style=display:none;pointer-events:none id=formLoadingOverlay>
+                    <div class=text-center>
+                        <div class="text-primary mb-3 spinner-border" style=width:3rem;height:3rem role=status></div>
+                        <p class="fw-semibold mb-1 text-body">Loading record details...
+                        <p class="small text-muted mb-0">Fetching data from the registry</p><button
+                            class="btn btn-outline-secondary btn-sm d-none mt-3" type=button id=cancelLoadBtn
+                            style=pointer-events:auto><i class="bi me-1 bi-x-circle"></i> Taking too long?
+                            Cancel</button>
                     </div>
                 </div>
-
-                <!-- Action Buttons -->
-                <div class="d-flex justify-content-between align-items-center mt-4 mt-md-5 pt-3 border-top">
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold" id="submitBtn">
-                            <i class="bi bi-send me-2"></i> Submit Request
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-semibold"
-                            id="clearBtn">
-                            <i class="bi bi-arrow-counterclockwise me-2"></i> Clear Fields
-                        </button>
+                <form id=requestForm name=requestForm>
+                    <div class="g-4 row">
+                        <div class=col-md-4><label class="fw-semibold small form-label">Reference Number/Ticket
+                                Number</label> <input class="form-control text-muted"
+                                name="Reference Number/Ticket Number" placeholder="Auto-generated on save"
+                                id=refNumberInput readonly></div>
+                        <div class=col-md-4><label class="fw-semibold small form-label">Requested Department <span
+                                    class=text-danger>*</span></label> <select class=form-select
+                                name="Requested Department" required>
+                                <option value="" selected disabled>--Select--
+                                <option value="Adi Dravidar Welfare">Adi Dravidar Welfare
+                                <option value="Agricultural Engineering">Agricultural Engineering
+                                <option value="Agriculture Department">Agriculture Department
+                                <option value="Animal Husbandry and Veterinary Services">Animal Husbandry and Veterinary
+                                    Services
+                                <option value="Art and Culture">Art and Culture
+                                <option value="Backward Classes Welfare">Backward Classes Welfare
+                                <option value="Children Welfare and Special Services">Children Welfare and Special
+                                    Services
+                                <option value="Civil Supplies and Consumer Protection">CCS - Civil Supplies and Consumer
+                                    Protection
+                                <option value="Cleanliness Workers Welfare Board">Cleanliness Workers Welfare Board
+                                <option value="Collegiate Education">Collegiate Education
+                                <option value="CRA - Revenue Administration">CRA - Revenue Administration
+                                <option value="CTA - IFHRMS">CTA - IFHRMS
+                                <option value="Dairy Development Department">Dairy Development Department
+                                <option value=EDII-TN>EDII-TN
+                                <option value="Elementary Education">Elementary Education
+                                <option value="Employment and Training">Employment and Training
+                                <option value="Ex-Servicemen’s Welfare">Ex-Servicemen’s Welfare
+                                <option value="Fisheries and Fishermen Welfare">Fisheries and Fishermen Welfare
+                                <option value="Geology and Mining Department">Geology and Mining Department
+                                <option value="Handlooms Department">Handlooms Department
+                                <option value="Hindu Religious and Charitable Endowments Department">Hindu Religious and
+                                    Charitable Endowments Department
+                                <option value="Horticulture and Plantation Crops Department">Horticulture and Plantation
+                                    Crops Department
+                                <option value="Human Resources Management Department">Human Resources Management
+                                    Department
+                                <option value="Industries and Commerce">Industries and Commerce
+                                <option value="Information and Public Relations Department">Information and Public
+                                    Relations Department
+                                <option value="International Institute of Tamil Studies">International Institute of
+                                    Tamil Studies
+                                <option value="Land Administration">Land Administration
+                                <option value="Local Fund Audit">Local Fund Audit
+                                <option value="Medical Education and Research">Medical Education and Research
+                                <option value="Minorities Welfare">Minorities Welfare
+                                <option value="Most Backward Classes and Denotified Communities Welfare Department">Most
+                                    Backward Classes and Denotified Communities Welfare Department
+                                <option value="NHM - National Health Mission">NHM - National Health Mission
+                                <option value="Private Schools Department">Private Schools Department
+                                <option value="Public Health and Preventive Medicine">Public Health and Preventive
+                                    Medicine
+                                <option value="RCS - Registrar of Cooperative Societies">RCS - Registrar of Cooperative
+                                    Societies
+                                <option value="Rural Developement and Panchayat Raj">Rural Developement and Panchayat
+                                    Raj
+                                <option value="School Education Department">School Education Department
+                                <option value="Seed Certification and Organic Certification">Seed Certification and
+                                    Organic Certification
+                                <option value="Social Welfare and Women’s Rights Department">Social Welfare and Women’s
+                                    Rights Department
+                                <option value="Sericulture Department">Sericulture Department
+                                <option value="Social Welfare Department">Social Welfare Department
+                                <option value="Sports Development Authority of Tamil Nadu">Sports Development Authority
+                                    of Tamil Nadu
+                                <option value=StartupTN>StartupTN
+                                <option value=TAHDCO>TAHDCO
+                                <option value="Tamil Development Department">Tamil Development Department
+                                <option value="Tamil Nadu Civil Supplies Corporation">Tamil Nadu Civil Supplies
+                                    Corporation
+                                <option value="Tamil Nadu Corporation for Development of Women">Tamil Nadu Corporation
+                                    for Development of Women
+                                <option value="Tamil Nadu Fishermen Welfare Board">Tamil Nadu Fishermen Welfare Board
+                                <option value="TASMAC - Tamil Nadu State Marketing Corporation">TASMAC - Tamil Nadu
+                                    State Marketing Corporation
+                                <option value="Tamil Nadu Traders Welfare Board">Tamil Nadu Traders Welfare Board
+                                <option value="TNSTC - Tamil Nadu State Transport Corporation">TNSTC - Tamil Nadu State
+                                    Transport Corporation
+                                <option value="Tamil Nadu State Waqf Board">Tamil Nadu State Waqf Board
+                                <option value="Tamil Nadu Unorganised Workers Welfare Board (TNUWWB)">TNUWWB - Tamil
+                                    Nadu Unorganised Workers Welfare Board
+                                <option value="Tamil Nadu Watershed Development Agency">Tamil Nadu Watershed Development
+                                    Agency
+                                <option value="Tamil Nadu Welfare Board For Differently Abled">Tamil Nadu Welfare Board
+                                    For Differently Abled
+                                <option value=TANGEDCO>TANGEDCO
+                                <option value="Technical Education">Technical Education
+                                <option value=TNHSP>TNHSP
+                                <option value=TNSDC>TNSDC
+                                <option value=TNUHDB>TNUHDB
+                                <option value="Transgender Welfare Board">Transgender Welfare Board
+                                <option value="Tribal Welfare">Tribal Welfare
+                                <option value="Ulemas And Employees Welfare Board">Ulemas And Employees Welfare Board
+                                <option value="Welfare of Differently Abled Person">Welfare of Differently Abled Person
+                            </select></div>
+                        <div class=col-md-4><label class="fw-semibold small form-label">Request Date <span
+                                    class=text-danger>*</span></label> <input class=form-control name="Request Date"
+                                required type=date></div>
+                        <div class=col-md-4><label class="fw-semibold small form-label">Letter / Email Reference <span
+                                    class=text-danger>*</span></label> <input class=form-control
+                                name="Letter / Email Reference" placeholder="e.g. LTR/2024/092" required></div>
+                        <div class=col-md-4><label class="fw-semibold small form-label">Action Taken By <span
+                                    class=text-danger>*</span></label> <select class=form-select name="Action Taken By"
+                                required>
+                                <option value="" selected disabled>--Select--
+                                <option value="Akash Karmegam">Akash Karmegam
+                                <option value="Ganesh Velu">Ganesh Velu
+                                <option value=Kalaivanan>Kalaivanan
+                                <option value="Martina Maria Pushpam">Martina Maria Pushpam
+                                <option value=Mohan>Mohan
+                                <option value="Nivas Saravana">Nivas Saravana
+                                <option value=Praveenraj>Praveenraj
+                                <option value=Swathi>Swathi
+                            </select></div>
+                        <div class=col-md-4><label class="fw-semibold small form-label">Problem Statement / Objective
+                                <span class=text-danger>*</span></label> <textarea class=form-control
+                                name="Problem Statement / Objective" placeholder="Enter problem statement or objective"
+                                required rows=4></textarea></div>
+                        <div class=col-md-4><label class="fw-semibold small form-label">Datasets Used <span
+                                    class=text-danger>*</span></label> <input class=form-control name="Datasets Used"
+                                placeholder="e.g. IFHRMS, PDS, CRS, etc., if not put N/A" required></div>
+                        <div class=col-md-4><label class="fw-semibold small form-label">Date for Data Dump</label>
+                            <input class=form-control name="Date for Data Dump" type=date></div>
+                        <div class=col-md-4><label class="fw-semibold small form-label">Analysis Outcome <span
+                                    class=text-danger>*</span></label> <textarea class=form-control
+                                name="Analysis Outcome" placeholder="e.g. Cleaned & Validated, if not put N/A" required
+                                rows=4></textarea></div>
+                        <div class=col-md-3><label class="fw-semibold small form-label">Result Shared Mode <span
+                                    class=text-danger>*</span></label> <input class=form-control
+                                name="Result Shared Mode" placeholder="e.g. Email, Shared Drive, Portal, if not put N/A"
+                                required></div>
+                        <div class=col-md-3><label class="fw-semibold small form-label">Received Count <span
+                                    class=text-danger>*</span></label> <input class=form-control name="Received Count"
+                                placeholder="e.g. 25,000, if not put N/A" required></div>
+                        <div class=col-md-3><label class="fw-semibold small form-label">Savings <span
+                                    class=text-danger>*</span></label> <input class=form-control name=Savings
+                                placeholder="e.g. 10,000, if not put N/A" required></div>
+                        <div class=col-md-3><label class="fw-semibold small form-label">Status <span
+                                    class=text-danger>*</span></label> <select class=form-select name=Status required>
+                                <option value=Pending selected>Pending
+                                <option value="In Progress">In Progress
+                                <option value=Completed>Completed
+                            </select></div>
                     </div>
-                    <a href="/form" class="text-primary fw-semibold text-decoration-none">
-                        View All Requests <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
-                </div>
-            </form>
+                    <div class="align-items-center d-flex justify-content-between border-top mt-4 mt-md-5 pt-3">
+                        <div class="gap-2 d-flex"><button class="fw-semibold btn px-4 py-2 btn-primary" type=submit
+                                id=submitBtn><i class="bi me-2 bi-send"></i> Submit Request</button> <button
+                                class="fw-semibold btn px-4 py-2 btn-outline-secondary" type=button id=clearBtn><i
+                                    class="bi me-2 bi-arrow-counterclockwise"></i> Clear Fields</button></div><a
+                            class="fw-semibold text-decoration-none text-primary" href=/form>View All Requests <i
+                                class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </form>
+            </div>
+            <div class="small text-muted align-items-center d-flex justify-content-between mt-3"><span><i
+                        class="bi me-1 bi-circle-fill text-success" style=font-size:8px></i> Auto-synced with
+                    database</span></div>
         </div>
-
-        <div class="d-flex justify-content-between align-items-center mt-3 text-muted small">
-            <span><i class="bi bi-circle-fill text-success me-1" style="font-size: 8px;"></i> Auto-synced with
-                database</span>
-        </div>
-    </div>
-
-    <footer class="d-flex justify-content-between align-items-center px-4 py-3 mt-auto bg-body border-top">
-        <span class="text-muted small">© 2026 DeG-Data Purity.</span>
-        <span class="text-success small fw-semibold"><i class="bi bi-circle-fill me-1" style="font-size: 8px;"></i>
-            Created By NS</span>
-    </footer>
-
-    <!-- Toast Notification Container -->
-    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script src="js/app.js"></script>
-</body>
-
-</html>
+        <footer class="align-items-center d-flex justify-content-between border-top bg-body mt-auto px-4 py-3"><span
+                class="small text-muted">© 2026 DeG-Data Purity.</span> <span class="fw-semibold small text-success"><i
+                    class="bi me-1 bi-circle-fill" style=font-size:8px></i> Created By NS</span></footer>
+        <div class=toast-container id=toastContainer aria-atomic=true aria-live=polite></div>
+        <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js crossorigin=anonymous
+            integrity=sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL></script>
+        <script src=js/app.js></script>
