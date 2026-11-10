@@ -10,10 +10,15 @@
     document.documentElement.setAttribute('data-theme', saved);
 })();
 
-// 2. Authentication Check
+// 2. Authentication Check — hide body immediately if not authenticated
+//    This prevents any flash of protected content before redirect
 const token = sessionStorage.getItem('ops_portal_token');
 if (!token) {
+    document.documentElement.style.visibility = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     window.location.replace('/login');
+    // Halt all further script execution on this page
+    throw new Error('AUTH_REDIRECT');
 }
 
 // 3. Centralized Logout Handler
