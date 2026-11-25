@@ -17,6 +17,8 @@ function checkExistingSession() {
     if (urlParams.get('timeout') === 'true') {
         sessionStorage.removeItem('ops_portal_token');
         sessionStorage.removeItem('ops_portal_user');
+        sessionStorage.removeItem('ops_portal_role');
+        sessionStorage.removeItem('ops_portal_display_name');
         sessionStorage.removeItem('ops_portal_records_cache');
         const errorAlert = document.getElementById('errorAlert');
         if (errorAlert) {
@@ -121,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.success) {
                 sessionStorage.setItem('ops_portal_token', data.token);
                 sessionStorage.setItem('ops_portal_user', data.username);
+                sessionStorage.setItem('ops_portal_role', data.role || 'user');
+                sessionStorage.setItem('ops_portal_display_name', data.displayName || data.username);
                 window.location.replace('/index');
             } else {
                 throw new Error(data.error || 'Login failed. Please check your credentials.');

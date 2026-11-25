@@ -1,1 +1,1321 @@
-const _0x333e2c = _0xfed1; (function (_0x24f476, _0x1c8b65) { const _0x4f4305 = _0xfed1, _0x1a1709 = _0x24f476(); while (!![]) { try { const _0xe30beb = -parseInt(_0x4f4305(0x1c4)) / 0x1 * (parseInt(_0x4f4305(0x277)) / 0x2) + parseInt(_0x4f4305(0x1e9)) / 0x3 * (parseInt(_0x4f4305(0x24c)) / 0x4) + -parseInt(_0x4f4305(0x158)) / 0x5 + -parseInt(_0x4f4305(0x26a)) / 0x6 * (-parseInt(_0x4f4305(0x1b5)) / 0x7) + -parseInt(_0x4f4305(0x141)) / 0x8 + -parseInt(_0x4f4305(0x1f6)) / 0x9 + parseInt(_0x4f4305(0x157)) / 0xa; if (_0xe30beb === _0x1c8b65) break; else _0x1a1709['push'](_0x1a1709['shift']()); } catch (_0x10630f) { _0x1a1709['push'](_0x1a1709['shift']()); } } }(_0x2317, 0x1bcca)); const e = _0x333e2c(0x179); let t = [], n = [], a = 0x1; const o = 0xa; let s = _0x333e2c(0x1ed), r = _0x333e2c(0x1ed), i = ''; const l = [_0x333e2c(0x245), _0x333e2c(0x1b3), 'Kalaivanan', _0x333e2c(0x14a), _0x333e2c(0x181), _0x333e2c(0x25e)], c = [_0x333e2c(0x1ae), _0x333e2c(0x213)], d = _0x333e2c(0x1d7); function u(_0x2edb0f, _0x4886c1 = _0x333e2c(0x268), _0x14dbad = 0xdac) { const _0x2ee07e = _0x333e2c; let _0x544e22 = document['getElementById'](_0x2ee07e(0x219)); _0x544e22 || (_0x544e22 = document[_0x2ee07e(0x1d1)](_0x2ee07e(0x1f1)), _0x544e22['id'] = _0x2ee07e(0x219), _0x544e22[_0x2ee07e(0x137)] = _0x2ee07e(0x1de), _0x544e22[_0x2ee07e(0x1f0)](_0x2ee07e(0x1ce), _0x2ee07e(0x1d2)), _0x544e22[_0x2ee07e(0x1f0)]('aria-atomic', _0x2ee07e(0x1af)), document['body'][_0x2ee07e(0x14f)](_0x544e22)); const _0xd23ffe = document[_0x2ee07e(0x1d1)]('div'); _0xd23ffe[_0x2ee07e(0x137)] = 'toast-notification\x20toast-' + _0x4886c1; let _0x4a47d2 = 'bi-info-circle-fill'; 'success' === _0x4886c1 ? _0x4a47d2 = _0x2ee07e(0x1d4) : _0x2ee07e(0x169) === _0x4886c1 ? _0x4a47d2 = _0x2ee07e(0x134) : _0x2ee07e(0x1dc) === _0x4886c1 && (_0x4a47d2 = _0x2ee07e(0x26d)), _0xd23ffe[_0x2ee07e(0x269)] = _0x2ee07e(0x1f7) + _0x4a47d2 + _0x2ee07e(0x26f) + B(_0x2edb0f) + _0x2ee07e(0x1f9), _0x544e22[_0x2ee07e(0x14f)](_0xd23ffe), setTimeout(() => { const _0x72acfe = _0x2ee07e; _0xd23ffe[_0x72acfe(0x1bb)]['opacity'] = '0', _0xd23ffe[_0x72acfe(0x1bb)]['transform'] = _0x72acfe(0x1b2), _0xd23ffe[_0x72acfe(0x1bb)]['transition'] = _0x72acfe(0x18c), setTimeout(() => _0xd23ffe[_0x72acfe(0x183)](), 0x12c); }, _0x14dbad); } function m(_0x5ac006) { const _0x19281c = _0x333e2c; document['documentElement'][_0x19281c(0x1f0)](_0x19281c(0x261), _0x5ac006), document[_0x19281c(0x15c)]['setAttribute'](_0x19281c(0x167), _0x5ac006), localStorage[_0x19281c(0x154)](_0x19281c(0x1fc), _0x5ac006); const _0x2630a9 = document['getElementById']('themeIcon'); (_0x2630a9 && (_0x2630a9['className'] = _0x19281c(0x201) === _0x5ac006 ? _0x19281c(0x136) : _0x19281c(0x260)), document[_0x19281c(0x19e)](_0x19281c(0x1ab))) && I('all' !== s || i || _0x19281c(0x1ed) !== r ? n : t); } function g() { const _0x31612b = _0x333e2c; try { const _0xf691c9 = sessionStorage[_0x31612b(0x270)](d); if (!_0xf691c9) return null; const _0x2f5628 = JSON['parse'](_0xf691c9); return Date[_0x31612b(0x20f)]() - _0x2f5628[_0x31612b(0x1d0)] > 0xea60 ? null : _0x2f5628[_0x31612b(0x214)]; } catch (_0x23b497) { return null; } } function p() { const _0x176879 = _0x333e2c; sessionStorage[_0x176879(0x1fd)](d); } function _0x2317() { const _0x401dd9 = ['...', '600\x209px\x20Inter,\x20system-ui,\x20sans-serif', 'ops_portal_token', 'statusPieChart', 'pointer', 'toLocaleDateString', 'Martina\x20Maria\x20Pushpam', 'true', 'd-none', 'number', 'translateY(-10px)', 'Ganesh\x20Velu', 'animate-row', '733453dDJRYQ', 'Timestamp', '/form', 'createDocumentFragment', 'Data_Purity_Records_', '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22text-muted\x22>', 'style', 'text-muted', '#f87171', 'en-IN', '<tr><td\x20colspan=\x2210\x22\x20class=\x22text-center\x20py-4\x20text-muted\x22>No\x20records\x20found\x20matching\x20your\x20criteria.</td></tr>', 'en-US', 'abs', 'inProgressCount', 'includes', '36ybmslc', 'filterGroup', 'stroke', 'reqs', 'N/A', '<span\x20class=\x22badge\x20bg-success-subtle\x20text-success\x20border\x20border-success\x20px-2\x20py-1\x22>Completed</span>', '2-digit', 'result', 'slice', 'arc', 'aria-live', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20', 'timestamp', 'createElement', 'polite', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22action-by-name\x20fw-medium\x22>', 'bi-check-circle-fill', 'Click\x20to\x20view\x20all\x20requests\x20across\x20all\x20members\x20(', 'find', 'ops_portal_records_cache', 'data-filter', 'Requested\x20Department', '.team-member-card,\x20.person-chip', 'No\x20data\x20available\x20to\x20download.', 'warning', '\x22>Previous</a></li>', 'toast-container', 'button[data-filter=\x22', 'Failed\x20to\x20load\x20record.\x20Please\x20try\x20again.', 'addEventListener', '#0d6efd', 'Reference\x20Number/Ticket\x20Number', 'clearPersonFilterBtn', 'paginationText', '#f0f6fc', '\x20requests\x20-\x20click\x20to\x20show\x20all)', 'Received\x20Count', '45735VDtXmN', 'target', 'update', '</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-name\x22\x20title=\x22', 'all', 'activePersonFilterCount', 'undefined', 'setAttribute', 'div', 'width', 'searchInput', 'stringify', 'Action\x20Taken\x20By', '754884RqzDqq', '<i\x20class=\x22bi\x20', 'paginationControls', '</span>', 'then', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22px-4\x20', 'dp_theme', 'removeItem', 'split', 'toLocaleString', 'Problem\x20Statement\x20/\x20Objective', 'dark', 'Download\x20started\x20successfully!', 'key', 'originalId', 'revokeObjectURL', 'Datasets\x20Used', 'numeric', 'font', 'Session\x20expired.\x20Redirecting\x20to\x20login...', 'downloadBtn', 'values', 'input', 'light', 'getAttribute', 'now', 'Completed', '&quot;', '.team-count', 'Nivas\x20Saravana', 'data', 'disabled', 'status', 'ceil', 'toString', 'toastContainer', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-click-prompt\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22badge\x20bg-body-secondary\x20text-secondary\x20border\x20border-secondary-subtle\x20rounded-pill\x20px-2\x20py-1\x20small\x20fw-normal\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-eye\x20me-1\x22></i>View\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-card-active-indicator\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-check-circle-fill\x22></i>\x20Showing\x20', 'Error:\x20', 'Analysis\x20Outcome', 'Asia/Kolkata', 'hidden', 'search', 'No\x20Data', 'Pending', 'Error\x20fetching\x20record\x20for\x20edit:', 'body', 'active', 'beginPath', '&gt;', '#198754', 'title', 'button', 'Result\x20Shared\x20Mode', 'floor', 'reset', 'querySelector', 'formSubtitle', 'toLowerCase', 'team-member-card\x20team-card-all\x20', 'count', 'animationDelay', 'height', 'padStart', 'closePath', 'getFullYear', 'text/csv;charset=utf-8;', 'createObjectURL', 'fw-semibold', 'substring', 'tabindex', 'devicePixelRatio', 'Record\x20not\x20found\x20in\x20database!', 'ops_portal_user', 'headers', 'role', '\x20me-2\x22>', 'success', 'activePersonFilterBanner', 'textAlign', 'Akash\x20Karmegam', 'Unknown', 'Letter\x20/\x20Email\x20Reference', 'catch', 'classList', '?action=get', '\x22>Next</a></li>', '20yzKyNc', '&amp;', 'restore', '\x22\x20class=\x22text-primary\x20fw-semibold\x20text-decoration-none\x20action-btn\x22>View/Edit</a>', '#38bdf8', '\x20Members', 'HTTP\x20', 'strokeStyle', 'refreshDataBtn', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr><td\x20colspan=\x2210\x22\x20class=\x22text-center\x20py-4\x20text-danger\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-exclamation-triangle\x20me-2\x22></i>Unable\x20to\x20load\x20records.\x20Please\x20check\x20your\x20connection.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<br><button\x20type=\x22button\x22\x20class=\x22btn\x20btn-sm\x20btn-outline-primary\x20mt-2\x20retry-fetch-btn\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-arrow-clockwise\x20me-1\x22></i>\x20Retry\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td></tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20', 'preventDefault', 'requestForm', '#20c997', 'activePersonFilterName', 'type', 'warn', '#e9ecef', 'POST', 'Swathi', 'charCodeAt', 'bi\x20bi-moon-fill', 'data-bs-theme', '<span\x20class=\x22badge\x20bg-danger-subtle\x20text-danger\x20border\x20border-danger\x20px-2\x20py-1\x22>Pending</span>', '.page-link', '\x20total\x20requests\x20-\x20click\x20to\x20show\x20all)', 'from', 'Showing\x20', 'Filtered', 'info', 'innerHTML', '12CJmHvk', 'en-GB', 'min', 'bi-exclamation-circle-fill', 'Requests', '\x20me-2\x22></i><span>', 'getItem', 'test', '#8b949e', '&#39;', 'closest', '?action=get_one&id=', 'querySelectorAll', '12590krSYQc', 'clearBtn', 'edit', 'middle', 'Request\x20Date', 'replace', 'formTitle', 'elements', 'statusScopeBadge', 'Request\x20submitted\x20successfully!\x20Generated\x20ID:\x20', '.retry-fetch-btn', '#adb5bd', 'fillText', '</a></li>', 'Savings', 'bi-exclamation-triangle-fill', '#212529', 'bi\x20bi-sun-fill\x20text-warning', 'className', 'name', 'center', 'spin-animation', 'currentTarget', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-count-unit\x22>Total</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-card-active-indicator\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-check-circle-fill\x22></i>\x20Showing\x20All\x20Records\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20', 'Update\x20the\x20fields\x20below\x20to\x20modify\x20the\x20request\x20in\x20the\x20registry.', 'Enter', 'length', '\x22\x20title=\x22Click\x20to\x20filter\x20by\x20', '437776wdZarP', 'team-member-card\x20avatar-theme-', 'color', 'value', 'add', '\x20total\x20requests)', 'append', 'SessionStorage\x20cache\x20quota\x20exceeded:', 'fillStyle', 'Mohan', 'keys', 'textBaseline', '\x22><a\x20class=\x22page-link\x22\x20href=\x22#\x22\x20data-page=\x22', 'Network\x20error.\x20Please\x20check\x20your\x20connection.', 'appendChild', 'innerText', 'cancelLoadBtn', 'data-person', '\x20to\x20', 'setItem', '600\x2011px\x20Inter,\x20system-ui,\x20sans-serif', 'opacity\x200.3s\x20ease', '3595050UjbuuU', '831020HqLiHS', 'Status', 'Submit\x20error:', '\x20Active\x20Members</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-stat-badge\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-count\x22\x20id=\x22allPersonsCount\x22>', 'documentElement', 'visibility', '.missing-id-btn', 'save', 'trim', 'clearRect', 'Failed\x20to\x20save\x20record.', 'Request\x20updated\x20successfully!', '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22text-end\x20px-4\x22>', '\x27s\x20Requests', 'cursor', 'data-theme', '\x20of\x20', 'error', 'personBadgesContainer', '#ffffff', 'opacity', 'date', 'toUpperCase', 'short', 'submitBtn', 'currentUserDisplay', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-stat-badge\x20team-stat-individual\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-count\x22>', 'filter', 'pendingCount', 'toggle', 'forEach', 'getContext', '.csv', '/api/cfdb', 'teamMemberCountBadge', 'replaceAll', 'join', 'keydown', 'totalCount', 'Submit', '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22fw-semibold\x22>', 'Praveenraj', 'contains', 'remove', 'Records\x20refreshed\x20from\x20database!', 'isArray', 'max', '<li\x20class=\x22page-item\x20', '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-avatar-mini\x20avatar-theme-', 'text-primary', '.stat-badge[data-filter]', 'tableBody', 'all\x200.3s\x20ease', 'location', 'json', '<a\x20href=\x22/index?edit=', 'sort', 'none', 'In\x20Progress', '/login?timeout=true', '&lt;', 'click', 'lineWidth', '\x20requests', 'req', 'getTime', '#6c757d', 'Click\x20to\x20view\x20count\x20&\x20requests\x20for\x20', 'dismissPersonFilterBtn', 'Cannot\x20edit:\x20Missing\x20Reference\x20Number.', 'getElementById', 'Auto-generated\x20on\x20save', 'display', '<i\x20class=\x22bi\x20bi-save\x20me-2\x22></i>\x20Update\x20Request', 'Bearer\x20', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-card-top\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-avatar\x20team-avatar-all\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-people-fill\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-name\x22>All\x20Team\x20Members</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-role\x22>', 'data-page', 'push', 'Date\x20for\x20Data\x20Dump', 'map']; _0x2317 = function () { return _0x401dd9; }; return _0x2317(); } async function f(_0xbcaf89, _0x218f1f = {}, _0x5159a6 = 0x3, _0x5e4408 = 0x1f4) { const _0x5df731 = _0x333e2c, _0x55989a = sessionStorage['getItem'](_0x5df731(0x1aa)) || '', _0x48e2df = { ..._0x218f1f[_0x5df731(0x23f)] || {}, 'Authorization': _0x5df731(0x1a2) + _0x55989a }, _0x57956b = { ..._0x218f1f, 'headers': _0x48e2df }; for (let _0x516ea1 = 0x1; _0x516ea1 <= _0x5159a6; _0x516ea1++)try { const _0x1ee880 = await fetch(_0xbcaf89, _0x57956b); if (0x191 === _0x1ee880[_0x5df731(0x216)]) return sessionStorage['removeItem'](_0x5df731(0x1aa)), sessionStorage[_0x5df731(0x1fd)]('ops_portal_user'), sessionStorage[_0x5df731(0x1fd)](d), window['location']['replace']('/login?timeout=true'), null; if (!_0x1ee880['ok']) throw new Error(_0x5df731(0x252) + _0x1ee880[_0x5df731(0x216)]); return await _0x1ee880[_0x5df731(0x18e)](); } catch (_0x2eb375) { if (_0x516ea1 === _0x5159a6) throw _0x2eb375; await new Promise(_0x1e50ce => setTimeout(_0x1e50ce, _0x5e4408 * _0x516ea1)); } } async function b() { const _0xe7b8e0 = _0x333e2c, _0x16c774 = document[_0xe7b8e0(0x19e)](_0xe7b8e0(0x18b)), _0x457641 = g(); _0x457641 && Array[_0xe7b8e0(0x185)](_0x457641) && _0x457641['length'] >= 0x0 ? (t = [..._0x457641], E(), y(), x(), h(!0x0)) : (_0x16c774 && (_0x16c774['innerHTML'] = '<tr><td\x20colspan=\x2210\x22\x20class=\x22text-center\x20py-4\x22><div\x20class=\x22spinner-border\x20text-primary\x22\x20role=\x22status\x22></div><br><span\x20class=\x22text-muted\x20small\x20mt-2\x20d-inline-block\x22>Loading\x20records...</span></td></tr>'), h(!0x1)); } async function h(_0x15ea94 = !0x1) { const _0x143111 = _0x333e2c; try { const _0x24cf59 = await f(e + _0x143111(0x24a), {}, 0x3, 0x1f4); if (!_0x24cf59) return; if (function (_0x36a959) { const _0x38f308 = _0x143111; try { const _0x28fd59 = { 'data': _0x36a959, 'timestamp': Date['now']() }; sessionStorage[_0x38f308(0x154)](d, JSON[_0x38f308(0x1f4)](_0x28fd59)); } catch (_0x4a7343) { console[_0x38f308(0x25b)](_0x38f308(0x148), _0x4a7343); } }(_0x24cf59), _0x15ea94 && _0x24cf59[_0x143111(0x13f)] === t[_0x143111(0x13f)]) { let _0x143da2 = !0x0; const _0x17a41c = [0x0, Math[_0x143111(0x22b)](_0x24cf59[_0x143111(0x13f)] / 0x2), _0x24cf59[_0x143111(0x13f)] - 0x1]; for (const _0x5516f8 of _0x17a41c) if (_0x5516f8 >= 0x0 && _0x5516f8 < _0x24cf59[_0x143111(0x13f)] && JSON['stringify'](_0x24cf59[_0x5516f8]) !== JSON[_0x143111(0x1f4)](t[_0x5516f8])) { _0x143da2 = !0x1; break; } if (_0x143da2) return; } t = [..._0x24cf59], E(), y(), x(); } catch (_0x3ae3f0) { if (console[_0x143111(0x169)]('Error\x20fetching\x20records:', _0x3ae3f0), !_0x15ea94 || 0x0 === t['length']) { const _0x39de70 = document['getElementById'](_0x143111(0x18b)); _0x39de70 && (_0x39de70[_0x143111(0x269)] = _0x143111(0x255)); } } } function y(_0x15888d = !0x1) { const _0x53f606 = _0x333e2c, _0x14777 = _0x15888d || ('all' !== s || i || _0x53f606(0x1ed) !== r) ? n : t, _0x5018a1 = { 'Completed': 0x0, 'In\x20Progress': 0x0, 'Pending': 0x0 }; _0x14777[_0x53f606(0x176)](_0x3144ad => { const _0x3fef77 = _0x53f606; _0x3144ad[_0x3fef77(0x159)] in _0x5018a1 && _0x5018a1[_0x3144ad[_0x3fef77(0x159)]]++; }); const _0x4f1f1c = document[_0x53f606(0x19e)](_0x53f606(0x17e)), _0x1525e6 = document['getElementById']('completedCount'), _0x3df37c = document['getElementById'](_0x53f606(0x1c2)), _0xca9e44 = document['getElementById'](_0x53f606(0x174)); _0x4f1f1c && (_0x4f1f1c[_0x53f606(0x150)] = _0x14777[_0x53f606(0x13f)]), _0x1525e6 && (_0x1525e6[_0x53f606(0x150)] = _0x5018a1['Completed']), _0x3df37c && (_0x3df37c[_0x53f606(0x150)] = _0x5018a1['In\x20Progress']), _0xca9e44 && (_0xca9e44[_0x53f606(0x150)] = _0x5018a1[_0x53f606(0x221)]); const _0x3f8d36 = document[_0x53f606(0x19e)](_0x53f606(0x27f)); _0x3f8d36 && (_0x3f8d36['innerText'] = 'all' !== r ? r + _0x53f606(0x165) : _0x53f606(0x1ed) !== s || i ? _0x53f606(0x267) : 'All\x20Requests'), I(_0x14777); } function v() { const _0x1b33a2 = _0x333e2c, _0x205166 = new Set(c['map'](_0x1837bc => _0x1837bc[_0x1b33a2(0x22f)]())), _0x5d5c00 = new Set(l); return t[_0x1b33a2(0x176)](_0x4367c6 => { const _0x465555 = _0x1b33a2, _0x3af686 = (_0x4367c6[_0x465555(0x1f5)] || '')[_0x465555(0x160)](); _0x3af686 && _0x465555(0x246) !== _0x3af686 && '-' !== _0x3af686 && _0x465555(0x1c8) !== _0x3af686 && !_0x205166['has'](_0x3af686[_0x465555(0x22f)]()) && _0x5d5c00[_0x465555(0x145)](_0x3af686); }), Array[_0x1b33a2(0x265)](_0x5d5c00)[_0x1b33a2(0x173)](_0x2e21dd => !_0x205166['has'](_0x2e21dd[_0x1b33a2(0x22f)]()))[_0x1b33a2(0x190)]((_0x46791e, _0x14ce65) => _0x46791e['localeCompare'](_0x14ce65)); } function _0xfed1(_0x9ce155, _0x586c53) { _0x9ce155 = _0x9ce155 - 0x130; const _0x231773 = _0x2317(); let _0xfed17c = _0x231773[_0x9ce155]; return _0xfed17c; } function w(_0x4f1d3d, _0x2f16af) { const _0x31b6b5 = _0x333e2c; if (_0x31b6b5(0x1b1) == typeof _0x2f16af && _0x2f16af >= 0x0) return _0x2f16af % 0xc; const _0x4b4aba = v()['findIndex'](_0x1db270 => _0x1db270[_0x31b6b5(0x22f)]() === (_0x4f1d3d || '')['toLowerCase']()); if (_0x4b4aba >= 0x0) return _0x4b4aba % 0xc; let _0x1e98d1 = 0x0; for (let _0x255d5e = 0x0; _0x255d5e < (_0x4f1d3d || '')[_0x31b6b5(0x13f)]; _0x255d5e++)_0x1e98d1 = _0x4f1d3d[_0x31b6b5(0x25f)](_0x255d5e) + ((_0x1e98d1 << 0x5) - _0x1e98d1); return Math[_0x31b6b5(0x1c1)](_0x1e98d1) % 0xc; } function E() { const _0xd2fd7c = _0x333e2c, _0x5ae202 = document[_0xd2fd7c(0x19e)](_0xd2fd7c(0x16a)); if (!_0x5ae202) return; const _0x210742 = v(), _0x439444 = document[_0xd2fd7c(0x19e)](_0xd2fd7c(0x17a)); _0x439444 && (_0x439444[_0xd2fd7c(0x150)] = _0x210742[_0xd2fd7c(0x13f)] + _0xd2fd7c(0x251)); const _0x4581c2 = {}; _0x210742[_0xd2fd7c(0x176)](_0x1a7641 => { _0x4581c2[_0x1a7641] = 0x0; }), t['forEach'](_0x376c93 => { const _0x4a1c9f = _0xd2fd7c, _0x95612f = (_0x376c93[_0x4a1c9f(0x1f5)] || '')[_0x4a1c9f(0x160)](); _0x95612f in _0x4581c2 ? _0x4581c2[_0x95612f]++ : _0x95612f && _0x4a1c9f(0x246) !== _0x95612f && '-' !== _0x95612f && _0x4a1c9f(0x1c8) !== _0x95612f && (_0x4581c2[_0x95612f] = (_0x4581c2[_0x95612f] || 0x0) + 0x1); }), t['length']; const _0xdfb958 = document['createDocumentFragment'](), _0x2cca0d = document[_0xd2fd7c(0x1d1)]('div'), _0x5e2c3a = _0xd2fd7c(0x1ed) === r; _0x2cca0d[_0xd2fd7c(0x137)] = _0xd2fd7c(0x230) + (_0x5e2c3a ? 'active' : ''), _0x2cca0d[_0xd2fd7c(0x1f0)]('data-person', 'all'), _0x2cca0d[_0xd2fd7c(0x1f0)](_0xd2fd7c(0x240), 'button'), _0x2cca0d[_0xd2fd7c(0x1f0)](_0xd2fd7c(0x23b), '0'), _0x2cca0d['setAttribute'](_0xd2fd7c(0x228), _0xd2fd7c(0x1d5) + t[_0xd2fd7c(0x13f)] + _0xd2fd7c(0x146)), _0x2cca0d['innerHTML'] = _0xd2fd7c(0x1a3) + _0x210742[_0xd2fd7c(0x13f)] + _0xd2fd7c(0x15b) + t[_0xd2fd7c(0x13f)] + _0xd2fd7c(0x13c), _0xdfb958['appendChild'](_0x2cca0d), _0x210742[_0xd2fd7c(0x176)]((_0x152f3d, _0xf81b4) => { const _0x410861 = _0xd2fd7c, _0x46c7ab = _0x4581c2[_0x152f3d] || 0x0, _0x929ed0 = B(_0x152f3d['split']('\x20')[_0x410861(0x1a7)](_0x5c4877 => _0x5c4877[0x0])['join']('')[_0x410861(0x23a)](0x0, 0x2)[_0x410861(0x16e)]()), _0x3dddb8 = r[_0x410861(0x22f)]() === _0x152f3d[_0x410861(0x22f)](), _0xcd60ae = w(_0x152f3d, _0xf81b4), _0xa31cf0 = document[_0x410861(0x1d1)]('div'); _0xa31cf0[_0x410861(0x137)] = _0x410861(0x142) + _0xcd60ae + '\x20' + (_0x3dddb8 ? _0x410861(0x224) : ''), _0xa31cf0['setAttribute'](_0x410861(0x152), _0x152f3d), _0xa31cf0['setAttribute'](_0x410861(0x240), _0x410861(0x229)), _0xa31cf0['setAttribute'](_0x410861(0x23b), '0'), _0xa31cf0['setAttribute'](_0x410861(0x228), _0x3dddb8 ? B(_0x152f3d) + '\x20(' + _0x46c7ab + _0x410861(0x264) : _0x410861(0x19b) + B(_0x152f3d)), _0xa31cf0[_0x410861(0x269)] = '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-card-top\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-avatar\x22>' + _0x929ed0 + _0x410861(0x1ec) + B(_0x152f3d) + '\x22>' + B(_0x152f3d) + _0x410861(0x172) + _0x46c7ab + '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-count-unit\x22>' + (0x1 === _0x46c7ab ? _0x410861(0x198) : _0x410861(0x1c7)) + _0x410861(0x21a) + _0x46c7ab + '\x20' + (0x1 === _0x46c7ab ? 'Request' : _0x410861(0x26e)) + _0x410861(0x1cf), _0xdfb958['appendChild'](_0xa31cf0); }), _0x5ae202[_0xd2fd7c(0x269)] = '', _0x5ae202[_0xd2fd7c(0x14f)](_0xdfb958), S(); } function S() { const _0x1f8b41 = _0x333e2c, _0x2f359b = document[_0x1f8b41(0x19e)](_0x1f8b41(0x16a)); _0x2f359b && _0x2f359b[_0x1f8b41(0x276)](_0x1f8b41(0x1da))['forEach'](_0x633348 => { const _0x5c22b1 = _0x1f8b41, _0x102bcb = _0x633348['getAttribute'](_0x5c22b1(0x152)); if ('all' === _0x102bcb) _0x633348[_0x5c22b1(0x249)][_0x5c22b1(0x175)]('active', _0x5c22b1(0x1ed) === r); else { const _0x503205 = r[_0x5c22b1(0x22f)]() === _0x102bcb[_0x5c22b1(0x22f)](); _0x633348[_0x5c22b1(0x249)][_0x5c22b1(0x175)](_0x5c22b1(0x224), _0x503205); const _0xa6906e = _0x633348[_0x5c22b1(0x22d)](_0x5c22b1(0x212)), _0x1857f4 = _0xa6906e ? _0xa6906e['innerText'] : ''; _0x633348[_0x5c22b1(0x1f0)]('title', _0x503205 ? _0x102bcb + '\x20(' + _0x1857f4 + _0x5c22b1(0x1e7) : _0x5c22b1(0x19b) + _0x102bcb); } }); const _0x212cf1 = document[_0x1f8b41(0x19e)](_0x1f8b41(0x1e4)), _0x3e8de6 = document[_0x1f8b41(0x19e)](_0x1f8b41(0x243)), _0x118980 = document[_0x1f8b41(0x19e)](_0x1f8b41(0x259)), _0x96753 = document[_0x1f8b41(0x19e)](_0x1f8b41(0x1ee)); 'all' !== r ? (_0x212cf1 && _0x212cf1[_0x1f8b41(0x249)][_0x1f8b41(0x183)](_0x1f8b41(0x1b0)), _0x3e8de6 && _0x3e8de6[_0x1f8b41(0x249)][_0x1f8b41(0x183)](_0x1f8b41(0x1b0)), _0x118980 && (_0x118980[_0x1f8b41(0x150)] = r), _0x96753 && (_0x96753[_0x1f8b41(0x150)] = n[_0x1f8b41(0x13f)] + _0x1f8b41(0x197))) : (_0x212cf1 && _0x212cf1[_0x1f8b41(0x249)]['add'](_0x1f8b41(0x1b0)), _0x3e8de6 && _0x3e8de6['classList'][_0x1f8b41(0x145)]('d-none')); } function L(_0x6f1895) { const _0x1c9480 = _0x333e2c; r = _0x6f1895 && 'all' !== _0x6f1895 && r[_0x1c9480(0x22f)]() !== _0x6f1895['toLowerCase']() ? _0x6f1895 : 'all', a = 0x1, x(); } function I(_0x53d105) { const _0x4687d9 = _0x333e2c, _0x6d00e7 = document['getElementById'](_0x4687d9(0x1ab)); if (!_0x6d00e7) return; const _0x52ef67 = _0x6d00e7[_0x4687d9(0x177)]('2d'); if (!_0x52ef67) return; const _0x2e19ec = _0x53d105 || t, _0x4139fe = window[_0x4687d9(0x23c)] || 0x1, _0x273777 = 0x82; _0x6d00e7['width'] === _0x273777 * _0x4139fe && _0x6d00e7[_0x4687d9(0x233)] === _0x273777 * _0x4139fe || (_0x6d00e7['width'] = _0x273777 * _0x4139fe, _0x6d00e7[_0x4687d9(0x233)] = _0x273777 * _0x4139fe, _0x6d00e7[_0x4687d9(0x1bb)][_0x4687d9(0x1f2)] = _0x273777 + 'px', _0x6d00e7[_0x4687d9(0x1bb)][_0x4687d9(0x233)] = _0x273777 + 'px'), _0x52ef67[_0x4687d9(0x15f)](), _0x52ef67['scale'](_0x4139fe, _0x4139fe), _0x52ef67[_0x4687d9(0x161)](0x0, 0x0, _0x273777, _0x273777); const _0x52f7ba = { 'Completed': 0x0, 'In\x20Progress': 0x0, 'Pending': 0x0 }; _0x2e19ec[_0x4687d9(0x176)](_0x7ef28c => { const _0x3dbb59 = _0x4687d9; _0x7ef28c[_0x3dbb59(0x159)] in _0x52f7ba && _0x52f7ba[_0x7ef28c['Status']]++; }); const _0x151cf7 = _0x2e19ec[_0x4687d9(0x13f)], _0x3f0447 = _0x4687d9(0x201) === document[_0x4687d9(0x15c)]['getAttribute'](_0x4687d9(0x261)), _0x1fa222 = 0x41, _0x56b808 = 0x41; if (0x0 === _0x151cf7) return _0x52ef67[_0x4687d9(0x225)](), _0x52ef67[_0x4687d9(0x1cd)](_0x1fa222, _0x56b808, 0x2e, 0x0, 0x2 * Math['PI']), _0x52ef67[_0x4687d9(0x253)] = _0x3f0447 ? '#30363d' : _0x4687d9(0x25c), _0x52ef67[_0x4687d9(0x196)] = 0x10, _0x52ef67[_0x4687d9(0x1c6)](), _0x52ef67[_0x4687d9(0x149)] = _0x3f0447 ? _0x4687d9(0x272) : _0x4687d9(0x130), _0x52ef67[_0x4687d9(0x208)] = _0x4687d9(0x155), _0x52ef67['textAlign'] = _0x4687d9(0x139), _0x52ef67[_0x4687d9(0x14c)] = _0x4687d9(0x27a), _0x52ef67[_0x4687d9(0x131)](_0x4687d9(0x220), _0x1fa222, _0x56b808), void _0x52ef67['restore'](); const _0x1c0950 = [{ 'label': _0x4687d9(0x210), 'count': _0x52f7ba[_0x4687d9(0x210)], 'color': _0x3f0447 ? _0x4687d9(0x258) : _0x4687d9(0x227) }, { 'label': 'In\x20Progress', 'count': _0x52f7ba[_0x4687d9(0x192)], 'color': _0x3f0447 ? _0x4687d9(0x250) : _0x4687d9(0x1e2) }, { 'label': _0x4687d9(0x221), 'count': _0x52f7ba['Pending'], 'color': _0x3f0447 ? _0x4687d9(0x1bd) : '#dc3545' }]; let _0x8f9382 = -Math['PI'] / 0x2; _0x1c0950[_0x4687d9(0x176)](_0x3847ee => { const _0x3d0bb9 = _0x4687d9; if (_0x3847ee[_0x3d0bb9(0x231)] <= 0x0) return; const _0x2f2d46 = _0x3847ee['count'] / _0x151cf7 * 0x2 * Math['PI'], _0x5ea107 = _0x8f9382 + _0x2f2d46; _0x52ef67[_0x3d0bb9(0x225)](), _0x52ef67[_0x3d0bb9(0x1cd)](_0x1fa222, _0x56b808, 0x36, _0x8f9382, _0x5ea107), _0x52ef67[_0x3d0bb9(0x1cd)](_0x1fa222, _0x56b808, 0x26, _0x5ea107, _0x8f9382, !0x0), _0x52ef67[_0x3d0bb9(0x235)](), _0x52ef67[_0x3d0bb9(0x149)] = _0x3847ee[_0x3d0bb9(0x143)], _0x52ef67['fill'](), _0x52ef67['lineWidth'] = 1.5, _0x52ef67[_0x3d0bb9(0x253)] = _0x3f0447 ? _0x3d0bb9(0x135) : _0x3d0bb9(0x16b), _0x52ef67['stroke'](), _0x8f9382 = _0x5ea107; }), _0x52ef67[_0x4687d9(0x244)] = 'center', _0x52ef67['textBaseline'] = _0x4687d9(0x27a), _0x52ef67[_0x4687d9(0x149)] = _0x3f0447 ? _0x4687d9(0x1e6) : _0x4687d9(0x135), _0x52ef67[_0x4687d9(0x208)] = 'bold\x2018px\x20Inter,\x20system-ui,\x20sans-serif', _0x52ef67['fillText'](_0x151cf7[_0x4687d9(0x218)](), _0x1fa222, 0x3b), _0x52ef67[_0x4687d9(0x149)] = _0x3f0447 ? _0x4687d9(0x272) : _0x4687d9(0x19a), _0x52ef67[_0x4687d9(0x208)] = _0x4687d9(0x1a9), _0x52ef67['fillText']('TOTAL', _0x1fa222, 0x4c), _0x52ef67[_0x4687d9(0x24e)](); } function x() { const _0x13f32e = _0x333e2c; let _0x54d3b4 = [...t]; if ('all' !== s && (_0x54d3b4 = _0x54d3b4[_0x13f32e(0x173)](_0x21bafa => _0x21bafa[_0x13f32e(0x159)] === s)), 'all' !== r) { const _0xd67a35 = r['trim']()[_0x13f32e(0x22f)](); _0x54d3b4 = _0x54d3b4[_0x13f32e(0x173)](_0x411997 => (_0x411997[_0x13f32e(0x1f5)] || '')[_0x13f32e(0x160)]()[_0x13f32e(0x22f)]() === _0xd67a35); } if (i) { const _0x50c089 = i[_0x13f32e(0x22f)](); _0x54d3b4 = _0x54d3b4[_0x13f32e(0x173)](_0x2f2bb0 => Object[_0x13f32e(0x20b)](_0x2f2bb0)[_0x13f32e(0x17c)]('\x20')['toLowerCase']()[_0x13f32e(0x1c3)](_0x50c089)); } n = _0x54d3b4; const _0x72dbac = Math['ceil'](n[_0x13f32e(0x13f)] / o) || 0x1; a > _0x72dbac && (a = 0x1), (y(!!('all' !== s || i || _0x13f32e(0x1ed) !== r)), S(), (function () { const _0x34c31d = _0x13f32e, _0x5d252d = document['getElementById'](_0x34c31d(0x18b)); if (!_0x5d252d) return; if (_0x5d252d[_0x34c31d(0x269)] = '', 0x0 === n[_0x34c31d(0x13f)]) return void (_0x5d252d[_0x34c31d(0x269)] = _0x34c31d(0x1bf)); const _0x2787a0 = (a - 0x1) * o, _0x40bd29 = _0x2787a0 + o, _0x215997 = n[_0x34c31d(0x1cc)](_0x2787a0, _0x40bd29), _0x5340e4 = document[_0x34c31d(0x1b8)](); _0x215997[_0x34c31d(0x176)]((_0x3b82ed, _0x1ca18c) => { const _0x4b1775 = _0x34c31d; let _0x19c700 = _0x3b82ed[_0x4b1775(0x27b)] || _0x4b1775(0x1c8); if (_0x19c700 && _0x19c700[_0x4b1775(0x1c3)]('-')) { const _0x140b62 = new Date(_0x19c700); isNaN(_0x140b62[_0x4b1775(0x199)]()) || (_0x19c700 = _0x140b62[_0x4b1775(0x1ad)](_0x4b1775(0x26b), { 'day': '2-digit', 'month': _0x4b1775(0x16f), 'year': _0x4b1775(0x207) })); } const _0x1996cb = _0x3b82ed[_0x4b1775(0x1f5)] || _0x4b1775(0x246), _0x2b7e51 = B(_0x1996cb), _0x1deb6e = B(_0x1996cb[_0x4b1775(0x1fe)]('\x20')[_0x4b1775(0x1a7)](_0x4f91e3 => _0x4f91e3[0x0])[_0x4b1775(0x17c)]('')[_0x4b1775(0x23a)](0x0, 0x2)[_0x4b1775(0x16e)]()), _0x51f1cd = _0x3b82ed[_0x4b1775(0x200)] || _0x4b1775(0x1c8), _0x215d43 = B(_0x51f1cd), _0x56f01c = B(_0x51f1cd['length'] > 0x1e ? _0x51f1cd[_0x4b1775(0x23a)](0x0, 0x1e) + _0x4b1775(0x1a8) : _0x51f1cd), _0xc4597f = _0x3b82ed[_0x4b1775(0x1e3)] || '', _0x585dfc = B(_0xc4597f || _0x4b1775(0x1c8)), _0x9f8c53 = _0x3b82ed[_0x4b1775(0x1e8)] || '-', _0x5a5719 = B('-' === _0x9f8c53 || isNaN(_0x9f8c53) || '' === String(_0x9f8c53)['trim']() ? String(_0x9f8c53) : Number(_0x9f8c53)['toLocaleString']()), _0xe1d71d = _0x3b82ed['Status'] || _0x4b1775(0x221); let _0x41a911 = ''; _0x41a911 = _0x4b1775(0x210) === _0xe1d71d ? _0x4b1775(0x1c9) : _0x4b1775(0x192) === _0xe1d71d ? '<span\x20class=\x22badge\x20bg-primary-subtle\x20text-primary\x20border\x20border-primary\x20px-2\x20py-1\x22>In\x20Progress</span>' : _0x4b1775(0x262); const _0x2599a4 = _0xc4597f ? _0x4b1775(0x18f) + encodeURIComponent(_0xc4597f) + _0x4b1775(0x24f) : '<button\x20type=\x22button\x22\x20class=\x22btn\x20btn-link\x20p-0\x20text-muted\x20fw-semibold\x20text-decoration-none\x20missing-id-btn\x22>Edit</button>', _0x257ff9 = B(_0x3b82ed[_0x4b1775(0x1d9)] || _0x4b1775(0x1c8)), _0x4b7caa = B(_0x3b82ed[_0x4b1775(0x247)] || '-'), _0x55642a = B(_0x3b82ed[_0x4b1775(0x22a)] || '-'), _0x1d1f08 = document[_0x4b1775(0x1d1)]('tr'); _0x1d1f08['className'] = _0x4b1775(0x1b4), _0x1d1f08[_0x4b1775(0x1bb)][_0x4b1775(0x232)] = Math[_0x4b1775(0x26c)](0.05 * _0x1ca18c, 0.4) + 's', _0x1d1f08[_0x4b1775(0x269)] = _0x4b1775(0x1fb) + (_0xc4597f ? _0x4b1775(0x189) : _0x4b1775(0x1bc)) + '\x20fw-semibold\x22>' + _0x585dfc + _0x4b1775(0x180) + _0x257ff9 + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + _0x19c700 + _0x4b1775(0x1ba) + _0x4b7caa + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22action-by-cell\x22\x20data-person=\x22' + _0x1996cb + _0x4b1775(0x140) + _0x2b7e51 + _0x4b1775(0x188) + w(_0x1996cb) + _0x4b1775(0x241) + _0x1deb6e + _0x4b1775(0x1d3) + _0x2b7e51 + '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22text-truncate\x22\x20style=\x22max-width:\x20200px;\x22\x20title=\x22' + _0x215d43 + '\x22>' + _0x56f01c + _0x4b1775(0x1ba) + _0x5a5719 + _0x4b1775(0x1ba) + _0x55642a + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + _0x41a911 + _0x4b1775(0x164) + _0x2599a4 + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20', _0x5340e4[_0x4b1775(0x14f)](_0x1d1f08); }), _0x5d252d[_0x34c31d(0x14f)](_0x5340e4); }()), (function () { const _0x130b06 = _0x13f32e, _0x3f79b2 = document[_0x130b06(0x19e)](_0x130b06(0x1e5)), _0x3c3eb9 = document[_0x130b06(0x19e)](_0x130b06(0x1f8)); if (!_0x3f79b2 || !_0x3c3eb9) return; const _0x46322c = n[_0x130b06(0x13f)], _0x2f6dfa = Math[_0x130b06(0x217)](_0x46322c / o) || 0x1, _0x2f0729 = (a - 0x1) * o, _0x20b9fb = Math[_0x130b06(0x26c)](_0x2f0729 + o, _0x46322c); if (0x0 === _0x46322c) return _0x3f79b2[_0x130b06(0x150)] = 'Showing\x200\x20to\x200\x20of\x200\x20requests', void (_0x3c3eb9[_0x130b06(0x269)] = ''); _0x3f79b2[_0x130b06(0x150)] = _0x130b06(0x266) + (_0x2f0729 + 0x1) + _0x130b06(0x153) + _0x20b9fb + _0x130b06(0x168) + _0x46322c + _0x130b06(0x197); let _0x5905f1 = ''; _0x5905f1 += _0x130b06(0x187) + (0x1 === a ? _0x130b06(0x215) : '') + _0x130b06(0x14d) + (a - 0x1) + _0x130b06(0x1dd), (((_0x17467d, _0x3cd694) => { const _0x55f506 = _0x130b06; if (_0x3cd694 <= 0x7) return Array[_0x55f506(0x265)]({ 'length': _0x3cd694 }, (_0x4833b1, _0x296ed7) => _0x296ed7 + 0x1); const _0x4f9235 = [0x1]; let _0x200146 = Math[_0x55f506(0x186)](0x2, _0x17467d - 0x1), _0x4912e2 = Math[_0x55f506(0x26c)](_0x3cd694 - 0x1, _0x17467d + 0x1); _0x17467d <= 0x3 && (_0x200146 = 0x2, _0x4912e2 = 0x4), _0x17467d >= _0x3cd694 - 0x2 && (_0x200146 = _0x3cd694 - 0x3, _0x4912e2 = _0x3cd694 - 0x1), _0x200146 > 0x2 && _0x4f9235[_0x55f506(0x1a5)]('...'); for (let _0x252d45 = _0x200146; _0x252d45 <= _0x4912e2; _0x252d45++)_0x4f9235[_0x55f506(0x1a5)](_0x252d45); return _0x4912e2 < _0x3cd694 - 0x1 && _0x4f9235[_0x55f506(0x1a5)](_0x55f506(0x1a8)), _0x4f9235[_0x55f506(0x1a5)](_0x3cd694), _0x4f9235; })(a, _0x2f6dfa)['forEach'](_0x4e7cf3 => { const _0xdd404e = _0x130b06; _0x5905f1 += '...' === _0x4e7cf3 ? '<li\x20class=\x22page-item\x20disabled\x22><span\x20class=\x22page-link\x22>&hellip;</span></li>' : '<li\x20class=\x22page-item\x20' + (a === _0x4e7cf3 ? _0xdd404e(0x224) : '') + '\x22><a\x20class=\x22page-link\x22\x20href=\x22#\x22\x20data-page=\x22' + _0x4e7cf3 + '\x22>' + _0x4e7cf3 + _0xdd404e(0x132); }), _0x5905f1 += _0x130b06(0x187) + (a === _0x2f6dfa ? _0x130b06(0x215) : '') + _0x130b06(0x14d) + (a + 0x1) + _0x130b06(0x24b), _0x3c3eb9[_0x130b06(0x269)] = _0x5905f1, _0x3c3eb9[_0x130b06(0x276)](_0x130b06(0x263))['forEach'](_0x36b8c5 => { const _0x5488a3 = _0x130b06; _0x36b8c5[_0x5488a3(0x1e1)]('click', _0x31373e => { const _0x34da51 = _0x5488a3; _0x31373e[_0x34da51(0x256)](); const _0x408623 = parseInt(_0x31373e[_0x34da51(0x13b)]['getAttribute'](_0x34da51(0x1a4)), 0xa); _0x408623 >= 0x1 && _0x408623 <= _0x2f6dfa && _0x408623 !== a && (a = _0x408623, x()); }); })); }())); } function B(_0x5995cb) { const _0x45b884 = _0x333e2c; return null == _0x5995cb ? '' : String(_0x5995cb)[_0x45b884(0x27c)](/&/g, _0x45b884(0x24d))['replace'](/</g, _0x45b884(0x194))[_0x45b884(0x27c)](/>/g, _0x45b884(0x226))[_0x45b884(0x27c)](/"/g, _0x45b884(0x211))['replace'](/'/g, _0x45b884(0x273)); } document[_0x333e2c(0x1e1)]('DOMContentLoaded', () => { const _0x491587 = _0x333e2c; !(function () { const _0xa5b63 = _0xfed1; m(localStorage[_0xa5b63(0x270)](_0xa5b63(0x1fc)) || _0xa5b63(0x20d)); const _0x42b5ec = document[_0xa5b63(0x19e)]('themeToggle'); _0x42b5ec && _0x42b5ec[_0xa5b63(0x1e1)](_0xa5b63(0x195), () => { const _0x34e4f0 = _0xa5b63; m(_0x34e4f0(0x201) === (document['documentElement']['getAttribute']('data-bs-theme') || _0x34e4f0(0x20d)) ? 'light' : _0x34e4f0(0x201)); }); }()), document[_0x491587(0x276)]('.logout-btn,\x20#logoutBtn')[_0x491587(0x176)](_0x5784b7 => { const _0x5e3bfa = _0x491587; _0x5784b7[_0x5e3bfa(0x1e1)](_0x5e3bfa(0x195), _0x2b13de => { const _0x2a6132 = _0x5e3bfa; _0x2b13de[_0x2a6132(0x256)](), logout(); }); }), document['getElementById'](_0x491587(0x18b)) && (b(), (function () { const _0x316a76 = _0x491587, _0x47d72a = document[_0x316a76(0x19e)](_0x316a76(0x1c5)); if (!_0x47d72a) return; _0x47d72a['addEventListener'](_0x316a76(0x195), _0x261506 => { const _0x549bb9 = _0x316a76, _0x8a2fca = _0x261506[_0x549bb9(0x1ea)]['closest'](_0x549bb9(0x229)); _0x8a2fca && (_0x47d72a['querySelectorAll'](_0x549bb9(0x229))['forEach'](_0x3cf4f7 => { const _0x4860bf = _0x549bb9; _0x3cf4f7['classList'][_0x4860bf(0x183)](_0x4860bf(0x224), _0x4860bf(0x239)); }), _0x8a2fca[_0x549bb9(0x249)][_0x549bb9(0x145)](_0x549bb9(0x224), 'fw-semibold'), s = _0x8a2fca[_0x549bb9(0x20e)](_0x549bb9(0x1d8)) || _0x549bb9(0x1ed), a = 0x1, x()); }); }()), document[_0x491587(0x276)](_0x491587(0x18a))['forEach'](_0x5170b0 => { const _0x46e1d2 = _0x491587; _0x5170b0[_0x46e1d2(0x1bb)][_0x46e1d2(0x166)] = _0x46e1d2(0x1ac), _0x5170b0[_0x46e1d2(0x1e1)](_0x46e1d2(0x195), () => { const _0x5a4b3d = _0x46e1d2, _0x7a1b41 = _0x5170b0[_0x5a4b3d(0x20e)](_0x5a4b3d(0x1d8)); if (!_0x7a1b41) return; const _0x49eabf = document[_0x5a4b3d(0x19e)](_0x5a4b3d(0x1c5)); if (_0x49eabf) { const _0x488cae = _0x49eabf['querySelector'](_0x5a4b3d(0x1df) + _0x7a1b41 + '\x22]'); if (_0x488cae) return void _0x488cae[_0x5a4b3d(0x195)](); } s = _0x7a1b41, a = 0x1, x(); }); }), (function () { const _0x594ef3 = _0x491587, _0x3651a7 = document['getElementById'](_0x594ef3(0x1f3)); if (!_0x3651a7) return; let _0x60896d; _0x3651a7[_0x594ef3(0x1e1)]('input', _0x8c9cbc => { clearTimeout(_0x60896d), _0x60896d = setTimeout(() => { const _0x3593c3 = _0xfed1; i = _0x8c9cbc[_0x3593c3(0x1ea)][_0x3593c3(0x144)][_0x3593c3(0x160)](), a = 0x1, x(); }, 0x12c); }); }()), (function () { const _0x1666fd = _0x491587, _0x52a22d = document[_0x1666fd(0x19e)](_0x1666fd(0x20a)); if (!_0x52a22d) return; _0x52a22d['addEventListener'](_0x1666fd(0x195), () => { const _0x166f9d = _0x1666fd; if (0x0 === t[_0x166f9d(0x13f)]) return void u(_0x166f9d(0x1db), _0x166f9d(0x1dc)); const _0x3021c3 = Object[_0x166f9d(0x14b)](t[0x0])['filter'](_0x29e9be => _0x166f9d(0x1b6) !== _0x29e9be), _0x716b53 = []; _0x716b53['push'](_0x3021c3[_0x166f9d(0x1a7)](_0x5c6294 => '\x22' + _0x5c6294 + '\x22')[_0x166f9d(0x17c)](',')), t[_0x166f9d(0x176)](_0x200682 => { const _0x218c73 = _0x166f9d, _0x566c45 = _0x3021c3[_0x218c73(0x1a7)](_0x4d6f0f => { const _0x5e770d = _0x218c73; let _0x1d9850 = _0x200682[_0x4d6f0f] || ''; return _0x1d9850 = function (_0x2ded01, _0x1581ba) { const _0x4b6276 = _0xfed1; if (null == _0x1581ba) return ''; let _0xda074b = String(_0x1581ba); /^[=+\-@\t\r]/[_0x4b6276(0x271)](_0xda074b) && (_0xda074b = '\x27' + _0xda074b); if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/['test'](_0xda074b)) { const _0x36c35a = new Date(_0xda074b); if (isNaN(_0x36c35a['getTime']())) return _0xda074b; const _0x4764ab = { 'timeZone': 'Asia/Kolkata' }, _0x4dcd79 = String(_0x36c35a['toLocaleString'](_0x4b6276(0x1c0), { ..._0x4764ab, 'day': '2-digit' }))[_0x4b6276(0x234)](0x2, '0'), _0x3cf437 = String(_0x36c35a[_0x4b6276(0x1ff)](_0x4b6276(0x1c0), { ..._0x4764ab, 'month': '2-digit' }))[_0x4b6276(0x234)](0x2, '0'), _0xf05769 = _0x36c35a[_0x4b6276(0x1ff)](_0x4b6276(0x1c0), { ..._0x4764ab, 'year': _0x4b6276(0x207) }); if (_0x4b6276(0x1b6) === _0x2ded01) return _0x36c35a[_0x4b6276(0x1ff)](_0x4b6276(0x1be), { 'timeZone': _0x4b6276(0x21d), 'day': _0x4b6276(0x1ca), 'month': '2-digit', 'year': _0x4b6276(0x207), 'hour': _0x4b6276(0x1ca), 'minute': '2-digit', 'second': '2-digit', 'hour12': !0x0 }); return _0x4dcd79 + '-' + _0x3cf437 + '-' + _0xf05769; } if (/^\d{4}-\d{2}-\d{2}$/[_0x4b6276(0x271)](_0xda074b)) { const _0x8ec176 = _0xda074b['split']('-'); return _0x8ec176[0x2] + '-' + _0x8ec176[0x1] + '-' + _0x8ec176[0x0]; } return _0xda074b; }(_0x4d6f0f, _0x1d9850), _0x1d9850 = String(_0x1d9850)[_0x5e770d(0x17b)]('\x22', '\x22\x22'), '\x22' + _0x1d9850 + '\x22'; }); _0x716b53[_0x218c73(0x1a5)](_0x566c45[_0x218c73(0x17c)](',')); }); const _0x2c490a = '\ufeff' + _0x716b53[_0x166f9d(0x17c)]('\x0a'), _0x19e1c8 = new Blob([_0x2c490a], { 'type': _0x166f9d(0x237) }), _0x1406cb = URL[_0x166f9d(0x238)](_0x19e1c8), _0x576cfb = document['createElement']('a'), _0x584f36 = new Date(), _0x574e29 = _0x584f36[_0x166f9d(0x236)]() + '-' + String(_0x584f36['getMonth']() + 0x1)[_0x166f9d(0x234)](0x2, '0') + '-' + String(_0x584f36['getDate']())['padStart'](0x2, '0'); _0x576cfb[_0x166f9d(0x1f0)]('href', _0x1406cb), _0x576cfb[_0x166f9d(0x1f0)]('download', _0x166f9d(0x1b9) + _0x574e29 + _0x166f9d(0x178)), _0x576cfb[_0x166f9d(0x1bb)][_0x166f9d(0x15d)] = _0x166f9d(0x21e), document[_0x166f9d(0x223)][_0x166f9d(0x14f)](_0x576cfb), _0x576cfb[_0x166f9d(0x195)](), document['body']['removeChild'](_0x576cfb), URL[_0x166f9d(0x205)](_0x1406cb), u(_0x166f9d(0x202), _0x166f9d(0x242)); }); }()), (function () { const _0x598dc3 = _0x491587, _0x4404d1 = document[_0x598dc3(0x19e)](_0x598dc3(0x18b)); if (!_0x4404d1) return; _0x4404d1[_0x598dc3(0x1e1)](_0x598dc3(0x195), _0x59af0b => { const _0x518f90 = _0x598dc3; if (_0x59af0b[_0x518f90(0x1ea)][_0x518f90(0x274)](_0x518f90(0x281))) return _0x59af0b['preventDefault'](), void b(); if (_0x59af0b[_0x518f90(0x1ea)][_0x518f90(0x274)](_0x518f90(0x15e))) return _0x59af0b[_0x518f90(0x256)](), void u(_0x518f90(0x19d), _0x518f90(0x1dc)); const _0x2e0d0f = _0x59af0b['target']['closest']('.action-by-cell'); if (_0x2e0d0f) { _0x59af0b[_0x518f90(0x256)](); const _0x5ddcfe = _0x2e0d0f['getAttribute'](_0x518f90(0x152)); return void (_0x5ddcfe && 'Unknown' !== _0x5ddcfe && _0x518f90(0x1c8) !== _0x5ddcfe && L(_0x5ddcfe)); } }); }()), (function () { const _0x436b1d = _0x491587, _0x41f632 = document['getElementById'](_0x436b1d(0x16a)); _0x41f632 && (_0x41f632[_0x436b1d(0x1e1)]('click', _0x15f1df => { const _0x4e07e9 = _0x436b1d, _0x126f7f = _0x15f1df[_0x4e07e9(0x1ea)][_0x4e07e9(0x274)]('.team-member-card,\x20.person-chip'); _0x126f7f && L(_0x126f7f[_0x4e07e9(0x20e)](_0x4e07e9(0x152))); }), _0x41f632[_0x436b1d(0x1e1)](_0x436b1d(0x17d), _0x176b0e => { const _0x476d4d = _0x436b1d; if (_0x476d4d(0x13e) === _0x176b0e[_0x476d4d(0x203)] || '\x20' === _0x176b0e[_0x476d4d(0x203)]) { const _0x151e3f = _0x176b0e[_0x476d4d(0x1ea)][_0x476d4d(0x274)](_0x476d4d(0x1da)); _0x151e3f && (_0x176b0e[_0x476d4d(0x256)](), L(_0x151e3f[_0x476d4d(0x20e)](_0x476d4d(0x152)))); } })); const _0x1286eb = document['getElementById'](_0x436b1d(0x1e4)); _0x1286eb && _0x1286eb['addEventListener'](_0x436b1d(0x195), () => { const _0x57604 = _0x436b1d; L(_0x57604(0x1ed)); }); const _0xe52b7e = document[_0x436b1d(0x19e)](_0x436b1d(0x19c)); _0xe52b7e && _0xe52b7e[_0x436b1d(0x1e1)](_0x436b1d(0x195), () => { const _0x5a8a72 = _0x436b1d; L(_0x5a8a72(0x1ed)); }); const _0x48d3e8 = document[_0x436b1d(0x19e)](_0x436b1d(0x254)); _0x48d3e8 && _0x48d3e8[_0x436b1d(0x1e1)](_0x436b1d(0x195), () => { const _0x4bb373 = _0x436b1d; p(); const _0x1a280d = _0x48d3e8[_0x4bb373(0x22d)]('i'); _0x1a280d && _0x1a280d[_0x4bb373(0x249)][_0x4bb373(0x145)]('spin-animation'), h(!0x1)['finally'](() => { const _0x4321dc = _0x4bb373; _0x1a280d && _0x1a280d[_0x4321dc(0x249)][_0x4321dc(0x183)](_0x4321dc(0x13a)), u(_0x4321dc(0x184), _0x4321dc(0x242)); }); }); }())); const _0x4e243f = document['getElementById'](_0x491587(0x257)); _0x4e243f && function (_0x41efc7) { const _0x16b027 = _0x491587, _0x30bcc0 = new URLSearchParams(window['location'][_0x16b027(0x21f)])['get'](_0x16b027(0x279)), _0x2b8629 = document[_0x16b027(0x19e)](_0x16b027(0x170)), _0x67616 = document[_0x16b027(0x19e)]('refNumberInput'), _0x302dd9 = document[_0x16b027(0x19e)]('formLoadingOverlay'), _0x2fe9e1 = document[_0x16b027(0x19e)](_0x16b027(0x151)); if (_0x30bcc0 && 'undefined' !== _0x30bcc0 && _0x16b027(0x1c8) !== _0x30bcc0) { const _0x184f09 = document['getElementById'](_0x16b027(0x27d)), _0x4dec9d = document['getElementById'](_0x16b027(0x22e)); _0x184f09 && (_0x184f09[_0x16b027(0x150)] = 'Edit\x20Data\x20Request'), _0x4dec9d && (_0x4dec9d[_0x16b027(0x150)] = _0x16b027(0x13d)), _0x2b8629 && (_0x2b8629[_0x16b027(0x269)] = _0x16b027(0x1a1)), _0x67616 && (_0x67616[_0x16b027(0x144)] = _0x30bcc0); const _0x443626 = document[_0x16b027(0x1d1)](_0x16b027(0x20c)); _0x443626['type'] = _0x16b027(0x21e), _0x443626[_0x16b027(0x138)] = _0x16b027(0x204), _0x443626[_0x16b027(0x144)] = _0x30bcc0, _0x41efc7['appendChild'](_0x443626), _0x302dd9 && (_0x302dd9[_0x16b027(0x249)][_0x16b027(0x183)](_0x16b027(0x1b0)), _0x302dd9[_0x16b027(0x1bb)][_0x16b027(0x1a0)] = 'flex'); const _0x526e4e = setTimeout(() => { const _0xdc54e8 = _0x16b027; _0x2fe9e1 && _0x2fe9e1[_0xdc54e8(0x249)]['remove']('d-none'); }, 0x1770); _0x2fe9e1 && _0x2fe9e1[_0x16b027(0x1e1)](_0x16b027(0x195), () => { const _0x2a7bee = _0x16b027; window[_0x2a7bee(0x18d)][_0x2a7bee(0x27c)]('/form'); }); const _0x33e0e9 = _0x410d8b => { const _0x291332 = _0x16b027; _0x410d8b && function (_0x7db56, _0x448d93) { const _0x4074ea = _0xfed1;[_0x4074ea(0x1d9), _0x4074ea(0x27b), _0x4074ea(0x247), 'Action\x20Taken\x20By', _0x4074ea(0x200), _0x4074ea(0x206), _0x4074ea(0x1a6), _0x4074ea(0x1e8), 'Result\x20Shared\x20Mode', _0x4074ea(0x21c), _0x4074ea(0x159), _0x4074ea(0x133)][_0x4074ea(0x176)](_0x26b212 => { const _0x5c8bca = _0x4074ea, _0x2ce81a = _0x7db56[_0x5c8bca(0x27e)][_0x26b212]; _0x2ce81a && void 0x0 !== _0x448d93[_0x26b212] && null !== _0x448d93[_0x26b212] && (_0x5c8bca(0x16d) === _0x2ce81a[_0x5c8bca(0x25a)] ? _0x2ce81a[_0x5c8bca(0x144)] = function (_0x36d025) { const _0x20bd7f = _0x5c8bca; if (!_0x36d025) return ''; const _0x15123b = String(_0x36d025)[_0x20bd7f(0x160)](); if (/^\d{4}-\d{2}-\d{2}$/[_0x20bd7f(0x271)](_0x15123b)) return _0x15123b; const _0x2a306e = new Date(_0x15123b); if (isNaN(_0x2a306e[_0x20bd7f(0x199)]())) return ''; const _0x95a4d6 = _0x2a306e['getFullYear'](), _0x2e8dcc = String(_0x2a306e['getMonth']() + 0x1)[_0x20bd7f(0x234)](0x2, '0'), _0x4a55dd = String(_0x2a306e['getDate']())[_0x20bd7f(0x234)](0x2, '0'); return _0x95a4d6 + '-' + _0x2e8dcc + '-' + _0x4a55dd; }(_0x448d93[_0x26b212]) : _0x2ce81a[_0x5c8bca(0x144)] = _0x448d93[_0x26b212]); }); }(_0x41efc7, _0x410d8b), clearTimeout(_0x526e4e), _0x302dd9 && (_0x302dd9['style']['transition'] = _0x291332(0x156), _0x302dd9[_0x291332(0x1bb)][_0x291332(0x16c)] = '0', setTimeout(() => { const _0x2ee9ee = _0x291332; _0x302dd9[_0x2ee9ee(0x249)][_0x2ee9ee(0x145)](_0x2ee9ee(0x1b0)), _0x302dd9['style'][_0x2ee9ee(0x1a0)] = _0x2ee9ee(0x191), _0x302dd9[_0x2ee9ee(0x1bb)][_0x2ee9ee(0x16c)] = '1'; }, 0x12c)); }, _0x406fad = g(); if (_0x406fad) { const _0x361626 = _0x406fad[_0x16b027(0x1d6)](_0x515847 => String(_0x515847['Reference\x20Number/Ticket\x20Number']) === String(_0x30bcc0)); _0x361626 && setTimeout(() => _0x33e0e9(_0x361626), 0xc8); } f(e + _0x16b027(0x275) + encodeURIComponent(_0x30bcc0), {}, 0x3, 0x1f4)[_0x16b027(0x1fa)](_0x2c8f1d => { const _0xaa1253 = _0x16b027; _0x2c8f1d && !_0x2c8f1d[_0xaa1253(0x169)] ? _0x302dd9 && !_0x302dd9[_0xaa1253(0x249)][_0xaa1253(0x182)](_0xaa1253(0x1b0)) && _0x33e0e9(_0x2c8f1d) : (u(_0xaa1253(0x23d), _0xaa1253(0x169)), setTimeout(() => window[_0xaa1253(0x18d)][_0xaa1253(0x27c)]('/form'), 0x5dc)); })[_0x16b027(0x248)](_0x534313 => { const _0x999fa1 = _0x16b027; console[_0x999fa1(0x169)](_0x999fa1(0x222), _0x534313), _0x302dd9 && !_0x302dd9[_0x999fa1(0x249)]['contains'](_0x999fa1(0x1b0)) && (u(_0x999fa1(0x1e0), _0x999fa1(0x169)), setTimeout(() => window['location']['replace'](_0x999fa1(0x1b7)), 0x5dc)); }); } else _0x67616 && (_0x67616[_0x16b027(0x144)] = '', _0x67616['placeholder'] = _0x16b027(0x19f)); _0x41efc7[_0x16b027(0x1e1)]('submit', async _0x2d13f6 => { const _0x25e107 = _0x16b027; _0x2d13f6[_0x25e107(0x256)](); const _0x57d380 = _0x2b8629 ? _0x2b8629[_0x25e107(0x269)] : _0x25e107(0x17f); _0x2b8629 && (_0x2b8629[_0x25e107(0x269)] = '<span\x20class=\x22spinner-border\x20spinner-border-sm\x20me-2\x22></span>\x20Saving...', _0x2b8629['disabled'] = !0x0); const _0x20e60b = new FormData(_0x41efc7), _0x30b2ef = new URLSearchParams(_0x20e60b), _0x5e2778 = _0x30b2ef['has']('originalId') ? _0x25e107(0x1eb) : 'add'; _0x30b2ef['append']('action', _0x5e2778), _0x30b2ef[_0x25e107(0x147)]('Logged\x20In\x20User', sessionStorage[_0x25e107(0x270)](_0x25e107(0x23e)) || 'Unknown'); try { const _0x3477a9 = await fetch(e, { 'method': _0x25e107(0x25d), 'headers': { 'Authorization': 'Bearer\x20' + (sessionStorage['getItem']('ops_portal_token') || '') }, 'body': _0x30b2ef }); if (0x191 === _0x3477a9['status']) return sessionStorage['removeItem'](_0x25e107(0x1aa)), sessionStorage['removeItem']('ops_portal_user'), sessionStorage[_0x25e107(0x1fd)](d), u(_0x25e107(0x209), _0x25e107(0x1dc)), void setTimeout(() => window[_0x25e107(0x18d)][_0x25e107(0x27c)](_0x25e107(0x193)), 0x5dc); const _0x3a42f1 = await _0x3477a9[_0x25e107(0x18e)](); if (_0x3a42f1 && _0x25e107(0x242) === _0x3a42f1[_0x25e107(0x1cb)]) p(), (u(_0x25e107(0x145) === _0x5e2778 ? _0x25e107(0x280) + _0x3a42f1['id'] : _0x25e107(0x163), _0x25e107(0x242)), setTimeout(() => window['location'][_0x25e107(0x27c)]('/form'), 0x3e8)); else u(_0x25e107(0x21b) + (_0x3a42f1?.[_0x25e107(0x169)] || _0x25e107(0x162)), _0x25e107(0x169)); } catch (_0x2fa5eb) { console['error'](_0x25e107(0x15a), _0x2fa5eb), u(_0x25e107(0x14e), _0x25e107(0x169)); } finally { _0x2b8629 && (_0x2b8629[_0x25e107(0x269)] = _0x57d380, _0x2b8629[_0x25e107(0x215)] = !0x1); } }); const _0x315d43 = document[_0x16b027(0x19e)](_0x16b027(0x278)); _0x315d43 && _0x315d43[_0x16b027(0x1e1)]('click', () => { const _0x44abb5 = _0x16b027; _0x41efc7[_0x44abb5(0x22c)](), _0x30bcc0 && _0x44abb5(0x1ef) !== _0x30bcc0 && _0x44abb5(0x1c8) !== _0x30bcc0 && _0x67616 && (_0x67616[_0x44abb5(0x144)] = _0x30bcc0); }); }(_0x4e243f); const _0x458bb4 = sessionStorage['getItem'](_0x491587(0x23e)), _0x2fa510 = document[_0x491587(0x19e)](_0x491587(0x171)); _0x458bb4 && _0x2fa510 && (_0x2fa510[_0x491587(0x150)] = _0x458bb4); });
+// ==========================================
+// DeG - Data Purity Operations Portal
+// Core Application Logic
+// ==========================================
+
+const scriptURL = '/api/cfdb';
+
+// Global Application State
+let allRecords = [];
+let filteredRecords = [];
+let currentPage = 1;
+const recordsPerPage = 10;
+let currentFilter = 'all';
+let selectedPerson = 'all';
+let searchQuery = '';
+
+const DEFAULT_MEMBERS = [
+    'Akash Karmegam',
+    'Ganesh Velu',
+    'Kalaivanan',
+    'Mohan',
+    'Praveenraj',
+    'Swathi'
+];
+
+const EXCLUDED_MEMBERS = [
+    'Martina Maria Pushpam',
+    'Nivas Saravana'
+];
+
+// Cache Configuration
+const CACHE_KEY = 'ops_portal_records_cache';
+const CACHE_TTL = 60 * 1000; // 60 seconds
+
+// Auth Context Helpers
+function getCurrentUserRole() {
+    return sessionStorage.getItem('ops_portal_role') || 'user';
+}
+
+function getCurrentUserDisplayName() {
+    return (sessionStorage.getItem('ops_portal_display_name') || sessionStorage.getItem('ops_portal_user') || '').trim();
+}
+
+function isCurrentUserAdmin() {
+    return getCurrentUserRole() === 'admin';
+}
+
+function canEditRecord(record) {
+    if (isCurrentUserAdmin()) return true;
+    const owner = ((record && record['Action Taken By']) || '').trim().toLowerCase();
+    const current = getCurrentUserDisplayName().toLowerCase();
+    return Boolean(owner && current && owner === current);
+}
+
+// ==========================================
+// Toast Notification Utility (Non-blocking)
+// ==========================================
+function showToast(message, type = 'info', duration = 3500) {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.className = 'toast-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'true');
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast-notification toast-${type}`;
+
+    let iconClass = 'bi-info-circle-fill';
+    if (type === 'success') iconClass = 'bi-check-circle-fill';
+    else if (type === 'error') iconClass = 'bi-exclamation-triangle-fill';
+    else if (type === 'warning') iconClass = 'bi-exclamation-circle-fill';
+
+    toast.innerHTML = `<i class="bi ${iconClass} me-2"></i><span>${escapeHtml(message)}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// ==========================================
+// Theme (Dark / Light Mode) Management
+// ==========================================
+function initTheme() {
+    const currentTheme = localStorage.getItem('dp_theme') || 'light';
+    applyTheme(currentTheme);
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const activeTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+            const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+    }
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('dp_theme', theme);
+
+    const icon = document.getElementById('themeIcon');
+    if (icon) {
+        if (theme === 'dark') {
+            icon.className = 'bi bi-sun-fill text-warning';
+        } else {
+            icon.className = 'bi bi-moon-fill';
+        }
+    }
+
+    // Redraw pie chart if present on page to adapt colors/contrast
+    if (document.getElementById('statusPieChart')) {
+        const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
+        const sourceData = isFiltered ? filteredRecords : allRecords;
+        drawStatusPieChart(sourceData);
+    }
+}
+
+// ==========================================
+// Lifecycle Entry Point
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+
+    // Attach global logout button listeners (replaces inline onclick for CSP)
+    document.querySelectorAll('.logout-btn, #logoutBtn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+    });
+
+    const tableBody = document.getElementById('tableBody');
+    if (tableBody) {
+        loadFromCacheOrFetch();
+        setupFilters();
+        setupBadgeFilters();
+        setupSearch();
+        setupDownloadButton();
+        setupTableDelegation();
+        setupPersonFilterListeners();
+    }
+
+    const form = document.getElementById('requestForm');
+    if (form) {
+        setupFormLogic(form);
+    }
+
+    // Display logged-in user name & role badge
+    const displayName = getCurrentUserDisplayName();
+    const userDisplay = document.getElementById('currentUserDisplay');
+    if (displayName && userDisplay) {
+        if (isCurrentUserAdmin()) {
+            userDisplay.innerHTML = `${escapeHtml(displayName)} <span class="badge bg-primary-subtle text-primary border border-primary-subtle ms-1">Admin</span>`;
+        } else {
+            userDisplay.innerText = displayName;
+        }
+    }
+
+    // Show admin-only navigation links
+    if (isCurrentUserAdmin()) {
+        document.querySelectorAll('.admin-only-nav').forEach(el => {
+            el.classList.remove('d-none');
+        });
+    }
+});
+
+// ==========================================
+// Cache Helpers (Stale-While-Revalidate)
+// ==========================================
+function saveToCache(data) {
+    try {
+        const payload = { data: data, timestamp: Date.now() };
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+    } catch (e) {
+        console.warn('SessionStorage cache quota exceeded:', e);
+    }
+}
+
+function getFromCache() {
+    try {
+        const raw = sessionStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const payload = JSON.parse(raw);
+        if (Date.now() - payload.timestamp > CACHE_TTL) return null;
+        return payload.data;
+    } catch (e) {
+        return null;
+    }
+}
+
+function clearCache() {
+    sessionStorage.removeItem(CACHE_KEY);
+}
+
+// ==========================================
+// Smart Fetch with Token & Retry
+// ==========================================
+async function fetchWithRetry(url, options = {}, retries = 3, delay = 500) {
+    const token = sessionStorage.getItem('ops_portal_token') || '';
+    const headers = {
+        ...(options.headers || {}),
+        'Authorization': 'Bearer ' + token
+    };
+
+    const mergedOptions = { ...options, headers };
+
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            const response = await fetch(url, mergedOptions);
+
+            if (response.status === 401) {
+                sessionStorage.removeItem('ops_portal_token');
+                sessionStorage.removeItem('ops_portal_user');
+                sessionStorage.removeItem('ops_portal_role');
+                sessionStorage.removeItem('ops_portal_display_name');
+                sessionStorage.removeItem(CACHE_KEY);
+                window.location.replace('/login?timeout=true');
+                return null;
+            }
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            if (attempt === retries) throw error;
+            await new Promise(r => setTimeout(r, delay * attempt));
+        }
+    }
+}
+
+// ==========================================
+// Data Fetching & Caching
+// ==========================================
+async function loadFromCacheOrFetch() {
+    const tableBody = document.getElementById('tableBody');
+    const cached = getFromCache();
+
+    if (cached && Array.isArray(cached) && cached.length >= 0) {
+        allRecords = [...cached];
+        renderPersonBadges();
+        updateStats();
+        applyFiltersAndRender();
+        // Background silent refresh
+        fetchAndRenderRecords(true);
+    } else {
+        if (tableBody) {
+            tableBody.innerHTML = `<tr><td colspan="10" class="text-center py-4"><div class="spinner-border text-primary" role="status"></div><br><span class="text-muted small mt-2 d-inline-block">Loading records...</span></td></tr>`;
+        }
+        fetchAndRenderRecords(false);
+    }
+}
+
+async function fetchAndRenderRecords(isBackgroundRefresh = false) {
+    try {
+        const data = await fetchWithRetry(scriptURL + '?action=get', {}, 3, 500);
+        if (!data) return;
+
+        saveToCache(data);
+
+        // Avoid re-rendering if background refresh data hasn't changed
+        // Lightweight comparison: check length and sample a few records instead of full JSON.stringify
+        if (isBackgroundRefresh && data.length === allRecords.length) {
+            let same = true;
+            const sampleIndices = [0, Math.floor(data.length / 2), data.length - 1];
+            for (const idx of sampleIndices) {
+                if (idx >= 0 && idx < data.length) {
+                    if (JSON.stringify(data[idx]) !== JSON.stringify(allRecords[idx])) {
+                        same = false;
+                        break;
+                    }
+                }
+            }
+            if (same) return;
+        }
+
+        allRecords = [...data];
+        renderPersonBadges();
+        updateStats();
+        applyFiltersAndRender();
+    } catch (error) {
+        console.error('Error fetching records:', error);
+        if (!isBackgroundRefresh || allRecords.length === 0) {
+            const tableBody = document.getElementById('tableBody');
+            if (tableBody) {
+                tableBody.innerHTML = `
+                    <tr><td colspan="10" class="text-center py-4 text-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>Unable to load records. Please check your connection.
+                        <br><button type="button" class="btn btn-sm btn-outline-primary mt-2 retry-fetch-btn">
+                            <i class="bi bi-arrow-clockwise me-1"></i> Retry
+                        </button>
+                    </td></tr>
+                `;
+            }
+        }
+    }
+}
+
+// ==========================================
+// Dynamic Stats & Canvas Pie Chart
+// ==========================================
+// When useFiltered is true, stats and pie chart reflect filteredRecords (search/filter active)
+function updateStats(useFiltered = false) {
+    const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
+    const sourceData = (useFiltered || isFiltered) ? filteredRecords : allRecords;
+    const counts = { Completed: 0, 'In Progress': 0, Pending: 0 };
+    sourceData.forEach(r => {
+        if (r['Status'] in counts) counts[r['Status']]++;
+    });
+
+    const totalEl = document.getElementById('totalCount');
+    const compEl = document.getElementById('completedCount');
+    const progEl = document.getElementById('inProgressCount');
+    const pendEl = document.getElementById('pendingCount');
+
+    if (totalEl) totalEl.innerText = sourceData.length;
+    if (compEl) compEl.innerText = counts.Completed;
+    if (progEl) progEl.innerText = counts['In Progress'];
+    if (pendEl) pendEl.innerText = counts.Pending;
+
+    const scopeBadge = document.getElementById('statusScopeBadge');
+    if (scopeBadge) {
+        if (selectedPerson !== 'all') {
+            scopeBadge.innerText = `${selectedPerson}'s Requests`;
+        } else if (currentFilter !== 'all' || searchQuery) {
+            scopeBadge.innerText = 'Filtered';
+        } else {
+            scopeBadge.innerText = 'All Requests';
+        }
+    }
+
+    drawStatusPieChart(sourceData);
+}
+
+// ==========================================
+// Team Workload: "Action Taken By" Analytics
+// ==========================================
+function getMembersList() {
+    const excluded = new Set(EXCLUDED_MEMBERS.map(m => m.toLowerCase()));
+    const set = new Set(DEFAULT_MEMBERS);
+    allRecords.forEach(r => {
+        const name = (r['Action Taken By'] || '').trim();
+        if (name && name !== 'Unknown' && name !== '-' && name !== 'N/A' && !excluded.has(name.toLowerCase())) {
+            set.add(name);
+        }
+    });
+    return Array.from(set).filter(name => !excluded.has(name.toLowerCase())).sort((a, b) => a.localeCompare(b));
+}
+
+function getThemeIndex(name, index) {
+    if (typeof index === 'number' && index >= 0) {
+        return index % 12;
+    }
+    const members = getMembersList();
+    const idx = members.findIndex(m => m.toLowerCase() === (name || '').toLowerCase());
+    if (idx >= 0) {
+        return idx % 12;
+    }
+    let hash = 0;
+    for (let i = 0; i < (name || '').length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash) % 12;
+}
+
+function renderPersonBadges() {
+    const container = document.getElementById('personBadgesContainer');
+    if (!container) return;
+
+    const members = getMembersList();
+    const teamMemberCountBadge = document.getElementById('teamMemberCountBadge');
+    if (teamMemberCountBadge) {
+        teamMemberCountBadge.innerText = `${members.length} Members`;
+    }
+
+    // Tally total requests per member across entire database (allRecords)
+    const counts = {};
+    members.forEach(name => {
+        counts[name] = 0;
+    });
+
+    allRecords.forEach(r => {
+        const name = (r['Action Taken By'] || '').trim();
+        if (name in counts) {
+            counts[name]++;
+        } else if (name && name !== 'Unknown' && name !== '-' && name !== 'N/A') {
+            counts[name] = (counts[name] || 0) + 1;
+        }
+    });
+
+    const totalDatabaseRecords = allRecords.length || 1;
+    const fragment = document.createDocumentFragment();
+
+    // 1. "All Members" Executive Master Card
+    const allChip = document.createElement('div');
+    const isAllActive = selectedPerson === 'all';
+    allChip.className = `team-member-card team-card-all ${isAllActive ? 'active' : ''}`;
+    allChip.setAttribute('data-person', 'all');
+    allChip.setAttribute('role', 'button');
+    allChip.setAttribute('tabindex', '0');
+    allChip.setAttribute('title', `Click to view all requests across all members (${allRecords.length} total requests)`);
+    allChip.innerHTML = `
+        <div class="team-card-top">
+            <div class="team-avatar team-avatar-all">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="team-info">
+                <span class="team-name">All Team Members</span>
+                <span class="team-role">${members.length} Active Members</span>
+            </div>
+            <div class="team-stat-badge">
+                <span class="team-count" id="allPersonsCount">${allRecords.length}</span>
+                <span class="team-count-unit">Total</span>
+            </div>
+        </div>
+        <div class="team-card-active-indicator">
+            <i class="bi bi-check-circle-fill"></i> Showing All Records
+        </div>
+    `;
+    fragment.appendChild(allChip);
+
+    // 2. Individual Executive Member Cards (each person gets a distinct dynamic color theme)
+    members.forEach((member, index) => {
+        const count = counts[member] || 0;
+        const initials = escapeHtml(member.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
+        const isSelected = selectedPerson.toLowerCase() === member.toLowerCase();
+        const isCurrentUser = !isCurrentUserAdmin() && getCurrentUserDisplayName().toLowerCase() === member.toLowerCase();
+        const themeIndex = getThemeIndex(member, index);
+
+        const card = document.createElement('div');
+        card.className = `team-member-card avatar-theme-${themeIndex} ${isSelected ? 'active' : ''}`;
+        card.setAttribute('data-person', member);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('title', isSelected ? `${escapeHtml(member)} (${count} total requests - click to show all)` : `Click to view count & requests for ${escapeHtml(member)}`);
+
+        const youBadge = isCurrentUser
+            ? `<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill ms-1" style="font-size: 0.65rem;">You</span>`
+            : '';
+
+        card.innerHTML = `
+            <div class="team-card-top">
+                <div class="team-avatar">${initials}</div>
+                <div class="team-info">
+                    <span class="team-name" title="${escapeHtml(member)}">${escapeHtml(member)}${youBadge}</span>
+                </div>
+                <div class="team-stat-badge team-stat-individual">
+                    <span class="team-count">${count}</span>
+                    <span class="team-count-unit">${count === 1 ? 'req' : 'reqs'}</span>
+                </div>
+                <div class="team-click-prompt">
+                    <span class="badge bg-body-secondary text-secondary border border-secondary-subtle rounded-pill px-2 py-1 small fw-normal">
+                        <i class="bi bi-eye me-1"></i>View
+                    </span>
+                </div>
+            </div>
+            <div class="team-card-active-indicator">
+                <i class="bi bi-check-circle-fill"></i> Showing ${count} ${count === 1 ? 'Request' : 'Requests'}
+            </div>
+        `;
+        fragment.appendChild(card);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(fragment);
+
+    updatePersonChipsActiveState();
+}
+
+function updatePersonChipsActiveState() {
+    const container = document.getElementById('personBadgesContainer');
+    if (container) {
+        container.querySelectorAll('.team-member-card, .person-chip').forEach(chip => {
+            const person = chip.getAttribute('data-person');
+            if (person === 'all') {
+                chip.classList.toggle('active', selectedPerson === 'all');
+            } else {
+                const isSelected = selectedPerson.toLowerCase() === person.toLowerCase();
+                chip.classList.toggle('active', isSelected);
+                const countBadge = chip.querySelector('.team-count');
+                const count = countBadge ? countBadge.innerText : '';
+                chip.setAttribute('title', isSelected ? `${person} (${count} requests - click to show all)` : `Click to view count & requests for ${person}`);
+            }
+        });
+    }
+
+    // Toggle active filter indicators & banner
+    const clearBtn = document.getElementById('clearPersonFilterBtn');
+    const banner = document.getElementById('activePersonFilterBanner');
+    const bannerName = document.getElementById('activePersonFilterName');
+    const bannerCount = document.getElementById('activePersonFilterCount');
+
+    if (selectedPerson !== 'all') {
+        if (clearBtn) clearBtn.classList.remove('d-none');
+        if (banner) banner.classList.remove('d-none');
+        if (bannerName) bannerName.innerText = selectedPerson;
+        if (bannerCount) bannerCount.innerText = `${filteredRecords.length} requests`;
+    } else {
+        if (clearBtn) clearBtn.classList.add('d-none');
+        if (banner) banner.classList.add('d-none');
+    }
+}
+
+function selectPersonFilter(personName) {
+    if (!personName || personName === 'all' || selectedPerson.toLowerCase() === personName.toLowerCase()) {
+        selectedPerson = 'all';
+    } else {
+        selectedPerson = personName;
+    }
+    currentPage = 1;
+    applyFiltersAndRender();
+}
+
+function setupPersonFilterListeners() {
+    const container = document.getElementById('personBadgesContainer');
+    if (container) {
+        container.addEventListener('click', (e) => {
+            const chip = e.target.closest('.team-member-card, .person-chip');
+            if (chip) {
+                const person = chip.getAttribute('data-person');
+                selectPersonFilter(person);
+            }
+        });
+
+        container.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const chip = e.target.closest('.team-member-card, .person-chip');
+                if (chip) {
+                    e.preventDefault();
+                    const person = chip.getAttribute('data-person');
+                    selectPersonFilter(person);
+                }
+            }
+        });
+    }
+
+    const clearBtn = document.getElementById('clearPersonFilterBtn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            selectPersonFilter('all');
+        });
+    }
+
+    const dismissBtn = document.getElementById('dismissPersonFilterBtn');
+    if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+            selectPersonFilter('all');
+        });
+    }
+
+    const refreshBtn = document.getElementById('refreshDataBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            clearCache();
+            const icon = refreshBtn.querySelector('i');
+            if (icon) icon.classList.add('spin-animation');
+            fetchAndRenderRecords(false).finally(() => {
+                if (icon) icon.classList.remove('spin-animation');
+                showToast('Records refreshed from database!', 'success');
+            });
+        });
+    }
+}
+
+function drawStatusPieChart(sourceData) {
+    const canvas = document.getElementById('statusPieChart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Use provided data or fall back to allRecords
+    const data = sourceData || allRecords;
+
+    const dpr = window.devicePixelRatio || 1;
+    const displaySize = 130;
+
+    if (canvas.width !== displaySize * dpr || canvas.height !== displaySize * dpr) {
+        canvas.width = displaySize * dpr;
+        canvas.height = displaySize * dpr;
+        canvas.style.width = displaySize + 'px';
+        canvas.style.height = displaySize + 'px';
+    }
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, displaySize, displaySize);
+
+    const counts = { Completed: 0, 'In Progress': 0, Pending: 0 };
+    data.forEach(r => {
+        if (r['Status'] in counts) counts[r['Status']]++;
+    });
+
+    const total = data.length;
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+
+    const centerX = displaySize / 2;
+    const centerY = displaySize / 2;
+    const radius = 54;
+    const innerRadius = 38;
+
+    if (total === 0) {
+        // Draw subtle ring for empty state
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, (radius + innerRadius) / 2, 0, 2 * Math.PI);
+        ctx.strokeStyle = isDark ? '#30363d' : '#e9ecef';
+        ctx.lineWidth = radius - innerRadius;
+        ctx.stroke();
+
+        ctx.fillStyle = isDark ? '#8b949e' : '#adb5bd';
+        ctx.font = '600 11px Inter, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('No Data', centerX, centerY);
+        ctx.restore();
+        return;
+    }
+
+    const segments = [
+        { label: 'Completed', count: counts.Completed, color: isDark ? '#20c997' : '#198754' },
+        { label: 'In Progress', count: counts['In Progress'], color: isDark ? '#38bdf8' : '#0d6efd' },
+        { label: 'Pending', count: counts.Pending, color: isDark ? '#f87171' : '#dc3545' }
+    ];
+
+    let startAngle = -Math.PI / 2;
+
+    segments.forEach(segment => {
+        if (segment.count <= 0) return;
+        const sliceAngle = (segment.count / total) * 2 * Math.PI;
+        const endAngle = startAngle + sliceAngle;
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
+        ctx.closePath();
+
+        ctx.fillStyle = segment.color;
+        ctx.fill();
+
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = isDark ? '#212529' : '#ffffff';
+        ctx.stroke();
+
+        startAngle = endAngle;
+    });
+
+    // Donut Center Text
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    ctx.fillStyle = isDark ? '#f0f6fc' : '#212529';
+    ctx.font = 'bold 18px Inter, system-ui, sans-serif';
+    ctx.fillText(total.toString(), centerX, centerY - 6);
+
+    ctx.fillStyle = isDark ? '#8b949e' : '#6c757d';
+    ctx.font = '600 9px Inter, system-ui, sans-serif';
+    ctx.fillText('TOTAL', centerX, centerY + 11);
+
+    ctx.restore();
+}
+
+// ==========================================
+// Filtering, Searching, & Rendering
+// ==========================================
+function applyFiltersAndRender() {
+    let result = [...allRecords];
+
+    // 1. Status Filter
+    if (currentFilter !== 'all') {
+        result = result.filter(r => r['Status'] === currentFilter);
+    }
+
+    // 2. Person Filter (Action Taken By)
+    if (selectedPerson !== 'all') {
+        const target = selectedPerson.trim().toLowerCase();
+        result = result.filter(r => {
+            const actionBy = (r['Action Taken By'] || '').trim().toLowerCase();
+            return actionBy === target;
+        });
+    }
+
+    // 3. Search Query Filter
+    if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        result = result.filter(r => {
+            const rowString = Object.values(r).join(' ').toLowerCase();
+            return rowString.includes(query);
+        });
+    }
+
+    filteredRecords = result;
+
+    const maxPage = Math.ceil(filteredRecords.length / recordsPerPage) || 1;
+    if (currentPage > maxPage) {
+        currentPage = 1;
+    }
+
+    // Update stats, pie chart, person chips state
+    const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
+    updateStats(!!isFiltered);
+    updatePersonChipsActiveState();
+
+    renderTable();
+    renderPagination();
+}
+
+// XSS Sanitizer: Pure string-based HTML entity encoding (no DOM allocation)
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function renderTable() {
+    const tableBody = document.getElementById('tableBody');
+    if (!tableBody) return;
+    tableBody.innerHTML = '';
+
+    if (filteredRecords.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="10" class="text-center py-4 text-muted">No records found matching your criteria.</td></tr>`;
+        return;
+    }
+
+    const startIndex = (currentPage - 1) * recordsPerPage;
+    const endIndex = startIndex + recordsPerPage;
+    const paginatedData = filteredRecords.slice(startIndex, endIndex);
+
+    // High performance DOM batch insertion via DocumentFragment
+    const fragment = document.createDocumentFragment();
+
+    paginatedData.forEach((row, index) => {
+        let reqDate = row['Request Date'] || 'N/A';
+        if (reqDate && reqDate.includes('-')) {
+            const dateObj = new Date(reqDate);
+            if (!isNaN(dateObj.getTime())) {
+                reqDate = dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            }
+        }
+
+        const rawActionBy = row['Action Taken By'] || 'Unknown';
+        const actionBy = escapeHtml(rawActionBy);
+        const initials = escapeHtml(rawActionBy.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
+
+        const rawProblem = row['Problem Statement / Objective'] || 'N/A';
+        const problem = escapeHtml(rawProblem);
+        const shortProblem = escapeHtml(rawProblem.length > 30 ? rawProblem.substring(0, 30) + '...' : rawProblem);
+
+        const rawId = row['Reference Number/Ticket Number'] || '';
+        const displayId = escapeHtml(rawId ? rawId : 'N/A');
+
+        const receivedCount = row['Received Count'] || '-';
+        const formattedCount = escapeHtml(
+            (receivedCount !== '-' && !isNaN(receivedCount) && String(receivedCount).trim() !== '')
+                ? Number(receivedCount).toLocaleString()
+                : String(receivedCount)
+        );
+
+        const status = row['Status'] || 'Pending';
+        let statusBadge = '';
+        if (status === 'Completed') {
+            statusBadge = `<span class="badge bg-success-subtle text-success border border-success px-2 py-1">Completed</span>`;
+        } else if (status === 'In Progress') {
+            statusBadge = `<span class="badge bg-primary-subtle text-primary border border-primary px-2 py-1">In Progress</span>`;
+        } else {
+            statusBadge = `<span class="badge bg-danger-subtle text-danger border border-danger px-2 py-1">Pending</span>`;
+        }
+
+        const isOwner = canEditRecord(row);
+        const editAction = rawId
+            ? (isOwner
+                ? `<a href="/index?edit=${encodeURIComponent(rawId)}" class="text-primary fw-semibold text-decoration-none action-btn"><i class="bi bi-pencil-square me-1"></i>Edit</a>`
+                : `<a href="/index?edit=${encodeURIComponent(rawId)}&readonly=true" class="text-secondary fw-semibold text-decoration-none action-btn"><i class="bi bi-eye me-1"></i>View</a>`)
+            : `<button type="button" class="btn btn-link p-0 text-muted fw-semibold text-decoration-none missing-id-btn">Edit</button>`;
+
+        const department = escapeHtml(row['Requested Department'] || 'N/A');
+        const letterRef = escapeHtml(row['Letter / Email Reference'] || '-');
+        const sharedMode = escapeHtml(row['Result Shared Mode'] || '-');
+
+        const tr = document.createElement('tr');
+        tr.className = 'animate-row';
+        tr.style.animationDelay = `${Math.min(index * 0.05, 0.4)}s`;
+
+        tr.innerHTML = `
+            <td class="px-4 ${rawId ? 'text-primary' : 'text-muted'} fw-semibold">${displayId}</td>
+            <td class="fw-semibold">${department}</td>
+            <td>${reqDate}</td>
+            <td class="text-muted">${letterRef}</td>
+            <td class="action-by-cell" data-person="${rawActionBy}" title="Click to filter by ${actionBy}">
+                <span class="team-avatar-mini avatar-theme-${getThemeIndex(rawActionBy)} me-2">${initials}</span>
+                <span class="action-by-name fw-medium">${actionBy}</span>
+            </td>
+            <td class="text-truncate" style="max-width: 200px;" title="${problem}">${shortProblem}</td>
+            <td class="text-muted">${formattedCount}</td>
+            <td class="text-muted">${sharedMode}</td>
+            <td>${statusBadge}</td>
+            <td class="text-end px-4">${editAction}</td>
+        `;
+        fragment.appendChild(tr);
+    });
+
+    tableBody.appendChild(fragment);
+}
+
+// Table Event Delegation (CSP Safe: no inline onclick handlers)
+function setupTableDelegation() {
+    const tableBody = document.getElementById('tableBody');
+    if (!tableBody) return;
+
+    tableBody.addEventListener('click', (e) => {
+        const retryBtn = e.target.closest('.retry-fetch-btn');
+        if (retryBtn) {
+            e.preventDefault();
+            loadFromCacheOrFetch();
+            return;
+        }
+
+        const missingIdBtn = e.target.closest('.missing-id-btn');
+        if (missingIdBtn) {
+            e.preventDefault();
+            showToast('Cannot edit: Missing Reference Number.', 'warning');
+            return;
+        }
+
+        const actionByCell = e.target.closest('.action-by-cell');
+        if (actionByCell) {
+            e.preventDefault();
+            const person = actionByCell.getAttribute('data-person');
+            if (person && person !== 'Unknown' && person !== 'N/A') {
+                selectPersonFilter(person);
+            }
+            return;
+        }
+    });
+}
+
+// ==========================================
+// UI Controls (Filters, Badges, Search, Pagination)
+// ==========================================
+function setupFilters() {
+    const filterGroup = document.getElementById('filterGroup');
+    if (!filterGroup) return;
+
+    filterGroup.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (btn) {
+            filterGroup.querySelectorAll('button').forEach(b => {
+                b.classList.remove('active', 'fw-semibold');
+            });
+            btn.classList.add('active', 'fw-semibold');
+
+            currentFilter = btn.getAttribute('data-filter') || 'all';
+            currentPage = 1;
+            applyFiltersAndRender();
+        }
+    });
+}
+
+// Interactive Dynamic Stats Badges: Clicking a badge filters table
+function setupBadgeFilters() {
+    document.querySelectorAll('.stat-badge[data-filter]').forEach(badge => {
+        badge.style.cursor = 'pointer';
+        badge.addEventListener('click', () => {
+            const filterValue = badge.getAttribute('data-filter');
+            if (!filterValue) return;
+
+            // Sync with filterGroup buttons
+            const filterGroup = document.getElementById('filterGroup');
+            if (filterGroup) {
+                const targetBtn = filterGroup.querySelector(`button[data-filter="${filterValue}"]`);
+                if (targetBtn) {
+                    targetBtn.click();
+                    return;
+                }
+            }
+
+            currentFilter = filterValue;
+            currentPage = 1;
+            applyFiltersAndRender();
+        });
+    });
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            searchQuery = e.target.value.trim();
+            currentPage = 1;
+            applyFiltersAndRender();
+        }, 300);
+    });
+}
+
+function renderPagination() {
+    const paginationText = document.getElementById('paginationText');
+    const paginationControls = document.getElementById('paginationControls');
+    if (!paginationText || !paginationControls) return;
+
+    const totalFiltered = filteredRecords.length;
+    const totalPages = Math.ceil(totalFiltered / recordsPerPage) || 1;
+
+    const startIndex = (currentPage - 1) * recordsPerPage;
+    const endIndex = Math.min(startIndex + recordsPerPage, totalFiltered);
+
+    if (totalFiltered === 0) {
+        paginationText.innerText = 'Showing 0 to 0 of 0 requests';
+        paginationControls.innerHTML = '';
+        return;
+    }
+
+    paginationText.innerText = `Showing ${startIndex + 1} to ${endIndex} of ${totalFiltered} requests`;
+
+    let html = '';
+    html += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}"><a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a></li>`;
+
+    const getPageNumbers = (current, total) => {
+        if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+        const pages = [1];
+        let start = Math.max(2, current - 1);
+        let end = Math.min(total - 1, current + 1);
+        if (current <= 3) { start = 2; end = 4; }
+        if (current >= total - 2) { start = total - 3; end = total - 1; }
+        if (start > 2) pages.push('...');
+        for (let i = start; i <= end; i++) pages.push(i);
+        if (end < total - 1) pages.push('...');
+        pages.push(total);
+        return pages;
+    };
+
+    getPageNumbers(currentPage, totalPages).forEach(p => {
+        if (p === '...') {
+            html += `<li class="page-item disabled"><span class="page-link">&hellip;</span></li>`;
+        } else {
+            html += `<li class="page-item ${currentPage === p ? 'active' : ''}"><a class="page-link" href="#" data-page="${p}">${p}</a></li>`;
+        }
+    });
+
+    html += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}"><a class="page-link" href="#" data-page="${currentPage + 1}">Next</a></li>`;
+
+    paginationControls.innerHTML = html;
+
+    paginationControls.querySelectorAll('.page-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = parseInt(e.currentTarget.getAttribute('data-page'), 10);
+            if (page >= 1 && page <= totalPages && page !== currentPage) {
+                currentPage = page;
+                applyFiltersAndRender();
+            }
+        });
+    });
+}
+
+// ==========================================
+// Form Logic (Create & Edit Mode)
+// ==========================================
+function lockActionTakenByField(form, value) {
+    const select = form.elements['Action Taken By'];
+    if (!select) return;
+    if (value) {
+        const hasOption = Array.from(select.options).some(opt => opt.value.toLowerCase() === value.toLowerCase());
+        if (!hasOption) {
+            const opt = document.createElement('option');
+            opt.value = value;
+            opt.textContent = value;
+            select.appendChild(opt);
+        }
+        select.value = Array.from(select.options).find(opt => opt.value.toLowerCase() === value.toLowerCase())?.value || value;
+    }
+    select.disabled = true;
+
+    let hiddenOwner = form.querySelector('input[type="hidden"][name="Action Taken By"]');
+    if (!hiddenOwner) {
+        hiddenOwner = document.createElement('input');
+        hiddenOwner.type = 'hidden';
+        hiddenOwner.name = 'Action Taken By';
+        form.appendChild(hiddenOwner);
+    }
+    hiddenOwner.value = select.value;
+}
+
+function applyReadOnlyMode(form, ownerName) {
+    const titleEl = document.getElementById('formTitle');
+    const subTitleEl = document.getElementById('formSubtitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    if (titleEl) titleEl.innerText = 'View Data Request (Read-Only)';
+    if (subTitleEl) subTitleEl.innerText = 'You have view-only access to this request.';
+    if (submitBtn) submitBtn.classList.add('d-none');
+    if (clearBtn) clearBtn.classList.add('d-none');
+
+    // Freeze all form controls
+    Array.from(form.elements).forEach(el => {
+        if (el.tagName !== 'A') {
+            el.disabled = true;
+        }
+    });
+
+    // Show read-only banner at top of form
+    if (!document.getElementById('readOnlyBanner')) {
+        const banner = document.createElement('div');
+        banner.id = 'readOnlyBanner';
+        banner.className = 'alert alert-warning d-flex align-items-center gap-2 mb-4';
+        banner.setAttribute('role', 'alert');
+        banner.innerHTML = `<i class="bi bi-lock-fill fs-5"></i><div><strong>View Only Mode:</strong> This record belongs to <strong>${escapeHtml(ownerName || 'another user')}</strong>. All fields are locked because only the record owner or an administrator can modify it.</div>`;
+        form.prepend(banner);
+    }
+}
+
+function setupFormLogic(form) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const editId = urlParams.get('edit');
+    const submitBtn = document.getElementById('submitBtn');
+    const refNumberInput = document.getElementById('refNumberInput');
+    const overlay = document.getElementById('formLoadingOverlay');
+    const cancelBtn = document.getElementById('cancelLoadBtn');
+
+    if (editId && editId !== 'undefined' && editId !== 'N/A') {
+        const titleEl = document.getElementById('formTitle');
+        const subTitleEl = document.getElementById('formSubtitle');
+        if (titleEl) titleEl.innerText = 'Edit Data Request';
+        if (subTitleEl) subTitleEl.innerText = 'Update the fields below to modify the request in the registry.';
+        if (submitBtn) submitBtn.innerHTML = '<i class="bi bi-save me-2"></i> Update Request';
+        if (refNumberInput) refNumberInput.value = editId;
+
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'originalId';
+        hiddenInput.value = editId;
+        form.appendChild(hiddenInput);
+
+        if (overlay) {
+            overlay.classList.remove('d-none');
+            overlay.style.display = 'flex';
+        }
+
+        const cancelTimer = setTimeout(() => {
+            if (cancelBtn) cancelBtn.classList.remove('d-none');
+        }, 6000);
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => {
+                window.location.replace('/form');
+            });
+        }
+
+        const finishLoading = (record) => {
+            if (record) {
+                populateForm(form, record);
+                if (!canEditRecord(record)) {
+                    applyReadOnlyMode(form, record['Action Taken By']);
+                } else if (!isCurrentUserAdmin()) {
+                    lockActionTakenByField(form, record['Action Taken By']);
+                }
+            }
+            clearTimeout(cancelTimer);
+            if (overlay) {
+                overlay.style.transition = 'opacity 0.3s ease';
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.classList.add('d-none');
+                    overlay.style.display = 'none';
+                    overlay.style.opacity = '1';
+                }, 300);
+            }
+        };
+
+        // Cache first
+        const cached = getFromCache();
+        if (cached) {
+            const record = cached.find(r => String(r['Reference Number/Ticket Number']) === String(editId));
+            if (record) {
+                setTimeout(() => finishLoading(record), 200);
+            }
+        }
+
+        // Fetch single record
+        fetchWithRetry(scriptURL + '?action=get_one&id=' + encodeURIComponent(editId), {}, 3, 500)
+            .then(record => {
+                if (record && !record.error) {
+                    if (overlay && !overlay.classList.contains('d-none')) {
+                        finishLoading(record);
+                    }
+                } else {
+                    showToast('Record not found in database!', 'error');
+                    setTimeout(() => window.location.replace('/form'), 1500);
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching record for edit:', err);
+                if (overlay && !overlay.classList.contains('d-none')) {
+                    showToast('Failed to load record. Please try again.', 'error');
+                    setTimeout(() => window.location.replace('/form'), 1500);
+                }
+            });
+    } else {
+        if (refNumberInput) {
+            refNumberInput.value = '';
+            refNumberInput.placeholder = 'Auto-generated on save';
+        }
+        if (!isCurrentUserAdmin()) {
+            lockActionTakenByField(form, getCurrentUserDisplayName());
+        }
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Submit';
+        if (submitBtn) {
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Saving...';
+            submitBtn.disabled = true;
+        }
+
+        const formData = new FormData(form);
+        const urlEncodedData = new URLSearchParams(formData);
+        const actionType = urlEncodedData.has('originalId') ? 'update' : 'add';
+        urlEncodedData.append('action', actionType);
+        urlEncodedData.append('Logged In User', sessionStorage.getItem('ops_portal_user') || 'Unknown');
+
+        try {
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + (sessionStorage.getItem('ops_portal_token') || '')
+                },
+                body: urlEncodedData
+            });
+
+            if (response.status === 401) {
+                sessionStorage.removeItem('ops_portal_token');
+                sessionStorage.removeItem('ops_portal_user');
+                sessionStorage.removeItem('ops_portal_role');
+                sessionStorage.removeItem('ops_portal_display_name');
+                sessionStorage.removeItem(CACHE_KEY);
+                showToast('Session expired. Redirecting to login...', 'warning');
+                setTimeout(() => window.location.replace('/login?timeout=true'), 1500);
+                return;
+            }
+
+            const result = await response.json();
+
+            if (result && result.result === 'success') {
+                clearCache();
+                const msg = actionType === 'add'
+                    ? `Request submitted successfully! Generated ID: ${result.id}`
+                    : 'Request updated successfully!';
+                showToast(msg, 'success');
+                setTimeout(() => window.location.replace('/form'), 1000);
+            } else {
+                showToast('Error: ' + (result?.error || 'Failed to save record.'), 'error');
+            }
+        } catch (error) {
+            console.error('Submit error:', error);
+            showToast('Network error. Please check your connection.', 'error');
+        } finally {
+            if (submitBtn) {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+    });
+
+    const clearBtn = document.getElementById('clearBtn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            form.reset();
+            if (editId && editId !== 'undefined' && editId !== 'N/A' && refNumberInput) {
+                refNumberInput.value = editId;
+            }
+            if (!isCurrentUserAdmin()) {
+                lockActionTakenByField(form, getCurrentUserDisplayName());
+            }
+        });
+    }
+}
+
+function populateForm(form, record) {
+    const fieldsToFill = [
+        'Requested Department', 'Request Date', 'Letter / Email Reference',
+        'Action Taken By', 'Problem Statement / Objective', 'Datasets Used',
+        'Date for Data Dump', 'Received Count', 'Result Shared Mode', 'Analysis Outcome',
+        'Status', 'Savings'
+    ];
+
+    fieldsToFill.forEach(field => {
+        const input = form.elements[field];
+        if (input && record[field] !== undefined && record[field] !== null) {
+            if (input.type === 'date') {
+                input.value = formatDateForInput(record[field]);
+            } else {
+                input.value = record[field];
+            }
+        }
+    });
+}
+
+function formatDateForInput(dateStr) {
+    if (!dateStr) return '';
+    const str = String(dateStr).trim();
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(str)) {
+        return str;
+    }
+
+    const d = new Date(str);
+    if (isNaN(d.getTime())) return '';
+
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+// ==========================================
+// CSV Export with Formula Injection Guard
+// ==========================================
+function formatValueForCSV(key, value) {
+    if (value === null || value === undefined) return '';
+    let strValue = String(value);
+
+    // Prevent CSV formula injection in spreadsheet applications
+    if (/^[=+\-@\t\r]/.test(strValue)) {
+        strValue = "'" + strValue;
+    }
+
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(strValue)) {
+        const d = new Date(strValue);
+        if (isNaN(d.getTime())) return strValue;
+
+        // Use IST (Asia/Kolkata) for all date-time formatting in CSV
+        const istOptions = { timeZone: 'Asia/Kolkata' };
+        const day = String(d.toLocaleString('en-US', { ...istOptions, day: '2-digit' })).padStart(2, '0');
+        const month = String(d.toLocaleString('en-US', { ...istOptions, month: '2-digit' })).padStart(2, '0');
+        const year = d.toLocaleString('en-US', { ...istOptions, year: 'numeric' });
+
+        if (key === 'Timestamp') {
+            // Format timestamp in IST 12-hour format
+            const istFormatted = d.toLocaleString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: true
+            });
+            return istFormatted;
+        }
+        return `${day}-${month}-${year}`;
+    }
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(strValue)) {
+        const parts = strValue.split('-');
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+
+    return strValue;
+}
+
+function setupDownloadButton() {
+    const downloadBtn = document.getElementById('downloadBtn');
+    if (!downloadBtn) return;
+
+    downloadBtn.addEventListener('click', () => {
+        if (allRecords.length === 0) {
+            showToast('No data available to download.', 'warning');
+            return;
+        }
+
+        const allHeaders = Object.keys(allRecords[0]);
+        const headers = allHeaders.filter(h => h !== 'Timestamp');
+
+        const csvRows = [];
+        csvRows.push(headers.map(header => `"${header}"`).join(','));
+
+        allRecords.forEach(record => {
+            const values = headers.map(header => {
+                let val = record[header] || '';
+                val = formatValueForCSV(header, val);
+                val = String(val).replaceAll('"', '""');
+                return `"${val}"`;
+            });
+            csvRows.push(values.join(','));
+        });
+
+        const csvString = '\uFEFF' + csvRows.join('\n');
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+
+        const date = new Date();
+        const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+        link.setAttribute('href', url);
+        link.setAttribute('download', `Data_Purity_Records_${dateString}.csv`);
+        link.style.visibility = 'hidden';
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(url);
+        showToast('Download started successfully!', 'success');
+    });
+}

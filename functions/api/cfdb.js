@@ -1,56 +1,28 @@
-// Token verification helper — validates HMAC-signed tokens from auth.js
-async function verifyToken(authHeader, env) {
-    if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
-    const token = authHeader.substring(7);
-    try {
-        const parts = token.split('.');
-        if (parts.length !== 2) return null;
-        const [payloadB64, sigB64] = parts;
-        if (!env.AUTH_SECRET) return null;
+import {
+    verifyToken,
+    toIST,
+    nowIST,
+    getClientIP,
+    logAudit
+} from '../_lib/security.js';
 
-        const key = await crypto.subtle.importKey(
-            'raw',
-            new TextEncoder().encode(env.AUTH_SECRET),
-            { name: 'HMAC', hash: 'SHA-256' },
-            false,
-            ['verify']
-        );
-
-        const sigBuffer = Uint8Array.from(atob(sigB64), c => c.charCodeAt(0));
-        const valid = await crypto.subtle.verify(
-            'HMAC', key, sigBuffer, new TextEncoder().encode(payloadB64)
-        );
-
-        if (!valid) return null;
-
-        const payload = JSON.parse(atob(payloadB64));
-
-        // Token expires after 24 hours
-        if (Date.now() - payload.iat > 24 * 60 * 60 * 1000) return null;
-
-        return payload;
-    } catch {
-        return null;
-    }
-}
-
-// Helper: Convert a UTC ISO timestamp to IST (UTC+5:30) formatted string
-function toIST(isoString) {
-    if (!isoString) return '';
-    try {
-        const d = new Date(isoString);
-        if (isNaN(d.getTime())) return isoString;
-        return d.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-    } catch {
-        return isoString;
-    }
-}
-
-// Helper: Get current IST timestamp as ISO string
-function nowIST() {
-    const now = new Date();
-    // Format as ISO-like string in IST
-    return now.toLocaleString('en-CA', { timeZone: 'Asia/Kolkata', hour12: false }).replace(', ', 'T') + '+05:30';
+function mapRecord(r) {
+    return {
+        'Reference Number/Ticket Number': r.ref_id,
+        'Requested Department': r.requested_dept,
+        'Request Date': r.request_date,
+        'Letter / Email Reference': r.letter_ref,
+        'Action Taken By': r.action_by,
+        'Problem Statement / Objective': r.problem,
+        'Datasets Used': r.datasets,
+        'Date for Data Dump': r.data_dump_date,
+        'Received Count': r.received_count,
+        'Result Shared Mode': r.shared_mode,
+        'Analysis Outcome': r.analysis,
+        'Status': r.status,
+        'Savings': r.savings,
+        'Timestamp': toIST(r.timestamp)
+    };
 }
 
 export async function onRequest(context) {
@@ -58,29 +30,30 @@ export async function onRequest(context) {
     const url = new URL(request.url);
     let action = url.searchParams.get('action');
 
-    // 🔒 CSRF CHECK — validate Origin header for state-changing requests
+    // CSRF & Content-Type check for state-changing requests
     if (request.method === 'POST') {
         const origin = request.headers.get('Origin');
-        const requestUrl = new URL(request.url);
-        // Reject if Origin is missing or doesn't match the host
-        if (!origin || new URL(origin).host !== requestUrl.host) {
+        if (!origin || new URL(origin).host !== url.host) {
             return Response.json({ error: 'Forbidden.' }, { status: 403 });
         }
 
-        // Validate Content-Type for POST requests
         const contentType = request.headers.get('Content-Type') || '';
         if (!contentType.includes('application/x-www-form-urlencoded')) {
             return Response.json({ error: 'Invalid content type.' }, { status: 415 });
         }
     }
 
-    // 🔒 AUTH CHECK — verify HMAC-signed token
+    // Verify HMAC-signed token (allows both 'admin' and 'user' roles)
     const authHeader = request.headers.get('Authorization');
     const tokenPayload = await verifyToken(authHeader, env);
 
-    if (!tokenPayload || tokenPayload.user !== env.ADMIN_USER) {
+    if (!tokenPayload || !tokenPayload.user) {
         return Response.json({ error: 'Unauthorized. Please log in.' }, { status: 401 });
     }
+
+    const isAdmin = tokenPayload.role === 'admin';
+    const userDisplayName = (tokenPayload.displayName || tokenPayload.user || '').trim();
+    const clientIP = getClientIP(request);
 
     try {
         // ================================
@@ -88,27 +61,10 @@ export async function onRequest(context) {
         // ================================
         if (request.method === 'GET' && action === 'get') {
             const { results } = await env.DB.prepare(
-                "SELECT * FROM requests ORDER BY id DESC"
+                'SELECT * FROM requests ORDER BY id DESC'
             ).all();
 
-            const mapped = results.map(r => ({
-                'Reference Number/Ticket Number': r.ref_id,
-                'Requested Department': r.requested_dept,
-                'Request Date': r.request_date,
-                'Letter / Email Reference': r.letter_ref,
-                'Action Taken By': r.action_by,
-                'Problem Statement / Objective': r.problem,
-                'Datasets Used': r.datasets,
-                'Date for Data Dump': r.data_dump_date,
-                'Received Count': r.received_count,
-                'Result Shared Mode': r.shared_mode,
-                'Analysis Outcome': r.analysis,
-                'Status': r.status,
-                'Savings': r.savings,
-                'Timestamp': toIST(r.timestamp)
-            }));
-
-            return Response.json(mapped);
+            return Response.json(results.map(mapRecord));
         }
 
         // ================================
@@ -121,29 +77,14 @@ export async function onRequest(context) {
             }
 
             const r = await env.DB.prepare(
-                "SELECT * FROM requests WHERE ref_id = ?"
+                'SELECT * FROM requests WHERE ref_id = ?'
             ).bind(id).first();
 
             if (!r) {
                 return Response.json({ error: 'Record not found.' }, { status: 404 });
             }
 
-            return Response.json({
-                'Reference Number/Ticket Number': r.ref_id,
-                'Requested Department': r.requested_dept,
-                'Request Date': r.request_date,
-                'Letter / Email Reference': r.letter_ref,
-                'Action Taken By': r.action_by,
-                'Problem Statement / Objective': r.problem,
-                'Datasets Used': r.datasets,
-                'Date for Data Dump': r.data_dump_date,
-                'Received Count': r.received_count,
-                'Result Shared Mode': r.shared_mode,
-                'Analysis Outcome': r.analysis,
-                'Status': r.status,
-                'Savings': r.savings,
-                'Timestamp': toIST(r.timestamp)
-            });
+            return Response.json(mapRecord(r));
         }
 
         // ================================
@@ -158,7 +99,6 @@ export async function onRequest(context) {
                 action = data.get('action');
             }
 
-            // Server-side validation
             const VALID_STATUSES = ['Pending', 'In Progress', 'Completed'];
             const MAX_FIELD_LENGTH = 2000;
 
@@ -167,7 +107,6 @@ export async function onRequest(context) {
                 return Response.json({ error: 'Invalid status value.' }, { status: 400 });
             }
 
-            // Validate field lengths
             const fieldsToCheck = [
                 'Requested Department', 'Letter / Email Reference', 'Action Taken By',
                 'Problem Statement / Objective', 'Datasets Used', 'Received Count',
@@ -181,11 +120,14 @@ export async function onRequest(context) {
 
             // ----- ADD NEW RECORD -----
             if (action === 'add') {
+                // Non-admin users can only create records under their own displayName
+                const actionBy = isAdmin ? get('Action Taken By') : userDisplayName;
+
                 const year = new Date().getFullYear().toString();
                 const STARTING_NUMBER = 48;
 
                 const maxResult = await env.DB.prepare(
-                    "SELECT ref_id FROM requests WHERE ref_id LIKE ? ORDER BY LENGTH(ref_id) DESC, ref_id DESC LIMIT 1"
+                    'SELECT ref_id FROM requests WHERE ref_id LIKE ? ORDER BY LENGTH(ref_id) DESC, ref_id DESC LIMIT 1'
                 ).bind(year + '%').first();
 
                 let nextCount = STARTING_NUMBER + 1;
@@ -197,7 +139,7 @@ export async function onRequest(context) {
                 const newRefId = year + String(nextCount).padStart(4, '0');
 
                 await env.DB.prepare(
-                    `INSERT INTO requests 
+                    `INSERT INTO requests
                     (ref_id, requested_dept, request_date, letter_ref, action_by, problem,
                      datasets, data_dump_date, received_count, shared_mode,
                      analysis, status, savings, timestamp)
@@ -207,7 +149,7 @@ export async function onRequest(context) {
                     get('Requested Department'),
                     get('Request Date'),
                     get('Letter / Email Reference'),
-                    get('Action Taken By'),
+                    actionBy,
                     get('Problem Statement / Objective'),
                     get('Datasets Used'),
                     get('Date for Data Dump'),
@@ -219,6 +161,20 @@ export async function onRequest(context) {
                     nowIST()
                 ).run();
 
+                await logAudit(env, {
+                    userId: tokenPayload.userId || 0,
+                    username: tokenPayload.user,
+                    action: 'add_record',
+                    targetType: 'record',
+                    targetId: newRefId,
+                    details: {
+                        department: get('Requested Department'),
+                        action_by: actionBy,
+                        status
+                    },
+                    ipAddress: clientIP
+                });
+
                 return Response.json({ result: 'success', action: 'added', id: newRefId });
             }
 
@@ -228,6 +184,28 @@ export async function onRequest(context) {
                 if (!originalId) {
                     return Response.json({ error: 'Missing originalId for update.' }, { status: 400 });
                 }
+
+                const existing = await env.DB.prepare(
+                    'SELECT action_by FROM requests WHERE ref_id = ?'
+                ).bind(originalId).first();
+
+                if (!existing) {
+                    return Response.json({ error: 'Record not found.' }, { status: 404 });
+                }
+
+                // Server-side ownership check for non-admin users
+                if (!isAdmin) {
+                    const recordOwner = (existing.action_by || '').trim().toLowerCase();
+                    if (recordOwner !== userDisplayName.toLowerCase()) {
+                        return Response.json(
+                            { error: 'Forbidden. You can only edit your own records.' },
+                            { status: 403 }
+                        );
+                    }
+                }
+
+                // Non-admins cannot reassign Action Taken By to another user
+                const actionBy = isAdmin ? get('Action Taken By') : existing.action_by;
 
                 await env.DB.prepare(
                     `UPDATE requests SET
@@ -239,7 +217,7 @@ export async function onRequest(context) {
                     get('Requested Department'),
                     get('Request Date'),
                     get('Letter / Email Reference'),
-                    get('Action Taken By'),
+                    actionBy,
                     get('Problem Statement / Objective'),
                     get('Datasets Used'),
                     get('Date for Data Dump'),
@@ -251,14 +229,27 @@ export async function onRequest(context) {
                     originalId
                 ).run();
 
+                await logAudit(env, {
+                    userId: tokenPayload.userId || 0,
+                    username: tokenPayload.user,
+                    action: 'update_record',
+                    targetType: 'record',
+                    targetId: originalId,
+                    details: {
+                        department: get('Requested Department'),
+                        action_by: actionBy,
+                        status
+                    },
+                    ipAddress: clientIP
+                });
+
                 return Response.json({ result: 'success', action: 'updated' });
             }
         }
 
         return Response.json({ error: 'Invalid action or method.' }, { status: 400 });
-
     } catch (error) {
-        console.error("D1 proxy error:", error);
+        console.error('D1 proxy error:', error);
         return Response.json({ error: 'An unexpected error occurred.' }, { status: 500 });
     }
 }

@@ -21,11 +21,25 @@ if (!token) {
     throw new Error('AUTH_REDIRECT');
 }
 
+// 2b. Role Check for Admin Page
+const currentPath = window.location.pathname;
+if (currentPath === '/admin' || currentPath === '/admin.html') {
+    const role = sessionStorage.getItem('ops_portal_role');
+    if (role !== 'admin') {
+        document.documentElement.style.visibility = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        window.location.replace('/form');
+        throw new Error('ADMIN_REQUIRED');
+    }
+}
+
 // 3. Centralized Logout Handler
 function logout() {
     stopInactivityTimer();
     sessionStorage.removeItem('ops_portal_token');
     sessionStorage.removeItem('ops_portal_user');
+    sessionStorage.removeItem('ops_portal_role');
+    sessionStorage.removeItem('ops_portal_display_name');
     sessionStorage.removeItem('ops_portal_records_cache');
     window.location.replace('/login');
 }

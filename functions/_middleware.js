@@ -27,6 +27,7 @@ const API_FUNCTION_PATHS = [
     '/api/auth',
     '/api/cfdb',
     '/api/proxy',
+    '/api/admin',
 ];
 
 export async function onRequest(context) {
@@ -91,7 +92,7 @@ export async function onRequest(context) {
     //    and just ensure no junk routes leak through.
 
     // Allow known app pages to proceed (auth.js will guard them client-side)
-    const KNOWN_APP_PAGES = ['/', '/index', '/index.html', '/form', '/form.html'];
+    const KNOWN_APP_PAGES = ['/', '/index', '/index.html', '/form', '/form.html', '/admin', '/admin.html'];
     if (KNOWN_APP_PAGES.some(p => pathname === p || pathname === p + '/')) {
         return next();
     }

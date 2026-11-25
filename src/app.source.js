@@ -32,6 +32,26 @@ const EXCLUDED_MEMBERS = [
 const CACHE_KEY = 'ops_portal_records_cache';
 const CACHE_TTL = 60 * 1000; // 60 seconds
 
+// Auth Context Helpers
+function getCurrentUserRole() {
+    return sessionStorage.getItem('ops_portal_role') || 'user';
+}
+
+function getCurrentUserDisplayName() {
+    return (sessionStorage.getItem('ops_portal_display_name') || sessionStorage.getItem('ops_portal_user') || '').trim();
+}
+
+function isCurrentUserAdmin() {
+    return getCurrentUserRole() === 'admin';
+}
+
+function canEditRecord(record) {
+    if (isCurrentUserAdmin()) return true;
+    const owner = ((record && record['Action Taken By']) || '').trim().toLowerCase();
+    const current = getCurrentUserDisplayName().toLowerCase();
+    return Boolean(owner && current && owner === current);
+}
+
 // ==========================================
 // Toast Notification Utility (Non-blocking)
 // ==========================================
@@ -134,11 +154,22 @@ document.addEventListener('DOMContentLoaded', () => {
         setupFormLogic(form);
     }
 
-    // Display logged-in user name
-    const user = sessionStorage.getItem('ops_portal_user');
+    // Display logged-in user name & role badge
+    const displayName = getCurrentUserDisplayName();
     const userDisplay = document.getElementById('currentUserDisplay');
-    if (user && userDisplay) {
-        userDisplay.innerText = user;
+    if (displayName && userDisplay) {
+        if (isCurrentUserAdmin()) {
+            userDisplay.innerHTML = `${escapeHtml(displayName)} <span class="badge bg-primary-subtle text-primary border border-primary-subtle ms-1">Admin</span>`;
+        } else {
+            userDisplay.innerText = displayName;
+        }
+    }
+
+    // Show admin-only navigation links
+    if (isCurrentUserAdmin()) {
+        document.querySelectorAll('.admin-only-nav').forEach(el => {
+            el.classList.remove('d-none');
+        });
     }
 });
 
@@ -189,6 +220,8 @@ async function fetchWithRetry(url, options = {}, retries = 3, delay = 500) {
             if (response.status === 401) {
                 sessionStorage.removeItem('ops_portal_token');
                 sessionStorage.removeItem('ops_portal_user');
+                sessionStorage.removeItem('ops_portal_role');
+                sessionStorage.removeItem('ops_portal_display_name');
                 sessionStorage.removeItem(CACHE_KEY);
                 window.location.replace('/login?timeout=true');
                 return null;
@@ -401,6 +434,7 @@ function renderPersonBadges() {
         const count = counts[member] || 0;
         const initials = escapeHtml(member.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
         const isSelected = selectedPerson.toLowerCase() === member.toLowerCase();
+        const isCurrentUser = !isCurrentUserAdmin() && getCurrentUserDisplayName().toLowerCase() === member.toLowerCase();
         const themeIndex = getThemeIndex(member, index);
 
         const card = document.createElement('div');
@@ -410,11 +444,15 @@ function renderPersonBadges() {
         card.setAttribute('tabindex', '0');
         card.setAttribute('title', isSelected ? `${escapeHtml(member)} (${count} total requests - click to show all)` : `Click to view count & requests for ${escapeHtml(member)}`);
 
+        const youBadge = isCurrentUser
+            ? `<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill ms-1" style="font-size: 0.65rem;">You</span>`
+            : '';
+
         card.innerHTML = `
             <div class="team-card-top">
                 <div class="team-avatar">${initials}</div>
                 <div class="team-info">
-                    <span class="team-name" title="${escapeHtml(member)}">${escapeHtml(member)}</span>
+                    <span class="team-name" title="${escapeHtml(member)}">${escapeHtml(member)}${youBadge}</span>
                 </div>
                 <div class="team-stat-badge team-stat-individual">
                     <span class="team-count">${count}</span>
@@ -741,8 +779,11 @@ function renderTable() {
             statusBadge = `<span class="badge bg-danger-subtle text-danger border border-danger px-2 py-1">Pending</span>`;
         }
 
+        const isOwner = canEditRecord(row);
         const editAction = rawId
-            ? `<a href="/index?edit=${encodeURIComponent(rawId)}" class="text-primary fw-semibold text-decoration-none action-btn">View/Edit</a>`
+            ? (isOwner
+                ? `<a href="/index?edit=${encodeURIComponent(rawId)}" class="text-primary fw-semibold text-decoration-none action-btn"><i class="bi bi-pencil-square me-1"></i>Edit</a>`
+                : `<a href="/index?edit=${encodeURIComponent(rawId)}&readonly=true" class="text-secondary fw-semibold text-decoration-none action-btn"><i class="bi bi-eye me-1"></i>View</a>`)
             : `<button type="button" class="btn btn-link p-0 text-muted fw-semibold text-decoration-none missing-id-btn">Edit</button>`;
 
         const department = escapeHtml(row['Requested Department'] || 'N/A');
@@ -931,6 +972,60 @@ function renderPagination() {
 // ==========================================
 // Form Logic (Create & Edit Mode)
 // ==========================================
+function lockActionTakenByField(form, value) {
+    const select = form.elements['Action Taken By'];
+    if (!select) return;
+    if (value) {
+        const hasOption = Array.from(select.options).some(opt => opt.value.toLowerCase() === value.toLowerCase());
+        if (!hasOption) {
+            const opt = document.createElement('option');
+            opt.value = value;
+            opt.textContent = value;
+            select.appendChild(opt);
+        }
+        select.value = Array.from(select.options).find(opt => opt.value.toLowerCase() === value.toLowerCase())?.value || value;
+    }
+    select.disabled = true;
+
+    let hiddenOwner = form.querySelector('input[type="hidden"][name="Action Taken By"]');
+    if (!hiddenOwner) {
+        hiddenOwner = document.createElement('input');
+        hiddenOwner.type = 'hidden';
+        hiddenOwner.name = 'Action Taken By';
+        form.appendChild(hiddenOwner);
+    }
+    hiddenOwner.value = select.value;
+}
+
+function applyReadOnlyMode(form, ownerName) {
+    const titleEl = document.getElementById('formTitle');
+    const subTitleEl = document.getElementById('formSubtitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    if (titleEl) titleEl.innerText = 'View Data Request (Read-Only)';
+    if (subTitleEl) subTitleEl.innerText = 'You have view-only access to this request.';
+    if (submitBtn) submitBtn.classList.add('d-none');
+    if (clearBtn) clearBtn.classList.add('d-none');
+
+    // Freeze all form controls
+    Array.from(form.elements).forEach(el => {
+        if (el.tagName !== 'A') {
+            el.disabled = true;
+        }
+    });
+
+    // Show read-only banner at top of form
+    if (!document.getElementById('readOnlyBanner')) {
+        const banner = document.createElement('div');
+        banner.id = 'readOnlyBanner';
+        banner.className = 'alert alert-warning d-flex align-items-center gap-2 mb-4';
+        banner.setAttribute('role', 'alert');
+        banner.innerHTML = `<i class="bi bi-lock-fill fs-5"></i><div><strong>View Only Mode:</strong> This record belongs to <strong>${escapeHtml(ownerName || 'another user')}</strong>. All fields are locked because only the record owner or an administrator can modify it.</div>`;
+        form.prepend(banner);
+    }
+}
+
 function setupFormLogic(form) {
     const urlParams = new URLSearchParams(window.location.search);
     const editId = urlParams.get('edit');
@@ -969,7 +1064,14 @@ function setupFormLogic(form) {
         }
 
         const finishLoading = (record) => {
-            if (record) populateForm(form, record);
+            if (record) {
+                populateForm(form, record);
+                if (!canEditRecord(record)) {
+                    applyReadOnlyMode(form, record['Action Taken By']);
+                } else if (!isCurrentUserAdmin()) {
+                    lockActionTakenByField(form, record['Action Taken By']);
+                }
+            }
             clearTimeout(cancelTimer);
             if (overlay) {
                 overlay.style.transition = 'opacity 0.3s ease';
@@ -1015,6 +1117,9 @@ function setupFormLogic(form) {
             refNumberInput.value = '';
             refNumberInput.placeholder = 'Auto-generated on save';
         }
+        if (!isCurrentUserAdmin()) {
+            lockActionTakenByField(form, getCurrentUserDisplayName());
+        }
     }
 
     form.addEventListener('submit', async (e) => {
@@ -1043,6 +1148,8 @@ function setupFormLogic(form) {
             if (response.status === 401) {
                 sessionStorage.removeItem('ops_portal_token');
                 sessionStorage.removeItem('ops_portal_user');
+                sessionStorage.removeItem('ops_portal_role');
+                sessionStorage.removeItem('ops_portal_display_name');
                 sessionStorage.removeItem(CACHE_KEY);
                 showToast('Session expired. Redirecting to login...', 'warning');
                 setTimeout(() => window.location.replace('/login?timeout=true'), 1500);
@@ -1078,6 +1185,9 @@ function setupFormLogic(form) {
             form.reset();
             if (editId && editId !== 'undefined' && editId !== 'N/A' && refNumberInput) {
                 refNumberInput.value = editId;
+            }
+            if (!isCurrentUserAdmin()) {
+                lockActionTakenByField(form, getCurrentUserDisplayName());
             }
         });
     }
