@@ -3,7 +3,8 @@ import {
     toIST,
     nowIST,
     getClientIP,
-    logAudit
+    logAudit,
+    secureJson
 } from '../_lib/security.js';
 
 function mapRecord(r) {
@@ -48,7 +49,7 @@ export async function onRequest(context) {
     const tokenPayload = await verifyToken(authHeader, env);
 
     if (!tokenPayload || !tokenPayload.user) {
-        return Response.json({ error: 'Unauthorized. Please log in.' }, { status: 401 });
+        return secureJson({ error: 'Unauthorized. Please log in.' }, 401);
     }
 
     const isAdmin = tokenPayload.role === 'admin';
@@ -64,7 +65,7 @@ export async function onRequest(context) {
                 'SELECT * FROM requests ORDER BY id DESC'
             ).all();
 
-            return Response.json(results.map(mapRecord));
+            return secureJson(results.map(mapRecord));
         }
 
         // ================================
@@ -84,7 +85,7 @@ export async function onRequest(context) {
                 return Response.json({ error: 'Record not found.' }, { status: 404 });
             }
 
-            return Response.json(mapRecord(r));
+            return secureJson(mapRecord(r));
         }
 
         // ================================
@@ -175,7 +176,7 @@ export async function onRequest(context) {
                     ipAddress: clientIP
                 });
 
-                return Response.json({ result: 'success', action: 'added', id: newRefId });
+                return secureJson({ result: 'success', action: 'added', id: newRefId });
             }
 
             // ----- UPDATE EXISTING RECORD -----
@@ -243,7 +244,7 @@ export async function onRequest(context) {
                     ipAddress: clientIP
                 });
 
-                return Response.json({ result: 'success', action: 'updated' });
+                return secureJson({ result: 'success', action: 'updated' });
             }
         }
 

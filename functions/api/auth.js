@@ -1,9 +1,12 @@
 import {
     constantTimeEquals,
     verifyPassword,
+    hashIdentifier,
+    decryptText,
     signToken,
     getClientIP,
-    logAudit
+    logAudit,
+    secureJson
 } from '../_lib/security.js';
 
 // Rate limiter: Map<ip, { count, resetTime }>
@@ -28,14 +31,14 @@ export async function onRequest(context) {
     const { request, env } = context;
 
     if (request.method !== 'POST') {
-        return Response.json({ error: 'Method Not Allowed' }, { status: 405 });
+        return secureJson({ error: 'Method Not Allowed' }, 405);
     }
 
     const clientIP = getClientIP(request);
     if (isRateLimited(clientIP)) {
-        return Response.json(
+        return secureJson(
             { error: 'Too many login attempts. Please try again later.' },
-            { status: 429 }
+            429
         );
     }
 
@@ -45,92 +48,97 @@ export async function onRequest(context) {
         const password = typeof body.password === 'string' ? body.password : '';
 
         if (!username || !password) {
-            return Response.json({ success: false, error: 'Username and password are required.' }, { status: 400 });
+            return secureJson({ success: false, error: 'Username and password are required.' }, 400);
         }
 
         if (!env.AUTH_SECRET) {
-            return Response.json({ error: 'Server auth configuration error.' }, { status: 500 });
+            return secureJson({ error: 'Server auth configuration error.' }, 500);
         }
 
-        // 1. Check D1 users table first
+        // 1. Check D1 users table first (using blind index hash, with fallback for legacy plaintext rows)
         let dbUser = null;
         try {
             if (env.DB) {
+                const unameHash = await hashIdentifier(username, env.AUTH_SECRET);
                 dbUser = await env.DB.prepare(
-                    'SELECT id, username, password, display_name, role, status FROM users WHERE LOWER(username) = LOWER(?) LIMIT 1'
-                ).bind(username).first();
+                    'SELECT id, username, password, display_name, role, status FROM users WHERE username_hash = ? OR LOWER(username) = LOWER(?) LIMIT 1'
+                ).bind(unameHash, username).first();
             }
         } catch (dbErr) {
-            // If users table doesn't exist yet, fall back to env vars seamlessly
             console.warn('D1 users lookup skipped:', dbErr.message);
         }
 
         if (dbUser) {
+            const plainUsername = await decryptText(dbUser.username, env.AUTH_SECRET) || username;
+            const plainDisplayName = await decryptText(dbUser.display_name, env.AUTH_SECRET);
+
             if (dbUser.status !== 'active') {
                 await logAudit(env, {
                     userId: dbUser.id,
-                    username: dbUser.username,
+                    username: plainUsername,
                     action: 'login_failed',
                     targetType: 'user',
                     targetId: dbUser.id,
                     details: { reason: 'inactive_account' },
                     ipAddress: clientIP
                 });
-                return Response.json(
+                return secureJson(
                     { success: false, error: 'Account is inactive. Please contact the administrator.' },
-                    { status: 403 }
+                    403
                 );
             }
 
-            const passValid = await verifyPassword(password, dbUser.password);
+            const passValid = await verifyPassword(password, dbUser.password, env.AUTH_SECRET);
             if (!passValid) {
                 await logAudit(env, {
                     userId: dbUser.id,
-                    username: dbUser.username,
+                    username: plainUsername,
                     action: 'login_failed',
                     targetType: 'user',
                     targetId: dbUser.id,
                     details: { reason: 'invalid_password' },
                     ipAddress: clientIP
                 });
-                return Response.json({ success: false, error: 'Invalid credentials' }, { status: 401 });
+                return secureJson({ success: false, error: 'Invalid credentials' }, 401);
             }
 
             const payload = {
                 userId: dbUser.id,
-                user: dbUser.username,
+                user: plainUsername,
                 role: dbUser.role,
-                displayName: dbUser.display_name,
+                displayName: plainDisplayName,
                 iat: Date.now()
             };
             const token = await signToken(payload, env.AUTH_SECRET);
 
             await logAudit(env, {
                 userId: dbUser.id,
-                username: dbUser.username,
+                username: plainUsername,
                 action: 'login',
                 targetType: 'user',
                 targetId: dbUser.id,
-                details: { role: dbUser.role, displayName: dbUser.display_name },
+                details: { role: dbUser.role },
                 ipAddress: clientIP
             });
 
-            return Response.json({
+            return secureJson({
                 success: true,
-                username: dbUser.username,
-                displayName: dbUser.display_name,
+                username: plainUsername,
+                displayName: plainDisplayName,
                 role: dbUser.role,
                 token
             });
         }
 
-        // 2. Fallback superadmin via Cloudflare environment variables
+        // 2. Fallback superadmin via Cloudflare environment variables (supports plaintext or hashed ADMIN_PASS)
         const validUsername = env.ADMIN_USER;
         const validPassword = env.ADMIN_PASS;
 
         if (validUsername && validPassword) {
             const userMatch = constantTimeEquals(username, validUsername);
-            const passMatch = constantTimeEquals(password, validPassword);
+            const passMatch = (validPassword.startsWith('pbkdf2:') || validPassword.includes(':'))
+                ? await verifyPassword(password, validPassword, env.AUTH_SECRET)
+                : constantTimeEquals(password, validPassword);
 
             if (userMatch && passMatch) {
                 const payload = {
@@ -152,7 +160,7 @@ export async function onRequest(context) {
                     ipAddress: clientIP
                 });
 
-                return Response.json({
+                return secureJson({
                     success: true,
                     username,
                     displayName: 'Administrator',
@@ -172,8 +180,8 @@ export async function onRequest(context) {
             ipAddress: clientIP
         });
 
-        return Response.json({ success: false, error: 'Invalid credentials' }, { status: 401 });
+        return secureJson({ success: false, error: 'Invalid credentials' }, 401);
     } catch (error) {
-        return Response.json({ error: 'Internal Server Error' }, { status: 500 });
+        return secureJson({ error: 'Internal Server Error' }, 500);
     }
 }

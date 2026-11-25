@@ -167,7 +167,7 @@ function openCreateUserModal() {
     document.getElementById('editUserId').value = '';
     document.getElementById('modalUsername').disabled = false;
     document.getElementById('modalPassword').required = true;
-    document.getElementById('passwordHelp').innerText = 'Minimum 6 characters.';
+    document.getElementById('passwordHelp').innerText = 'Min 8 chars with uppercase, lowercase, and a number.';
     document.getElementById('modalStatusGroup').classList.add('d-none');
 
     const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('userModal'));

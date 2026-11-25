@@ -1,9 +1,14 @@
 import {
     verifyToken,
     hashPassword,
+    hashIdentifier,
+    encryptText,
+    decryptText,
+    validatePasswordStrength,
     nowIST,
     getClientIP,
-    logAudit
+    logAudit,
+    secureJson
 } from '../_lib/security.js';
 
 const VALID_ROLES = ['admin', 'user'];
@@ -18,25 +23,27 @@ export async function onRequest(context) {
     if (request.method === 'POST') {
         const origin = request.headers.get('Origin');
         if (!origin || new URL(origin).host !== url.host) {
-            return Response.json({ error: 'Forbidden.' }, { status: 403 });
+            return secureJson({ error: 'Forbidden.' }, 403);
         }
     }
 
-    // Verify token & enforce admin role
+    // Verify encrypted token & enforce admin role
     const authHeader = request.headers.get('Authorization');
     const tokenPayload = await verifyToken(authHeader, env);
 
     if (!tokenPayload || !tokenPayload.user) {
-        return Response.json({ error: 'Unauthorized. Please log in.' }, { status: 401 });
+        return secureJson({ error: 'Unauthorized. Please log in.' }, 401);
     }
 
     if (tokenPayload.role !== 'admin') {
-        return Response.json({ error: 'Forbidden. Administrator access required.' }, { status: 403 });
+        return secureJson({ error: 'Forbidden. Administrator access required.' }, 403);
     }
 
     if (!env.DB) {
-        return Response.json({ error: 'Database binding (DB) is not configured.' }, { status: 500 });
+        return secureJson({ error: 'Database binding (DB) is not configured.' }, 500);
     }
+
+    const secret = env.AUTH_SECRET || '';
 
     try {
         // ================================
@@ -49,11 +56,22 @@ export async function onRequest(context) {
                 const { results } = await env.DB.prepare(
                     'SELECT id, username, display_name, role, status, created_at, updated_at FROM users ORDER BY id ASC'
                 ).all();
-                return Response.json({ users: results || [] });
+
+                const users = await Promise.all((results || []).map(async (u) => ({
+                    id: u.id,
+                    username: await decryptText(u.username, secret),
+                    display_name: await decryptText(u.display_name, secret),
+                    role: u.role,
+                    status: u.status,
+                    created_at: u.created_at,
+                    updated_at: u.updated_at
+                })));
+
+                return secureJson({ users });
             }
 
             if (action === 'logs') {
-                const usernameFilter = (url.searchParams.get('username') || '').trim();
+                const usernameFilter = (url.searchParams.get('username') || '').trim().toLowerCase();
                 const actionFilter = (url.searchParams.get('action_filter') || '').trim();
                 const limitParam = parseInt(url.searchParams.get('limit') || '200', 10);
                 const limit = isNaN(limitParam) ? 200 : Math.min(Math.max(limitParam, 1), 500);
@@ -61,24 +79,38 @@ export async function onRequest(context) {
                 const conditions = [];
                 const bindings = [];
 
-                if (usernameFilter) {
-                    conditions.push('LOWER(username) LIKE LOWER(?)');
-                    bindings.push(`%${usernameFilter}%`);
-                }
                 if (actionFilter) {
                     conditions.push('action = ?');
                     bindings.push(actionFilter);
                 }
 
                 const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+                const fetchLimit = usernameFilter ? 500 : limit;
                 const query = `SELECT id, user_id, username, action, target_type, target_id, details, ip_address, timestamp FROM audit_logs ${whereClause} ORDER BY id DESC LIMIT ?`;
-                bindings.push(limit);
+                bindings.push(fetchLimit);
 
                 const { results } = await env.DB.prepare(query).bind(...bindings).all();
-                return Response.json({ logs: results || [] });
+
+                let logs = await Promise.all((results || []).map(async (log) => ({
+                    id: log.id,
+                    user_id: log.user_id,
+                    username: await decryptText(log.username, secret),
+                    action: log.action,
+                    target_type: log.target_type,
+                    target_id: log.target_id,
+                    details: log.details ? await decryptText(log.details, secret) : null,
+                    ip_address: log.ip_address ? await decryptText(log.ip_address, secret) : null,
+                    timestamp: log.timestamp
+                })));
+
+                if (usernameFilter) {
+                    logs = logs.filter(l => (l.username || '').toLowerCase().includes(usernameFilter)).slice(0, limit);
+                }
+
+                return secureJson({ logs });
             }
 
-            return Response.json({ error: 'Invalid GET action.' }, { status: 400 });
+            return secureJson({ error: 'Invalid GET action.' }, 400);
         }
 
         // ================================
@@ -97,31 +129,38 @@ export async function onRequest(context) {
                 const role = VALID_ROLES.includes(body.role) ? body.role : 'user';
 
                 if (!username || username.length < 3 || username.length > 50 || !/^[a-zA-Z0-9._-]+$/.test(username)) {
-                    return Response.json(
+                    return secureJson(
                         { error: 'Username must be 3-50 characters (letters, numbers, ., _, - only).' },
-                        { status: 400 }
+                        400
                     );
                 }
-                if (!password || password.length < 6) {
-                    return Response.json({ error: 'Password must be at least 6 characters.' }, { status: 400 });
-                }
-                if (!displayName || displayName.length < 2 || displayName.length > 100) {
-                    return Response.json({ error: 'Display Name (Action Taken By) is required.' }, { status: 400 });
+
+                const strengthErr = validatePasswordStrength(password);
+                if (strengthErr) {
+                    return secureJson({ error: strengthErr }, 400);
                 }
 
+                if (!displayName || displayName.length < 2 || displayName.length > 100) {
+                    return secureJson({ error: 'Display Name (Action Taken By) is required.' }, 400);
+                }
+
+                const unameHash = await hashIdentifier(username, secret);
                 const existing = await env.DB.prepare(
-                    'SELECT id FROM users WHERE LOWER(username) = LOWER(?)'
-                ).bind(username).first();
+                    'SELECT id FROM users WHERE username_hash = ? OR LOWER(username) = LOWER(?)'
+                ).bind(unameHash, username).first();
 
                 if (existing) {
-                    return Response.json({ error: 'Username already exists.' }, { status: 409 });
+                    return secureJson({ error: 'Username already exists.' }, 409);
                 }
 
-                const passwordHash = await hashPassword(password);
+                const encUsername = await encryptText(username, secret);
+                const encDisplayName = await encryptText(displayName, secret);
+                const passwordHash = await hashPassword(password, secret);
+
                 const result = await env.DB.prepare(
-                    `INSERT INTO users (username, password, display_name, role, status, created_at, updated_at)
-                     VALUES (?, ?, ?, ?, 'active', ?, ?)`
-                ).bind(username, passwordHash, displayName, role, timestamp, timestamp).run();
+                    `INSERT INTO users (username_hash, username, password, display_name, role, status, created_at, updated_at)
+                     VALUES (?, ?, ?, ?, ?, 'active', ?, ?)`
+                ).bind(unameHash, encUsername, passwordHash, encDisplayName, role, timestamp, timestamp).run();
 
                 const newId = result?.meta?.last_row_id || null;
 
@@ -135,14 +174,14 @@ export async function onRequest(context) {
                     ipAddress: clientIP
                 });
 
-                return Response.json({ success: true, message: `User "${username}" created.`, id: newId });
+                return secureJson({ success: true, message: `User "${username}" created.`, id: newId });
             }
 
             // ----- UPDATE USER -----
             if (action === 'update_user') {
                 const id = parseInt(body.id, 10);
                 if (isNaN(id) || id <= 0) {
-                    return Response.json({ error: 'Valid user id is required.' }, { status: 400 });
+                    return secureJson({ error: 'Valid user id is required.' }, 400);
                 }
 
                 const target = await env.DB.prepare(
@@ -150,38 +189,43 @@ export async function onRequest(context) {
                 ).bind(id).first();
 
                 if (!target) {
-                    return Response.json({ error: 'User not found.' }, { status: 404 });
+                    return secureJson({ error: 'User not found.' }, 404);
                 }
+
+                const targetPlainUsername = await decryptText(target.username, secret);
+                const targetPlainDisplay = await decryptText(target.display_name, secret);
 
                 const displayName = typeof body.displayName === 'string' && body.displayName.trim()
                     ? body.displayName.trim()
-                    : target.display_name;
+                    : targetPlainDisplay;
                 const role = VALID_ROLES.includes(body.role) ? body.role : target.role;
                 const status = VALID_STATUSES.includes(body.status) ? body.status : target.status;
                 const newPassword = typeof body.password === 'string' ? body.password : '';
 
-                // Prevent logged-in admin from locking themselves out
                 if (tokenPayload.userId && id === tokenPayload.userId) {
                     if (status !== 'active' || role !== 'admin') {
-                        return Response.json(
+                        return secureJson(
                             { error: 'You cannot deactivate or demote your own admin account.' },
-                            { status: 400 }
+                            400
                         );
                     }
                 }
 
+                const encDisplayName = await encryptText(displayName, secret);
+
                 if (newPassword) {
-                    if (newPassword.length < 6) {
-                        return Response.json({ error: 'New password must be at least 6 characters.' }, { status: 400 });
+                    const strengthErr = validatePasswordStrength(newPassword);
+                    if (strengthErr) {
+                        return secureJson({ error: strengthErr }, 400);
                     }
-                    const passwordHash = await hashPassword(newPassword);
+                    const passwordHash = await hashPassword(newPassword, secret);
                     await env.DB.prepare(
                         'UPDATE users SET display_name = ?, role = ?, status = ?, password = ?, updated_at = ? WHERE id = ?'
-                    ).bind(displayName, role, status, passwordHash, timestamp, id).run();
+                    ).bind(encDisplayName, role, status, passwordHash, timestamp, id).run();
                 } else {
                     await env.DB.prepare(
                         'UPDATE users SET display_name = ?, role = ?, status = ?, updated_at = ? WHERE id = ?'
-                    ).bind(displayName, role, status, timestamp, id).run();
+                    ).bind(encDisplayName, role, status, timestamp, id).run();
                 }
 
                 await logAudit(env, {
@@ -191,7 +235,7 @@ export async function onRequest(context) {
                     targetType: 'user',
                     targetId: String(id),
                     details: {
-                        target_username: target.username,
+                        target_username: targetPlainUsername,
                         display_name: displayName,
                         role,
                         status,
@@ -200,32 +244,34 @@ export async function onRequest(context) {
                     ipAddress: clientIP
                 });
 
-                return Response.json({ success: true, message: `User "${target.username}" updated.` });
+                return secureJson({ success: true, message: `User "${targetPlainUsername}" updated.` });
             }
 
             // ----- DELETE / DEACTIVATE USER -----
             if (action === 'delete_user') {
                 const id = parseInt(body.id, 10);
                 if (isNaN(id) || id <= 0) {
-                    return Response.json({ error: 'Valid user id is required.' }, { status: 400 });
+                    return secureJson({ error: 'Valid user id is required.' }, 400);
                 }
 
                 if (tokenPayload.userId && id === tokenPayload.userId) {
-                    return Response.json(
+                    return secureJson(
                         { error: 'You cannot delete or deactivate your own account.' },
-                        { status: 400 }
+                        400
                     );
                 }
 
                 const target = await env.DB.prepare(
-                    'SELECT id, username, display_name, status FROM users WHERE id = ?'
+                    'SELECT id, username, status FROM users WHERE id = ?'
                 ).bind(id).first();
 
                 if (!target) {
-                    return Response.json({ error: 'User not found.' }, { status: 404 });
+                    return secureJson({ error: 'User not found.' }, 404);
                 }
 
+                const targetPlainUsername = await decryptText(target.username, secret);
                 const permanent = body.permanent === true;
+
                 if (permanent) {
                     await env.DB.prepare('DELETE FROM users WHERE id = ?').bind(id).run();
                 } else {
@@ -241,27 +287,26 @@ export async function onRequest(context) {
                     targetType: 'user',
                     targetId: String(id),
                     details: {
-                        target_username: target.username,
+                        target_username: targetPlainUsername,
                         mode: permanent ? 'permanent' : 'soft_deactivate'
                     },
                     ipAddress: clientIP
                 });
 
-                return Response.json({
+                return secureJson({
                     success: true,
                     message: permanent
-                        ? `User "${target.username}" permanently deleted.`
-                        : `User "${target.username}" deactivated.`
+                        ? `User "${targetPlainUsername}" permanently deleted.`
+                        : `User "${targetPlainUsername}" deactivated.`
                 });
             }
 
-            return Response.json({ error: 'Invalid POST action.' }, { status: 400 });
+            return secureJson({ error: 'Invalid POST action.' }, 400);
         }
 
-        return Response.json({ error: 'Method Not Allowed' }, { status: 405 });
+        return secureJson({ error: 'Method Not Allowed' }, 405);
     } catch (error) {
         console.error('Admin API error:', error);
-        return Response.json({ error: 'An unexpected error occurred.' }, { status: 500 });
+        return secureJson({ error: 'An unexpected error occurred.' }, 500);
     }
 }
-
