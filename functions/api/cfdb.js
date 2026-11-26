@@ -197,10 +197,11 @@ export async function onRequest(context) {
                 // Server-side ownership check for non-admin users
                 if (!isAdmin) {
                     const recordOwner = (existing.action_by || '').trim().toLowerCase();
-                    if (recordOwner !== userDisplayName.toLowerCase()) {
-                        return Response.json(
+                    const userLower = (tokenPayload.user || '').trim().toLowerCase();
+                    if (recordOwner !== userDisplayName.toLowerCase() && recordOwner !== userLower) {
+                        return secureJson(
                             { error: 'Forbidden. You can only edit your own records.' },
-                            { status: 403 }
+                            403
                         );
                     }
                 }

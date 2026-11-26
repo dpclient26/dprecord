@@ -301,6 +301,26 @@ export function secureJson(data, status = 200) {
     });
 }
 
+// Self-healing schema check: ensures users.username_hash exists even if table was created with older schema.sql
+let _schemaChecked = false;
+export async function ensureRbacSchema(db) {
+    if (!db || _schemaChecked) return;
+    try {
+        await db.prepare('SELECT username_hash FROM users LIMIT 1').first();
+        _schemaChecked = true;
+    } catch (err) {
+        if (String(err.message || '').includes('no such column')) {
+            try {
+                await db.prepare('ALTER TABLE users ADD COLUMN username_hash TEXT').run();
+                await db.prepare('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username_hash ON users(username_hash)').run();
+                _schemaChecked = true;
+            } catch (alterErr) {
+                console.warn('Auto-migration for username_hash failed:', alterErr.message);
+            }
+        }
+    }
+}
+
 // Write an encrypted audit log entry (never throws to avoid breaking primary operations)
 export async function logAudit(env, { userId = 0, username = 'unknown', action, targetType = null, targetId = null, details = null, ipAddress = 'unknown' }) {
     if (!env.DB) return;

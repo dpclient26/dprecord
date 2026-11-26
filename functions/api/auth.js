@@ -1,30 +1,51 @@
 import {
     constantTimeEquals,
+    hashPassword,
     verifyPassword,
     hashIdentifier,
     decryptText,
+    validatePasswordStrength,
     signToken,
+    verifyToken,
+    nowIST,
     getClientIP,
     logAudit,
-    secureJson
+    secureJson,
+    ensureRbacSchema
 } from '../_lib/security.js';
 
-// Rate limiter: Map<ip, { count, resetTime }>
+// Rate limiter: Map<ip:username, { count, resetTime }>
+// Tracks ONLY failed login attempts per (IP + username) so users on the same
+// office/home Wi-Fi do not block each other, and valid logins never count.
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
-const RATE_LIMIT_MAX = 5; // max attempts per window
+const RATE_LIMIT_MAX = 10; // max failed attempts per (IP + username) per window
 
-function isRateLimited(ip) {
+function getRateKey(ip, username) {
+    return `${ip}:${String(username || '').trim().toLowerCase()}`;
+}
+
+function isRateLimited(key) {
     const now = Date.now();
-    const entry = rateLimitMap.get(ip);
-
+    const entry = rateLimitMap.get(key);
     if (!entry || now > entry.resetTime) {
-        rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
         return false;
     }
+    return entry.count >= RATE_LIMIT_MAX;
+}
 
-    entry.count++;
-    return entry.count > RATE_LIMIT_MAX;
+function recordFailedAttempt(key) {
+    const now = Date.now();
+    const entry = rateLimitMap.get(key);
+    if (!entry || now > entry.resetTime) {
+        rateLimitMap.set(key, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    } else {
+        entry.count++;
+    }
+}
+
+function clearRateLimit(key) {
+    rateLimitMap.delete(key);
 }
 
 export async function onRequest(context) {
@@ -35,15 +56,68 @@ export async function onRequest(context) {
     }
 
     const clientIP = getClientIP(request);
-    if (isRateLimited(clientIP)) {
-        return secureJson(
-            { error: 'Too many login attempts. Please try again later.' },
-            429
-        );
-    }
 
     try {
         const body = await request.json();
+
+        // ================================
+        // Self-service Password Change
+        // ================================
+        if (body.action === 'change_password') {
+            const authHeader = request.headers.get('Authorization');
+            const tokenPayload = await verifyToken(authHeader, env);
+            if (!tokenPayload || !tokenPayload.user) {
+                return secureJson({ error: 'Unauthorized. Please log in.' }, 401);
+            }
+            if (!tokenPayload.userId || tokenPayload.userId === 0) {
+                return secureJson(
+                    { error: 'Environment superadmin password must be changed in Cloudflare Environment Variables.' },
+                    400
+                );
+            }
+
+            const currentPassword = typeof body.currentPassword === 'string' ? body.currentPassword : '';
+            const newPassword = typeof body.newPassword === 'string' ? body.newPassword : '';
+
+            const strengthErr = validatePasswordStrength(newPassword);
+            if (strengthErr) {
+                return secureJson({ error: strengthErr }, 400);
+            }
+
+            const dbUser = await env.DB.prepare(
+                'SELECT id, username, password FROM users WHERE id = ?'
+            ).bind(tokenPayload.userId).first();
+
+            if (!dbUser) {
+                return secureJson({ error: 'User not found.' }, 404);
+            }
+
+            const validCurrent = await verifyPassword(currentPassword, dbUser.password, env.AUTH_SECRET);
+            if (!validCurrent) {
+                return secureJson({ error: 'Current password is incorrect.' }, 401);
+            }
+
+            const newHash = await hashPassword(newPassword, env.AUTH_SECRET);
+            await env.DB.prepare(
+                'UPDATE users SET password = ?, updated_at = ? WHERE id = ?'
+            ).bind(newHash, nowIST(), dbUser.id).run();
+
+            await logAudit(env, {
+                userId: dbUser.id,
+                username: tokenPayload.user,
+                action: 'change_password',
+                targetType: 'user',
+                targetId: String(dbUser.id),
+                details: { self_service: true },
+                ipAddress: clientIP
+            });
+
+            return secureJson({ success: true, message: 'Password updated successfully.' });
+        }
+
+        // ================================
+        // Login
+        // ================================
         const username = typeof body.username === 'string' ? body.username.trim() : '';
         const password = typeof body.password === 'string' ? body.password : '';
 
@@ -55,14 +129,29 @@ export async function onRequest(context) {
             return secureJson({ error: 'Server auth configuration error.' }, 500);
         }
 
-        // 1. Check D1 users table first (using blind index hash, with fallback for legacy plaintext rows)
+        const rateKey = getRateKey(clientIP, username);
+        if (isRateLimited(rateKey)) {
+            return secureJson(
+                { error: 'Too many failed login attempts for this user. Please try again in 15 minutes.' },
+                429
+            );
+        }
+
+        // 1. Check D1 users table first
         let dbUser = null;
         try {
             if (env.DB) {
+                await ensureRbacSchema(env.DB);
                 const unameHash = await hashIdentifier(username, env.AUTH_SECRET);
                 dbUser = await env.DB.prepare(
-                    'SELECT id, username, password, display_name, role, status FROM users WHERE username_hash = ? OR LOWER(username) = LOWER(?) LIMIT 1'
+                    'SELECT id, username_hash, username, password, display_name, role, status FROM users WHERE username_hash = ? OR LOWER(username) = LOWER(?) LIMIT 1'
                 ).bind(unameHash, username).first();
+
+                // Auto-backfill username_hash for legacy rows
+                if (dbUser && !dbUser.username_hash) {
+                    await env.DB.prepare('UPDATE users SET username_hash = ? WHERE id = ?')
+                        .bind(unameHash, dbUser.id).run().catch(() => {});
+                }
             }
         } catch (dbErr) {
             console.warn('D1 users lookup skipped:', dbErr.message);
@@ -73,6 +162,7 @@ export async function onRequest(context) {
             const plainDisplayName = await decryptText(dbUser.display_name, env.AUTH_SECRET);
 
             if (dbUser.status !== 'active') {
+                recordFailedAttempt(rateKey);
                 await logAudit(env, {
                     userId: dbUser.id,
                     username: plainUsername,
@@ -90,6 +180,7 @@ export async function onRequest(context) {
 
             const passValid = await verifyPassword(password, dbUser.password, env.AUTH_SECRET);
             if (!passValid) {
+                recordFailedAttempt(rateKey);
                 await logAudit(env, {
                     userId: dbUser.id,
                     username: plainUsername,
@@ -102,6 +193,7 @@ export async function onRequest(context) {
                 return secureJson({ success: false, error: 'Invalid credentials' }, 401);
             }
 
+            clearRateLimit(rateKey);
             const payload = {
                 userId: dbUser.id,
                 user: plainUsername,
@@ -130,17 +222,18 @@ export async function onRequest(context) {
             });
         }
 
-        // 2. Fallback superadmin via Cloudflare environment variables (supports plaintext or hashed ADMIN_PASS)
+        // 2. Fallback superadmin via Cloudflare environment variables
         const validUsername = env.ADMIN_USER;
         const validPassword = env.ADMIN_PASS;
 
         if (validUsername && validPassword) {
             const userMatch = constantTimeEquals(username, validUsername);
-            const passMatch = (validPassword.startsWith('pbkdf2:') || validPassword.includes(':'))
+            const passMatch = validPassword.startsWith('pbkdf2:')
                 ? await verifyPassword(password, validPassword, env.AUTH_SECRET)
                 : constantTimeEquals(password, validPassword);
 
             if (userMatch && passMatch) {
+                clearRateLimit(rateKey);
                 const payload = {
                     userId: 0,
                     user: username,
@@ -171,6 +264,7 @@ export async function onRequest(context) {
         }
 
         // 3. Invalid credentials
+        recordFailedAttempt(rateKey);
         await logAudit(env, {
             userId: 0,
             username,

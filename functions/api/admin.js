@@ -8,7 +8,8 @@ import {
     nowIST,
     getClientIP,
     logAudit,
-    secureJson
+    secureJson,
+    ensureRbacSchema
 } from '../_lib/security.js';
 
 const VALID_ROLES = ['admin', 'user'];
@@ -44,6 +45,7 @@ export async function onRequest(context) {
     }
 
     const secret = env.AUTH_SECRET || '';
+    await ensureRbacSchema(env.DB);
 
     try {
         // ================================
