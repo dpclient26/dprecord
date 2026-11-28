@@ -73,9 +73,9 @@ function startISTClock() {
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
-            hour12: true
+            hour12: false
         });
-        clockEl.innerHTML = `<i class="bi bi-clock text-primary"></i> <span>${dayDate}</span> <span class="opacity-50">|</span> <span>${timeStr} IST</span>`;
+        clockEl.innerHTML = `<i class="bi bi-clock-fill text-primary"></i> <span>${dayDate}</span> <span class="text-body-tertiary">|</span> <span>${timeStr} IST</span>`;
     };
     update();
     setInterval(update, 1000);
