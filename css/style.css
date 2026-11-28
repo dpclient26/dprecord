@@ -582,11 +582,8 @@ h4 {
 .person-chips-grid,
 .team-summary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-    gap: 0.75rem;
-    max-height: 250px;
-    overflow-y: auto;
-    padding-right: 6px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
     padding-bottom: 4px;
     flex-grow: 1;
 }
@@ -754,6 +751,7 @@ h4 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-width: 0;
     background-color: var(--dp-bg-card, #ffffff);
     border: 1px solid var(--dp-border-color, #dee2e6);
     border-radius: 12px;
@@ -1190,9 +1188,9 @@ h4 {
         font-size: 0.75rem;
     }
 
-    .person-chips-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-height: 240px;
+    .person-chips-grid,
+    .team-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .person-chip-all {
