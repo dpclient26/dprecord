@@ -69,26 +69,51 @@ function applyTheme(theme) {
     }
 }
 
+function getISTGreeting(hour) {
+    if (hour >= 5 && hour < 12) return 'Good Morning';
+    if (hour >= 12 && hour < 17) return 'Good Afternoon';
+    if (hour >= 17 && hour < 21) return 'Good Evening';
+    return 'Good Night';
+}
+
 function startISTClock() {
     const clockEl = document.getElementById('istClock');
-    if (!clockEl) return;
+    const greetingEl = document.getElementById('userGreeting');
+    if (!clockEl && !greetingEl) return;
+
+    const displayName = sessionStorage.getItem('ops_portal_display_name') || sessionStorage.getItem('ops_portal_user') || 'Administrator';
+    const adminBadge = ' <span class="badge bg-primary-subtle text-primary border border-primary-subtle ms-1">Admin</span>';
+
     const update = () => {
         const now = new Date();
-        const dayDate = now.toLocaleDateString('en-IN', {
-            timeZone: 'Asia/Kolkata',
-            weekday: 'short',
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric'
-        });
-        const timeStr = now.toLocaleTimeString('en-IN', {
+        const istHour = parseInt(now.toLocaleString('en-US', {
             timeZone: 'Asia/Kolkata',
             hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
             hour12: false
-        });
-        clockEl.innerHTML = `<i class="bi bi-clock-fill text-primary"></i> <span>${dayDate}</span> <span class="text-body-tertiary">|</span> <span>${timeStr} IST</span>`;
+        }), 10) % 24;
+
+        if (greetingEl) {
+            const greeting = getISTGreeting(istHour);
+            greetingEl.innerHTML = `<i class="bi bi-sun-fill text-warning me-1"></i> ${greeting}, <span class="text-primary fw-bold ms-1">${escapeHtml(displayName)}</span>${adminBadge}`;
+        }
+
+        if (clockEl) {
+            const dayDate = now.toLocaleDateString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                weekday: 'short',
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+            const timeStr = now.toLocaleTimeString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            clockEl.innerHTML = `<i class="bi bi-clock-fill text-primary"></i> <span>${dayDate}</span> <span class="text-body-tertiary">|</span> <span>${timeStr} IST</span>`;
+        }
     };
     update();
     setInterval(update, 1000);
