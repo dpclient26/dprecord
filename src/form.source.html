@@ -44,7 +44,12 @@
 
             <!-- User Info and Logout -->
             <div class="d-flex align-items-center gap-2 gap-md-3">
+                <span id="istClock" class="small text-secondary fw-medium d-none d-lg-inline-flex align-items-center gap-1 px-2 py-1 rounded bg-body-secondary text-nowrap"></span>
                 <span id="currentUserDisplay" class="small fw-semibold text-secondary d-none d-md-inline"></span>
+                <button id="changePasswordBtn" class="btn btn-sm btn-outline-secondary" type="button" title="Change Password"
+                    aria-label="Change Password">
+                    <i class="bi bi-key-fill"></i>
+                </button>
                 <button id="themeToggle" class="btn btn-sm btn-outline-secondary" type="button" title="Toggle dark mode"
                     aria-label="Toggle dark mode">
                     <i class="bi bi-moon-fill" id="themeIcon"></i>
@@ -238,6 +243,47 @@
         <span class="text-success small fw-semibold"><i class="bi bi-circle-fill me-1" style="font-size: 8px;"></i>
             Created By NS</span>
     </footer>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="changePasswordForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold"><i class="bi bi-key-fill text-primary me-2"></i>Change Password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small" for="cpUsername">Username</label>
+                            <input type="text" class="form-control bg-body-secondary" id="cpUsername" readonly disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small" for="cpDisplayName">Display Name</label>
+                            <input type="text" class="form-control bg-body-secondary" id="cpDisplayName" readonly disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small" for="cpCurrentPassword">Current Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="cpCurrentPassword" required autocomplete="current-password">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small" for="cpNewPassword">New Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="cpNewPassword" required autocomplete="new-password">
+                            <div class="form-text small">Min 8 chars with uppercase, lowercase, and a number.</div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold small" for="cpConfirmPassword">Confirm New Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="cpConfirmPassword" required autocomplete="new-password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary fw-semibold" id="cpSaveBtn">Update Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>

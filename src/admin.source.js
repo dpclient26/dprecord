@@ -69,6 +69,31 @@ function applyTheme(theme) {
     }
 }
 
+function startISTClock() {
+    const clockEl = document.getElementById('istClock');
+    if (!clockEl) return;
+    const update = () => {
+        const now = new Date();
+        const dayDate = now.toLocaleDateString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            weekday: 'short',
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+        const timeStr = now.toLocaleTimeString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        clockEl.innerHTML = `<i class="bi bi-clock text-primary"></i> <span>${dayDate}</span> <span class="opacity-50">|</span> <span>${timeStr} IST</span>`;
+    };
+    update();
+    setInterval(update, 1000);
+}
+
 async function adminFetch(url, options = {}) {
     const token = sessionStorage.getItem('ops_portal_token') || '';
     const headers = {
@@ -342,6 +367,7 @@ function renderLogsTable() {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    startISTClock();
 
     const displayName = sessionStorage.getItem('ops_portal_display_name') || sessionStorage.getItem('ops_portal_user') || 'Administrator';
     const userDisplay = document.getElementById('currentUserDisplay');

@@ -1,1 +1,1419 @@
-const _0x551f23 = _0x3ff7; (function (_0x20fa02, _0x57df42) { const _0xce43a2 = _0x3ff7, _0x5d8a37 = _0x20fa02(); while (!![]) { try { const _0x2609c1 = parseInt(_0xce43a2(0x141)) / 0x1 + parseInt(_0xce43a2(0x24f)) / 0x2 * (-parseInt(_0xce43a2(0x1a0)) / 0x3) + parseInt(_0xce43a2(0x1df)) / 0x4 * (parseInt(_0xce43a2(0x1c9)) / 0x5) + parseInt(_0xce43a2(0x1ef)) / 0x6 + parseInt(_0xce43a2(0x190)) / 0x7 * (-parseInt(_0xce43a2(0x28c)) / 0x8) + -parseInt(_0xce43a2(0x1ad)) / 0x9 + -parseInt(_0xce43a2(0x130)) / 0xa * (-parseInt(_0xce43a2(0x1f8)) / 0xb); if (_0x2609c1 === _0x57df42) break; else _0x5d8a37['push'](_0x5d8a37['shift']()); } catch (_0x309ffd) { _0x5d8a37['push'](_0x5d8a37['shift']()); } } }(_0x4e84, 0x4d393)); const scriptURL = _0x551f23(0x1cc); let allRecords = [], filteredRecords = [], currentPage = 0x1; const recordsPerPage = 0xa; let currentFilter = _0x551f23(0x1eb), selectedPerson = _0x551f23(0x1eb), searchQuery = ''; const DEFAULT_MEMBERS = [_0x551f23(0x131), _0x551f23(0x20f), _0x551f23(0x1ce), _0x551f23(0x226), _0x551f23(0x1ab), _0x551f23(0x1ca)], EXCLUDED_MEMBERS = [_0x551f23(0x1fe), _0x551f23(0x163)], CACHE_KEY = _0x551f23(0x25f), CACHE_TTL = 0xea60; function getCurrentUserRole() { const _0x18aed4 = _0x551f23; return sessionStorage[_0x18aed4(0x21d)]('ops_portal_role') || _0x18aed4(0x224); } function getCurrentUserDisplayName() { const _0x167ade = _0x551f23; return (sessionStorage[_0x167ade(0x21d)](_0x167ade(0x1c7)) || sessionStorage['getItem'](_0x167ade(0x15d)) || '')['trim'](); } function _0x4e84() { const _0x165529 = ['warn', '.logout-btn,\x20#logoutBtn', 'totalCount', 'getContext', 'ops_portal_user', 'toUpperCase', 'textAlign', 'body', 'toastContainer', 'You\x20have\x20view-only\x20access\x20to\x20this\x20request.', 'Nivas\x20Saravana', 'Submit', 'text-primary', 'Showing\x20', 'activePersonFilterBanner', 'middle', 'toast-container', 'Cannot\x20edit:\x20Missing\x20Reference\x20Number.', 'flex', '...', 'formSubtitle', '.team-count', 'some', 'classList', 'Status', 'Records\x20refreshed\x20from\x20database!', '#38bdf8', 'trim', 'getElementById', 'save', 'paginationText', 'stroke', 'map', 'removeChild', 'abs', '#dc3545', 'tabindex', 'Network\x20error.\x20Please\x20check\x20your\x20connection.', '<span\x20class=\x22badge\x20bg-success-subtle\x20text-success\x20border\x20border-success\x20px-2\x20py-1\x22>Completed</span>', 'role', 'createElement', 'setAttribute', 'localeCompare', 'Date\x20for\x20Data\x20Dump', 'opacity\x200.3s\x20ease', '\x22\x20title=\x22Click\x20to\x20filter\x20by\x20', '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22text-muted\x22>', 'searchInput', 'forEach', 'catch', '.admin-only-nav', 'key', '600\x209px\x20Inter,\x20system-ui,\x20sans-serif', '2-digit', 'info', '86695XcdnxK', 'edit', 'themeIcon', 'animationDelay', '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>', '<i\x20class=\x22bi\x20', 'Savings', '#6c757d', 'textContent', '\x20total\x20requests\x20-\x20click\x20to\x20show\x20all)', 'Session\x20expired.\x20Redirecting\x20to\x20login...', 'get', 'originalId', '.team-member-card,\x20.person-chip', 'completedCount', 'now', '17529tIhhES', 'Submit\x20error:', 'undefined', 'fw-semibold', 'animate-row', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-card-top\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-avatar\x20team-avatar-all\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-people-fill\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-name\x22>All\x20Team\x20Members</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-role\x22>', 'toLowerCase', 'querySelector', '.missing-id-btn', 'fillText', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22action-by-name\x20fw-medium\x22>', 'Praveenraj', 'numeric', '2932731lSunkv', 'clearBtn', 'Problem\x20Statement\x20/\x20Objective', 'disabled', 'toggle', '/api/cfdb?action=get', 'Asia/Kolkata', 'active', 'button[data-filter=\x22', 'Action\x20Taken\x20By', 'ops_portal_token', 'teamMemberCountBadge', 'pendingCount', 'replaceAll', '/api/cfdb?action=get_one&id=', 'tagName', 'substring', 'spin-animation', 'max', 'append', 'warning', 'closest', 'push', '#adb5bd', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-count-unit\x22>Total</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-card-active-indicator\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-check-circle-fill\x22></i>\x20Showing\x20All\x20Records\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20', 'title', 'ops_portal_display_name', 'querySelectorAll', '212575noCwgd', 'Swathi', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr><td\x20colspan=\x2210\x22\x20class=\x22text-center\x20py-4\x20text-danger\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-exclamation-triangle\x20me-2\x22></i>Unable\x20to\x20load\x20records.\x20Please\x20check\x20your\x20connection.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<br><button\x20type=\x22button\x22\x20class=\x22btn\x20btn-sm\x20btn-outline-primary\x20mt-2\x20retry-fetch-btn\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-arrow-clockwise\x20me-1\x22></i>\x20Retry\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td></tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20', '/api/cfdb', 'TOTAL', 'Kalaivanan', '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20', 'bi-check-circle-fill', 'submit', 'No\x20Data', 'true', 'createObjectURL', 'search', 'toString', 'placeholder', 'contains', 'Pending', 'Error:\x20', 'elements', 'values', 'themeToggle', 'div', '44VaWWYB', 'Download\x20started\x20successfully!', 'alert', 'currentUserDisplay', 'data-person', 'date', 'Requests', 'status', 'location', 'button', 'charCodeAt', 'height', 'all', 'team-member-card\x20team-card-all\x20', '#30363d', '#8b949e', '1478298DZvxjG', 'slice', '</a></li>', 'Logged\x20In\x20User', '\x20requests\x20-\x20click\x20to\x20show\x20all)', 'Request', 'lineWidth', 'sort', 'error', '2761oKEpjL', 'removeItem', '<li\x20class=\x22page-item\x20disabled\x22><span\x20class=\x22page-link\x22>&hellip;</span></li>', 'bi-info-circle-fill', '\x22><a\x20class=\x22page-link\x22\x20href=\x22#\x22\x20data-page=\x22', 'createDocumentFragment', 'Martina\x20Maria\x20Pushpam', 'filter', 'split', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-count-unit\x22>', 'pointer', 'Enter', 'data-filter', 'concat', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22text-truncate\x22\x20style=\x22max-width:\x20200px;\x22\x20title=\x22', '\x20Members', 'Request\x20updated\x20successfully!', 'replace', 'All\x20Requests', 'has', '\x22>Previous</a></li>', 'requestForm', 'success', 'Ganesh\x20Velu', 'toLocaleDateString', 'dark', 'inProgressCount', 'ops_portal_role', '&#39;', '<span\x20class=\x22badge\x20bg-danger-subtle\x20text-danger\x20border\x20border-danger\x20px-2\x20py-1\x22>Pending</span>', 'style', '&readonly=true\x22\x20class=\x22text-secondary\x20fw-semibold\x20text-decoration-none\x20action-btn\x22><i\x20class=\x22bi\x20bi-eye\x20me-1\x22></i>View</a>', 'readOnlyBanner', 'reset', 'transform', 'width', 'Bearer\x20', 'getItem', 'refreshDataBtn', '.csv', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-stat-badge\x20team-stat-individual\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-count\x22>', 'en-US', 'font', 'scale', 'user', 'formTitle', 'Mohan', 'In\x20Progress', 'closePath', 'Click\x20to\x20view\x20count\x20&\x20requests\x20for\x20', '\x20me-2\x22></i><span>', 'count', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20', '#212529', 'activePersonFilterCount', 'Requested\x20Department', 'color', 'addEventListener', 'statusScopeBadge', '/form', 'Request\x20Date', 'then', 'beginPath', 'fillStyle', 'strokeStyle', '\x20fw-semibold\x22>', 'from', 'dismissPersonFilterBtn', 'timestamp', '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-avatar-mini\x20avatar-theme-', '#ffffff', 'prepend', 'min', 'bi-exclamation-triangle-fill', 'downloadBtn', '<i\x20class=\x22bi\x20bi-save\x20me-2\x22></i>\x20Update\x20Request', 'Error\x20fetching\x20records:', 'target', '\x20to\x20', 'personBadgesContainer', 'click', 'fill', '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22action-by-cell\x22\x20data-person=\x22', '&quot;', 'transition', 'parse', 'toLocaleString', '16nrBwck', 'className', 'activePersonFilterName', 'Timestamp', 'none', '#20c997', 'data', '#e9ecef', '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-click-prompt\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22badge\x20bg-body-secondary\x20text-secondary\x20border\x20border-secondary-subtle\x20rounded-pill\x20px-2\x20py-1\x20small\x20fw-normal\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-eye\x20me-1\x22></i>View\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-card-active-indicator\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-check-circle-fill\x22></i>\x20Showing\x20', 'visibility', 'name', 'join', '#198754', 'update', '#f87171', 'Letter\x20/\x20Email\x20Reference', 'ops_portal_records_cache', 'isArray', 'hidden', 'Record\x20not\x20found\x20in\x20database!', 'test', '<i\x20class=\x22bi\x20bi-lock-fill\x20fs-5\x22></i><div><strong>View\x20Only\x20Mode:</strong>\x20This\x20record\x20belongs\x20to\x20<strong>', 'alert\x20alert-warning\x20d-flex\x20align-items-center\x20gap-2\x20mb-4', '&gt;', 'download', 'remove', 'formLoadingOverlay', '&lt;', 'floor', 'keydown', 'json', 'textBaseline', 'all\x200.3s\x20ease', 'admin', 'N/A', 'No\x20data\x20available\x20to\x20download.', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22px-4\x20', 'display', 'reqs', 'padStart', '\x22>Next</a></li>', 'light', 'clearPersonFilterBtn', 'findIndex', '<a\x20href=\x22/index?edit=', 'Result\x20Shared\x20Mode', '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22fw-semibold\x22>', 'Unknown', '<li\x20class=\x22page-item\x20', '<tr><td\x20colspan=\x2210\x22\x20class=\x22text-center\x20py-4\x20text-muted\x22>No\x20records\x20found\x20matching\x20your\x20criteria.</td></tr>', 'Received\x20Count', 'text/csv;charset=utf-8;', 'preventDefault', 'innerText', 'finally', 'number', '#0d6efd', 'getDate', 'appendChild', 'getAttribute', 'stringify', '360ZAjeGM', 'd-none', 'value', 'aria-live', 'data-page', '<span\x20class=\x22badge\x20bg-success-subtle\x20text-success\x20border\x20border-success-subtle\x20rounded-pill\x20ms-1\x22\x20style=\x22font-size:\x200.65rem;\x22>You</span>', 'short', 'Completed', 'bi\x20bi-sun-fill\x20text-warning', 'Edit\x20Data\x20Request', 'getTime', 'filterGroup', '\x20total\x20requests)', 'tableBody', 'arc', '5060dkmUuO', 'Akash\x20Karmegam', '\x20<span\x20class=\x22badge\x20bg-primary-subtle\x20text-primary\x20border\x20border-primary-subtle\x20ms-1\x22>Admin</span>', 'statusPieChart', '\x20requests', 'innerHTML', 'getFullYear', '</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-name\x22\x20title=\x22', 'Showing\x200\x20to\x200\x20of\x200\x20requests', 'add', 'restore', 'options', 'length', 'Reference\x20Number/Ticket\x20Number', 'documentElement', 'text-muted', '</span>', '405181XhfONf', '#f0f6fc', 'find', '\x22\x20class=\x22text-primary\x20fw-semibold\x20text-decoration-none\x20action-btn\x22><i\x20class=\x22bi\x20bi-pencil-square\x20me-1\x22></i>Edit</a>', '&amp;', '\x20of\x20', 'team-member-card\x20avatar-theme-', 'center', '<tr><td\x20colspan=\x2210\x22\x20class=\x22text-center\x20py-4\x22><div\x20class=\x22spinner-border\x20text-primary\x22\x20role=\x22status\x22></div><br><span\x20class=\x22text-muted\x20small\x20mt-2\x20d-inline-block\x22>Loading\x20records...</span></td></tr>', 'Error\x20fetching\x20record\x20for\x20edit:', 'en-IN', 'href', 'Auto-generated\x20on\x20save', 'type', '600\x2011px\x20Inter,\x20system-ui,\x20sans-serif', 'data-bs-theme', 'refNumberInput', 'cancelLoadBtn', 'input', 'ceil', 'Request\x20submitted\x20successfully!\x20Generated\x20ID:\x20', 'Failed\x20to\x20load\x20record.\x20Please\x20try\x20again.', 'Failed\x20to\x20save\x20record.', 'opacity']; _0x4e84 = function () { return _0x165529; }; return _0x4e84(); } function isCurrentUserAdmin() { const _0x30693e = _0x551f23; return _0x30693e(0x270) === getCurrentUserRole(); } function canEditRecord(_0x5e4e0c) { const _0x44268c = _0x551f23; if (isCurrentUserAdmin()) return !0x0; const _0xfb1700 = (_0x5e4e0c && _0x5e4e0c[_0x44268c(0x1b6)] || '')[_0x44268c(0x174)]()[_0x44268c(0x1a6)](), _0x18c82d = getCurrentUserDisplayName()[_0x44268c(0x1a6)](); return Boolean(_0xfb1700 && _0x18c82d && _0xfb1700 === _0x18c82d); } function showToast(_0x14870c, _0x513335 = _0x551f23(0x18f), _0x3298ca = 0xdac) { const _0x198fdc = _0x551f23; let _0x5f3954 = document[_0x198fdc(0x175)]('toastContainer'); _0x5f3954 || (_0x5f3954 = document[_0x198fdc(0x181)]('div'), _0x5f3954['id'] = _0x198fdc(0x161), _0x5f3954['className'] = _0x198fdc(0x169), _0x5f3954['setAttribute'](_0x198fdc(0x28f), 'polite'), _0x5f3954[_0x198fdc(0x182)]('aria-atomic', _0x198fdc(0x1d3)), document['body'][_0x198fdc(0x289)](_0x5f3954)); const _0x5cacc8 = document['createElement']('div'); _0x5cacc8['className'] = 'toast-notification\x20toast-'[_0x198fdc(0x205)](_0x513335); let _0x39117e = _0x198fdc(0x1fb); _0x198fdc(0x20e) === _0x513335 ? _0x39117e = _0x198fdc(0x1d0) : _0x198fdc(0x1f7) === _0x513335 ? _0x39117e = _0x198fdc(0x241) : _0x198fdc(0x1c1) === _0x513335 && (_0x39117e = 'bi-exclamation-circle-fill'), _0x5cacc8[_0x198fdc(0x135)] = _0x198fdc(0x195)[_0x198fdc(0x205)](_0x39117e, _0x198fdc(0x22a))['concat'](escapeHtml(_0x14870c), _0x198fdc(0x140)), _0x5f3954[_0x198fdc(0x289)](_0x5cacc8), setTimeout(() => { const _0x18d35f = _0x198fdc; _0x5cacc8[_0x18d35f(0x216)]['opacity'] = '0', _0x5cacc8[_0x18d35f(0x216)][_0x18d35f(0x21a)] = 'translateY(-10px)', _0x5cacc8[_0x18d35f(0x216)][_0x18d35f(0x24c)] = _0x18d35f(0x26f), setTimeout(() => _0x5cacc8[_0x18d35f(0x268)](), 0x12c); }, _0x3298ca); } function initTheme() { const _0x6d0a1f = _0x551f23; applyTheme(localStorage[_0x6d0a1f(0x21d)]('dp_theme') || 'light'); const _0x31ca60 = document[_0x6d0a1f(0x175)](_0x6d0a1f(0x1dd)); _0x31ca60 && _0x31ca60[_0x6d0a1f(0x231)]('click', () => { const _0x5e31a4 = _0x6d0a1f; applyTheme(_0x5e31a4(0x211) === (document[_0x5e31a4(0x13e)][_0x5e31a4(0x28a)](_0x5e31a4(0x150)) || _0x5e31a4(0x278)) ? _0x5e31a4(0x278) : _0x5e31a4(0x211)); }); } function applyTheme(_0x882100) { const _0x4f2624 = _0x551f23; document['documentElement'][_0x4f2624(0x182)](_0x4f2624(0x150), _0x882100), document[_0x4f2624(0x13e)][_0x4f2624(0x182)]('data-theme', _0x882100), localStorage['setItem']('dp_theme', _0x882100); const _0x3be0a4 = document[_0x4f2624(0x175)](_0x4f2624(0x192)); (_0x3be0a4 && (_0x3be0a4[_0x4f2624(0x250)] = _0x4f2624(0x211) === _0x882100 ? _0x4f2624(0x294) : 'bi\x20bi-moon-fill'), document[_0x4f2624(0x175)](_0x4f2624(0x133))) && drawStatusPieChart('all' !== currentFilter || searchQuery || _0x4f2624(0x1eb) !== selectedPerson ? filteredRecords : allRecords); } function _0x3ff7(_0x1b33dd, _0x35d4ce) { _0x1b33dd = _0x1b33dd - 0x130; const _0x4e848b = _0x4e84(); let _0x3ff768 = _0x4e848b[_0x1b33dd]; return _0x3ff768; } function saveToCache(_0x4a6b38) { const _0x4592b7 = _0x551f23; try { const _0x490bc8 = { 'data': _0x4a6b38, 'timestamp': Date[_0x4592b7(0x19f)]() }; sessionStorage['setItem'](CACHE_KEY, JSON['stringify'](_0x490bc8)); } catch (_0x1ecb82) { console[_0x4592b7(0x159)]('SessionStorage\x20cache\x20quota\x20exceeded:', _0x1ecb82); } } function getFromCache() { const _0x273cc2 = _0x551f23; try { const _0x43bbd3 = sessionStorage[_0x273cc2(0x21d)](CACHE_KEY); if (!_0x43bbd3) return null; const _0x35d7e7 = JSON[_0x273cc2(0x24d)](_0x43bbd3); return Date['now']() - _0x35d7e7[_0x273cc2(0x23c)] > 0xea60 ? null : _0x35d7e7[_0x273cc2(0x255)]; } catch (_0x251a8c) { return null; } } function clearCache() { const _0x1c8ddb = _0x551f23; sessionStorage[_0x1c8ddb(0x1f9)](CACHE_KEY); } async function fetchWithRetry(_0x3ea4de, _0x47ae5f = {}, _0x2b96e4 = 0x3, _0x3b2938 = 0x1f4) { const _0x2da622 = _0x551f23, _0x38baca = sessionStorage['getItem'](_0x2da622(0x1b7)) || '', _0x621b8f = { ..._0x47ae5f['headers'] || {}, 'Authorization': _0x2da622(0x21c) + _0x38baca }, _0x36c99e = { ..._0x47ae5f, 'headers': _0x621b8f }; for (let _0x4d1b42 = 0x1; _0x4d1b42 <= _0x2b96e4; _0x4d1b42++)try { const _0xb3cbed = await fetch(_0x3ea4de, _0x36c99e); if (0x191 === _0xb3cbed[_0x2da622(0x1e6)]) return sessionStorage['removeItem'](_0x2da622(0x1b7)), sessionStorage[_0x2da622(0x1f9)](_0x2da622(0x15d)), sessionStorage['removeItem'](_0x2da622(0x213)), sessionStorage[_0x2da622(0x1f9)](_0x2da622(0x1c7)), sessionStorage[_0x2da622(0x1f9)](CACHE_KEY), window[_0x2da622(0x1e7)][_0x2da622(0x209)]('/login?timeout=true'), null; if (!_0xb3cbed['ok']) throw new Error('HTTP\x20'[_0x2da622(0x205)](_0xb3cbed['status'])); return await _0xb3cbed[_0x2da622(0x26d)](); } catch (_0x4f008c) { if (_0x4d1b42 === _0x2b96e4) throw _0x4f008c; await new Promise(_0x106579 => setTimeout(_0x106579, _0x3b2938 * _0x4d1b42)); } } async function loadFromCacheOrFetch() { const _0x58d91f = _0x551f23, _0x287e2d = document[_0x58d91f(0x175)](_0x58d91f(0x299)), _0x379cf4 = getFromCache(); _0x379cf4 && Array[_0x58d91f(0x260)](_0x379cf4) && _0x379cf4[_0x58d91f(0x13c)] >= 0x0 ? (allRecords = [..._0x379cf4], renderPersonBadges(), updateStats(), applyFiltersAndRender(), fetchAndRenderRecords(!0x0)) : (_0x287e2d && (_0x287e2d[_0x58d91f(0x135)] = _0x58d91f(0x149)), fetchAndRenderRecords(!0x1)); } async function fetchAndRenderRecords(_0x5f2826 = !0x1) { const _0x466f24 = _0x551f23; try { const _0x4f3908 = await fetchWithRetry(_0x466f24(0x1b2), {}, 0x3, 0x1f4); if (!_0x4f3908) return; if (saveToCache(_0x4f3908), _0x5f2826 && _0x4f3908[_0x466f24(0x13c)] === allRecords[_0x466f24(0x13c)]) { let _0x8d011b = !0x0; const _0x4ed932 = [0x0, Math[_0x466f24(0x26b)](_0x4f3908[_0x466f24(0x13c)] / 0x2), _0x4f3908[_0x466f24(0x13c)] - 0x1]; for (const _0x4bf095 of _0x4ed932) if (_0x4bf095 >= 0x0 && _0x4bf095 < _0x4f3908['length'] && JSON[_0x466f24(0x28b)](_0x4f3908[_0x4bf095]) !== JSON[_0x466f24(0x28b)](allRecords[_0x4bf095])) { _0x8d011b = !0x1; break; } if (_0x8d011b) return; } allRecords = [..._0x4f3908], renderPersonBadges(), updateStats(), applyFiltersAndRender(); } catch (_0x26ff1e) { if (console[_0x466f24(0x1f7)](_0x466f24(0x244), _0x26ff1e), !_0x5f2826 || 0x0 === allRecords[_0x466f24(0x13c)]) { const _0x348320 = document[_0x466f24(0x175)](_0x466f24(0x299)); _0x348320 && (_0x348320[_0x466f24(0x135)] = _0x466f24(0x1cb)); } } } function updateStats(_0x318291 = !0x1) { const _0x39e369 = _0x551f23, _0x26b873 = _0x318291 || (_0x39e369(0x1eb) !== currentFilter || searchQuery || _0x39e369(0x1eb) !== selectedPerson) ? filteredRecords : allRecords, _0x211aae = { 'Completed': 0x0, 'In\x20Progress': 0x0, 'Pending': 0x0 }; _0x26b873[_0x39e369(0x189)](_0x8978c2 => { const _0x1fdf5f = _0x39e369; _0x8978c2[_0x1fdf5f(0x171)] in _0x211aae && _0x211aae[_0x8978c2[_0x1fdf5f(0x171)]]++; }); const _0x331e69 = document[_0x39e369(0x175)](_0x39e369(0x15b)), _0x1ba40d = document['getElementById'](_0x39e369(0x19e)), _0x55d688 = document[_0x39e369(0x175)](_0x39e369(0x212)), _0x189eb8 = document['getElementById'](_0x39e369(0x1b9)); _0x331e69 && (_0x331e69[_0x39e369(0x284)] = _0x26b873[_0x39e369(0x13c)]), _0x1ba40d && (_0x1ba40d[_0x39e369(0x284)] = _0x211aae[_0x39e369(0x293)]), _0x55d688 && (_0x55d688[_0x39e369(0x284)] = _0x211aae['In\x20Progress']), _0x189eb8 && (_0x189eb8[_0x39e369(0x284)] = _0x211aae['Pending']); const _0x38ff05 = document['getElementById'](_0x39e369(0x232)); _0x38ff05 && (_0x38ff05[_0x39e369(0x284)] = _0x39e369(0x1eb) !== selectedPerson ? ''[_0x39e369(0x205)](selectedPerson, '\x27s\x20Requests') : 'all' !== currentFilter || searchQuery ? 'Filtered' : _0x39e369(0x20a)), drawStatusPieChart(_0x26b873); } function getMembersList() { const _0x5ad28f = _0x551f23, _0xc3cdc1 = new Set(EXCLUDED_MEMBERS[_0x5ad28f(0x179)](_0x91ab93 => _0x91ab93[_0x5ad28f(0x1a6)]())), _0x5972dc = new Set(DEFAULT_MEMBERS); return allRecords[_0x5ad28f(0x189)](_0x571e7f => { const _0x1c1f22 = _0x5ad28f, _0x51cf00 = (_0x571e7f[_0x1c1f22(0x1b6)] || '')[_0x1c1f22(0x174)](); _0x51cf00 && _0x1c1f22(0x27e) !== _0x51cf00 && '-' !== _0x51cf00 && _0x1c1f22(0x271) !== _0x51cf00 && !_0xc3cdc1[_0x1c1f22(0x20b)](_0x51cf00[_0x1c1f22(0x1a6)]()) && _0x5972dc['add'](_0x51cf00); }), Array['from'](_0x5972dc)['filter'](_0x457a4a => !_0xc3cdc1[_0x5ad28f(0x20b)](_0x457a4a['toLowerCase']()))[_0x5ad28f(0x1f6)]((_0x5899f5, _0x3ba19c) => _0x5899f5[_0x5ad28f(0x183)](_0x3ba19c)); } function getThemeIndex(_0x2a9242, _0x255bdd) { const _0x2cb1a6 = _0x551f23; if (_0x2cb1a6(0x286) == typeof _0x255bdd && _0x255bdd >= 0x0) return _0x255bdd % 0xc; const _0x40a4f2 = getMembersList()[_0x2cb1a6(0x27a)](_0x16f564 => _0x16f564['toLowerCase']() === (_0x2a9242 || '')['toLowerCase']()); if (_0x40a4f2 >= 0x0) return _0x40a4f2 % 0xc; let _0x5365d4 = 0x0; for (let _0x4eee3e = 0x0; _0x4eee3e < (_0x2a9242 || '')[_0x2cb1a6(0x13c)]; _0x4eee3e++)_0x5365d4 = _0x2a9242[_0x2cb1a6(0x1e9)](_0x4eee3e) + ((_0x5365d4 << 0x5) - _0x5365d4); return Math[_0x2cb1a6(0x17b)](_0x5365d4) % 0xc; } function renderPersonBadges() { const _0x1776cb = _0x551f23, _0x4ce701 = document[_0x1776cb(0x175)](_0x1776cb(0x247)); if (!_0x4ce701) return; const _0x501101 = getMembersList(), _0xfe1232 = document[_0x1776cb(0x175)](_0x1776cb(0x1b8)); _0xfe1232 && (_0xfe1232[_0x1776cb(0x284)] = ''[_0x1776cb(0x205)](_0x501101[_0x1776cb(0x13c)], _0x1776cb(0x207))); const _0xad8ce4 = {}; _0x501101[_0x1776cb(0x189)](_0x24c78b => { _0xad8ce4[_0x24c78b] = 0x0; }), allRecords[_0x1776cb(0x189)](_0xb685ea => { const _0x14d4fc = _0x1776cb, _0x234713 = (_0xb685ea[_0x14d4fc(0x1b6)] || '')[_0x14d4fc(0x174)](); _0x234713 in _0xad8ce4 ? _0xad8ce4[_0x234713]++ : _0x234713 && _0x14d4fc(0x27e) !== _0x234713 && '-' !== _0x234713 && 'N/A' !== _0x234713 && (_0xad8ce4[_0x234713] = (_0xad8ce4[_0x234713] || 0x0) + 0x1); }), allRecords[_0x1776cb(0x13c)]; const _0x3b333e = document[_0x1776cb(0x1fd)](), _0x45e2d0 = document[_0x1776cb(0x181)](_0x1776cb(0x1de)), _0x46316f = _0x1776cb(0x1eb) === selectedPerson; _0x45e2d0[_0x1776cb(0x250)] = _0x1776cb(0x1ec) + (_0x46316f ? 'active' : ''), _0x45e2d0[_0x1776cb(0x182)](_0x1776cb(0x1e3), 'all'), _0x45e2d0[_0x1776cb(0x182)](_0x1776cb(0x180), _0x1776cb(0x1e8)), _0x45e2d0[_0x1776cb(0x182)](_0x1776cb(0x17d), '0'), _0x45e2d0[_0x1776cb(0x182)]('title', 'Click\x20to\x20view\x20all\x20requests\x20across\x20all\x20members\x20('[_0x1776cb(0x205)](allRecords[_0x1776cb(0x13c)], _0x1776cb(0x298))), _0x45e2d0['innerHTML'] = _0x1776cb(0x1a5)[_0x1776cb(0x205)](_0x501101['length'], '\x20Active\x20Members</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-stat-badge\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22team-count\x22\x20id=\x22allPersonsCount\x22>')[_0x1776cb(0x205)](allRecords['length'], _0x1776cb(0x1c5)), _0x3b333e['appendChild'](_0x45e2d0), _0x501101[_0x1776cb(0x189)]((_0xf8b88f, _0x5b26a4) => { const _0x20793f = _0x1776cb, _0x373884 = _0xad8ce4[_0xf8b88f] || 0x0, _0xdd7f16 = escapeHtml(_0xf8b88f[_0x20793f(0x200)]('\x20')[_0x20793f(0x179)](_0x124836 => _0x124836[0x0])['join']('')['substring'](0x0, 0x2)[_0x20793f(0x15e)]()), _0x3c8ce4 = selectedPerson[_0x20793f(0x1a6)]() === _0xf8b88f[_0x20793f(0x1a6)](), _0x48db1c = !isCurrentUserAdmin() && getCurrentUserDisplayName()['toLowerCase']() === _0xf8b88f['toLowerCase'](), _0x4dcf10 = getThemeIndex(_0xf8b88f, _0x5b26a4), _0x50e18e = document['createElement'](_0x20793f(0x1de)); _0x50e18e[_0x20793f(0x250)] = _0x20793f(0x147)['concat'](_0x4dcf10, '\x20')[_0x20793f(0x205)](_0x3c8ce4 ? _0x20793f(0x1b4) : ''), _0x50e18e[_0x20793f(0x182)]('data-person', _0xf8b88f), _0x50e18e[_0x20793f(0x182)](_0x20793f(0x180), 'button'), _0x50e18e[_0x20793f(0x182)](_0x20793f(0x17d), '0'), _0x50e18e[_0x20793f(0x182)]('title', _0x3c8ce4 ? ''['concat'](escapeHtml(_0xf8b88f), '\x20(')[_0x20793f(0x205)](_0x373884, _0x20793f(0x199)) : _0x20793f(0x229)[_0x20793f(0x205)](escapeHtml(_0xf8b88f))); const _0x396c2c = _0x48db1c ? _0x20793f(0x291) : ''; _0x50e18e['innerHTML'] = '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-card-top\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22team-avatar\x22>'['concat'](_0xdd7f16, _0x20793f(0x137))[_0x20793f(0x205)](escapeHtml(_0xf8b88f), '\x22>')[_0x20793f(0x205)](escapeHtml(_0xf8b88f))['concat'](_0x396c2c, _0x20793f(0x220))[_0x20793f(0x205)](_0x373884, _0x20793f(0x201))[_0x20793f(0x205)](0x1 === _0x373884 ? 'req' : _0x20793f(0x275), _0x20793f(0x257))[_0x20793f(0x205)](_0x373884, '\x20')[_0x20793f(0x205)](0x1 === _0x373884 ? _0x20793f(0x1f4) : _0x20793f(0x1e5), _0x20793f(0x22c)), _0x3b333e[_0x20793f(0x289)](_0x50e18e); }), _0x4ce701['innerHTML'] = '', _0x4ce701[_0x1776cb(0x289)](_0x3b333e), updatePersonChipsActiveState(); } function updatePersonChipsActiveState() { const _0x271fba = _0x551f23, _0x2f1d73 = document[_0x271fba(0x175)]('personBadgesContainer'); _0x2f1d73 && _0x2f1d73[_0x271fba(0x1c8)](_0x271fba(0x19d))['forEach'](_0x462e81 => { const _0x3a3fab = _0x271fba, _0x5f31df = _0x462e81[_0x3a3fab(0x28a)](_0x3a3fab(0x1e3)); if ('all' === _0x5f31df) _0x462e81[_0x3a3fab(0x170)][_0x3a3fab(0x1b1)]('active', 'all' === selectedPerson); else { const _0x5a4aeb = selectedPerson['toLowerCase']() === _0x5f31df[_0x3a3fab(0x1a6)](); _0x462e81[_0x3a3fab(0x170)][_0x3a3fab(0x1b1)](_0x3a3fab(0x1b4), _0x5a4aeb); const _0x1632e6 = _0x462e81[_0x3a3fab(0x1a7)](_0x3a3fab(0x16e)), _0xb0d5a3 = _0x1632e6 ? _0x1632e6['innerText'] : ''; _0x462e81[_0x3a3fab(0x182)](_0x3a3fab(0x1c6), _0x5a4aeb ? ''[_0x3a3fab(0x205)](_0x5f31df, '\x20(')[_0x3a3fab(0x205)](_0xb0d5a3, _0x3a3fab(0x1f3)) : _0x3a3fab(0x229)[_0x3a3fab(0x205)](_0x5f31df)); } }); const _0x52e5b9 = document[_0x271fba(0x175)](_0x271fba(0x279)), _0x552d33 = document[_0x271fba(0x175)](_0x271fba(0x167)), _0x1a07d1 = document[_0x271fba(0x175)](_0x271fba(0x251)), _0x410c1d = document[_0x271fba(0x175)](_0x271fba(0x22e)); _0x271fba(0x1eb) !== selectedPerson ? (_0x52e5b9 && _0x52e5b9[_0x271fba(0x170)]['remove'](_0x271fba(0x28d)), _0x552d33 && _0x552d33[_0x271fba(0x170)][_0x271fba(0x268)](_0x271fba(0x28d)), _0x1a07d1 && (_0x1a07d1[_0x271fba(0x284)] = selectedPerson), _0x410c1d && (_0x410c1d[_0x271fba(0x284)] = ''[_0x271fba(0x205)](filteredRecords[_0x271fba(0x13c)], _0x271fba(0x134)))) : (_0x52e5b9 && _0x52e5b9[_0x271fba(0x170)][_0x271fba(0x139)](_0x271fba(0x28d)), _0x552d33 && _0x552d33[_0x271fba(0x170)][_0x271fba(0x139)](_0x271fba(0x28d))); } function selectPersonFilter(_0xb44b22) { const _0xdd441 = _0x551f23; selectedPerson = _0xb44b22 && _0xdd441(0x1eb) !== _0xb44b22 && selectedPerson[_0xdd441(0x1a6)]() !== _0xb44b22[_0xdd441(0x1a6)]() ? _0xb44b22 : _0xdd441(0x1eb), currentPage = 0x1, applyFiltersAndRender(); } function setupPersonFilterListeners() { const _0x103211 = _0x551f23, _0x57c38e = document[_0x103211(0x175)](_0x103211(0x247)); _0x57c38e && (_0x57c38e['addEventListener'](_0x103211(0x248), _0x31f5c2 => { const _0x16baab = _0x103211, _0x2546d6 = _0x31f5c2[_0x16baab(0x245)][_0x16baab(0x1c2)](_0x16baab(0x19d)); _0x2546d6 && selectPersonFilter(_0x2546d6[_0x16baab(0x28a)](_0x16baab(0x1e3))); }), _0x57c38e[_0x103211(0x231)](_0x103211(0x26c), _0x105301 => { const _0x340a31 = _0x103211; if (_0x340a31(0x203) === _0x105301[_0x340a31(0x18c)] || '\x20' === _0x105301[_0x340a31(0x18c)]) { const _0x1d22bd = _0x105301[_0x340a31(0x245)][_0x340a31(0x1c2)](_0x340a31(0x19d)); _0x1d22bd && (_0x105301[_0x340a31(0x283)](), selectPersonFilter(_0x1d22bd['getAttribute'](_0x340a31(0x1e3)))); } })); const _0x3615e8 = document[_0x103211(0x175)](_0x103211(0x279)); _0x3615e8 && _0x3615e8['addEventListener'](_0x103211(0x248), () => { selectPersonFilter('all'); }); const _0x139242 = document[_0x103211(0x175)](_0x103211(0x23b)); _0x139242 && _0x139242[_0x103211(0x231)](_0x103211(0x248), () => { const _0x52f00c = _0x103211; selectPersonFilter(_0x52f00c(0x1eb)); }); const _0x2258b6 = document['getElementById'](_0x103211(0x21e)); _0x2258b6 && _0x2258b6['addEventListener']('click', () => { const _0x42edbf = _0x103211; clearCache(); const _0x1e160b = _0x2258b6['querySelector']('i'); _0x1e160b && _0x1e160b[_0x42edbf(0x170)]['add'](_0x42edbf(0x1be)), fetchAndRenderRecords(!0x1)[_0x42edbf(0x285)](() => { const _0x53631b = _0x42edbf; _0x1e160b && _0x1e160b['classList'][_0x53631b(0x268)](_0x53631b(0x1be)), showToast(_0x53631b(0x172), 'success'); }); }); } function drawStatusPieChart(_0xd1b17d) { const _0x1549c1 = _0x551f23, _0x31d298 = document['getElementById'](_0x1549c1(0x133)); if (!_0x31d298) return; const _0x4dd162 = _0x31d298[_0x1549c1(0x15c)]('2d'); if (!_0x4dd162) return; const _0x1b16ac = _0xd1b17d || allRecords, _0x2992f3 = window['devicePixelRatio'] || 0x1, _0x5ee190 = 0x82; _0x31d298['width'] === _0x5ee190 * _0x2992f3 && _0x31d298[_0x1549c1(0x1ea)] === _0x5ee190 * _0x2992f3 || (_0x31d298[_0x1549c1(0x21b)] = _0x5ee190 * _0x2992f3, _0x31d298[_0x1549c1(0x1ea)] = _0x5ee190 * _0x2992f3, _0x31d298[_0x1549c1(0x216)][_0x1549c1(0x21b)] = _0x5ee190 + 'px', _0x31d298[_0x1549c1(0x216)][_0x1549c1(0x1ea)] = _0x5ee190 + 'px'), _0x4dd162[_0x1549c1(0x176)](), _0x4dd162[_0x1549c1(0x223)](_0x2992f3, _0x2992f3), _0x4dd162['clearRect'](0x0, 0x0, _0x5ee190, _0x5ee190); const _0x4b032b = { 'Completed': 0x0, 'In\x20Progress': 0x0, 'Pending': 0x0 }; _0x1b16ac[_0x1549c1(0x189)](_0x3487b8 => { const _0x489f3b = _0x1549c1; _0x3487b8[_0x489f3b(0x171)] in _0x4b032b && _0x4b032b[_0x3487b8[_0x489f3b(0x171)]]++; }); const _0x16aa15 = _0x1b16ac['length'], _0x50b03e = _0x1549c1(0x211) === document[_0x1549c1(0x13e)][_0x1549c1(0x28a)]('data-bs-theme'), _0x227947 = 0x41, _0x1de67c = 0x41; if (0x0 === _0x16aa15) return _0x4dd162[_0x1549c1(0x236)](), _0x4dd162[_0x1549c1(0x29a)](_0x227947, _0x1de67c, 0x2e, 0x0, 0x2 * Math['PI']), _0x4dd162[_0x1549c1(0x238)] = _0x50b03e ? _0x1549c1(0x1ed) : _0x1549c1(0x256), _0x4dd162['lineWidth'] = 0x10, _0x4dd162['stroke'](), _0x4dd162[_0x1549c1(0x237)] = _0x50b03e ? _0x1549c1(0x1ee) : _0x1549c1(0x1c4), _0x4dd162[_0x1549c1(0x222)] = _0x1549c1(0x14f), _0x4dd162[_0x1549c1(0x15f)] = _0x1549c1(0x148), _0x4dd162[_0x1549c1(0x26e)] = _0x1549c1(0x168), _0x4dd162['fillText'](_0x1549c1(0x1d2), _0x227947, _0x1de67c), void _0x4dd162[_0x1549c1(0x13a)](); const _0x4c6c93 = [{ 'label': _0x1549c1(0x293), 'count': _0x4b032b[_0x1549c1(0x293)], 'color': _0x50b03e ? _0x1549c1(0x254) : _0x1549c1(0x25b) }, { 'label': _0x1549c1(0x227), 'count': _0x4b032b[_0x1549c1(0x227)], 'color': _0x50b03e ? _0x1549c1(0x173) : _0x1549c1(0x287) }, { 'label': 'Pending', 'count': _0x4b032b['Pending'], 'color': _0x50b03e ? _0x1549c1(0x25d) : _0x1549c1(0x17c) }]; let _0x2f75a6 = -Math['PI'] / 0x2; _0x4c6c93['forEach'](_0x165b8a => { const _0x8e1498 = _0x1549c1; if (_0x165b8a['count'] <= 0x0) return; const _0x346241 = _0x165b8a[_0x8e1498(0x22b)] / _0x16aa15 * 0x2 * Math['PI'], _0x231e0f = _0x2f75a6 + _0x346241; _0x4dd162[_0x8e1498(0x236)](), _0x4dd162['arc'](_0x227947, _0x1de67c, 0x36, _0x2f75a6, _0x231e0f), _0x4dd162[_0x8e1498(0x29a)](_0x227947, _0x1de67c, 0x26, _0x231e0f, _0x2f75a6, !0x0), _0x4dd162[_0x8e1498(0x228)](), _0x4dd162['fillStyle'] = _0x165b8a[_0x8e1498(0x230)], _0x4dd162[_0x8e1498(0x249)](), _0x4dd162[_0x8e1498(0x1f5)] = 1.5, _0x4dd162[_0x8e1498(0x238)] = _0x50b03e ? '#212529' : _0x8e1498(0x23e), _0x4dd162[_0x8e1498(0x178)](), _0x2f75a6 = _0x231e0f; }), _0x4dd162[_0x1549c1(0x15f)] = _0x1549c1(0x148), _0x4dd162[_0x1549c1(0x26e)] = _0x1549c1(0x168), _0x4dd162[_0x1549c1(0x237)] = _0x50b03e ? _0x1549c1(0x142) : _0x1549c1(0x22d), _0x4dd162[_0x1549c1(0x222)] = 'bold\x2018px\x20Inter,\x20system-ui,\x20sans-serif', _0x4dd162[_0x1549c1(0x1a9)](_0x16aa15[_0x1549c1(0x1d6)](), _0x227947, 0x3b), _0x4dd162['fillStyle'] = _0x50b03e ? '#8b949e' : _0x1549c1(0x197), _0x4dd162['font'] = _0x1549c1(0x18d), _0x4dd162[_0x1549c1(0x1a9)](_0x1549c1(0x1cd), _0x227947, 0x4c), _0x4dd162['restore'](); } function applyFiltersAndRender() { const _0x445926 = _0x551f23; let _0x59524d = [...allRecords]; if (_0x445926(0x1eb) !== currentFilter && (_0x59524d = _0x59524d[_0x445926(0x1ff)](_0x2093e1 => _0x2093e1[_0x445926(0x171)] === currentFilter)), _0x445926(0x1eb) !== selectedPerson) { const _0x434a28 = selectedPerson[_0x445926(0x174)]()[_0x445926(0x1a6)](); _0x59524d = _0x59524d[_0x445926(0x1ff)](_0x44c6aa => (_0x44c6aa[_0x445926(0x1b6)] || '')[_0x445926(0x174)]()[_0x445926(0x1a6)]() === _0x434a28); } if (searchQuery) { const _0x1f666f = searchQuery[_0x445926(0x1a6)](); _0x59524d = _0x59524d[_0x445926(0x1ff)](_0x276062 => Object[_0x445926(0x1dc)](_0x276062)['join']('\x20')[_0x445926(0x1a6)]()['includes'](_0x1f666f)); } filteredRecords = _0x59524d; const _0x56ea0a = Math[_0x445926(0x154)](filteredRecords[_0x445926(0x13c)] / 0xa) || 0x1; currentPage > _0x56ea0a && (currentPage = 0x1), (updateStats(!!('all' !== currentFilter || searchQuery || _0x445926(0x1eb) !== selectedPerson)), updatePersonChipsActiveState(), renderTable(), renderPagination()); } function escapeHtml(_0x37b1d6) { const _0x12a632 = _0x551f23; return null == _0x37b1d6 ? '' : String(_0x37b1d6)[_0x12a632(0x209)](/&/g, _0x12a632(0x145))[_0x12a632(0x209)](/</g, _0x12a632(0x26a))['replace'](/>/g, _0x12a632(0x266))['replace'](/"/g, _0x12a632(0x24b))[_0x12a632(0x209)](/'/g, _0x12a632(0x214)); } function renderTable() { const _0x4341a4 = _0x551f23, _0x1d60b3 = document['getElementById'](_0x4341a4(0x299)); if (!_0x1d60b3) return; if (_0x1d60b3[_0x4341a4(0x135)] = '', 0x0 === filteredRecords[_0x4341a4(0x13c)]) return void (_0x1d60b3[_0x4341a4(0x135)] = _0x4341a4(0x280)); const _0x10bbf5 = 0xa * (currentPage - 0x1), _0x137515 = _0x10bbf5 + 0xa, _0x2444f5 = filteredRecords[_0x4341a4(0x1f0)](_0x10bbf5, _0x137515), _0xcd5f9e = document[_0x4341a4(0x1fd)](); _0x2444f5['forEach']((_0x57b915, _0x33a677) => { const _0x423560 = _0x4341a4; let _0x4585b1 = _0x57b915[_0x423560(0x234)] || _0x423560(0x271); if (_0x4585b1 && _0x4585b1['includes']('-')) { const _0x512f88 = new Date(_0x4585b1); isNaN(_0x512f88['getTime']()) || (_0x4585b1 = _0x512f88[_0x423560(0x210)]('en-GB', { 'day': _0x423560(0x18e), 'month': _0x423560(0x292), 'year': _0x423560(0x1ac) })); } const _0x31cd9b = _0x57b915[_0x423560(0x1b6)] || _0x423560(0x27e), _0x31547c = escapeHtml(_0x31cd9b), _0xe2d520 = escapeHtml(_0x31cd9b['split']('\x20')[_0x423560(0x179)](_0x320253 => _0x320253[0x0])['join']('')[_0x423560(0x1bd)](0x0, 0x2)['toUpperCase']()), _0x26b7ee = _0x57b915[_0x423560(0x1af)] || _0x423560(0x271), _0x405ddf = escapeHtml(_0x26b7ee), _0x38e5e0 = escapeHtml(_0x26b7ee[_0x423560(0x13c)] > 0x1e ? _0x26b7ee['substring'](0x0, 0x1e) + _0x423560(0x16c) : _0x26b7ee), _0x474f7a = _0x57b915[_0x423560(0x13d)] || '', _0x5d4012 = escapeHtml(_0x474f7a || _0x423560(0x271)), _0x430278 = _0x57b915[_0x423560(0x281)] || '-', _0x40a174 = escapeHtml('-' === _0x430278 || isNaN(_0x430278) || '' === String(_0x430278)['trim']() ? String(_0x430278) : Number(_0x430278)[_0x423560(0x24e)]()), _0x4a6aa4 = _0x57b915[_0x423560(0x171)] || _0x423560(0x1d9); let _0x5f0512 = ''; _0x5f0512 = _0x423560(0x293) === _0x4a6aa4 ? _0x423560(0x17f) : _0x423560(0x227) === _0x4a6aa4 ? '<span\x20class=\x22badge\x20bg-primary-subtle\x20text-primary\x20border\x20border-primary\x20px-2\x20py-1\x22>In\x20Progress</span>' : _0x423560(0x215); const _0x46e1d1 = canEditRecord(_0x57b915), _0x5a457a = _0x474f7a ? _0x46e1d1 ? _0x423560(0x27b)[_0x423560(0x205)](encodeURIComponent(_0x474f7a), _0x423560(0x144)) : _0x423560(0x27b)['concat'](encodeURIComponent(_0x474f7a), _0x423560(0x217)) : '<button\x20type=\x22button\x22\x20class=\x22btn\x20btn-link\x20p-0\x20text-muted\x20fw-semibold\x20text-decoration-none\x20missing-id-btn\x22>Edit</button>', _0x3b9406 = escapeHtml(_0x57b915[_0x423560(0x22f)] || 'N/A'), _0x1aafcb = escapeHtml(_0x57b915[_0x423560(0x25e)] || '-'), _0x19cc64 = escapeHtml(_0x57b915['Result\x20Shared\x20Mode'] || '-'), _0x3a6965 = document[_0x423560(0x181)]('tr'); _0x3a6965[_0x423560(0x250)] = _0x423560(0x1a4), _0x3a6965['style'][_0x423560(0x193)] = ''['concat'](Math['min'](0.05 * _0x33a677, 0.4), 's'), _0x3a6965[_0x423560(0x135)] = _0x423560(0x273)[_0x423560(0x205)](_0x474f7a ? _0x423560(0x165) : _0x423560(0x13f), _0x423560(0x239))['concat'](_0x5d4012, _0x423560(0x27d))[_0x423560(0x205)](_0x3b9406, _0x423560(0x194))[_0x423560(0x205)](_0x4585b1, _0x423560(0x187))['concat'](_0x1aafcb, _0x423560(0x24a))[_0x423560(0x205)](_0x31cd9b, _0x423560(0x186))['concat'](_0x31547c, _0x423560(0x23d))[_0x423560(0x205)](getThemeIndex(_0x31cd9b), '\x20me-2\x22>')[_0x423560(0x205)](_0xe2d520, _0x423560(0x1aa))[_0x423560(0x205)](_0x31547c, _0x423560(0x206))[_0x423560(0x205)](_0x405ddf, '\x22>')['concat'](_0x38e5e0, _0x423560(0x187))['concat'](_0x40a174, _0x423560(0x187))[_0x423560(0x205)](_0x19cc64, _0x423560(0x194))[_0x423560(0x205)](_0x5f0512, '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22text-end\x20px-4\x22>')[_0x423560(0x205)](_0x5a457a, _0x423560(0x1cf)), _0xcd5f9e[_0x423560(0x289)](_0x3a6965); }), _0x1d60b3['appendChild'](_0xcd5f9e); } function setupTableDelegation() { const _0x226a24 = _0x551f23, _0x547bb4 = document[_0x226a24(0x175)](_0x226a24(0x299)); _0x547bb4 && _0x547bb4[_0x226a24(0x231)](_0x226a24(0x248), _0x102830 => { const _0x31ff3e = _0x226a24; if (_0x102830[_0x31ff3e(0x245)][_0x31ff3e(0x1c2)]('.retry-fetch-btn')) return _0x102830[_0x31ff3e(0x283)](), void loadFromCacheOrFetch(); if (_0x102830[_0x31ff3e(0x245)][_0x31ff3e(0x1c2)](_0x31ff3e(0x1a8))) return _0x102830[_0x31ff3e(0x283)](), void showToast(_0x31ff3e(0x16a), _0x31ff3e(0x1c1)); const _0x583e9d = _0x102830[_0x31ff3e(0x245)][_0x31ff3e(0x1c2)]('.action-by-cell'); if (_0x583e9d) { _0x102830[_0x31ff3e(0x283)](); const _0x1d4804 = _0x583e9d[_0x31ff3e(0x28a)](_0x31ff3e(0x1e3)); return void (_0x1d4804 && _0x31ff3e(0x27e) !== _0x1d4804 && _0x31ff3e(0x271) !== _0x1d4804 && selectPersonFilter(_0x1d4804)); } }); } function setupFilters() { const _0x48c2f9 = _0x551f23, _0x21df2e = document[_0x48c2f9(0x175)](_0x48c2f9(0x297)); _0x21df2e && _0x21df2e[_0x48c2f9(0x231)]('click', _0x57f7d4 => { const _0x2de349 = _0x48c2f9, _0x5f3c73 = _0x57f7d4[_0x2de349(0x245)][_0x2de349(0x1c2)](_0x2de349(0x1e8)); _0x5f3c73 && (_0x21df2e[_0x2de349(0x1c8)](_0x2de349(0x1e8))['forEach'](_0xde2101 => { const _0x436d8f = _0x2de349; _0xde2101[_0x436d8f(0x170)][_0x436d8f(0x268)]('active', _0x436d8f(0x1a3)); }), _0x5f3c73[_0x2de349(0x170)][_0x2de349(0x139)](_0x2de349(0x1b4), _0x2de349(0x1a3)), currentFilter = _0x5f3c73[_0x2de349(0x28a)]('data-filter') || _0x2de349(0x1eb), currentPage = 0x1, applyFiltersAndRender()); }); } function setupBadgeFilters() { const _0x25b9b9 = _0x551f23; document[_0x25b9b9(0x1c8)]('.stat-badge[data-filter]')[_0x25b9b9(0x189)](_0x240904 => { const _0x5ca899 = _0x25b9b9; _0x240904[_0x5ca899(0x216)]['cursor'] = _0x5ca899(0x202), _0x240904[_0x5ca899(0x231)](_0x5ca899(0x248), () => { const _0x865352 = _0x5ca899, _0x2d5a14 = _0x240904[_0x865352(0x28a)](_0x865352(0x204)); if (!_0x2d5a14) return; const _0x492148 = document[_0x865352(0x175)](_0x865352(0x297)); if (_0x492148) { const _0x4f9fb8 = _0x492148[_0x865352(0x1a7)](_0x865352(0x1b5)['concat'](_0x2d5a14, '\x22]')); if (_0x4f9fb8) return void _0x4f9fb8['click'](); } currentFilter = _0x2d5a14, currentPage = 0x1, applyFiltersAndRender(); }); }); } function setupSearch() { const _0x30499d = _0x551f23, _0xab58a3 = document[_0x30499d(0x175)](_0x30499d(0x188)); if (!_0xab58a3) return; let _0x17bffb; _0xab58a3[_0x30499d(0x231)](_0x30499d(0x153), _0x10ff44 => { clearTimeout(_0x17bffb), _0x17bffb = setTimeout(() => { const _0x2d54b9 = _0x3ff7; searchQuery = _0x10ff44[_0x2d54b9(0x245)][_0x2d54b9(0x28e)][_0x2d54b9(0x174)](), currentPage = 0x1, applyFiltersAndRender(); }, 0x12c); }); } function renderPagination() { const _0x26f5b9 = _0x551f23, _0x3075bd = document[_0x26f5b9(0x175)](_0x26f5b9(0x177)), _0x403b7d = document['getElementById']('paginationControls'); if (!_0x3075bd || !_0x403b7d) return; const _0x5bbee5 = filteredRecords[_0x26f5b9(0x13c)], _0x5ad7e8 = Math[_0x26f5b9(0x154)](_0x5bbee5 / 0xa) || 0x1, _0x2db553 = 0xa * (currentPage - 0x1), _0x207c1c = Math[_0x26f5b9(0x240)](_0x2db553 + 0xa, _0x5bbee5); if (0x0 === _0x5bbee5) return _0x3075bd['innerText'] = _0x26f5b9(0x138), void (_0x403b7d[_0x26f5b9(0x135)] = ''); _0x3075bd[_0x26f5b9(0x284)] = _0x26f5b9(0x166)[_0x26f5b9(0x205)](_0x2db553 + 0x1, _0x26f5b9(0x246))[_0x26f5b9(0x205)](_0x207c1c, _0x26f5b9(0x146))[_0x26f5b9(0x205)](_0x5bbee5, _0x26f5b9(0x134)); let _0x43313b = ''; _0x43313b += _0x26f5b9(0x27f)['concat'](0x1 === currentPage ? _0x26f5b9(0x1b0) : '', _0x26f5b9(0x1fc))[_0x26f5b9(0x205)](currentPage - 0x1, _0x26f5b9(0x20c)), (((_0x22ea82, _0xd08d5d) => { const _0x18db6f = _0x26f5b9; if (_0xd08d5d <= 0x7) return Array[_0x18db6f(0x23a)]({ 'length': _0xd08d5d }, (_0xd30c68, _0x394db4) => _0x394db4 + 0x1); const _0x287cd3 = [0x1]; let _0x4d9171 = Math[_0x18db6f(0x1bf)](0x2, _0x22ea82 - 0x1), _0x3f7532 = Math[_0x18db6f(0x240)](_0xd08d5d - 0x1, _0x22ea82 + 0x1); _0x22ea82 <= 0x3 && (_0x4d9171 = 0x2, _0x3f7532 = 0x4), _0x22ea82 >= _0xd08d5d - 0x2 && (_0x4d9171 = _0xd08d5d - 0x3, _0x3f7532 = _0xd08d5d - 0x1), _0x4d9171 > 0x2 && _0x287cd3[_0x18db6f(0x1c3)](_0x18db6f(0x16c)); for (let _0xf9a2e4 = _0x4d9171; _0xf9a2e4 <= _0x3f7532; _0xf9a2e4++)_0x287cd3['push'](_0xf9a2e4); return _0x3f7532 < _0xd08d5d - 0x1 && _0x287cd3[_0x18db6f(0x1c3)]('...'), _0x287cd3[_0x18db6f(0x1c3)](_0xd08d5d), _0x287cd3; })(currentPage, _0x5ad7e8)[_0x26f5b9(0x189)](_0x3b20ae => { const _0xeeb8fc = _0x26f5b9; _0x43313b += '...' === _0x3b20ae ? _0xeeb8fc(0x1fa) : '<li\x20class=\x22page-item\x20'[_0xeeb8fc(0x205)](currentPage === _0x3b20ae ? 'active' : '', _0xeeb8fc(0x1fc))[_0xeeb8fc(0x205)](_0x3b20ae, '\x22>')[_0xeeb8fc(0x205)](_0x3b20ae, _0xeeb8fc(0x1f1)); }), _0x43313b += '<li\x20class=\x22page-item\x20'['concat'](currentPage === _0x5ad7e8 ? 'disabled' : '', _0x26f5b9(0x1fc))['concat'](currentPage + 0x1, _0x26f5b9(0x277)), _0x403b7d[_0x26f5b9(0x135)] = _0x43313b, _0x403b7d[_0x26f5b9(0x1c8)]('.page-link')['forEach'](_0x429404 => { const _0x1d0136 = _0x26f5b9; _0x429404['addEventListener'](_0x1d0136(0x248), _0x2f43c0 => { const _0xac72df = _0x1d0136; _0x2f43c0[_0xac72df(0x283)](); const _0x4409f1 = parseInt(_0x2f43c0['currentTarget'][_0xac72df(0x28a)](_0xac72df(0x290)), 0xa); _0x4409f1 >= 0x1 && _0x4409f1 <= _0x5ad7e8 && _0x4409f1 !== currentPage && (currentPage = _0x4409f1, applyFiltersAndRender()); }); })); } function lockActionTakenByField(_0x18d96c, _0x24c423) { const _0x111134 = _0x551f23, _0x12f020 = _0x18d96c[_0x111134(0x1db)][_0x111134(0x1b6)]; if (!_0x12f020) return; if (_0x24c423) { if (!Array[_0x111134(0x23a)](_0x12f020[_0x111134(0x13b)])[_0x111134(0x16f)](_0x4c4d43 => _0x4c4d43['value'][_0x111134(0x1a6)]() === _0x24c423['toLowerCase']())) { const _0x29c1e4 = document[_0x111134(0x181)]('option'); _0x29c1e4[_0x111134(0x28e)] = _0x24c423, _0x29c1e4[_0x111134(0x198)] = _0x24c423, _0x12f020[_0x111134(0x289)](_0x29c1e4); } _0x12f020[_0x111134(0x28e)] = Array['from'](_0x12f020[_0x111134(0x13b)])[_0x111134(0x143)](_0x25c7c8 => _0x25c7c8[_0x111134(0x28e)]['toLowerCase']() === _0x24c423[_0x111134(0x1a6)]())?.['value'] || _0x24c423; } _0x12f020[_0x111134(0x1b0)] = !0x0; let _0x502b92 = _0x18d96c[_0x111134(0x1a7)]('input[type=\x22hidden\x22][name=\x22Action\x20Taken\x20By\x22]'); _0x502b92 || (_0x502b92 = document[_0x111134(0x181)](_0x111134(0x153)), _0x502b92['type'] = _0x111134(0x261), _0x502b92[_0x111134(0x259)] = _0x111134(0x1b6), _0x18d96c[_0x111134(0x289)](_0x502b92)), _0x502b92[_0x111134(0x28e)] = _0x12f020[_0x111134(0x28e)]; } function applyReadOnlyMode(_0x5254aa, _0x389cec) { const _0x10dcb6 = _0x551f23, _0x1238d8 = document[_0x10dcb6(0x175)](_0x10dcb6(0x225)), _0x3755f9 = document['getElementById'](_0x10dcb6(0x16d)), _0x3a6fdb = document[_0x10dcb6(0x175)]('submitBtn'), _0x1dcb4c = document[_0x10dcb6(0x175)](_0x10dcb6(0x1ae)); if (_0x1238d8 && (_0x1238d8[_0x10dcb6(0x284)] = 'View\x20Data\x20Request\x20(Read-Only)'), _0x3755f9 && (_0x3755f9[_0x10dcb6(0x284)] = _0x10dcb6(0x162)), _0x3a6fdb && _0x3a6fdb['classList'][_0x10dcb6(0x139)](_0x10dcb6(0x28d)), _0x1dcb4c && _0x1dcb4c[_0x10dcb6(0x170)][_0x10dcb6(0x139)]('d-none'), Array[_0x10dcb6(0x23a)](_0x5254aa[_0x10dcb6(0x1db)])[_0x10dcb6(0x189)](_0x211538 => { const _0x4c995b = _0x10dcb6; 'A' !== _0x211538[_0x4c995b(0x1bc)] && (_0x211538['disabled'] = !0x0); }), !document['getElementById'](_0x10dcb6(0x218))) { const _0xd3ccc2 = document[_0x10dcb6(0x181)]('div'); _0xd3ccc2['id'] = _0x10dcb6(0x218), _0xd3ccc2[_0x10dcb6(0x250)] = _0x10dcb6(0x265), _0xd3ccc2[_0x10dcb6(0x182)]('role', _0x10dcb6(0x1e1)), _0xd3ccc2[_0x10dcb6(0x135)] = _0x10dcb6(0x264)['concat'](escapeHtml(_0x389cec || 'another\x20user'), '</strong>.\x20All\x20fields\x20are\x20locked\x20because\x20only\x20the\x20record\x20owner\x20or\x20an\x20administrator\x20can\x20modify\x20it.</div>'), _0x5254aa[_0x10dcb6(0x23f)](_0xd3ccc2); } } function setupFormLogic(_0x4ae653) { const _0x185edb = _0x551f23, _0x11733e = new URLSearchParams(window['location'][_0x185edb(0x1d5)])[_0x185edb(0x19b)](_0x185edb(0x191)), _0x34b3c0 = document[_0x185edb(0x175)]('submitBtn'), _0x589eaf = document[_0x185edb(0x175)](_0x185edb(0x151)), _0x2f4e9b = document['getElementById'](_0x185edb(0x269)), _0x2db0e6 = document['getElementById'](_0x185edb(0x152)); if (_0x11733e && _0x185edb(0x1a2) !== _0x11733e && _0x185edb(0x271) !== _0x11733e) { const _0x2f3f34 = document['getElementById'](_0x185edb(0x225)), _0x5d12bb = document[_0x185edb(0x175)](_0x185edb(0x16d)); _0x2f3f34 && (_0x2f3f34['innerText'] = _0x185edb(0x295)), _0x5d12bb && (_0x5d12bb['innerText'] = 'Update\x20the\x20fields\x20below\x20to\x20modify\x20the\x20request\x20in\x20the\x20registry.'), _0x34b3c0 && (_0x34b3c0[_0x185edb(0x135)] = _0x185edb(0x243)), _0x589eaf && (_0x589eaf[_0x185edb(0x28e)] = _0x11733e); const _0x29643e = document['createElement']('input'); _0x29643e[_0x185edb(0x14e)] = _0x185edb(0x261), _0x29643e[_0x185edb(0x259)] = _0x185edb(0x19c), _0x29643e[_0x185edb(0x28e)] = _0x11733e, _0x4ae653[_0x185edb(0x289)](_0x29643e), _0x2f4e9b && (_0x2f4e9b[_0x185edb(0x170)][_0x185edb(0x268)](_0x185edb(0x28d)), _0x2f4e9b[_0x185edb(0x216)][_0x185edb(0x274)] = _0x185edb(0x16b)); const _0x48f4e2 = setTimeout(() => { const _0x210fc6 = _0x185edb; _0x2db0e6 && _0x2db0e6[_0x210fc6(0x170)]['remove']('d-none'); }, 0x1770); _0x2db0e6 && _0x2db0e6[_0x185edb(0x231)](_0x185edb(0x248), () => { const _0x11ec14 = _0x185edb; window[_0x11ec14(0x1e7)]['replace'](_0x11ec14(0x233)); }); const _0x2d5900 = _0x256b70 => { const _0xfe3414 = _0x185edb; _0x256b70 && (populateForm(_0x4ae653, _0x256b70), canEditRecord(_0x256b70) ? isCurrentUserAdmin() || lockActionTakenByField(_0x4ae653, _0x256b70['Action\x20Taken\x20By']) : applyReadOnlyMode(_0x4ae653, _0x256b70[_0xfe3414(0x1b6)])), clearTimeout(_0x48f4e2), _0x2f4e9b && (_0x2f4e9b[_0xfe3414(0x216)]['transition'] = _0xfe3414(0x185), _0x2f4e9b[_0xfe3414(0x216)][_0xfe3414(0x158)] = '0', setTimeout(() => { const _0x38906c = _0xfe3414; _0x2f4e9b[_0x38906c(0x170)]['add'](_0x38906c(0x28d)), _0x2f4e9b[_0x38906c(0x216)]['display'] = _0x38906c(0x253), _0x2f4e9b['style'][_0x38906c(0x158)] = '1'; }, 0x12c)); }, _0x222413 = getFromCache(); if (_0x222413) { const _0x164d0c = _0x222413[_0x185edb(0x143)](_0x406f7f => String(_0x406f7f['Reference\x20Number/Ticket\x20Number']) === String(_0x11733e)); _0x164d0c && setTimeout(() => _0x2d5900(_0x164d0c), 0xc8); } fetchWithRetry(_0x185edb(0x1bb) + encodeURIComponent(_0x11733e), {}, 0x3, 0x1f4)[_0x185edb(0x235)](_0x35734f => { const _0x32f130 = _0x185edb; _0x35734f && !_0x35734f['error'] ? _0x2f4e9b && !_0x2f4e9b[_0x32f130(0x170)][_0x32f130(0x1d8)](_0x32f130(0x28d)) && _0x2d5900(_0x35734f) : (showToast(_0x32f130(0x262), _0x32f130(0x1f7)), setTimeout(() => window[_0x32f130(0x1e7)][_0x32f130(0x209)]('/form'), 0x5dc)); })[_0x185edb(0x18a)](_0x52d2e5 => { const _0x38d473 = _0x185edb; console[_0x38d473(0x1f7)](_0x38d473(0x14a), _0x52d2e5), _0x2f4e9b && !_0x2f4e9b[_0x38d473(0x170)]['contains'](_0x38d473(0x28d)) && (showToast(_0x38d473(0x156), 'error'), setTimeout(() => window[_0x38d473(0x1e7)][_0x38d473(0x209)](_0x38d473(0x233)), 0x5dc)); }); } else _0x589eaf && (_0x589eaf[_0x185edb(0x28e)] = '', _0x589eaf[_0x185edb(0x1d7)] = _0x185edb(0x14d)), isCurrentUserAdmin() || lockActionTakenByField(_0x4ae653, getCurrentUserDisplayName()); _0x4ae653[_0x185edb(0x231)](_0x185edb(0x1d1), async _0x4e732e => { const _0x320a62 = _0x185edb; _0x4e732e[_0x320a62(0x283)](); const _0x500a2c = _0x34b3c0 ? _0x34b3c0[_0x320a62(0x135)] : _0x320a62(0x164); _0x34b3c0 && (_0x34b3c0['innerHTML'] = '<span\x20class=\x22spinner-border\x20spinner-border-sm\x20me-2\x22></span>\x20Saving...', _0x34b3c0[_0x320a62(0x1b0)] = !0x0); const _0x5e8b04 = new FormData(_0x4ae653), _0x1a2bbc = new URLSearchParams(_0x5e8b04), _0x4ca1b0 = _0x1a2bbc['has']('originalId') ? _0x320a62(0x25c) : _0x320a62(0x139); _0x1a2bbc[_0x320a62(0x1c0)]('action', _0x4ca1b0), _0x1a2bbc['append'](_0x320a62(0x1f2), sessionStorage[_0x320a62(0x21d)](_0x320a62(0x15d)) || 'Unknown'); try { const _0x2dee6d = await fetch(scriptURL, { 'method': 'POST', 'headers': { 'Authorization': _0x320a62(0x21c) + (sessionStorage[_0x320a62(0x21d)]('ops_portal_token') || '') }, 'body': _0x1a2bbc }); if (0x191 === _0x2dee6d[_0x320a62(0x1e6)]) return sessionStorage[_0x320a62(0x1f9)](_0x320a62(0x1b7)), sessionStorage[_0x320a62(0x1f9)](_0x320a62(0x15d)), sessionStorage['removeItem'](_0x320a62(0x213)), sessionStorage[_0x320a62(0x1f9)]('ops_portal_display_name'), sessionStorage[_0x320a62(0x1f9)](CACHE_KEY), showToast(_0x320a62(0x19a), _0x320a62(0x1c1)), void setTimeout(() => window['location']['replace']('/login?timeout=true'), 0x5dc); const _0x4e6512 = await _0x2dee6d[_0x320a62(0x26d)](); if (_0x4e6512 && 'success' === _0x4e6512['result']) clearCache(), (showToast('add' === _0x4ca1b0 ? _0x320a62(0x155)[_0x320a62(0x205)](_0x4e6512['id']) : _0x320a62(0x208), _0x320a62(0x20e)), setTimeout(() => window[_0x320a62(0x1e7)][_0x320a62(0x209)]('/form'), 0x3e8)); else showToast(_0x320a62(0x1da) + (_0x4e6512?.[_0x320a62(0x1f7)] || _0x320a62(0x157)), _0x320a62(0x1f7)); } catch (_0x32a4e2) { console['error'](_0x320a62(0x1a1), _0x32a4e2), showToast(_0x320a62(0x17e), 'error'); } finally { _0x34b3c0 && (_0x34b3c0['innerHTML'] = _0x500a2c, _0x34b3c0[_0x320a62(0x1b0)] = !0x1); } }); const _0x445d02 = document[_0x185edb(0x175)](_0x185edb(0x1ae)); _0x445d02 && _0x445d02[_0x185edb(0x231)](_0x185edb(0x248), () => { const _0x119a77 = _0x185edb; _0x4ae653[_0x119a77(0x219)](), _0x11733e && _0x119a77(0x1a2) !== _0x11733e && 'N/A' !== _0x11733e && _0x589eaf && (_0x589eaf[_0x119a77(0x28e)] = _0x11733e), isCurrentUserAdmin() || lockActionTakenByField(_0x4ae653, getCurrentUserDisplayName()); }); } function populateForm(_0x506663, _0x44b819) { const _0x5a7444 = _0x551f23;['Requested\x20Department', _0x5a7444(0x234), _0x5a7444(0x25e), _0x5a7444(0x1b6), _0x5a7444(0x1af), 'Datasets\x20Used', _0x5a7444(0x184), 'Received\x20Count', _0x5a7444(0x27c), 'Analysis\x20Outcome', 'Status', _0x5a7444(0x196)][_0x5a7444(0x189)](_0x5be22a => { const _0x1b0fef = _0x5a7444, _0x25bc28 = _0x506663[_0x1b0fef(0x1db)][_0x5be22a]; _0x25bc28 && void 0x0 !== _0x44b819[_0x5be22a] && null !== _0x44b819[_0x5be22a] && (_0x1b0fef(0x1e4) === _0x25bc28[_0x1b0fef(0x14e)] ? _0x25bc28['value'] = formatDateForInput(_0x44b819[_0x5be22a]) : _0x25bc28[_0x1b0fef(0x28e)] = _0x44b819[_0x5be22a]); }); } function formatDateForInput(_0x5e940d) { const _0x162584 = _0x551f23; if (!_0x5e940d) return ''; const _0x97841d = String(_0x5e940d)[_0x162584(0x174)](); if (/^\d{4}-\d{2}-\d{2}$/[_0x162584(0x263)](_0x97841d)) return _0x97841d; const _0x366ad4 = new Date(_0x97841d); if (isNaN(_0x366ad4[_0x162584(0x296)]())) return ''; return ''[_0x162584(0x205)](_0x366ad4['getFullYear'](), '-')[_0x162584(0x205)](String(_0x366ad4['getMonth']() + 0x1)[_0x162584(0x276)](0x2, '0'), '-')['concat'](String(_0x366ad4[_0x162584(0x288)]())[_0x162584(0x276)](0x2, '0')); } function formatValueForCSV(_0x19e551, _0x5e1228) { const _0x630442 = _0x551f23; if (null == _0x5e1228) return ''; let _0x3a4d9e = String(_0x5e1228); if (/^[=+\-@\t\r]/[_0x630442(0x263)](_0x3a4d9e) && (_0x3a4d9e = '\x27' + _0x3a4d9e), /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/[_0x630442(0x263)](_0x3a4d9e)) { const _0x13412b = new Date(_0x3a4d9e); if (isNaN(_0x13412b['getTime']())) return _0x3a4d9e; const _0xf51f4b = { 'timeZone': _0x630442(0x1b3) }, _0x2a0f59 = String(_0x13412b['toLocaleString'](_0x630442(0x221), { ..._0xf51f4b, 'day': _0x630442(0x18e) }))[_0x630442(0x276)](0x2, '0'), _0x23f63f = String(_0x13412b[_0x630442(0x24e)](_0x630442(0x221), { ..._0xf51f4b, 'month': _0x630442(0x18e) }))[_0x630442(0x276)](0x2, '0'), _0xebc64b = _0x13412b['toLocaleString'](_0x630442(0x221), { ..._0xf51f4b, 'year': _0x630442(0x1ac) }); if (_0x630442(0x252) === _0x19e551) return _0x13412b['toLocaleString'](_0x630442(0x14b), { 'timeZone': _0x630442(0x1b3), 'day': _0x630442(0x18e), 'month': _0x630442(0x18e), 'year': _0x630442(0x1ac), 'hour': '2-digit', 'minute': _0x630442(0x18e), 'second': _0x630442(0x18e), 'hour12': !0x0 }); return ''[_0x630442(0x205)](_0x2a0f59, '-')[_0x630442(0x205)](_0x23f63f, '-')[_0x630442(0x205)](_0xebc64b); } if (/^\d{4}-\d{2}-\d{2}$/[_0x630442(0x263)](_0x3a4d9e)) { const _0x322286 = _0x3a4d9e[_0x630442(0x200)]('-'); return ''[_0x630442(0x205)](_0x322286[0x2], '-')[_0x630442(0x205)](_0x322286[0x1], '-')[_0x630442(0x205)](_0x322286[0x0]); } return _0x3a4d9e; } function setupDownloadButton() { const _0x1c85b5 = _0x551f23, _0x484b5c = document[_0x1c85b5(0x175)](_0x1c85b5(0x242)); _0x484b5c && _0x484b5c[_0x1c85b5(0x231)](_0x1c85b5(0x248), () => { const _0x1823ff = _0x1c85b5; if (0x0 === allRecords[_0x1823ff(0x13c)]) return void showToast(_0x1823ff(0x272), 'warning'); const _0xf970e6 = Object['keys'](allRecords[0x0])[_0x1823ff(0x1ff)](_0x410499 => _0x1823ff(0x252) !== _0x410499), _0x2e9991 = []; _0x2e9991[_0x1823ff(0x1c3)](_0xf970e6[_0x1823ff(0x179)](_0x2ca3fa => '\x22'[_0x1823ff(0x205)](_0x2ca3fa, '\x22'))['join'](',')), allRecords[_0x1823ff(0x189)](_0x48aadd => { const _0x330619 = _0x1823ff, _0x120436 = _0xf970e6['map'](_0x5e542e => { const _0x372e3f = _0x3ff7; let _0x103184 = _0x48aadd[_0x5e542e] || ''; return _0x103184 = formatValueForCSV(_0x5e542e, _0x103184), _0x103184 = String(_0x103184)[_0x372e3f(0x1ba)]('\x22', '\x22\x22'), '\x22'[_0x372e3f(0x205)](_0x103184, '\x22'); }); _0x2e9991[_0x330619(0x1c3)](_0x120436['join'](',')); }); const _0x313da4 = '\ufeff' + _0x2e9991[_0x1823ff(0x25a)]('\x0a'), _0x26d955 = new Blob([_0x313da4], { 'type': _0x1823ff(0x282) }), _0x7f51e8 = URL[_0x1823ff(0x1d4)](_0x26d955), _0x35619d = document[_0x1823ff(0x181)]('a'), _0x1d7a36 = new Date(), _0x560153 = ''[_0x1823ff(0x205)](_0x1d7a36[_0x1823ff(0x136)](), '-')['concat'](String(_0x1d7a36['getMonth']() + 0x1)[_0x1823ff(0x276)](0x2, '0'), '-')['concat'](String(_0x1d7a36[_0x1823ff(0x288)]())[_0x1823ff(0x276)](0x2, '0')); _0x35619d[_0x1823ff(0x182)](_0x1823ff(0x14c), _0x7f51e8), _0x35619d[_0x1823ff(0x182)](_0x1823ff(0x267), 'Data_Purity_Records_'['concat'](_0x560153, _0x1823ff(0x21f))), _0x35619d['style'][_0x1823ff(0x258)] = 'hidden', document[_0x1823ff(0x160)][_0x1823ff(0x289)](_0x35619d), _0x35619d['click'](), document[_0x1823ff(0x160)][_0x1823ff(0x17a)](_0x35619d), URL['revokeObjectURL'](_0x7f51e8), showToast(_0x1823ff(0x1e0), _0x1823ff(0x20e)); }); } document['addEventListener']('DOMContentLoaded', () => { const _0x34a811 = _0x551f23; initTheme(), document[_0x34a811(0x1c8)](_0x34a811(0x15a))['forEach'](_0x5b4412 => { const _0x14b698 = _0x34a811; _0x5b4412[_0x14b698(0x231)]('click', _0x231b37 => { const _0x490ea0 = _0x14b698; _0x231b37[_0x490ea0(0x283)](), logout(); }); }), document[_0x34a811(0x175)](_0x34a811(0x299)) && (loadFromCacheOrFetch(), setupFilters(), setupBadgeFilters(), setupSearch(), setupDownloadButton(), setupTableDelegation(), setupPersonFilterListeners()); const _0x4efa96 = document[_0x34a811(0x175)](_0x34a811(0x20d)); _0x4efa96 && setupFormLogic(_0x4efa96); const _0x409a27 = getCurrentUserDisplayName(), _0x3a3b07 = document[_0x34a811(0x175)](_0x34a811(0x1e2)); _0x409a27 && _0x3a3b07 && (isCurrentUserAdmin() ? _0x3a3b07[_0x34a811(0x135)] = ''[_0x34a811(0x205)](escapeHtml(_0x409a27), _0x34a811(0x132)) : _0x3a3b07[_0x34a811(0x284)] = _0x409a27), isCurrentUserAdmin() && document[_0x34a811(0x1c8)](_0x34a811(0x18b))[_0x34a811(0x189)](_0x27c6d2 => { const _0x218367 = _0x34a811; _0x27c6d2[_0x218367(0x170)][_0x218367(0x268)](_0x218367(0x28d)); }); });
+// ==========================================
+// DeG - Data Purity Operations Portal
+// Core Application Logic
+// ==========================================
+
+const scriptURL = '/api/cfdb';
+
+// Global Application State
+let allRecords = [];
+let filteredRecords = [];
+let currentPage = 1;
+const recordsPerPage = 10;
+let currentFilter = 'all';
+let selectedPerson = 'all';
+let searchQuery = '';
+
+const DEFAULT_MEMBERS = [
+    'Akash Karmegam',
+    'Ganesh Velu',
+    'Kalaivanan',
+    'Mohan',
+    'Praveenraj',
+    'Swathi'
+];
+
+const EXCLUDED_MEMBERS = [
+    'Martina Maria Pushpam',
+    'Nivas Saravana'
+];
+
+// Cache Configuration
+const CACHE_KEY = 'ops_portal_records_cache';
+const CACHE_TTL = 60 * 1000; // 60 seconds
+
+// Auth Context Helpers
+function getCurrentUserRole() {
+    return sessionStorage.getItem('ops_portal_role') || 'user';
+}
+
+function getCurrentUserDisplayName() {
+    return (sessionStorage.getItem('ops_portal_display_name') || sessionStorage.getItem('ops_portal_user') || '').trim();
+}
+
+function isCurrentUserAdmin() {
+    return getCurrentUserRole() === 'admin';
+}
+
+function canEditRecord(record) {
+    if (isCurrentUserAdmin()) return true;
+    const owner = ((record && record['Action Taken By']) || '').trim().toLowerCase();
+    const displayName = getCurrentUserDisplayName().toLowerCase();
+    const username = (sessionStorage.getItem('ops_portal_user') || '').trim().toLowerCase();
+    return Boolean(owner && ((displayName && owner === displayName) || (username && owner === username)));
+}
+
+// ==========================================
+// Live IST Clock (Day, Date & Time)
+// ==========================================
+function startISTClock() {
+    const clockEl = document.getElementById('istClock');
+    if (!clockEl) return;
+    const update = () => {
+        const now = new Date();
+        const dayDate = now.toLocaleDateString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            weekday: 'short',
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+        const timeStr = now.toLocaleTimeString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        clockEl.innerHTML = `<i class="bi bi-clock text-primary"></i> <span>${dayDate}</span> <span class="opacity-50">|</span> <span>${timeStr} IST</span>`;
+    };
+    update();
+    setInterval(update, 1000);
+}
+
+// ==========================================
+// Self-Service Password Change (Username locked/read-only)
+// ==========================================
+function setupChangePasswordModal() {
+    const openBtn = document.getElementById('changePasswordBtn');
+    const modalEl = document.getElementById('changePasswordModal');
+    const form = document.getElementById('changePasswordForm');
+    if (!openBtn || !modalEl || !form) return;
+
+    openBtn.addEventListener('click', () => {
+        form.reset();
+        const usernameInput = document.getElementById('cpUsername');
+        const displayInput = document.getElementById('cpDisplayName');
+        if (usernameInput) usernameInput.value = sessionStorage.getItem('ops_portal_user') || '';
+        if (displayInput) displayInput.value = getCurrentUserDisplayName();
+        bootstrap.Modal.getOrCreateInstance(modalEl).show();
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const saveBtn = document.getElementById('cpSaveBtn');
+        const origHtml = saveBtn ? saveBtn.innerHTML : 'Update Password';
+        const currentPassword = document.getElementById('cpCurrentPassword')?.value || '';
+        const newPassword = document.getElementById('cpNewPassword')?.value || '';
+        const confirmPassword = document.getElementById('cpConfirmPassword')?.value || '';
+
+        if (newPassword !== confirmPassword) {
+            showToast('New password and confirmation do not match.', 'warning');
+            return;
+        }
+
+        if (saveBtn) {
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
+        }
+
+        try {
+            const response = await fetch('/api/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + (sessionStorage.getItem('ops_portal_token') || '')
+                },
+                body: JSON.stringify({
+                    action: 'change_password',
+                    currentPassword,
+                    newPassword
+                })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to update password.');
+            }
+            showToast(data.message || 'Password updated successfully!', 'success');
+            bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+            form.reset();
+        } catch (err) {
+            showToast(err.message, 'error');
+        } finally {
+            if (saveBtn) {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = origHtml;
+            }
+        }
+    });
+}
+
+// ==========================================
+// Toast Notification Utility (Non-blocking)
+// ==========================================
+function showToast(message, type = 'info', duration = 3500) {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.className = 'toast-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'true');
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast-notification toast-${type}`;
+
+    let iconClass = 'bi-info-circle-fill';
+    if (type === 'success') iconClass = 'bi-check-circle-fill';
+    else if (type === 'error') iconClass = 'bi-exclamation-triangle-fill';
+    else if (type === 'warning') iconClass = 'bi-exclamation-circle-fill';
+
+    toast.innerHTML = `<i class="bi ${iconClass} me-2"></i><span>${escapeHtml(message)}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// ==========================================
+// Theme (Dark / Light Mode) Management
+// ==========================================
+function initTheme() {
+    const currentTheme = localStorage.getItem('dp_theme') || 'light';
+    applyTheme(currentTheme);
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const activeTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+            const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+    }
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('dp_theme', theme);
+
+    const icon = document.getElementById('themeIcon');
+    if (icon) {
+        if (theme === 'dark') {
+            icon.className = 'bi bi-sun-fill text-warning';
+        } else {
+            icon.className = 'bi bi-moon-fill';
+        }
+    }
+
+    // Redraw pie chart if present on page to adapt colors/contrast
+    if (document.getElementById('statusPieChart')) {
+        const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
+        const sourceData = isFiltered ? filteredRecords : allRecords;
+        drawStatusPieChart(sourceData);
+    }
+}
+
+// ==========================================
+// Lifecycle Entry Point
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    startISTClock();
+    setupChangePasswordModal();
+
+    // Attach global logout button listeners (replaces inline onclick for CSP)
+    document.querySelectorAll('.logout-btn, #logoutBtn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+    });
+
+    const tableBody = document.getElementById('tableBody');
+    if (tableBody) {
+        loadFromCacheOrFetch();
+        setupFilters();
+        setupBadgeFilters();
+        setupSearch();
+        setupDownloadButton();
+        setupTableDelegation();
+        setupPersonFilterListeners();
+    }
+
+    const form = document.getElementById('requestForm');
+    if (form) {
+        setupFormLogic(form);
+    }
+
+    // Display logged-in user name & role badge
+    const displayName = getCurrentUserDisplayName();
+    const userDisplay = document.getElementById('currentUserDisplay');
+    if (displayName && userDisplay) {
+        if (isCurrentUserAdmin()) {
+            userDisplay.innerHTML = `${escapeHtml(displayName)} <span class="badge bg-primary-subtle text-primary border border-primary-subtle ms-1">Admin</span>`;
+        } else {
+            userDisplay.innerText = displayName;
+        }
+    }
+
+    // Show admin-only navigation links
+    if (isCurrentUserAdmin()) {
+        document.querySelectorAll('.admin-only-nav').forEach(el => {
+            el.classList.remove('d-none');
+        });
+    }
+});
+
+// ==========================================
+// Cache Helpers (Stale-While-Revalidate)
+// ==========================================
+function saveToCache(data) {
+    try {
+        const payload = { data: data, timestamp: Date.now() };
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+    } catch (e) {
+        console.warn('SessionStorage cache quota exceeded:', e);
+    }
+}
+
+function getFromCache() {
+    try {
+        const raw = sessionStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const payload = JSON.parse(raw);
+        if (Date.now() - payload.timestamp > CACHE_TTL) return null;
+        return payload.data;
+    } catch (e) {
+        return null;
+    }
+}
+
+function clearCache() {
+    sessionStorage.removeItem(CACHE_KEY);
+}
+
+// ==========================================
+// Smart Fetch with Token & Retry
+// ==========================================
+async function fetchWithRetry(url, options = {}, retries = 3, delay = 500) {
+    const token = sessionStorage.getItem('ops_portal_token') || '';
+    const headers = {
+        ...(options.headers || {}),
+        'Authorization': 'Bearer ' + token
+    };
+
+    const mergedOptions = { ...options, headers };
+
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            const response = await fetch(url, mergedOptions);
+
+            if (response.status === 401) {
+                sessionStorage.removeItem('ops_portal_token');
+                sessionStorage.removeItem('ops_portal_user');
+                sessionStorage.removeItem('ops_portal_role');
+                sessionStorage.removeItem('ops_portal_display_name');
+                sessionStorage.removeItem(CACHE_KEY);
+                window.location.replace('/login?timeout=true');
+                return null;
+            }
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            if (attempt === retries) throw error;
+            await new Promise(r => setTimeout(r, delay * attempt));
+        }
+    }
+}
+
+// ==========================================
+// Data Fetching & Caching
+// ==========================================
+async function loadFromCacheOrFetch() {
+    const tableBody = document.getElementById('tableBody');
+    const cached = getFromCache();
+
+    if (cached && Array.isArray(cached) && cached.length >= 0) {
+        allRecords = [...cached];
+        renderPersonBadges();
+        updateStats();
+        applyFiltersAndRender();
+        // Background silent refresh
+        fetchAndRenderRecords(true);
+    } else {
+        if (tableBody) {
+            tableBody.innerHTML = `<tr><td colspan="10" class="text-center py-4"><div class="spinner-border text-primary" role="status"></div><br><span class="text-muted small mt-2 d-inline-block">Loading records...</span></td></tr>`;
+        }
+        fetchAndRenderRecords(false);
+    }
+}
+
+async function fetchAndRenderRecords(isBackgroundRefresh = false) {
+    try {
+        const data = await fetchWithRetry(scriptURL + '?action=get', {}, 3, 500);
+        if (!data) return;
+
+        saveToCache(data);
+
+        // Avoid re-rendering if background refresh data hasn't changed
+        // Lightweight comparison: check length and sample a few records instead of full JSON.stringify
+        if (isBackgroundRefresh && data.length === allRecords.length) {
+            let same = true;
+            const sampleIndices = [0, Math.floor(data.length / 2), data.length - 1];
+            for (const idx of sampleIndices) {
+                if (idx >= 0 && idx < data.length) {
+                    if (JSON.stringify(data[idx]) !== JSON.stringify(allRecords[idx])) {
+                        same = false;
+                        break;
+                    }
+                }
+            }
+            if (same) return;
+        }
+
+        allRecords = [...data];
+        renderPersonBadges();
+        updateStats();
+        applyFiltersAndRender();
+    } catch (error) {
+        console.error('Error fetching records:', error);
+        if (!isBackgroundRefresh || allRecords.length === 0) {
+            const tableBody = document.getElementById('tableBody');
+            if (tableBody) {
+                tableBody.innerHTML = `
+                    <tr><td colspan="10" class="text-center py-4 text-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>Unable to load records. Please check your connection.
+                        <br><button type="button" class="btn btn-sm btn-outline-primary mt-2 retry-fetch-btn">
+                            <i class="bi bi-arrow-clockwise me-1"></i> Retry
+                        </button>
+                    </td></tr>
+                `;
+            }
+        }
+    }
+}
+
+// ==========================================
+// Dynamic Stats & Canvas Pie Chart
+// ==========================================
+// When useFiltered is true, stats and pie chart reflect filteredRecords (search/filter active)
+function updateStats(useFiltered = false) {
+    const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
+    const sourceData = (useFiltered || isFiltered) ? filteredRecords : allRecords;
+    const counts = { Completed: 0, 'In Progress': 0, Pending: 0 };
+    sourceData.forEach(r => {
+        if (r['Status'] in counts) counts[r['Status']]++;
+    });
+
+    const totalEl = document.getElementById('totalCount');
+    const compEl = document.getElementById('completedCount');
+    const progEl = document.getElementById('inProgressCount');
+    const pendEl = document.getElementById('pendingCount');
+
+    if (totalEl) totalEl.innerText = sourceData.length;
+    if (compEl) compEl.innerText = counts.Completed;
+    if (progEl) progEl.innerText = counts['In Progress'];
+    if (pendEl) pendEl.innerText = counts.Pending;
+
+    const scopeBadge = document.getElementById('statusScopeBadge');
+    if (scopeBadge) {
+        if (selectedPerson !== 'all') {
+            scopeBadge.innerText = `${selectedPerson}'s Requests`;
+        } else if (currentFilter !== 'all' || searchQuery) {
+            scopeBadge.innerText = 'Filtered';
+        } else {
+            scopeBadge.innerText = 'All Requests';
+        }
+    }
+
+    drawStatusPieChart(sourceData);
+}
+
+// ==========================================
+// Team Workload: "Action Taken By" Analytics
+// ==========================================
+function getMembersList() {
+    const excluded = new Set(EXCLUDED_MEMBERS.map(m => m.toLowerCase()));
+    const set = new Set(DEFAULT_MEMBERS);
+    allRecords.forEach(r => {
+        const name = (r['Action Taken By'] || '').trim();
+        if (name && name !== 'Unknown' && name !== '-' && name !== 'N/A' && !excluded.has(name.toLowerCase())) {
+            set.add(name);
+        }
+    });
+    return Array.from(set).filter(name => !excluded.has(name.toLowerCase())).sort((a, b) => a.localeCompare(b));
+}
+
+function getThemeIndex(name, index) {
+    if (typeof index === 'number' && index >= 0) {
+        return index % 12;
+    }
+    const members = getMembersList();
+    const idx = members.findIndex(m => m.toLowerCase() === (name || '').toLowerCase());
+    if (idx >= 0) {
+        return idx % 12;
+    }
+    let hash = 0;
+    for (let i = 0; i < (name || '').length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash) % 12;
+}
+
+function renderPersonBadges() {
+    const container = document.getElementById('personBadgesContainer');
+    if (!container) return;
+
+    const members = getMembersList();
+    const teamMemberCountBadge = document.getElementById('teamMemberCountBadge');
+    if (teamMemberCountBadge) {
+        teamMemberCountBadge.innerText = `${members.length} Members`;
+    }
+
+    // Tally total requests per member across entire database (allRecords)
+    const counts = {};
+    members.forEach(name => {
+        counts[name] = 0;
+    });
+
+    allRecords.forEach(r => {
+        const name = (r['Action Taken By'] || '').trim();
+        if (name in counts) {
+            counts[name]++;
+        } else if (name && name !== 'Unknown' && name !== '-' && name !== 'N/A') {
+            counts[name] = (counts[name] || 0) + 1;
+        }
+    });
+
+    const totalDatabaseRecords = allRecords.length || 1;
+    const fragment = document.createDocumentFragment();
+
+    // 1. "All Members" Executive Master Card
+    const allChip = document.createElement('div');
+    const isAllActive = selectedPerson === 'all';
+    allChip.className = `team-member-card team-card-all ${isAllActive ? 'active' : ''}`;
+    allChip.setAttribute('data-person', 'all');
+    allChip.setAttribute('role', 'button');
+    allChip.setAttribute('tabindex', '0');
+    allChip.setAttribute('title', `Click to view all requests across all members (${allRecords.length} total requests)`);
+    allChip.innerHTML = `
+        <div class="team-card-top">
+            <div class="team-avatar team-avatar-all">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="team-info">
+                <span class="team-name">All Team Members</span>
+                <span class="team-role">${members.length} Active Members</span>
+            </div>
+            <div class="team-stat-badge">
+                <span class="team-count" id="allPersonsCount">${allRecords.length}</span>
+                <span class="team-count-unit">Total</span>
+            </div>
+        </div>
+        <div class="team-card-active-indicator">
+            <i class="bi bi-check-circle-fill"></i> Showing All Records
+        </div>
+    `;
+    fragment.appendChild(allChip);
+
+    // 2. Individual Executive Member Cards (each person gets a distinct dynamic color theme)
+    members.forEach((member, index) => {
+        const count = counts[member] || 0;
+        const initials = escapeHtml(member.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
+        const isSelected = selectedPerson.toLowerCase() === member.toLowerCase();
+        const isCurrentUser = !isCurrentUserAdmin() && getCurrentUserDisplayName().toLowerCase() === member.toLowerCase();
+        const themeIndex = getThemeIndex(member, index);
+
+        const card = document.createElement('div');
+        card.className = `team-member-card avatar-theme-${themeIndex} ${isSelected ? 'active' : ''}`;
+        card.setAttribute('data-person', member);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('title', isSelected ? `${escapeHtml(member)} (${count} total requests - click to show all)` : `Click to view count & requests for ${escapeHtml(member)}`);
+
+        const youBadge = isCurrentUser
+            ? `<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill ms-1" style="font-size: 0.65rem;">You</span>`
+            : '';
+
+        card.innerHTML = `
+            <div class="team-card-top">
+                <div class="team-avatar">${initials}</div>
+                <div class="team-info">
+                    <span class="team-name" title="${escapeHtml(member)}">${escapeHtml(member)}${youBadge}</span>
+                </div>
+                <div class="team-stat-badge team-stat-individual">
+                    <span class="team-count">${count}</span>
+                    <span class="team-count-unit">${count === 1 ? 'req' : 'reqs'}</span>
+                </div>
+                <div class="team-click-prompt">
+                    <span class="badge bg-body-secondary text-secondary border border-secondary-subtle rounded-pill px-2 py-1 small fw-normal">
+                        <i class="bi bi-eye me-1"></i>View
+                    </span>
+                </div>
+            </div>
+            <div class="team-card-active-indicator">
+                <i class="bi bi-check-circle-fill"></i> Showing ${count} ${count === 1 ? 'Request' : 'Requests'}
+            </div>
+        `;
+        fragment.appendChild(card);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(fragment);
+
+    updatePersonChipsActiveState();
+}
+
+function updatePersonChipsActiveState() {
+    const container = document.getElementById('personBadgesContainer');
+    if (container) {
+        container.querySelectorAll('.team-member-card, .person-chip').forEach(chip => {
+            const person = chip.getAttribute('data-person');
+            if (person === 'all') {
+                chip.classList.toggle('active', selectedPerson === 'all');
+            } else {
+                const isSelected = selectedPerson.toLowerCase() === person.toLowerCase();
+                chip.classList.toggle('active', isSelected);
+                const countBadge = chip.querySelector('.team-count');
+                const count = countBadge ? countBadge.innerText : '';
+                chip.setAttribute('title', isSelected ? `${person} (${count} requests - click to show all)` : `Click to view count & requests for ${person}`);
+            }
+        });
+    }
+
+    // Toggle active filter indicators & banner
+    const clearBtn = document.getElementById('clearPersonFilterBtn');
+    const banner = document.getElementById('activePersonFilterBanner');
+    const bannerName = document.getElementById('activePersonFilterName');
+    const bannerCount = document.getElementById('activePersonFilterCount');
+
+    if (selectedPerson !== 'all') {
+        if (clearBtn) clearBtn.classList.remove('d-none');
+        if (banner) banner.classList.remove('d-none');
+        if (bannerName) bannerName.innerText = selectedPerson;
+        if (bannerCount) bannerCount.innerText = `${filteredRecords.length} requests`;
+    } else {
+        if (clearBtn) clearBtn.classList.add('d-none');
+        if (banner) banner.classList.add('d-none');
+    }
+}
+
+function selectPersonFilter(personName) {
+    if (!personName || personName === 'all' || selectedPerson.toLowerCase() === personName.toLowerCase()) {
+        selectedPerson = 'all';
+    } else {
+        selectedPerson = personName;
+    }
+    currentPage = 1;
+    applyFiltersAndRender();
+}
+
+function setupPersonFilterListeners() {
+    const container = document.getElementById('personBadgesContainer');
+    if (container) {
+        container.addEventListener('click', (e) => {
+            const chip = e.target.closest('.team-member-card, .person-chip');
+            if (chip) {
+                const person = chip.getAttribute('data-person');
+                selectPersonFilter(person);
+            }
+        });
+
+        container.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const chip = e.target.closest('.team-member-card, .person-chip');
+                if (chip) {
+                    e.preventDefault();
+                    const person = chip.getAttribute('data-person');
+                    selectPersonFilter(person);
+                }
+            }
+        });
+    }
+
+    const clearBtn = document.getElementById('clearPersonFilterBtn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            selectPersonFilter('all');
+        });
+    }
+
+    const dismissBtn = document.getElementById('dismissPersonFilterBtn');
+    if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+            selectPersonFilter('all');
+        });
+    }
+
+    const refreshBtn = document.getElementById('refreshDataBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            clearCache();
+            const icon = refreshBtn.querySelector('i');
+            if (icon) icon.classList.add('spin-animation');
+            fetchAndRenderRecords(false).finally(() => {
+                if (icon) icon.classList.remove('spin-animation');
+                showToast('Records refreshed from database!', 'success');
+            });
+        });
+    }
+}
+
+function drawStatusPieChart(sourceData) {
+    const canvas = document.getElementById('statusPieChart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Use provided data or fall back to allRecords
+    const data = sourceData || allRecords;
+
+    const dpr = window.devicePixelRatio || 1;
+    const displaySize = 130;
+
+    if (canvas.width !== displaySize * dpr || canvas.height !== displaySize * dpr) {
+        canvas.width = displaySize * dpr;
+        canvas.height = displaySize * dpr;
+        canvas.style.width = displaySize + 'px';
+        canvas.style.height = displaySize + 'px';
+    }
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, displaySize, displaySize);
+
+    const counts = { Completed: 0, 'In Progress': 0, Pending: 0 };
+    data.forEach(r => {
+        if (r['Status'] in counts) counts[r['Status']]++;
+    });
+
+    const total = data.length;
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+
+    const centerX = displaySize / 2;
+    const centerY = displaySize / 2;
+    const radius = 54;
+    const innerRadius = 38;
+
+    if (total === 0) {
+        // Draw subtle ring for empty state
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, (radius + innerRadius) / 2, 0, 2 * Math.PI);
+        ctx.strokeStyle = isDark ? '#30363d' : '#e9ecef';
+        ctx.lineWidth = radius - innerRadius;
+        ctx.stroke();
+
+        ctx.fillStyle = isDark ? '#8b949e' : '#adb5bd';
+        ctx.font = '600 11px Inter, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('No Data', centerX, centerY);
+        ctx.restore();
+        return;
+    }
+
+    const segments = [
+        { label: 'Completed', count: counts.Completed, color: isDark ? '#20c997' : '#198754' },
+        { label: 'In Progress', count: counts['In Progress'], color: isDark ? '#38bdf8' : '#0d6efd' },
+        { label: 'Pending', count: counts.Pending, color: isDark ? '#f87171' : '#dc3545' }
+    ];
+
+    let startAngle = -Math.PI / 2;
+
+    segments.forEach(segment => {
+        if (segment.count <= 0) return;
+        const sliceAngle = (segment.count / total) * 2 * Math.PI;
+        const endAngle = startAngle + sliceAngle;
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
+        ctx.closePath();
+
+        ctx.fillStyle = segment.color;
+        ctx.fill();
+
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = isDark ? '#212529' : '#ffffff';
+        ctx.stroke();
+
+        startAngle = endAngle;
+    });
+
+    // Donut Center Text
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    ctx.fillStyle = isDark ? '#f0f6fc' : '#212529';
+    ctx.font = 'bold 18px Inter, system-ui, sans-serif';
+    ctx.fillText(total.toString(), centerX, centerY - 6);
+
+    ctx.fillStyle = isDark ? '#8b949e' : '#6c757d';
+    ctx.font = '600 9px Inter, system-ui, sans-serif';
+    ctx.fillText('TOTAL', centerX, centerY + 11);
+
+    ctx.restore();
+}
+
+// ==========================================
+// Filtering, Searching, & Rendering
+// ==========================================
+function applyFiltersAndRender() {
+    let result = [...allRecords];
+
+    // 1. Status Filter
+    if (currentFilter !== 'all') {
+        result = result.filter(r => r['Status'] === currentFilter);
+    }
+
+    // 2. Person Filter (Action Taken By)
+    if (selectedPerson !== 'all') {
+        const target = selectedPerson.trim().toLowerCase();
+        result = result.filter(r => {
+            const actionBy = (r['Action Taken By'] || '').trim().toLowerCase();
+            return actionBy === target;
+        });
+    }
+
+    // 3. Search Query Filter
+    if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        result = result.filter(r => {
+            const rowString = Object.values(r).join(' ').toLowerCase();
+            return rowString.includes(query);
+        });
+    }
+
+    filteredRecords = result;
+
+    const maxPage = Math.ceil(filteredRecords.length / recordsPerPage) || 1;
+    if (currentPage > maxPage) {
+        currentPage = 1;
+    }
+
+    // Update stats, pie chart, person chips state
+    const isFiltered = currentFilter !== 'all' || searchQuery || selectedPerson !== 'all';
+    updateStats(!!isFiltered);
+    updatePersonChipsActiveState();
+
+    renderTable();
+    renderPagination();
+}
+
+// XSS Sanitizer: Pure string-based HTML entity encoding (no DOM allocation)
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function renderTable() {
+    const tableBody = document.getElementById('tableBody');
+    if (!tableBody) return;
+    tableBody.innerHTML = '';
+
+    if (filteredRecords.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="10" class="text-center py-4 text-muted">No records found matching your criteria.</td></tr>`;
+        return;
+    }
+
+    const startIndex = (currentPage - 1) * recordsPerPage;
+    const endIndex = startIndex + recordsPerPage;
+    const paginatedData = filteredRecords.slice(startIndex, endIndex);
+
+    // High performance DOM batch insertion via DocumentFragment
+    const fragment = document.createDocumentFragment();
+
+    paginatedData.forEach((row, index) => {
+        let reqDate = row['Request Date'] || 'N/A';
+        if (reqDate && reqDate.includes('-')) {
+            const dateObj = new Date(reqDate);
+            if (!isNaN(dateObj.getTime())) {
+                reqDate = dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            }
+        }
+
+        const rawActionBy = row['Action Taken By'] || 'Unknown';
+        const actionBy = escapeHtml(rawActionBy);
+        const initials = escapeHtml(rawActionBy.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase());
+
+        const rawProblem = row['Problem Statement / Objective'] || 'N/A';
+        const problem = escapeHtml(rawProblem);
+        const shortProblem = escapeHtml(rawProblem.length > 30 ? rawProblem.substring(0, 30) + '...' : rawProblem);
+
+        const rawId = row['Reference Number/Ticket Number'] || '';
+        const displayId = escapeHtml(rawId ? rawId : 'N/A');
+
+        const receivedCount = row['Received Count'] || '-';
+        const formattedCount = escapeHtml(
+            (receivedCount !== '-' && !isNaN(receivedCount) && String(receivedCount).trim() !== '')
+                ? Number(receivedCount).toLocaleString()
+                : String(receivedCount)
+        );
+
+        const status = row['Status'] || 'Pending';
+        let statusBadge = '';
+        if (status === 'Completed') {
+            statusBadge = `<span class="badge bg-success-subtle text-success border border-success px-2 py-1">Completed</span>`;
+        } else if (status === 'In Progress') {
+            statusBadge = `<span class="badge bg-primary-subtle text-primary border border-primary px-2 py-1">In Progress</span>`;
+        } else {
+            statusBadge = `<span class="badge bg-danger-subtle text-danger border border-danger px-2 py-1">Pending</span>`;
+        }
+
+        const isOwner = canEditRecord(row);
+        const editAction = rawId
+            ? (isOwner
+                ? `<a href="/index?edit=${encodeURIComponent(rawId)}" class="text-primary fw-semibold text-decoration-none action-btn"><i class="bi bi-pencil-square me-1"></i>Edit</a>`
+                : `<a href="/index?edit=${encodeURIComponent(rawId)}&readonly=true" class="text-secondary fw-semibold text-decoration-none action-btn"><i class="bi bi-eye me-1"></i>View</a>`)
+            : `<button type="button" class="btn btn-link p-0 text-muted fw-semibold text-decoration-none missing-id-btn">Edit</button>`;
+
+        const department = escapeHtml(row['Requested Department'] || 'N/A');
+        const letterRef = escapeHtml(row['Letter / Email Reference'] || '-');
+        const sharedMode = escapeHtml(row['Result Shared Mode'] || '-');
+
+        const tr = document.createElement('tr');
+        tr.className = 'animate-row';
+        tr.style.animationDelay = `${Math.min(index * 0.05, 0.4)}s`;
+
+        tr.innerHTML = `
+            <td class="px-4 ${rawId ? 'text-primary' : 'text-muted'} fw-semibold">${displayId}</td>
+            <td class="fw-semibold">${department}</td>
+            <td>${reqDate}</td>
+            <td class="text-muted">${letterRef}</td>
+            <td class="action-by-cell" data-person="${rawActionBy}" title="Click to filter by ${actionBy}">
+                <span class="team-avatar-mini avatar-theme-${getThemeIndex(rawActionBy)} me-2">${initials}</span>
+                <span class="action-by-name fw-medium">${actionBy}</span>
+            </td>
+            <td class="text-truncate" style="max-width: 200px;" title="${problem}">${shortProblem}</td>
+            <td class="text-muted">${formattedCount}</td>
+            <td class="text-muted">${sharedMode}</td>
+            <td>${statusBadge}</td>
+            <td class="text-end px-4">${editAction}</td>
+        `;
+        fragment.appendChild(tr);
+    });
+
+    tableBody.appendChild(fragment);
+}
+
+// Table Event Delegation (CSP Safe: no inline onclick handlers)
+function setupTableDelegation() {
+    const tableBody = document.getElementById('tableBody');
+    if (!tableBody) return;
+
+    tableBody.addEventListener('click', (e) => {
+        const retryBtn = e.target.closest('.retry-fetch-btn');
+        if (retryBtn) {
+            e.preventDefault();
+            loadFromCacheOrFetch();
+            return;
+        }
+
+        const missingIdBtn = e.target.closest('.missing-id-btn');
+        if (missingIdBtn) {
+            e.preventDefault();
+            showToast('Cannot edit: Missing Reference Number.', 'warning');
+            return;
+        }
+
+        const actionByCell = e.target.closest('.action-by-cell');
+        if (actionByCell) {
+            e.preventDefault();
+            const person = actionByCell.getAttribute('data-person');
+            if (person && person !== 'Unknown' && person !== 'N/A') {
+                selectPersonFilter(person);
+            }
+            return;
+        }
+    });
+}
+
+// ==========================================
+// UI Controls (Filters, Badges, Search, Pagination)
+// ==========================================
+function setupFilters() {
+    const filterGroup = document.getElementById('filterGroup');
+    if (!filterGroup) return;
+
+    filterGroup.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (btn) {
+            filterGroup.querySelectorAll('button').forEach(b => {
+                b.classList.remove('active', 'fw-semibold');
+            });
+            btn.classList.add('active', 'fw-semibold');
+
+            currentFilter = btn.getAttribute('data-filter') || 'all';
+            currentPage = 1;
+            applyFiltersAndRender();
+        }
+    });
+}
+
+// Interactive Dynamic Stats Badges: Clicking a badge filters table
+function setupBadgeFilters() {
+    document.querySelectorAll('.stat-badge[data-filter]').forEach(badge => {
+        badge.style.cursor = 'pointer';
+        badge.addEventListener('click', () => {
+            const filterValue = badge.getAttribute('data-filter');
+            if (!filterValue) return;
+
+            // Sync with filterGroup buttons
+            const filterGroup = document.getElementById('filterGroup');
+            if (filterGroup) {
+                const targetBtn = filterGroup.querySelector(`button[data-filter="${filterValue}"]`);
+                if (targetBtn) {
+                    targetBtn.click();
+                    return;
+                }
+            }
+
+            currentFilter = filterValue;
+            currentPage = 1;
+            applyFiltersAndRender();
+        });
+    });
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            searchQuery = e.target.value.trim();
+            currentPage = 1;
+            applyFiltersAndRender();
+        }, 300);
+    });
+}
+
+function renderPagination() {
+    const paginationText = document.getElementById('paginationText');
+    const paginationControls = document.getElementById('paginationControls');
+    if (!paginationText || !paginationControls) return;
+
+    const totalFiltered = filteredRecords.length;
+    const totalPages = Math.ceil(totalFiltered / recordsPerPage) || 1;
+
+    const startIndex = (currentPage - 1) * recordsPerPage;
+    const endIndex = Math.min(startIndex + recordsPerPage, totalFiltered);
+
+    if (totalFiltered === 0) {
+        paginationText.innerText = 'Showing 0 to 0 of 0 requests';
+        paginationControls.innerHTML = '';
+        return;
+    }
+
+    paginationText.innerText = `Showing ${startIndex + 1} to ${endIndex} of ${totalFiltered} requests`;
+
+    let html = '';
+    html += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}"><a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a></li>`;
+
+    const getPageNumbers = (current, total) => {
+        if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+        const pages = [1];
+        let start = Math.max(2, current - 1);
+        let end = Math.min(total - 1, current + 1);
+        if (current <= 3) { start = 2; end = 4; }
+        if (current >= total - 2) { start = total - 3; end = total - 1; }
+        if (start > 2) pages.push('...');
+        for (let i = start; i <= end; i++) pages.push(i);
+        if (end < total - 1) pages.push('...');
+        pages.push(total);
+        return pages;
+    };
+
+    getPageNumbers(currentPage, totalPages).forEach(p => {
+        if (p === '...') {
+            html += `<li class="page-item disabled"><span class="page-link">&hellip;</span></li>`;
+        } else {
+            html += `<li class="page-item ${currentPage === p ? 'active' : ''}"><a class="page-link" href="#" data-page="${p}">${p}</a></li>`;
+        }
+    });
+
+    html += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}"><a class="page-link" href="#" data-page="${currentPage + 1}">Next</a></li>`;
+
+    paginationControls.innerHTML = html;
+
+    paginationControls.querySelectorAll('.page-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = parseInt(e.currentTarget.getAttribute('data-page'), 10);
+            if (page >= 1 && page <= totalPages && page !== currentPage) {
+                currentPage = page;
+                applyFiltersAndRender();
+            }
+        });
+    });
+}
+
+// ==========================================
+// Form Logic (Create & Edit Mode)
+// ==========================================
+function lockActionTakenByField(form, value) {
+    const select = form.elements['Action Taken By'];
+    if (!select) return;
+    if (value) {
+        const hasOption = Array.from(select.options).some(opt => opt.value.toLowerCase() === value.toLowerCase());
+        if (!hasOption) {
+            const opt = document.createElement('option');
+            opt.value = value;
+            opt.textContent = value;
+            select.appendChild(opt);
+        }
+        select.value = Array.from(select.options).find(opt => opt.value.toLowerCase() === value.toLowerCase())?.value || value;
+    }
+    select.disabled = true;
+
+    let hiddenOwner = form.querySelector('input[type="hidden"][name="Action Taken By"]');
+    if (!hiddenOwner) {
+        hiddenOwner = document.createElement('input');
+        hiddenOwner.type = 'hidden';
+        hiddenOwner.name = 'Action Taken By';
+        form.appendChild(hiddenOwner);
+    }
+    hiddenOwner.value = select.value;
+}
+
+function applyReadOnlyMode(form, ownerName) {
+    const titleEl = document.getElementById('formTitle');
+    const subTitleEl = document.getElementById('formSubtitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    if (titleEl) titleEl.innerText = 'View Data Request (Read-Only)';
+    if (subTitleEl) subTitleEl.innerText = 'You have view-only access to this request.';
+    if (submitBtn) submitBtn.classList.add('d-none');
+    if (clearBtn) clearBtn.classList.add('d-none');
+
+    // Freeze all form controls
+    Array.from(form.elements).forEach(el => {
+        if (el.tagName !== 'A') {
+            el.disabled = true;
+        }
+    });
+
+    // Show read-only banner at top of form
+    if (!document.getElementById('readOnlyBanner')) {
+        const banner = document.createElement('div');
+        banner.id = 'readOnlyBanner';
+        banner.className = 'alert alert-warning d-flex align-items-center gap-2 mb-4';
+        banner.setAttribute('role', 'alert');
+        banner.innerHTML = `<i class="bi bi-lock-fill fs-5"></i><div><strong>View Only Mode:</strong> This record belongs to <strong>${escapeHtml(ownerName || 'another user')}</strong>. All fields are locked because only the record owner or an administrator can modify it.</div>`;
+        form.prepend(banner);
+    }
+}
+
+function setupFormLogic(form) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const editId = urlParams.get('edit');
+    const submitBtn = document.getElementById('submitBtn');
+    const refNumberInput = document.getElementById('refNumberInput');
+    const overlay = document.getElementById('formLoadingOverlay');
+    const cancelBtn = document.getElementById('cancelLoadBtn');
+
+    if (editId && editId !== 'undefined' && editId !== 'N/A') {
+        const titleEl = document.getElementById('formTitle');
+        const subTitleEl = document.getElementById('formSubtitle');
+        if (titleEl) titleEl.innerText = 'Edit Data Request';
+        if (subTitleEl) subTitleEl.innerText = 'Update the fields below to modify the request in the registry.';
+        if (submitBtn) submitBtn.innerHTML = '<i class="bi bi-save me-2"></i> Update Request';
+        if (refNumberInput) refNumberInput.value = editId;
+
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'originalId';
+        hiddenInput.value = editId;
+        form.appendChild(hiddenInput);
+
+        if (overlay) {
+            overlay.classList.remove('d-none');
+            overlay.style.display = 'flex';
+        }
+
+        const cancelTimer = setTimeout(() => {
+            if (cancelBtn) cancelBtn.classList.remove('d-none');
+        }, 6000);
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => {
+                window.location.replace('/form');
+            });
+        }
+
+        const finishLoading = (record) => {
+            if (record) {
+                populateForm(form, record);
+                if (!canEditRecord(record)) {
+                    applyReadOnlyMode(form, record['Action Taken By']);
+                } else if (!isCurrentUserAdmin()) {
+                    lockActionTakenByField(form, record['Action Taken By']);
+                }
+            }
+            clearTimeout(cancelTimer);
+            if (overlay) {
+                overlay.style.transition = 'opacity 0.3s ease';
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.classList.add('d-none');
+                    overlay.style.display = 'none';
+                    overlay.style.opacity = '1';
+                }, 300);
+            }
+        };
+
+        // Cache first
+        const cached = getFromCache();
+        if (cached) {
+            const record = cached.find(r => String(r['Reference Number/Ticket Number']) === String(editId));
+            if (record) {
+                setTimeout(() => finishLoading(record), 200);
+            }
+        }
+
+        // Fetch single record
+        fetchWithRetry(scriptURL + '?action=get_one&id=' + encodeURIComponent(editId), {}, 3, 500)
+            .then(record => {
+                if (record && !record.error) {
+                    if (overlay && !overlay.classList.contains('d-none')) {
+                        finishLoading(record);
+                    }
+                } else {
+                    showToast('Record not found in database!', 'error');
+                    setTimeout(() => window.location.replace('/form'), 1500);
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching record for edit:', err);
+                if (overlay && !overlay.classList.contains('d-none')) {
+                    showToast('Failed to load record. Please try again.', 'error');
+                    setTimeout(() => window.location.replace('/form'), 1500);
+                }
+            });
+    } else {
+        if (refNumberInput) {
+            refNumberInput.value = '';
+            refNumberInput.placeholder = 'Auto-generated on save';
+        }
+        if (!isCurrentUserAdmin()) {
+            lockActionTakenByField(form, getCurrentUserDisplayName());
+        }
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Submit';
+        if (submitBtn) {
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Saving...';
+            submitBtn.disabled = true;
+        }
+
+        const formData = new FormData(form);
+        const urlEncodedData = new URLSearchParams(formData);
+        const actionType = urlEncodedData.has('originalId') ? 'update' : 'add';
+        urlEncodedData.append('action', actionType);
+        urlEncodedData.append('Logged In User', sessionStorage.getItem('ops_portal_user') || 'Unknown');
+
+        try {
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + (sessionStorage.getItem('ops_portal_token') || '')
+                },
+                body: urlEncodedData
+            });
+
+            if (response.status === 401) {
+                sessionStorage.removeItem('ops_portal_token');
+                sessionStorage.removeItem('ops_portal_user');
+                sessionStorage.removeItem('ops_portal_role');
+                sessionStorage.removeItem('ops_portal_display_name');
+                sessionStorage.removeItem(CACHE_KEY);
+                showToast('Session expired. Redirecting to login...', 'warning');
+                setTimeout(() => window.location.replace('/login?timeout=true'), 1500);
+                return;
+            }
+
+            const result = await response.json();
+
+            if (result && result.result === 'success') {
+                clearCache();
+                const msg = actionType === 'add'
+                    ? `Request submitted successfully! Generated ID: ${result.id}`
+                    : 'Request updated successfully!';
+                showToast(msg, 'success');
+                setTimeout(() => window.location.replace('/form'), 1000);
+            } else {
+                showToast('Error: ' + (result?.error || 'Failed to save record.'), 'error');
+            }
+        } catch (error) {
+            console.error('Submit error:', error);
+            showToast('Network error. Please check your connection.', 'error');
+        } finally {
+            if (submitBtn) {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+    });
+
+    const clearBtn = document.getElementById('clearBtn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            form.reset();
+            if (editId && editId !== 'undefined' && editId !== 'N/A' && refNumberInput) {
+                refNumberInput.value = editId;
+            }
+            if (!isCurrentUserAdmin()) {
+                lockActionTakenByField(form, getCurrentUserDisplayName());
+            }
+        });
+    }
+}
+
+function populateForm(form, record) {
+    const fieldsToFill = [
+        'Requested Department', 'Request Date', 'Letter / Email Reference',
+        'Action Taken By', 'Problem Statement / Objective', 'Datasets Used',
+        'Date for Data Dump', 'Received Count', 'Result Shared Mode', 'Analysis Outcome',
+        'Status', 'Savings'
+    ];
+
+    fieldsToFill.forEach(field => {
+        const input = form.elements[field];
+        if (input && record[field] !== undefined && record[field] !== null) {
+            if (input.type === 'date') {
+                input.value = formatDateForInput(record[field]);
+            } else {
+                input.value = record[field];
+            }
+        }
+    });
+}
+
+function formatDateForInput(dateStr) {
+    if (!dateStr) return '';
+    const str = String(dateStr).trim();
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(str)) {
+        return str;
+    }
+
+    const d = new Date(str);
+    if (isNaN(d.getTime())) return '';
+
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+// ==========================================
+// CSV Export with Formula Injection Guard
+// ==========================================
+function formatValueForCSV(key, value) {
+    if (value === null || value === undefined) return '';
+    let strValue = String(value);
+
+    // Prevent CSV formula injection in spreadsheet applications
+    if (/^[=+\-@\t\r]/.test(strValue)) {
+        strValue = "'" + strValue;
+    }
+
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(strValue)) {
+        const d = new Date(strValue);
+        if (isNaN(d.getTime())) return strValue;
+
+        // Use IST (Asia/Kolkata) for all date-time formatting in CSV
+        const istOptions = { timeZone: 'Asia/Kolkata' };
+        const day = String(d.toLocaleString('en-US', { ...istOptions, day: '2-digit' })).padStart(2, '0');
+        const month = String(d.toLocaleString('en-US', { ...istOptions, month: '2-digit' })).padStart(2, '0');
+        const year = d.toLocaleString('en-US', { ...istOptions, year: 'numeric' });
+
+        if (key === 'Timestamp') {
+            // Format timestamp in IST 12-hour format
+            const istFormatted = d.toLocaleString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: true
+            });
+            return istFormatted;
+        }
+        return `${day}-${month}-${year}`;
+    }
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(strValue)) {
+        const parts = strValue.split('-');
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+
+    return strValue;
+}
+
+function setupDownloadButton() {
+    const downloadBtn = document.getElementById('downloadBtn');
+    if (!downloadBtn) return;
+
+    downloadBtn.addEventListener('click', () => {
+        if (allRecords.length === 0) {
+            showToast('No data available to download.', 'warning');
+            return;
+        }
+
+        const allHeaders = Object.keys(allRecords[0]);
+        const headers = allHeaders.filter(h => h !== 'Timestamp');
+
+        const csvRows = [];
+        csvRows.push(headers.map(header => `"${header}"`).join(','));
+
+        allRecords.forEach(record => {
+            const values = headers.map(header => {
+                let val = record[header] || '';
+                val = formatValueForCSV(header, val);
+                val = String(val).replaceAll('"', '""');
+                return `"${val}"`;
+            });
+            csvRows.push(values.join(','));
+        });
+
+        const csvString = '\uFEFF' + csvRows.join('\n');
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+
+        const date = new Date();
+        const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+        link.setAttribute('href', url);
+        link.setAttribute('download', `Data_Purity_Records_${dateString}.csv`);
+        link.style.visibility = 'hidden';
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(url);
+        showToast('Download started successfully!', 'success');
+    });
+}

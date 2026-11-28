@@ -48,8 +48,104 @@ function isCurrentUserAdmin() {
 function canEditRecord(record) {
     if (isCurrentUserAdmin()) return true;
     const owner = ((record && record['Action Taken By']) || '').trim().toLowerCase();
-    const current = getCurrentUserDisplayName().toLowerCase();
-    return Boolean(owner && current && owner === current);
+    const displayName = getCurrentUserDisplayName().toLowerCase();
+    const username = (sessionStorage.getItem('ops_portal_user') || '').trim().toLowerCase();
+    return Boolean(owner && ((displayName && owner === displayName) || (username && owner === username)));
+}
+
+// ==========================================
+// Live IST Clock (Day, Date & Time)
+// ==========================================
+function startISTClock() {
+    const clockEl = document.getElementById('istClock');
+    if (!clockEl) return;
+    const update = () => {
+        const now = new Date();
+        const dayDate = now.toLocaleDateString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            weekday: 'short',
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+        const timeStr = now.toLocaleTimeString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        clockEl.innerHTML = `<i class="bi bi-clock text-primary"></i> <span>${dayDate}</span> <span class="opacity-50">|</span> <span>${timeStr} IST</span>`;
+    };
+    update();
+    setInterval(update, 1000);
+}
+
+// ==========================================
+// Self-Service Password Change (Username locked/read-only)
+// ==========================================
+function setupChangePasswordModal() {
+    const openBtn = document.getElementById('changePasswordBtn');
+    const modalEl = document.getElementById('changePasswordModal');
+    const form = document.getElementById('changePasswordForm');
+    if (!openBtn || !modalEl || !form) return;
+
+    openBtn.addEventListener('click', () => {
+        form.reset();
+        const usernameInput = document.getElementById('cpUsername');
+        const displayInput = document.getElementById('cpDisplayName');
+        if (usernameInput) usernameInput.value = sessionStorage.getItem('ops_portal_user') || '';
+        if (displayInput) displayInput.value = getCurrentUserDisplayName();
+        bootstrap.Modal.getOrCreateInstance(modalEl).show();
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const saveBtn = document.getElementById('cpSaveBtn');
+        const origHtml = saveBtn ? saveBtn.innerHTML : 'Update Password';
+        const currentPassword = document.getElementById('cpCurrentPassword')?.value || '';
+        const newPassword = document.getElementById('cpNewPassword')?.value || '';
+        const confirmPassword = document.getElementById('cpConfirmPassword')?.value || '';
+
+        if (newPassword !== confirmPassword) {
+            showToast('New password and confirmation do not match.', 'warning');
+            return;
+        }
+
+        if (saveBtn) {
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
+        }
+
+        try {
+            const response = await fetch('/api/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + (sessionStorage.getItem('ops_portal_token') || '')
+                },
+                body: JSON.stringify({
+                    action: 'change_password',
+                    currentPassword,
+                    newPassword
+                })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to update password.');
+            }
+            showToast(data.message || 'Password updated successfully!', 'success');
+            bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+            form.reset();
+        } catch (err) {
+            showToast(err.message, 'error');
+        } finally {
+            if (saveBtn) {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = origHtml;
+            }
+        }
+    });
 }
 
 // ==========================================
@@ -129,6 +225,8 @@ function applyTheme(theme) {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    startISTClock();
+    setupChangePasswordModal();
 
     // Attach global logout button listeners (replaces inline onclick for CSP)
     document.querySelectorAll('.logout-btn, #logoutBtn').forEach(btn => {
