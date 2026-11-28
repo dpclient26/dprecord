@@ -58,8 +58,8 @@ function canEditRecord(record) {
 // ==========================================
 function getISTGreeting(hour) {
     if (hour >= 5 && hour < 12) return 'Good Morning';
-    if (hour >= 12 && hour < 17) return 'Good Afternoon';
-    if (hour >= 17 && hour < 21) return 'Good Evening';
+    if (hour >= 12 && hour < 16) return 'Good Afternoon';
+    if (hour >= 16 && hour < 21) return 'Good Evening';
     return 'Good Night';
 }
 
@@ -83,7 +83,7 @@ function startISTClock() {
 
         if (greetingEl) {
             const greeting = getISTGreeting(istHour);
-            greetingEl.innerHTML = `<i class="bi bi-sun-fill text-warning me-1"></i> ${greeting}, <span class="text-primary fw-bold ms-1">${escapeHtml(displayName)}</span>${adminBadge}`;
+            greetingEl.innerHTML = `<i class="bi bi-sun-fill text-warning me-1"></i> ${greeting}, <span class="text-body-emphasis fw-bold ms-1">${escapeHtml(displayName)}</span>${adminBadge}`;
         }
 
         if (clockEl) {
